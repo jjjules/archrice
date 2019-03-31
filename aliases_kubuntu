@@ -1,0 +1,20 @@
+alias cdep='cd ~/Documents/EPFL/2018-2019/'
+alias cdw='cd ~/Downloads/'
+alias mve='/home/jules/.scripts/mvToEpfl'
+alias o='xdg-open'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+alias jpt='jupyter'
+alias jptn='jupyter notebook'
+alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
+alias ixss='pyspark --master yarn --num-executors 1 --executor-cores 1 --executor-memory 10G'
+alias ixsss='pyspark --master yarn --num-executors 7 --executor-cores 4 --executor-memory 20G'
+
+###GIT###
+alias pulla='s=$(echo "FFFF"); for b in $(git br | tr "*" "$s"); do if [[ b == *"$s"* ]]; then; b=$(echo "$b" | tr "$s" " "); fi; git copull $b; done;'
+g() {
+	git $@;
+}
+

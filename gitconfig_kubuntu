@@ -1,0 +1,31 @@
+[user]
+	email = jules.gottraux@epfl.ch
+	name = Jules Gottraux
+[alias]
+	la = log --branches --remotes --tags --graph --oneline --decorate --notes HEAD
+	co = checkout
+	br = branch
+	ac = "!f() { \
+        git add .; \
+        git commit; \
+	}; f"
+	st = status
+	push = ps
+	c = commit
+	pl = pull
+	amno = "!f() { \
+	git add .; \
+	git commit --amend --no-edit; \
+  	}; f"
+	cop = "!f() { \
+	git co $1; \
+	git pull; \
+  	}; f"
+	#pulla = "!f() { \
+	#b=$(git br | tr "*" " "); echo "$b" | \
+	#while read line ; \
+	#do copull $line; done; \
+	#}; f"
+	
+[core]
+	editor = vim
