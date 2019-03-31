@@ -5,13 +5,18 @@ alias cdep="cd ~/Documents/EPFL/2018-2019"
 alias cdw="cd ~/Downloads"
 alias v="vim"
 alias o="nohup xdg-open $1 &>/dev/null"
+alias diff="diff --color=auto"
+aloas grep="grep --color=auto"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 
-alias jpt"jupyter"
-alias jpta="conda activate"
-alias jptd="conda deactivate"
+alias jptn="jupyter notebook"
+alias condaa="conda activate"
+alias condad="conda deactivate"
 alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
 
 mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+mlnb() { condaa && cd "$(du -a -d1 "$(echo ${EPFL_DIR}ML/Homeworks/)" |
+        awk '{print $2}' | grep -Fv . | fzf)" && jptn; }
+
