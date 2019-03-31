@@ -1,0 +1,17 @@
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias cdep="cd ~/Documents/EPFL/2018-2019"
+alias cdw="cd ~/Downloads"
+alias v="vim"
+alias o="nohup xdg-open $1 &>/dev/null"
+alias ffmpeg="ffmpeg -hide_banner"
+alias ffplay="ffplay -hide_banner"
+
+alias jpt"jupyter"
+alias jpta="conda activate"
+alias jptd="conda deactivate"
+alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
+
+mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
