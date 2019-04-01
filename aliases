@@ -11,7 +11,7 @@ alias cdw="cd ~/Downloads"
 alias v="vim"
 alias o="nohup xdg-open $1 &>/dev/null"
 alias diff="diff --color=auto"
-aloas grep="grep --color=auto"
+alias grep="grep --color=auto"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 
