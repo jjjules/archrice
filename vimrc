@@ -42,7 +42,7 @@ map <leader>p "+P
     call setreg('/', old_query)
 	endfun
 
-	autocmd BufWritePre *.md,*.markdown let b:noStripWhitespace=1
+	autocmd FileType markdown,rmd let b:noStripWhitespace=1
 	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
 
 
