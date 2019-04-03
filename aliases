@@ -8,6 +8,8 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cdep="cd ~/Documents/EPFL/2018-2019"
 alias cdw="cd ~/Downloads"
+alias mkd="mkdir -pv"
+alias rm="rm -v"
 alias v="vim"
 alias o="nohup xdg-open $1 &>/dev/null"
 alias diff="diff --color=auto"
