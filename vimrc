@@ -4,7 +4,10 @@ set number relativenumber
 set encoding=utf-8
 set mouse=a
 set wildmode=longest,list,full
-
+set shiftwidth=2
+set tabstop=2
+set autoindent
+set smartindent
 
 " Splits
 	set splitbelow splitright
@@ -14,7 +17,7 @@ set wildmode=longest,list,full
 	map <C-l> <C-w>l
 
 " Automatically deletes trailing white spaces on save
-	autocmd BufWritePre * %s/\s\+$//e 
+	autocmd BufWritePre * %s/\s\+$//e
 
 
 " Taken from defaults.vim
