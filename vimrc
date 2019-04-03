@@ -4,10 +4,21 @@ set number relativenumber
 set encoding=utf-8
 set mouse=a
 set wildmode=longest,list,full
+
+set ignorecase
+set smartcase
+
 set shiftwidth=2
 set tabstop=2
 set autoindent
 set smartindent
+
+" Set to auto read when a file is changed from the outside
+	set autoread
+
+"" Mappings
+map 0 ^
+map <leader><leader> /
 
 " Splits
 	set splitbelow splitright
@@ -17,8 +28,23 @@ set smartindent
 	map <C-l> <C-w>l
 
 " Automatically deletes trailing white spaces on save
-	autocmd BufWritePre * %s/\s\+$//e
+	fun! DeleteTrailinfWhiteSpaces()
+		if exists('b:noStripWhitespace')
+        return
+    endif
+    let save_cursor = getpos(".")
+    let old_query = getreg('/')
+    silent! %s/\s\+$//e
+    call setpos('.', save_cursor)
+    call setreg('/', old_query)
+	endfun
 
+	autocmd BufWritePre *.md,*.markdown let b:noStripWhitespace=1
+	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
+
+
+" :W sudo saves the file
+	command W w !sudo tee % > /dev/null
 
 " Taken from defaults.vim
 " Only do this part when Vim was compiled with the +eval feature.
