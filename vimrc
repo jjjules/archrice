@@ -4,6 +4,7 @@ set number relativenumber
 set encoding=utf-8
 set mouse=a
 set wildmode=longest,list,full
+set bg=light
 
 set ignorecase
 set smartcase
