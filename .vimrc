@@ -20,8 +20,8 @@ set smartindent
 "" Mappings
 map 0 ^
 map <leader><leader> /
-map <C-c> "+y
-map <C-p> "+P
+vnoremap <C-c> "*y :let @+=@*<CR>
+map <C-v> "+P
 
 " Splits
 	set splitbelow splitright
