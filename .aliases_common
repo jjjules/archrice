@@ -17,13 +17,27 @@ alias grep="grep --color=auto"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 
+alias g="git"
+alias gss="git status -s -b"
+alias ga="git add"
+alias gc="git commit"
+alias gcm="alias gcm"
+alias gf"git fetch"
+alias gfp="git fetch --prune"
+alias gb="git branch"
+alias gpl"git pull"
+alias gp="git push"
+alias gpadd="git push -u origin $(git_current_branch)"
+alias glt="git log --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias glts="git --no-pager log -10 --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+
+
 alias jptn="jupyter notebook"
 alias condaa="conda activate"
 alias condad="conda deactivate"
+
 alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
 
 mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
-mlnb() { condaa && cd "$(du -a -d1 "$(echo ${EPFL_DIR}ML/Homeworks/)" |
-        awk '{print $2}' | grep -Fv . | fzf)" && jptn; }
-

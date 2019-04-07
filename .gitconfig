@@ -7,6 +7,8 @@
 	c = commit
 	co = checkout
 	pl = pull
+	p = push
+	f = fetch
 	br = branch
 	la = log --branches --remotes --tags --graph --oneline --decorate --notes HEAD
 	cop = "!f() { \
