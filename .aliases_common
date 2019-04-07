@@ -30,13 +30,17 @@ alias gp="git push"
 alias glt="git log --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 alias glts="git --no-pager log -10 --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
-
-
 alias jptn="jupyter notebook"
 alias condaa="conda activate"
 alias condad="conda deactivate"
 alias pclust='ssh gottraux@diascld32.iccluster.epfl.ch'
 alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
+alias vpnep="sudo openconnect -u gottraux vpn.epfl.ch"
+
+alias dots="vim ~/.files"
+alias vrc="v ~/.vimrc"
+alias zrc="v ~/.zshrc"
+alias brc="v ~/.bashrc"
 
 mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
