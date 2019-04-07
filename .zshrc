@@ -123,3 +123,5 @@ if [ -f ~/.files/.aliases_arch ]; then
   . ~/.files/.aliases_arch
 fi
 
+bindkey "^K" history-beginning-search-backward
+bindkey "^J" history-beginning-search-forward
