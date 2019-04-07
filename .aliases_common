@@ -40,3 +40,4 @@ alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
 
 mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+playm() { ffplay "$(find ~/Music -type f | fzf)" &> /dev/null; }
