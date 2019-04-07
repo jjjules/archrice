@@ -35,7 +35,7 @@ alias glts="git --no-pager log -10 --graph --tags --abbrev-commit --decorate --f
 alias jptn="jupyter notebook"
 alias condaa="conda activate"
 alias condad="conda deactivate"
-
+alias pclust='ssh gottraux@diascld32.iccluster.epfl.ch'
 alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
 
 mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
