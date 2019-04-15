@@ -3,7 +3,7 @@
 	name = Jules Gottraux
 
 [alias]
-	st = status
+	s = status
 	c = commit
 	co = checkout
 	pl = pull

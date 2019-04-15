@@ -38,6 +38,7 @@ alias pclust='ssh gottraux@diascld32.iccluster.epfl.ch'
 alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
 alias vpnep="sudo openconnect -u gottraux vpn.epfl.ch"
 
+alias cdots="cd ~/.files"
 alias dots="vim ~/.files"
 alias vrc="v ~/.vimrc"
 alias zrc="v ~/.zshrc"
