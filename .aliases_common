@@ -3,6 +3,7 @@ alias pwh="systemctl hibernate "
 alias pws="systemctl suspend"
 alias pwr="killall firefox && systemctl reboot"
 
+alias -="cd -"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
