@@ -139,6 +139,3 @@ unset __conda_setup
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export EPFL_DIR="/home/jules/Documents/EPFL/2018-2019"
-# Functions
-mvep() { mv "$@" "$(cut -f 2- "$(du -a -d 2 $EPFL_DIR | grep -Fv .)" | fzf)" ; }
-## alternatively using awk mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | grep -Fv . | awk '{$1=""}sub(FS, "")' | fzf)" ; }
