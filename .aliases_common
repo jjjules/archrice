@@ -49,7 +49,7 @@ alias vrc="v ~/.vimrc"
 alias zrc="v ~/.zshrc"
 alias brc="v ~/.bashrc"
 
-mvep() { mv "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
-mwep() { mv "$(du -a -d 1 ~/Downloads | awk '{print $2}' | grep -Fv . | fzf)" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+mvep() { mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+mwep() { mv "$(du -a -d 1 ~/Downloads | awk '{print $2}' | fzf)" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 2 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 playm() { ffplay "$(find ~/Music -type f | fzf)" &> /dev/null; }
