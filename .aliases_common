@@ -45,9 +45,9 @@ alias vpnep="sudo openconnect -u gottraux vpn.epfl.ch"
 
 alias cdots="cd ~/.files"
 alias dots="vim ~/.files"
-alias vrc="v ~/.vimrc"
-alias zrc="v ~/.zshrc"
-alias brc="v ~/.bashrc"
+alias vrc="v ~/.files/.vimrc"
+alias zrc="v ~/.files/.zshrc"
+alias brc="v ~/.files/.bashrc"
 
 mvep() { mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 mwep() { mv "$(du -a -d 1 ~/Downloads | awk '{print $2}' | fzf)" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
