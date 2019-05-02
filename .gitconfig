@@ -4,6 +4,7 @@
 
 [alias]
 	s = status
+	a = add
 	c = commit
 	co = checkout
 	pl = pull
