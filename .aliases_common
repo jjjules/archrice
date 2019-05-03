@@ -21,21 +21,18 @@ alias k1="kill %1"
 alias k2="kill %2"
 
 alias g="git"
-alias gss="g status -s -b"
+alias gs="g status -s -b"
 alias ga="g add"
 alias gc="g commit"
 alias gac="g ac"
-alias gcm="alias gcm"
 alias gd="g diff"
 alias gf="g fetch"
 alias gfp="g fetch --prune"
 alias gb="g branch"
 alias gpl="g pull"
 alias gp="g push"
-alias gl='g log'
-alias glo='g log --oneline --decorate'
-alias glg="g log --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
-alias glgm="g --no-pager log -10 --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gl="g log --graph --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+alias gls='g --no-pager log -10 --oneline --decorate'
 
 alias jptn="jupyter notebook"
 alias condaa="conda activate"
