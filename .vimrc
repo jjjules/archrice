@@ -1,13 +1,14 @@
+if filereadable("/usr/share/vim/vim80/vimrc")
+	source /usr/share/vim/vim80/vimrc
+endif
+
 let mapleader=" "
 
 set number relativenumber
 set encoding=utf-8
-set mouse=a
 set wildmode=longest,list,full
-set bg=light
-
-set ignorecase
-set smartcase
+set bg=dark
+colorscheme delek
 
 set shiftwidth=2
 set tabstop=2
@@ -88,3 +89,4 @@ if &t_Co > 2 || has("gui_running")
   " Revert with ":unlet c_comment_strings".
   let c_comment_strings=1
 endif
+"ioawnd
