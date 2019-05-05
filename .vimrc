@@ -1,5 +1,5 @@
-if filereadable("/usr/share/vim/vim80/vimrc")
-	source /usr/share/vim/vim80/vimrc
+if filereadable("/etc/vim/vimrc")
+	source /etc/vim/vimrc
 endif
 
 let mapleader=" "
