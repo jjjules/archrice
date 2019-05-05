@@ -4,6 +4,7 @@ endif
 
 let mapleader=" "
 
+set nocompatible
 set number relativenumber
 set encoding=utf-8
 set wildmode=longest,list,full
