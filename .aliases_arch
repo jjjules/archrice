@@ -1,4 +1,4 @@
-alias pm="sudo pacman"
+alias pm="pacman"
 alias pms="sudo pacman -S $1"
 alias pmr="sudo pacman -Rns $1"
 alias pmy="sudo pacman -Syu"
