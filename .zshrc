@@ -70,8 +70,11 @@ plugins=(
 )
 
 #TMUX
-ZSH_TMUX_AUTOSTART="true"
-ZSH_TMUX_AUTOCONNECT="false"
+if [ "$hostname" = "arch-jules" ]
+then
+	ZSH_TMUX_AUTOSTART="true"
+	ZSH_TMUX_AUTOCONNECT="false"
+fi
 
 source $ZSH/oh-my-zsh.sh
 
@@ -105,6 +108,7 @@ __conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 #fi
 unset __conda_setup
 # <<< conda initialize <<<
+export PATH="/opt/anaconda3/bin:$PATH"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
