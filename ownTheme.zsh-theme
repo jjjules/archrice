@@ -21,19 +21,21 @@ local loc_jobs="%(1j. [%{$fg[yellow]%}%j%{$reset_color%}].)%{$reset_color%}"
 
 # Git
 ZSH_THEME_GIT_PROMPT_PREFIX=""
-ZSH_THEME_GIT_PROMPT_SUFFIX="$reset_color"
-ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]"
-ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]"
-function git_prompt() {
-	ref=$(git symbolic-ref HEAD 2>/dev/null) || return
-	echo "$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_PREFIX} $(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[green]%}"
+
+local git_prompt="$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_PREFIX} $(current_branch)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+# function git_prompt() {
+	# ref=$(git symbolic-ref HEAD 2>/dev/null) || return
+	# echo "$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_PREFIX} $(current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+# }
 
 # Full prompt
 my_prompt=''
 my_prompt+="$loc_hostname"
 my_prompt+="$loc_pwd"
-PROMPT='${my_prompt}$(git_prompt)${loc_jobs} %(!.#.%%) %{$reset_color%}'
+PROMPT='${my_prompt}${git_prompt}${loc_jobs} %(!.#.%%) %{$reset_color%}'
 
 # Git
 #ZSH_THEME_GIT_PROMPT_PREFIX="" #%{$fg[green]%}%{$reset_color%}"
