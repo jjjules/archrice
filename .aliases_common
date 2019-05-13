@@ -11,6 +11,7 @@ alias cdw="cd ~/Downloads"
 alias mkd="mkdir -pv"
 alias rm="rm -v"
 alias v="vim"
+alias less='less -F -X'
 alias o="nohup xdg-open $1 &>/dev/null"
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
