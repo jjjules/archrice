@@ -127,6 +127,9 @@ if [ -f ~/.files/.aliases_arch ]; then
   . ~/.files/.aliases_arch
 fi
 
+# Fzf source
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Own key bindings
 bindkey "^@" autosuggest-execute
 bindkey "^P" forward-word
