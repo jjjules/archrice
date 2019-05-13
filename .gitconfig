@@ -19,5 +19,6 @@
 	pager = cat
 [pager]
 	log = less
+	diff = less
 [color]
 	ui = auto
