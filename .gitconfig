@@ -1,7 +1,6 @@
 [user]
 	email = jules.gottraux@epfl.ch
 	name = Jules Gottraux
-
 [alias]
 	s = status
 	a = add
@@ -11,18 +10,14 @@
 	p = push
 	f = fetch
 	br = branch
-	la = log --branches --remotes --tags --graph --oneline --decorate --notes HEAD
-	cop = "!f() { \
-		git co $1; \
-		git pull; \
-  		}; f"
-	ac = "!f() { \
-		git add .; \
-		git commit; \
-		}; f"
 	amno = "!f() { \
 		git add .; \
 		git commit --amend --no-edit; \
 		}; f"
 [core]
 	editor = vim
+	pager = cat
+[pager]
+	log = less
+[color]
+	ui = auto
