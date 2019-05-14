@@ -70,7 +70,7 @@ plugins=(
 )
 
 #TMUX
-if [ "$hostname" = "arch-jules" ]
+if [ "$HOST" = "arch-jules" ]
 then
 	ZSH_TMUX_AUTOSTART="true"
 	ZSH_TMUX_AUTOCONNECT="false"
