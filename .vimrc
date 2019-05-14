@@ -19,6 +19,9 @@ set smartindent
 " Set to auto read when a file is changed from the outside
 	set autoread
 
+" Disables automatic commenting on newline:
+	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 "" Mappings
 map 0 ^
 map <leader><leader> /

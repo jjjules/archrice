@@ -69,30 +69,37 @@ plugins=(
 	colored-man-pages
 )
 
-#TMUX
-if [ "$HOST" = "arch-jules" ]
+# General
+local is_arch='"$HOST" = "arch-jules"'
+eval $( dircolors -b $HOME/.LS_COLORS )
+export EPFL_DIR="/home/jules/Documents/EPFL/2018-2019/"
+
+# Aliases
+if [ -f ~/.files/.aliases_common ]; then
+	. ~/.files/.aliases_common
+fi
+if [ -f ~/.files/.aliases_arch && $is_arch ]; then
+  . ~/.files/.aliases_arch
+fi
+
+# Fzf source
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Own key bindings
+bindkey "^@" autosuggest-execute
+bindkey "^P" forward-word
+bindkey "^L" autosuggest-accept
+bindkey "^K" history-beginning-search-backward
+bindkey "^J" history-beginning-search-forward
+
+#Tmux
+if [ $is_arch ]
 then
 	ZSH_TMUX_AUTOSTART="true"
 	ZSH_TMUX_AUTOCONNECT="false"
 fi
 
 source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-export EDITOR='vim'
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -115,24 +122,4 @@ export PATH="/opt/anaconda3/bin:$PATH"
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.#
 
-eval $( dircolors -b $HOME/.LS_COLORS )
 
-export EPFL_DIR="/home/jules/Documents/EPFL/2018-2019/"
-
-# Aliases
-if [ -f ~/.files/.aliases_common ]; then
-	. ~/.files/.aliases_common
-fi
-if [ -f ~/.files/.aliases_arch ]; then
-  . ~/.files/.aliases_arch
-fi
-
-# Fzf source
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Own key bindings
-bindkey "^@" autosuggest-execute
-bindkey "^P" forward-word
-bindkey "^L" autosuggest-accept
-bindkey "^K" history-beginning-search-backward
-bindkey "^J" history-beginning-search-forward
