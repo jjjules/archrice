@@ -48,6 +48,8 @@ alias dots="vim ~/.files"
 alias vrc="v ~/.files/.vimrc"
 alias zrc="v ~/.files/.zshrc"
 alias brc="v ~/.files/.bashrc"
+alias cdscripts="cd ~/scripts"
+alias scripts="v ~/scripts"
 
 mvep() { mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
