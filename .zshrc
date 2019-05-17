@@ -70,20 +70,29 @@ plugins=(
 )
 
 # General
-local is_arch='"$HOST" = "arch-jules"'
 eval $( dircolors -b $HOME/.LS_COLORS )
 export EPFL_DIR="/home/jules/Documents/EPFL/2018-2019/"
+export PATH="/home/jules/scripts:$PATH"
 
 # Aliases
 if [ -f ~/.files/.aliases_common ]; then
 	. ~/.files/.aliases_common
 fi
-if [ -f ~/.files/.aliases_arch && $is_arch ]; then
-  . ~/.files/.aliases_arch
+if [ "$HOST" = "arch-jules" ]
+then
+	ZSH_TMUX_AUTOSTART="true"
+	ZSH_TMUX_AUTOCONNECT="false"
+	if [ -f ~/.files/.aliases_arch ]
+	then
+  	. ~/.files/.aliases_arch
+	fi
 fi
 
 # Fzf source
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.fzf.zsh ]
+then
+	source ~/.fzf.zsh
+fi
 
 # Own key bindings
 bindkey "^@" autosuggest-execute
@@ -91,13 +100,6 @@ bindkey "^P" forward-word
 bindkey "^L" autosuggest-accept
 bindkey "^K" history-beginning-search-backward
 bindkey "^J" history-beginning-search-forward
-
-#Tmux
-if [ $is_arch ]
-then
-	ZSH_TMUX_AUTOSTART="true"
-	ZSH_TMUX_AUTOCONNECT="false"
-fi
 
 source $ZSH/oh-my-zsh.sh
 
