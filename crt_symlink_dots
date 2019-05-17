@@ -1,0 +1,31 @@
+#!/usr/bin/zsh
+
+if [ -f ~/.files/.vimrc ]
+then
+	ln -s ~/.files/.vimrc ~/.vimrc
+fi
+
+if [ $0 = "-zsh" -a -f ~/.files/.zshrc ]
+then
+	ln -s ~/.files/.zshrc ~/.zshrc
+fi
+
+if [ -f ~/.files/.gitconfig ]
+then
+	ln -s ~/.files/.gitconfig ~/.gitconfig
+fi
+
+if [ -d ~/.oh-my-zsh/custom/themes/ ]
+then
+	ln -s ~/.files/ownThem.zsh-theme ~/.oh-my-zsh/custom/themes/
+fi
+
+if [ -f ~/.files/.tmux.conf ]
+then
+	ln -s ~/.files/.tmux.conf ~/.tmux.conf
+fi
+
+if [ -f ~/.files/.LS_COLORS ]
+then
+	ln -s ~/.files/.tmux.conf ~/.tmux.conf
+fi
