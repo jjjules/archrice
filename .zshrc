@@ -68,6 +68,7 @@ plugins=(
   tmux
 	colored-man-pages
 )
+source $ZSH/oh-my-zsh.sh
 
 # General
 eval $( dircolors -b $HOME/.LS_COLORS )
@@ -100,8 +101,6 @@ bindkey "^P" forward-word
 bindkey "^L" autosuggest-accept
 bindkey "^K" history-beginning-search-backward
 bindkey "^J" history-beginning-search-forward
-
-source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
