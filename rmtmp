@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if ! [ -d /tmp/rmsave ]
+then
+	mkdir /tmp/rmsave
+fi
+
+mv $@ /tmp/rmsave
