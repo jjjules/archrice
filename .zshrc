@@ -68,7 +68,6 @@ plugins=(
   tmux
 	colored-man-pages
 )
-source $ZSH/oh-my-zsh.sh
 
 # General
 eval $( dircolors -b $HOME/.LS_COLORS )
@@ -117,3 +116,5 @@ __conda_setup="$('/opt/anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 unset __conda_setup
 # <<< conda initialize <<<
 export PATH="/opt/anaconda3/bin:$PATH"
+
+source $ZSH/oh-my-zsh.sh
