@@ -25,10 +25,12 @@ set infercase
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 "" Mappings
-map 0 ^
-map <leader><leader> /
+noremap 0 ^
+noremap <leader><leader> /
 vnoremap <C-c> "*y :let @+=@*<CR>
-map <C-p> "+P
+noremap <C-p> "+P
+
+" unmap Q
 
 " Splits
 	set splitbelow splitright
