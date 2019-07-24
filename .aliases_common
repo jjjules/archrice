@@ -8,6 +8,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias cdep="cd ~/Documents/EPFL/2018-2019"
 alias cdw="cd ~/Downloads"
+alias d="dirs -v"
 alias cp="nocorrect cp"
 alias mkd="nocorrect mkdir -pv"
 alias mv="nocorrect mv"
