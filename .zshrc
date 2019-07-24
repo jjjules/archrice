@@ -73,7 +73,7 @@ plugins=(
 eval $( dircolors -b $HOME/.LS_COLORS )
 export EPFL_DIR="/home/jules/Documents/EPFL/2018-2019/"
 export PATH="/home/jules/scripts:$PATH"
-
+export EDITOR="vim"
 # Aliases
 if [ -f ~/.files/.aliases_common ]; then
 	. ~/.files/.aliases_common
