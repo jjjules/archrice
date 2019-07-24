@@ -9,7 +9,9 @@ alias ....='cd ../../..'
 alias cdep="cd ~/Documents/EPFL/2018-2019"
 alias cdw="cd ~/Downloads"
 alias mkd="mkdir -pv"
-alias ls="ls --color=tty -v"
+alias ls="ls --color=tty -v --group-directories-first"
+alias la="ls -a"
+alias ll="ls -alth"
 alias v="vim"
 alias less='less -F -X'
 alias o="nohup xdg-open $1 &>/dev/null"
