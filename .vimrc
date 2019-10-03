@@ -1,36 +1,59 @@
-if filereadable("/etc/vim/vimrc")
-	source /etc/vim/vimrc
-endif
-
 let mapleader=" "
 
 set nocompatible
+set showcmd
+set mouse=a
+set backspace=indent,eol,start
 set number relativenumber
 set encoding=utf-8
 set wildmode=longest,list,full
 set bg=dark
-colorscheme delek
 
 set shiftwidth=2
 set tabstop=2
 set autoindent
 set smartindent
-
 set infercase
+
+set incsearch
+set ignorecase
+set smartcase
+"set hlsearch
+
+colorscheme delek
+syntax on
+filetype plugin indent on
 
 " Set to auto read when a file is changed from the outside
 	set autoread
 
 " Disables automatic commenting on newline:
+" Does not work, see
+" https://vim.fandom.com/wiki/Disable_automatic_comment_insertion
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-"" Mappings
-noremap 0 ^
-noremap <leader><leader> /
-vnoremap <C-c> "*y :let @+=@*<CR>
-noremap <C-p> "+P
+" Mappings
+	map					Q <Nop>
+	noremap			0 ^
+	noremap			<leader>s /
+	nnoremap		<leader>c mtI#<Esc>'t
+	nnoremap		<leader>h :nohlsearch<CR>
+	vnoremap		<C-c> "*y :let @+=@*<CR>
+	vnoremap 		<C-x> "*d :let @+=@*<CR>
+	nnoremap 		<C-p> "+P
+	inoremap 		<C-p> <Esc>"+pa
+	nnoremap		<C-a> ggVG"*y :let @+=@*<CR>
+	nnoremap		 o<Esc>
+	"inoremap		 <Esc>ldBi
+	nnoremap		 X
+	inoremap		 <Esc>lbi
+	inoremap		 <Esc>lwi
+	inoremap		 <Esc>A
+	inoremap		 <Esc>I
 
-" unmap Q
+" Mysterious command for the map of <CR> in normal mode
+	autocmd CmdwinEnter * nnoremap <CR> <CR>
+	autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
 " Splits
 	set splitbelow splitright
@@ -54,47 +77,13 @@ noremap <C-p> "+P
 	autocmd FileType markdown,rmd let b:noStripWhitespace=1
 	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
 
-
 " :W sudo saves the file
 	command W w !sudo tee % > /dev/null
 
-" Taken from defaults.vim
-" Only do this part when Vim was compiled with the +eval feature.
-if 1
+" Set syntax for known files
+	autocmd BufNewFile,BufRead .aliases_* set syntax=zsh
 
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  " Revert with ":filetype off".
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that you can revert them with:
-  " ":augroup vimStartup | au! | augroup END"
-  augroup vimStartup
-    au!
-
-    " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid, when inside an event handler
-    " (happens when dropping a file on gvim) and for a commit message (it's
-    " likely a different one than last time).
-    autocmd BufReadPost *
-      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-      \ |   exe "normal! g`\""
-      \ | endif
-
-  augroup END
-
-endif
-
-" Switch syntax highlighting on when the terminal has colors or when using the
-" GUI (which always has colors).
-if &t_Co > 2 || has("gui_running")
-  " Revert with ":syntax off".
-  syntax on
-
-  " I like highlighting strings inside C comments.
-  " Revert with ":unlet c_comment_strings".
-  let c_comment_strings=1
-endif
-"ioawnd
+" Setup automatic fold
+	autocmd BufWinLeave *.* mkview
+	autocmd BufWinEnter *.* silent loadview
+	set viewoptions-=options	" Avoid directory change because of loadview
