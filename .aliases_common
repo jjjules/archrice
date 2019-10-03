@@ -1,12 +1,7 @@
-alias pwo="killall firefox && systemctl poweroff"
-alias pwh="systemctl hibernate "
-alias pws="systemctl suspend"
-alias pwr="killall firefox && systemctl reboot"
-
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias cdep="cd ~/Documents/EPFL/2018-2019"
+alias sudo="sudo	"
 alias cdw="cd ~/Downloads"
 alias d="dirs -v"
 alias cp="nocorrect cp"
@@ -21,19 +16,24 @@ alias c="clear"
 alias j="jobs"
 alias untar="tar -zxvf"
 alias v="vim"
+alias gvim="vim"
 alias ra="ranger"
 alias less='less -F -X'
-alias o="nohup xdg-open $1 &>/dev/null"
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
-alias hgrep="history | grep $1"
+alias hg="history | grep $@"
+alias psg="ps aux | grep $@"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 alias ka="killall"
 alias k1="kill %1"
 alias k2="kill %2"
-alias nml="nmcli d wifi rescan && nmcli d wifi list"
-alias nmc="nmcli d wifi rescan && nmcli -a d wifi connect"
+alias zshman="man zshzle"
+alias nmr="sudo systemctl restart NetworkManager"
+alias nmwr="nmcli device wifi rescan"
+alias nmwl="nmcli device wifi list"
+alias nmwc="nmcli -a device wifi connect"
+alias nmc="nmcli connection"
 
 alias g="git"
 alias gs="g status -s -b"
@@ -49,22 +49,33 @@ alias gl="g --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(rese
 alias gll="g log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
 gac() { git add . && git commit; }
 
+alias sdock="sudo docker"
 alias jptn="jupyter notebook"
-alias condaa="conda activate"
-alias condad="conda deactivate"
-alias pclust='ssh gottraux@diascld32.iccluster.epfl.ch'
-alias ixclust='ssh -l gottraux iccluster040.iccluster.epfl.ch'
-alias vpnep="sudo openconnect -u gottraux vpn.epfl.ch"
+alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 
+alias szrc="source ~/.zshrc"
 alias cdots="cd ~/.files"
 alias dots="vim ~/.files"
 alias vrc="v ~/.files/.vimrc"
 alias zrc="v ~/.files/.zshrc"
 alias brc="v ~/.files/.bashrc"
-alias cdscripts="cd ~/scripts"
+alias cdscr="cd ~/scripts"
 alias scripts="v ~/scripts"
+alias cdc="cd ~/.config/"
+alias qrc="v ~/.config/qutebrowser/config.py"
+alias irc="v ~/.config/i3/config"
+alias rrc="v ~/.config/ranger/rc.conf"
+alias xrc="v ~/.Xdefaults"
+
+alias cdep="cd $EPFL_DIR"
+alias gea="cd ${EPFL_DIR}/ADA"
+alias gei="cd ${EPFL_DIR}/ISP"
+alias gem="cd ${EPFL_DIR}/ML"
+alias gen="cd ${EPFL_DIR}/NatLang"
+alias ges="cd ${EPFL_DIR}/Stats"
 
 mvep() { mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
 cpep() { cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
-mwep() { mv "$(du -a -d 1 ~/Downloads | awk '{print $2}' | fzf)" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"; }
+zathuratab() { tabbed -c zathura "$@" -e; }
 playm() { ffplay "$(find ~/Music -type f | fzf)" &> /dev/null; }
+o() { xdg-open "$1" &!; }

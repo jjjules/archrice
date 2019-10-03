@@ -10,10 +10,7 @@
 	p = push
 	f = fetch
 	br = branch
-	amno = "!f() { \
-		git add .; \
-		git commit --amend --no-edit; \
-		}; f"
+	root = !pwd
 [core]
 	editor = vim
 	pager = cat
