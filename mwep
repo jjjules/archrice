@@ -1,16 +1,16 @@
 #!/bin/sh
 source ~/.profile
 
-prefix_file=~/Downloads
-file="$(du -a -d 1 ${prefix_file} | cut --complement -f1 | sed -e "$ d" -e "s,${prefix_file}/,," | dmenu | sed -e "s, ,\ ,g")"
-if ! [ -n "$file" ]
+prefix_file=~/downloads
+file="$(du -a -d 1 ${prefix_file} | cut --complement -f1 | sed -e "$ d" -e "s,${prefix_file}/,," | dmenu -p "file" | sed -e "s, ,\ ,g")"
+if [ -z "$file" ]
 then
 	exit
 fi
 file="${prefix_file}/${file}"
 
 prefix_dir=${EPFL_DIR}
-dir="$(du -d 4 ${prefix_dir} | cut --complement -f1 | sed -e "s,${prefix_dir},," | grep -Fv . | dmenu | sed -e "s, ,\ ,g")"
+dir="$(du -d 4 ${prefix_dir} | cut --complement -f1 | sed -e "s,${prefix_dir},," | grep -Fv . | dmenu -p "dir"| sed -e "s, ,\ ,g")"
 if ! [ -n "$dir" ]
 then
 	exit

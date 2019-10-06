@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 nm-applet &>/dev/null &
 stalonetray &>/dev/null
 killall nm-applet
