@@ -82,6 +82,8 @@ filetype plugin indent on
 
 " Set syntax for known files
 	autocmd BufNewFile,BufRead .aliases_* set syntax=zsh
+	autocmd BufNewFile,BufRead .xinitrc set syntax=sh
+
 
 " Setup automatic fold
 	autocmd BufWinLeave *.* mkview
