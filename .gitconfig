@@ -10,7 +10,8 @@
 	p = push
 	f = fetch
 	br = branch
-	root = !pwd
+	rs = restore --staged
+	rsa = "!gitrsa() { git restore --staged $(git rev-parse --show-toplevel); }; gitrsa"
 [core]
 	editor = vim
 	pager = cat
