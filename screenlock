@@ -1,0 +1,6 @@
+#!/bin/sh
+
+scrot -z -o /tmp/screencap
+convert /tmp/screencap -paint 2 /tmp/screencapblur
+rm /tmp/screencap
+i3lock -u -e -i /tmp/screencapblur
