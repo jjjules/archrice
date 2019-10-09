@@ -38,6 +38,8 @@ filetype plugin indent on
 	noremap			<leader>s /
 	nnoremap		<leader>c mtI#<Esc>'t
 	nnoremap		<leader>h :nohlsearch<CR>
+	nnoremap		<leader>p "0p
+	nnoremap		<leader>p "0p
 	vnoremap		<C-c> "*y :let @+=@*<CR>
 	vnoremap 		<C-x> "*d :let @+=@*<CR>
 	nnoremap 		<C-p> "+P
