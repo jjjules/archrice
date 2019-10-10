@@ -35,18 +35,20 @@ filetype plugin indent on
 " Mappings
 	map					Q <Nop>
 	noremap			0 ^
+	inoremap		<Home> <Esc>I
 	noremap			<leader>s /
 	nnoremap		<leader>c mtI#<Esc>'t
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>p "0p
-	nnoremap		<leader>p "0p
+	nnoremap		<leader>P "0P
+	nnoremap		Y y$
 	vnoremap		<C-c> "*y :let @+=@*<CR>
 	vnoremap 		<C-x> "*d :let @+=@*<CR>
 	nnoremap 		<C-p> "+P
 	inoremap 		<C-p> <Esc>"+pa
 	nnoremap		<C-a> ggVG"*y :let @+=@*<CR>
 	nnoremap		 o<Esc>
-	"inoremap		 <Esc>ldBi
+	nnoremap		<leader> O<Esc>
 	nnoremap		 X
 	inoremap		 <Esc>lbi
 	inoremap		 <Esc>lwi
