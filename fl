@@ -8,7 +8,7 @@ pdfs=""
 multiple_pdfs=""
 
 while read -r file; do
-	file="$directory/$file"
+	file="'$file'"
 
 	if [ "$(head -c 4 "$file")" = "%PDF" ]; then
 		if [ -z "$pdfs" ]; then
