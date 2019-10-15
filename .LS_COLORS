@@ -142,17 +142,17 @@ STICKY_OTHER_WRITABLE 48;5;235;38;5;139;3
 # }}}
 # }}}
 # configs {{{2
-*cfg                  1
-*conf                 1
-*rc                   1
-.ini                  1
-.plist                1
+*cfg                  38;5;248
+*conf                 38;5;248
+*rc                   38;5;248
+.ini                  38;5;248
+.plist                38;5;248
 #   vim
-.viminfo              1
+.viminfo              38;5;248
 #   cisco VPN client configuration
-.pcf                  1
+.pcf                  38;5;248
 #   adobe photoshop proof settings file
-.psf                  1
+.psf                  38;5;248
 # }}}
 # }}}
 # code {{{1
