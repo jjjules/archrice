@@ -1,9 +1,8 @@
 # Oh-My-Zsh
-export ZSH="$HOME/.config/.oh-my-zsh"
+export ZSH="$HOME/.config/zsh/oh-my-zsh"
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 ZSH_THEME="ownTheme"
-HYPHEN_INSENSITIVE="true"
-_Z_DATA="$HOME/.cache/z/.z"
+_Z_DATA="$HOME/.cache/z/z_data"
 plugins=(
 	z
   zsh-autosuggestions
@@ -11,13 +10,15 @@ plugins=(
 	zsh-syntax-highlighting
 )
 source $ZSH/oh-my-zsh.sh
+ZSH_HIGHLIGHT_STYLES[path]="none" # Do not highlight path url-like
 
 # General
 eval $( dircolors -b $HOME/.dots/.LS_COLORS )
 source /home/jules/.profile
-export PATH="/home/jules/.local/bin:$PATH"	# pip scripts directory
-export EDITOR="vim"
-export VISUAL="vim"
+export PATH="$HOME/.local/bin:$PATH"	# pip scripts directory
+export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
+export IPYTHONDIR="$HOME/.config/ipython"
+export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
 
 # Key Bindings
 bindkey '^O' kill-line
@@ -61,8 +62,7 @@ alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias psg="ps aux | grep $@"
 alias ka="killall"
-alias k1="kill %1"
-alias k2="kill %2"
+alias k="kill"
 ## Wifi
 alias nmr="nmcli device wifi rescan"
 alias nml="nmcli device wifi list"
@@ -70,18 +70,17 @@ alias nmc="nmcli -a device wifi connect"
 alias nms="nmcli connection show"
 alias nmw="nmcli device wifi"
 ## Git
-alias g="git"
-alias gs="g status -s -b"
-alias ga="g add"
-alias gc="g commit"
-alias gd="g diff"
-alias gf="g fetch"
-alias gfp="g fetch --prune"
-alias gb="g branch"
-alias gpl="g pull"
-alias gp="g push"
-alias gl="g --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
-alias gll="g log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
+alias gs="git status -s -b"
+alias ga="git add"
+alias gc="git commit"
+alias gd="git diff"
+alias gf="git fetch"
+alias gfp="git fetch --prune"
+alias gb="git branch"
+alias gpl="git pull"
+alias gp="git push"
+alias gl="git --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
+alias gll="git log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
 ## EPFL
 ### cds
 alias ge="cd $EPFL_DIR"
@@ -100,8 +99,10 @@ alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 alias szrc="source ~/.zshrc"
 alias cdot="cd ~/.dots"
 alias dots="vim ~/.dots"
-alias vrc="v ~/.dots/.vimrc"
+alias xrc="v ~/.dots/.xinitrc"
+alias prc="v ~/.dots/.profile"
 alias zrc="v ~/.dots/.zshrc"
+alias vrc="v ~/.dots/.vimrc"
 alias brc="v ~/.dots/.bashrc"
 alias grc="v ~/.dots/.gitconfig"
 alias cdscr="cd ~/scripts"
@@ -110,15 +111,17 @@ alias cdc="cd ~/.config/"
 alias qrc="v ~/.config/qutebrowser/config.py"
 alias irc="v ~/.config/i3/config"
 alias rrc="v ~/.config/ranger/rc.conf"
-alias xrc="v ~/.Xdefaults"
 alias todo="v ${EPFL_DIR}/todo.md" # In EPFL directory for synchronization purpose
 ## Others
+alias g="z"
 alias v="vim"
 alias gvim="vim"
 alias ra="ranger"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
+alias notmuch="notmuch --config=$HOME/.config/notmuch/notmuchrc"
+alias mbsync="mbsync -c $HOME/.config/mbsync/mbsyncrc"
 alias zshman="man zshzle"
 alias piu="pip install --user -U"
 
