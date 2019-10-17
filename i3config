@@ -10,7 +10,7 @@ font pango:mono 11
 
 # Color setup
 	# class                 border  backgr. text    indicator child_border
-	client.focused          #4c7899 #285577 #ffffff #c42e14		#c2640c
+	client.focused          #a2440c #a2440c #dddddd #000000		#a2440c
 	client.focused_inactive #333333 #5f676a #ffffff #484e50   #484e50
 	client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 	client.urgent           #2f343a #900000 #ffffff #900000   #900000
@@ -91,7 +91,7 @@ bindsym $mod+q 					kill
 bindsym $mod+r					exec --no-startup-id "urxvt -e ranger"
 #bindsym $mod+Shift+r
 
-#bindsym $mod+t
+bindsym $mod+t					layout tabbed
 #bindsym $mod+Shift+t
 
 bindsym $mod+z 					[instance="dropdown_calc"] scratchpad show ; move position center
@@ -112,7 +112,7 @@ bindsym $mod+Shift+p		exec --no-startup-id "passmenu ; $after_dmenu_focus"
 #bindsym $mod+a
 #bindsym $mod+Shift+a
 
-#bindsym $mod+s
+bindsym $mod+s					layout toggle default
 #bindsym $mod+Shift+s
 
 bindsym $mod+d					exec --no-startup-id i3-dmenu-desktop
