@@ -120,8 +120,6 @@ alias ra="ranger"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
-alias notmuch="notmuch --config=$HOME/.config/notmuch/notmuchrc"
-alias mbsync="mbsync -c $HOME/.config/mbsync/mbsyncrc"
 alias zshman="man zshzle"
 alias piu="pip install --user -U"
 
