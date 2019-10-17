@@ -85,8 +85,8 @@ filetype plugin indent on
 	command W w !sudo tee % > /dev/null
 
 " Set syntax for known files
-	autocmd BufNewFile,BufRead .aliases_* set syntax=zsh
-	autocmd BufNewFile,BufRead .xinitrc set syntax=sh
+	autocmd BufNewFile,BufRead *profile set syntax=zsh
+	autocmd BufNewFile,BufRead *xinitrc set syntax=sh
 
 
 " Setup automatic fold

@@ -96,7 +96,7 @@ alias jptn="jupyter notebook"
 alias jptl="jupyter lab"
 alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 ## Dots Shortcuts
-alias szrc="source ~/zshrc"
+alias szrc="source ~/.zshrc"
 alias cdot="cd ~/.dots"
 alias dots="vim ~/.dots"
 alias xrc="v ~/.dots/xinitrc"
