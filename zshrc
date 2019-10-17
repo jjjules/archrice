@@ -13,7 +13,7 @@ source $ZSH/oh-my-zsh.sh
 ZSH_HIGHLIGHT_STYLES[path]="none" # Do not highlight path url-like
 
 # General
-eval $( dircolors -b $HOME/.dots/.LS_COLORS )
+eval $( dircolors -b $HOME/.dots/ls_colors )
 source /home/jules/.profile
 export PATH="$HOME/.local/bin:$PATH"	# pip scripts directory
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
@@ -96,15 +96,15 @@ alias jptn="jupyter notebook"
 alias jptl="jupyter lab"
 alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 ## Dots Shortcuts
-alias szrc="source ~/.zshrc"
+alias szrc="source ~/zshrc"
 alias cdot="cd ~/.dots"
 alias dots="vim ~/.dots"
-alias xrc="v ~/.dots/.xinitrc"
-alias prc="v ~/.dots/.profile"
-alias zrc="v ~/.dots/.zshrc"
-alias vrc="v ~/.dots/.vimrc"
-alias brc="v ~/.dots/.bashrc"
-alias grc="v ~/.dots/.gitconfig"
+alias xrc="v ~/.dots/xinitrc"
+alias prc="v ~/.dots/profile"
+alias zrc="v ~/.dots/zshrc"
+alias vrc="v ~/.dots/vimrc"
+alias brc="v ~/.dots/bashrc"
+alias grc="v ~/.dots/gitconfig"
 alias cdscr="cd ~/scripts"
 alias scripts="v ~/scripts"
 alias cdc="cd ~/.config/"

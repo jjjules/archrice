@@ -1,0 +1,64 @@
+config.load_autoconfig()
+
+# Bindings
+config.bind('<Ctrl-m>', 'hint images spawn mpv --force-window yes {hint-url}')
+
+config.bind('spt', 'set input.spatial_navigation true')
+config.bind('spf', 'set input.spatial_navigation false')
+
+config.unbind('wf')
+config.bind('wft', 'set content.windowed_fullscreen true')
+config.bind('wff', 'set content.windowed_fullscreen false')
+
+config.bind('apt', 'set content.autoplay true')
+config.bind('apf', 'set content.autoplay false')
+
+config.bind('pdt', 'set downloads.location.prompt true ;; set downloads.location.remember true')
+config.bind('pdf', 'set downloads.location.prompt false ;; set downloads.location.remember false')
+
+config.bind('gi', 'open https://images.google.com')
+config.bind('gI', 'open -t https://images.google.com')
+
+config.unbind('gl')
+config.bind('gl', 'tab-move +')
+config.bind('gh', 'tab-move -')
+config.bind('tg', 'tab-give')
+config.bind('tc', 'tab-clone')
+config.bind('tt', 'set-cmd-text :tab-take')
+
+config.bind('pw', 'spawn --userscript qute-pass')
+
+# Environnement Settings
+c.auto_save.session = True
+c.scrolling.smooth = True
+c.content.geolocation = False
+c.content.notifications = False
+c.tabs.position = 'top'
+c.tabs.select_on_remove = 'last-used'
+c.downloads.location.directory = '/home/jules/downloads'
+c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
+c.hints.chars = 'asdflkjhgqwertzuiopyxcvbnm'
+c.completion.height = "40%"
+c.completion.open_categories = ['quickmarks', 'bookmarks', 'history']
+c.content.host_blocking.whitelist = ["piwik.org", "www.thepiratebay.org", "thepiratebay.org"]
+c.url.searchengines = {
+"DEFAULT": "https://duckduckgo.com/?q={}",
+"g": "https://www.google.com/search?q={}",
+"mit": "https://www.google.ch/maps/dir/{}",
+"mapi": "https://www.google.com/maps/search/{}",
+"tef": "https://translate.google.com/#view=home&op=translate&sl=en&tl=fr&text={}",
+"tfe": "https://translate.google.com/#view=home&op=translate&sl=fr&tl=en&text={}",
+"w": "https://fr.wikipedia.org/wiki/{}",
+"wa": "https://wiki.archlinux.org/?search={}",
+"we": "https://en.wikipedia.org/wiki/{}",
+"yt": "https://www.youtube.com/results?search_query={}",
+"pb":  "https://www.thepiratebay.org/s/?q={}"}
+
+c.aliases = {
+"jsf": "set content.pdfjs false",
+ "jst": "set content.pdfjs true",
+ "q": "close",
+ "qa": "quit",
+ "w": "session-save",
+ "wq": "quit --save",
+ "wqa": "quit --save"}

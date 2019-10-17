@@ -1,6 +1,0 @@
-alias pm="pacman"
-alias pms="sudo pacman -S $1"
-alias pmr="sudo pacman -Rns $1"
-alias pmy="sudo pacman -Syu"
-mlnb() { condaa && cd "$(du -a -d1 "$(echo ${EPFL_DIR}ML/Homeworks/)" |
-	awk '{print $2}' | grep -Fv . | fzf)" && jptn; }

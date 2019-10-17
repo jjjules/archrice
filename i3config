@@ -1,0 +1,182 @@
+# Basic definitions and appearance
+set $mod Mod4
+set $scripts $HOME/scripts
+set $after_dmenu_focus="i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+
+gaps inner 10
+gaps outer 0
+for_window [class="^.*"] border pixel 2
+font pango:mono 11
+
+# Color setup
+	# class                 border  backgr. text    indicator child_border
+	client.focused          #4c7899 #285577 #ffffff #c42e14		#c2640c
+	client.focused_inactive #333333 #5f676a #ffffff #484e50   #484e50
+	client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+	client.urgent           #2f343a #900000 #ffffff #900000   #900000
+	client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+	client.background       #ffffff
+
+# Status Bar
+bar {
+	font pango:mono 11
+	status_command i3status
+	#status command i3blocks
+	position bottom
+
+	colors {
+		separator		#aaaaaa
+    background 	#1b1b1c
+		# class							border	backgr.	text
+		focused_workspace 	#1b1b1c #a2440c #aaaaaa
+		inactive_workspace	#353535	#1b1b1c	#aaaaaa
+	}
+}
+
+# Dropdown Windows Definitions
+for_window [instance="dropdown_*"] floating enable
+for_window [instance="dropdown_*"] move scratchpad
+for_window [instance="dropdown_*"] sticky enable
+for_window [instance="dropdown_calc"] resize set 850 450
+for_window [instance="dropdown_term"] resize set 850 600
+
+exec --no-startup-id urxvt -name dropdown_calc -e bpython
+exec --no-startup-id urxvt -name dropdown_term
+
+# Workspace Name Definitions
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# Special Key Bindings
+bindsym $mod+F9 					exec --no-startup-id "$scripts/screenlock && systemctl suspend"
+#bindsym $mod+F10
+bindsym $mod+F11					exec --no-startup-id "systemctl reboot"
+bindsym $mod+F12					exec --no-startup-id "systemctl poweroff"
+bindsym $mod+Return 			exec urxvt
+bindsym $mod+Tab					workspace next
+#bindsym $mod+Backspace		workspace prev
+bindsym $mod+Home					workspace $ws1
+bindsym $mod+Shift+space	floating toggle
+bindsym $mod+space				focus mode_toggle
+bindsym $mod+Escape 			reload
+bindsym $mod+Shift+Escape exec i3-msg exit
+bindsym $mod+Print				exec deepin-screenshot
+
+# Media Keys Bindings
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id pactl set-sink-mute 0 0 ; exec --no-startup-id pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume 	exec --no-startup-id pactl set-sink-mute 0 0 ; exec --no-startup-id pactl set-sink-volume 0 -5%
+bindsym XF86AudioMute 				exec --no-startup-id pactl set-sink-mute 0 toggle
+bindsym XF86MonBrightnessUp		exec --no-startup-id sudo $scripts/brightness_incr
+bindsym XF86MonBrightnessDown	exec --no-startup-id sudo $scripts/brightness_decr
+bindcode 246									exec --no-startup-id sudo systemctl restart NetworkManager
+
+# Letter Key Bindings
+bindsym $mod+q 					kill
+#bindsym $mod+Shift+q
+
+#bindsym $mod+w					exec "/bin/zsh -c '/usr/bin/xdotool key --clearmodifiers o'"
+#bindsym $mod+Shift+w
+
+#bindsym $mod+e
+#bindsym $mod+Shift+e
+
+bindsym $mod+r					exec --no-startup-id "urxvt -e ranger"
+#bindsym $mod+Shift+r
+
+#bindsym $mod+t
+#bindsym $mod+Shift+t
+
+bindsym $mod+z 					[instance="dropdown_calc"] scratchpad show ; move position center
+bindsym $mod+Shift+z 		[instance="dropdown_term"] scratchpad show ; move position center
+
+bindsym $mod+u					resize shrink width 1 px or 1 ppt
+#bindsym $mod+Shift+u
+
+bindsym $mod+i					resize shrink height 1 px or 1 ppt
+#bindsym $mod+Shift+i
+
+bindsym $mod+o					resize grow height 1 px or 1 ppt
+#bindsym $mod+Shift+o
+
+bindsym $mod+p					resize grow width 1 px or 1 ppt
+bindsym $mod+Shift+p		exec --no-startup-id "passmenu ; $after_dmenu_focus"
+
+#bindsym $mod+a
+#bindsym $mod+Shift+a
+
+#bindsym $mod+s
+#bindsym $mod+Shift+s
+
+bindsym $mod+d					exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+d		exec --no-startup-id "urxvt -e $scripts/fl"
+
+bindsym $mod+f 					fullscreen toggle
+#bindsym $mod+Shift+f
+
+bindsym $mod+g 					split h
+bindsym $mod+Shift+g		exec --no-startup-id "$scripts/togaps"
+
+bindsym $mod+h 					focus left
+bindsym $mod+Shift+h 		move left
+
+bindsym $mod+j 					focus down
+bindsym $mod+Shift+j 		move down
+
+bindsym $mod+k 					focus up
+bindsym $mod+Shift+k 		move up
+
+bindsym $mod+l					focus right
+bindsym $mod++Shift+l		move right
+
+#bindsym $mod+y
+#bindsym $mod++Shift+y
+
+#bindsym $mod+x
+#bindsym $mod++Shift+x
+
+bindsym $mod+c					focus parent
+bindsym $mod++Shift+c		focus child
+
+bindsym $mod+v 					split v
+#bindsym $mod+Shift+v
+
+bindsym $mod+b 					exec qutebrowser
+#bindsym $mod+Shift+b
+
+#bindsym $mod+n
+#bindsym $mod+Shift+n
+
+bindsym $mod+m					exec --no-startup-id "$scripts/mwep $EPFL_DIR ; $after_dmenu_focus"
+#bindsym $mod+Shift+m
+#bindsym $mod+Shift+m		exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace 1'; i3-msg 'workspace 2' ; i3-msg 'workspace previous' ; i3-msg 'workspace previous'"
+
+# Workspace Bindings
+bindsym $mod+1		workspace $ws1
+bindsym $mod+2		workspace $ws2
+bindsym $mod+3		workspace $ws3
+bindsym $mod+4		workspace $ws4
+bindsym $mod+5		workspace $ws5
+bindsym $mod+6		workspace $ws6
+bindsym $mod+7		workspace $ws7
+bindsym $mod+8		workspace $ws8
+bindsym $mod+9		workspace $ws9
+bindsym $mod+0		workspace $ws10
+
+bindsym $mod+Shift+1		move container to workspace $ws1
+bindsym $mod+Shift+2		move container to workspace $ws2
+bindsym $mod+Shift+3		move container to workspace $ws3
+bindsym $mod+Shift+4		move container to workspace $ws4
+bindsym $mod+Shift+5		move container to workspace $ws5
+bindsym $mod+Shift+6		move container to workspace $ws6
+bindsym $mod+Shift+7		move container to workspace $ws7
+bindsym $mod+Shift+8		move container to workspace $ws8
+bindsym $mod+Shift+9		move container to workspace $ws9
+bindsym $mod+Shift+0		move container to workspace $ws10
