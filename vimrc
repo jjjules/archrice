@@ -84,6 +84,7 @@ filetype plugin indent on
 
 	autocmd FileType markdown,rmd let b:noStripWhitespace=1
 	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
+	autocmd BufWritePre * :%s,^\s\+$,,e
 
 " :W sudo saves the file
 	command W w !sudo tee % > /dev/null

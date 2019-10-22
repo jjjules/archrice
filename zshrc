@@ -53,6 +53,7 @@ alias ll="ls -alh"
 alias lsd="ls .*"
 alias rm="rm -I"
 alias du="du -h"
+alias tree='tree -a -I ".git|venv|.venv|*.class"'
 ### Process management
 alias sudo="sudo "
 alias c="clear"
@@ -178,4 +179,4 @@ function ispra {
 	scp -P 2222 "user@127.0.0.1:$1" ${ISP_DIR}
 }
 # Ada cluster
-alias adaclust="clust040 && ssh -N -L 8080:localhost:8080 gottraux@iccluster040.iccluster.epfl.ch"
+alias sshrp="ssh -N -L 8080:localhost:8080 gottraux@iccluster040.iccluster.epfl.ch"
