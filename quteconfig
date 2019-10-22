@@ -2,6 +2,7 @@ config.load_autoconfig()
 
 # Bindings
 config.bind('<Ctrl-m>', 'hint images spawn mpv --force-window yes {hint-url}')
+config.bind('<Ctrl-c>', 'stop')
 
 config.bind('spt', 'set input.spatial_navigation true')
 config.bind('spf', 'set input.spatial_navigation false')
@@ -25,7 +26,10 @@ config.bind('gh', 'tab-move -')
 config.bind('tg', 'tab-give')
 config.bind('tc', 'tab-clone')
 config.bind('tt', 'set-cmd-text :tab-take')
+config.bind('D', 'tab-next ;; tab-close')
 
+config.bind('m', 'run-macro')
+config.bind('Q', 'quickmark-save')
 config.bind('pw', 'spawn --userscript qute-pass')
 
 # Environnement Settings
@@ -38,6 +42,7 @@ c.tabs.select_on_remove = 'last-used'
 c.downloads.location.directory = '/home/jules/downloads'
 c.content.headers.user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.77 Safari/537.36'
 c.hints.chars = 'asdflkjhgqwertzuiopyxcvbnm'
+c.colors.hints.bg='#F68445'
 c.completion.height = "40%"
 c.completion.open_categories = ['quickmarks', 'bookmarks', 'history']
 c.content.host_blocking.whitelist = ["piwik.org", "www.thepiratebay.org", "thepiratebay.org"]

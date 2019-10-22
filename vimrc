@@ -7,7 +7,7 @@ set backspace=indent,eol,start
 set number relativenumber
 set encoding=utf-8
 set wildmode=longest,list,full
-set bg=dark
+set bg=light
 
 set shiftwidth=2
 set tabstop=2
@@ -20,7 +20,7 @@ set ignorecase
 set smartcase
 "set hlsearch
 
-colorscheme delek
+"colorscheme delek
 syntax on
 filetype plugin indent on
 
@@ -39,6 +39,8 @@ filetype plugin indent on
 	noremap			<leader>s /
 	nnoremap		<leader>c mtI#<Esc>'t
 	nnoremap		<leader>h :nohlsearch<CR>
+	nnoremap		<leader>l :b#<CR>
+
 	nnoremap		<leader>p "0p
 	nnoremap		<leader>P "0P
 	nnoremap		Y y$
@@ -47,9 +49,11 @@ filetype plugin indent on
 	nnoremap 		<C-p> "+P
 	inoremap 		<C-p> <Esc>"+pa
 	nnoremap		<C-a> ggVG"*y :let @+=@*<CR>
+
 	nnoremap		 o<Esc>
 	nnoremap		<leader> O<Esc>
 	nnoremap		 X
+
 	inoremap		 <Esc>lbi
 	inoremap		 <Esc>lwi
 	inoremap		 <Esc>A

@@ -51,13 +51,15 @@ alias ls="ls --color=tty -v --group-directories-first"
 alias la="ls -a"
 alias ll="ls -alh"
 alias lsd="ls .*"
+alias rm="rm -I"
+alias du="du -h"
 ### Process management
 alias sudo="sudo "
 alias c="clear"
 alias j="jobs"
 alias h="history"
 alias hg="history | grep $@"
-#alias less='less -F -X -b -1'
+	#alias less='less -F -X -b -1'
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias psg="ps aux | grep $@"
@@ -92,9 +94,10 @@ alias ges="cd ${EPFL_DIR}/sds"
 ### Misc
 alias vtd="vim ${EPFL_DIR}/todo.md"
 alias sdock="sudo docker"
-alias jptn="jupyter notebook"
-alias jptl="jupyter lab"
+alias jptn="jupyter notebook >/dev/null"
+alias jptl="jupyter lab >/dev/null"
 alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
+alias clust040="ssh gottraux@iccluster040.iccluster.epfl.ch"
 ## Dots Shortcuts
 alias szrc="source ~/.zshrc"
 alias cdot="cd ~/.dots"
@@ -133,6 +136,10 @@ function mvep() {
 function cpep() {
 	cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }
+function touchx() {
+	touch "$1"
+	chmod +x "$1"
+}
 function gr() {
 	cd $(git rev-parse --show-toplevel)
 }
@@ -170,3 +177,5 @@ function ispr {
 function ispra {
 	scp -P 2222 "user@127.0.0.1:$1" ${ISP_DIR}
 }
+# Ada cluster
+alias adaclust="clust040 && ssh -N -L 8080:localhost:8080 gottraux@iccluster040.iccluster.epfl.ch"
