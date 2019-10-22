@@ -2,7 +2,6 @@ config.load_autoconfig()
 
 # Bindings
 config.bind('<Ctrl-m>', 'hint images spawn mpv --force-window yes {hint-url}')
-config.bind('<Ctrl-c>', 'stop')
 
 config.bind('spt', 'set input.spatial_navigation true')
 config.bind('spf', 'set input.spatial_navigation false')
