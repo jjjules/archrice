@@ -6,5 +6,6 @@ xinput set-prop 11 309 1 													# Enable Natural Scroll
 feh --no-fehbg --bg-center ~/pics/fractal_wp/342753.jpg
 unclutter &
 dunst &
-ZDOTDIR="$HOME/.config/zsh/zshrc"
+xset dpms 300 300 300
+xss-lock -l -- $HOME/scripts/lockscreen &
 exec i3

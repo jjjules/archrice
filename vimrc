@@ -33,14 +33,18 @@ filetype plugin indent on
 	autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 " Mappings
+	" Misc
 	map					Q <Nop>
+	nnoremap 		<C-s> <Nop>
 	noremap			0 ^
 	inoremap		<Home> <Esc>I
 	noremap			<leader>s /
-	nnoremap		<leader>c mtI#<Esc>'t
+	nnoremap		<leader>c :let save_cursor = getpos('.')<CR>I#<Esc>:call setpos('.', save_cursor)<CR>l
+	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>l :b#<CR>
 
+	" Copy and Pasting
 	nnoremap		<leader>p "0p
 	nnoremap		<leader>P "0P
 	nnoremap		Y y$
@@ -50,14 +54,18 @@ filetype plugin indent on
 	inoremap 		<C-p> <Esc>"+pa
 	nnoremap		<C-a> ggVG"*y :let @+=@*<CR>
 
+	" Normal mode direct action
 	nnoremap		 o<Esc>
 	nnoremap		<leader> O<Esc>
 	nnoremap		 X
 
-	inoremap		 <Esc>lbi
-	inoremap		 <Esc>lwi
-	inoremap		 <Esc>A
-	inoremap		 <Esc>I
+	" Insert mode direct action
+	inoremap		<C-h> <C-o>b
+	inoremap		<C-j> <C-o>j
+	inoremap		<C-k> <C-o>k
+	inoremap		<C-l> <C-o>w
+	inoremap		<C-e> <C-o>$
+	inoremap		<C-a> <C-o>0
 
 " Mysterious command for the map of <CR> in normal mode
 	autocmd CmdwinEnter * nnoremap <CR> <CR>
