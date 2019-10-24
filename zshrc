@@ -148,6 +148,7 @@ function gac() {
 	cd $(git rev-parse --show-toplevel)
 	git add .
 	cd -
+	git restore --staged "$@"
 	git commit
 }
 function gamno() {
