@@ -88,8 +88,10 @@ alias gll="git log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) -
 ### cds
 alias ge="cd $EPFL_DIR"
 alias gea="cd ${EPFL_DIR}/ada"
+alias geap="cd ${EPFL_DIR}/ada/project"
 alias gei="cd ${EPFL_DIR}/isp"
 alias gem="cd ${EPFL_DIR}/ml"
+alias gem2="cd $EPFL_DIR/ml/ml-project2"
 alias gen="cd ${EPFL_DIR}/nlp"
 alias ges="cd ${EPFL_DIR}/sds"
 ### Misc
@@ -113,6 +115,7 @@ alias gscr="cd ~/scripts"
 alias scripts="v ~/scripts"
 alias cdc="cd ~/.config/"
 alias qrc="v ~/.config/qutebrowser/config.py"
+alias qrc2="v ~/.config/qutebrowser/config-default.py"
 alias irc="v ~/.config/i3/config"
 alias rrc="v ~/.config/ranger/rc.conf"
 alias todo="v ${EPFL_DIR}/todo.md" # In EPFL directory for synchronization purpose
