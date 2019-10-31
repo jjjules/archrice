@@ -2,6 +2,12 @@ config.load_autoconfig()
 
 # Bindings
 config.bind('<Ctrl-m>', 'hint images spawn mpv --force-window yes {hint-url}')
+config.bind('<Ctrl-c>', 'yank selection')
+
+config.bind('<Ctrl-h>', 'rl-backward-word', mode='command')
+config.bind('<Ctrl-j>', 'completion-item-focus next', mode='command')
+config.bind('<Ctrl-k>', 'completion-item-focus prev', mode='command')
+config.bind('<Ctrl-l>', 'rl-forward-word', mode='command')
 
 config.bind('spt', 'set input.spatial_navigation true')
 config.bind('spf', 'set input.spatial_navigation false')
@@ -65,4 +71,5 @@ c.aliases = {
  "qa": "quit",
  "w": "session-save",
  "wq": "quit --save",
- "wqa": "quit --save"}
+ "wqa": "quit --save",
+ "r": "restart"}
