@@ -1,7 +1,9 @@
 #!/bin/bash
+export DISPLAY=:0.0
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 # low battery in %
-LOW_BATTERY=11
+LOW_BATTERY=35
 # critical battery in %
 CRITICAL_BATTERY=6
 # display icon
@@ -17,9 +19,11 @@ if [ -n "$(acpi --ac-adapter | grep "off-line")" ]
 then
 		if [ "$PERC" -lt "$CRITICAL_BATTERY" ]
 		then
+			notify-send -u critical "Battery too low,\nThe computer will be suspended in 5 seconds"
+			sleep 5
 			systemctl suspend
 		elif [ "$PERC" -lt "$LOW_BATTERY" ]
 		then
-				notify-send "Battery is low !!!"
+				notify-send -u critical "Battery is low !!!"
 		fi
 fi
