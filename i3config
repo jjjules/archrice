@@ -1,4 +1,4 @@
-# Basic definitions and appearance
+## Basic definitions and appearance ##
 set $mod Mod4
 set $scripts $HOME/scripts
 
@@ -7,7 +7,7 @@ gaps outer 0
 for_window [class="^.*"] border pixel 2
 font pango:mono 12
 
-# Color setup
+## Color setup ##
 	# class                 border  backgr. text    indicator child_border
 	client.focused          #a2440c #a2440c #000000 #000000		#a2440c
 	client.focused_inactive #333333 #5f676a #ffffff #484e50   #484e50
@@ -16,7 +16,7 @@ font pango:mono 12
 	client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 	client.background       #ffffff
 
-# Status Bar
+## Status Bar ##
 bar {
 	font pango:mono 11
 	status_command i3status
@@ -27,12 +27,12 @@ bar {
 		separator		#aaaaaa
     background 	#1b1b1c
 		# class							border	backgr.	text
-		focused_workspace 	#1b1b1c #a2440c #aaaaaa
-		inactive_workspace	#353535	#1b1b1c	#aaaaaa
+		focused_workspace 	##1b1b1c #a2440c ##aaaaaa
+		inactive_workspace	##353535	#1b1b1c	##aaaaaa
 	}
 }
 
-# Dropdown Windows Definitions
+## Dropdown Windows Definitions ##
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
@@ -42,7 +42,7 @@ for_window [instance="dropdown_term"] resize set 850 600
 exec --no-startup-id urxvt -name dropdown_calc -e bpython
 exec --no-startup-id urxvt -name dropdown_term
 
-# Workspace Name Definitions
+## Workspace Name Definitions ##
 set $ws1 "1"
 set $ws2 "2"
 set $ws3 "3"
@@ -54,7 +54,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Special Key Bindings
+## Special Key Bindings ##
 bindsym $mod+Return 			exec urxvt
 bindsym $mod+Tab					workspace next
 #bindsym $mod+Backspace		workspace prev
@@ -62,18 +62,21 @@ bindsym $mod+Escape 			reload
 bindsym $mod+Shift+Escape exec --no-startup-id "$scripts/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
 bindsym $mod+Print				exec deepin-screenshot
 
-# Media Keys Bindings
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; exec --no-startup-id pactl set-sink-volume 0 +5%"
-bindsym XF86AudioLowerVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; exec --no-startup-id pactl set-sink-volume 0 -5%"
+## Media Keys Bindings ##
 bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute 0 toggle"
-bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_incr"
+bindsym XF86AudioLowerVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; pactl set-sink-volume 0 -5%"
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; pactl set-sink-volume 0 +5%"
+#bindsym XF86AudioMicMute
 bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $scripts/brightness_decr"
-bindcode 246									exec --no-startup-id "sudo systemctl restart NetworkManager"
-bindcode 179									exec --no-startup-id "$scripts/lockscreen"
-bindcode 128						      exec --no-startup-id "$scripts/prompt 'Do you really want to reboot?' 'systemctl reboot'"
-bindcode 152                  exec --no-startup-id "$scripts/prompt 'Do you really want to power off?' 'systemctl poweroff'"
+bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_incr"
+#bindsym XF86Display
+bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
+#bindsym XF86Tools
+bindsym XF86Search						exec --no-startup-id "$scripts/lockscreen"
+bindsym XF86LaunchA			      exec --no-startup-id "$scripts/prompt 'Do you really want to reboot?' 'systemctl reboot'"
+bindsym XF86Explorer          exec --no-startup-id "$scripts/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
-# Letter Key Bindings
+## Letter Key Bindings ##
 bindsym $mod+q					[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 #bindsym $mod+Shift+q
 
@@ -107,7 +110,7 @@ bindsym $mod+Shift+p		exec --no-startup-id "passmenu ; i3-msg 'workspace back_an
 #bindsym $mod+a
 #bindsym $mod+Shift+a
 
-bindsym $mod+s					layout toggle default
+#bindsym $mod+s
 #bindsym $mod+Shift+s
 
 bindsym $mod+d					exec --no-startup-id i3-dmenu-desktop
@@ -153,7 +156,7 @@ bindsym $mod+m					exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'works
 #bindsym $mod+Shift+m
 #bindsym $mod+Shift+m		exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace 1'; i3-msg 'workspace 2' ; i3-msg 'workspace previous' ; i3-msg 'workspace previous'"
 
-# Workspace Bindings
+## Workspace Bindings ##
 bindsym $mod+1		workspace $ws1
 bindsym $mod+2		workspace $ws2
 bindsym $mod+3		workspace $ws3
