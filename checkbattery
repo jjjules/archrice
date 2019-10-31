@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# low battery in %
+LOW_BATTERY=10
+# critical battery in %
+CRITICAL_BATTERY=6
+# display icon
+# ICON="/opt/icons/battery-low-icon.png"
+
+# Getting the actual percentage of each battery
+PERC0=$(cat /sys/class/power_supply/BAT0/capacity)
+PERC1=$(cat /sys/class/power_supply/BAT1/capacity)
+PERC=$(echo "$PERC0*0.7+$PERC1*0.2" | bc)
+PERC=${PERC%.*}
+
+if [ -n "$(acpi --ac-adapter | grep "off-line")" ]
+then
+		if [ "$PERC" -lt "$CRITICAL_BATTERY" ]
+		then
+			systemctl suspend
+		elif [ "$PERC" -lt "$LOW_BATTERY" ]
+		then
+				notify-send "Battery is low !!!"
+		fi
+fi
