@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # low battery in %
-LOW_BATTERY=10
+LOW_BATTERY=11
 # critical battery in %
 CRITICAL_BATTERY=6
 # display icon
