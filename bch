@@ -3,7 +3,7 @@ export DISPLAY=:0.0
 export XDG_RUNTIME_DIR=/run/user/$(id -u)
 
 # low battery in %
-LOW_BATTERY=35
+LOW_BATTERY=12
 # critical battery in %
 CRITICAL_BATTERY=6
 # display icon
