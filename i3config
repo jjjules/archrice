@@ -27,8 +27,8 @@ bar {
 		separator		#aaaaaa
     background 	#1b1b1c
 		# class							border	backgr.	text
-		focused_workspace 	##1b1b1c #a2440c ##aaaaaa
-		inactive_workspace	##353535	#1b1b1c	##aaaaaa
+		focused_workspace 	#1b1b1c #a2440c #aaaaaa
+		inactive_workspace	#353535	#1b1b1c	#aaaaaa
 	}
 }
 

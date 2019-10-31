@@ -26,10 +26,15 @@ bindkey '^@' autosuggest-execute
 bindkey '^P' autosuggest-accept
 bindkey '^H' backward-word
 bindkey 'h' backward-char
+bindkey '^J' history-beginning-search-forward
+bindkey '^K' history-beginning-search-backward
 bindkey 'l' forward-char
 bindkey '^L' forward-word
-bindkey '^K' history-beginning-search-backward
-bindkey '^J' history-beginning-search-forward
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey 'e' edit-command-line
 
 # Aliases
 ## Arch
@@ -127,6 +132,7 @@ alias ra="ranger"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
+alias archey="archey3 --config=$HOME/.config/archey3/archkey3.cfg"
 alias zshman="man zshzle"
 alias pipu="pip install --user -U"
 
