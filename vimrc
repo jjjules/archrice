@@ -1,28 +1,33 @@
 let mapleader=" "
 
+" Basics behavior and appearance
 set nocompatible
 set showcmd
 set mouse=a
 set backspace=indent,eol,start
 set number relativenumber
 set encoding=utf-8
-set wildmode=longest,list,full
 set bg=light
+set splitbelow splitright
+syntax on
+filetype plugin indent on
 
+" Auto-completion
+set wildmode=longest,list,full
+set completeopt=longest,menuone
+
+" Handle tabs
 set shiftwidth=2
 set tabstop=2
 set autoindent
 set smartindent
 set infercase
 
+" Searching
 set incsearch
 set ignorecase
 set smartcase
 "set hlsearch
-
-"colorscheme delek
-syntax on
-filetype plugin indent on
 
 " Set to auto read when a file is changed from the outside
 	set autoread
@@ -43,6 +48,10 @@ filetype plugin indent on
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>l :b#<CR>
+	nnoremap		<leader>ee :Explore
+	nnoremap		<leader>et :Texplore
+	nnoremap		<leader>es :Sexplore
+	nnoremap		<leader>ev :Vexplore
 
 	" Copy and Pasting
 	nnoremap		<leader>p "0p
@@ -61,22 +70,32 @@ filetype plugin indent on
 
 	" Insert mode direct action
 	inoremap		<C-h> <C-o>b
-	inoremap		<C-j> <C-o>j
-	inoremap		<C-k> <C-o>k
+	inoremap		<C-j> <Down>
+	inoremap		<C-k> <Up>
 	inoremap		<C-l> <C-o>w
 	inoremap		<C-e> <C-o>$
 	inoremap		<C-a> <C-o>0
+
+	" Splits
+	nnoremap <C-h> <C-w>h
+	nnoremap <C-j> <C-w>j
+	nnoremap <C-k> <C-w>k
+	nnoremap <C-l> <C-w>l
+
+	" Completion
+	inoremap <C-Space> <C-n>
+	"" Makes Enter key works as expected
+	"inoremap <expr> <CR> call pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+	"" Simulates Down key when entering in completion mode
+	"inoremap <expr> <C-n> call pumvisible() ? '<C-n>' :
+  "\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Mysterious command for the map of <CR> in normal mode
 	autocmd CmdwinEnter * nnoremap <CR> <CR>
 	autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
-" Splits
-	set splitbelow splitright
-	map <C-h> <C-w>h
-	map <C-j> <C-w>j
-	map <C-k> <C-w>k
-	map <C-l> <C-w>l
+
+
 
 " Automatically deletes trailing white spaces on save
 	fun! DeleteTrailinfWhiteSpaces()
