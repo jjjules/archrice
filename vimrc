@@ -48,10 +48,10 @@ set smartcase
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>l :b#<CR>
-	nnoremap		<leader>ee :Explore
-	nnoremap		<leader>et :Texplore
-	nnoremap		<leader>es :Sexplore
-	nnoremap		<leader>ev :Vexplore
+	nnoremap		<leader>ee :Explore<CR>
+	nnoremap		<leader>et :Texplore<CR>
+	nnoremap		<leader>es :Sexplore<CR>
+	nnoremap		<leader>ev :Vexplore<CR>
 
 	" Copy and Pasting
 	nnoremap		<leader>p "0p

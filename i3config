@@ -64,11 +64,11 @@ bindsym $mod+Print				exec deepin-screenshot
 
 ## Media Keys Bindings ##
 bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute 0 toggle"
-bindsym XF86AudioLowerVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; pactl set-sink-volume 0 -5%"
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id "pactl set-sink-mute 0 0 ; pactl set-sink-volume 0 +5%"
+bindsym XF86AudioLowerVolume 	exec --no-startup-id "$scripts/volume_down"
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$scripts/volume_up"
 #bindsym XF86AudioMicMute
-bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $scripts/brightness_decr"
-bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_incr"
+bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $scripts/brightness_down"
+bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_up"
 #bindsym XF86Display
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
 #bindsym XF86Tools
@@ -107,7 +107,7 @@ bindsym $mod+o					resize grow height 1 px or 1 ppt
 bindsym $mod+p					resize grow width 1 px or 1 ppt
 bindsym $mod+Shift+p		exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
-#bindsym $mod+a
+bindsym $mod+a					exec --no-startup-id "$scripts/i3focusleft"
 #bindsym $mod+Shift+a
 
 #bindsym $mod+s
