@@ -1,0 +1,15 @@
+#!/bin/sh
+export DISPLAY=:0.0
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+pactl set-sink-mute 0 0
+pactl set-sink-volume 0 +5%
+# Assuming left and right are the same
+vol=$(pactl list sinks | grep "^\s*Volume" | egrep -o "[[:digit:]]+%" | sed 1q)
+if [ $(tr -d '%' <<< $vol) -gt 150 ]
+then
+	pactl set-sink-volume 0 150%
+	vol="150%"
+fi
+
+dunstify -u normal -r 30003 "Volume: $vol"
