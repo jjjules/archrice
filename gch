@@ -11,15 +11,12 @@ do
 	then
 		cd $line && cd ..
 		gs="$(git status -sb)"
-		# echo "gs: $gs"
-		# echo "wc: $(echo "$gs" | wc -l)"
-		# echo "ahead: $(echo "$gs" | grep -o 'ahead')"
 		if [[ -n "$(echo "$gs" | grep -o 'ahead')" || $(echo "$gs" | wc -l) > 1 ]]
 		then
 			repos+="$(echo "$line" | sed 's/\.git//')"
 		fi
 	fi
-done <<< "$(find ~ -name ".git" -type d)"
+done <<< "$(find ~ -path "/home/jules/.cache*" -prune -o -name ".git" -type d)"
 
 repos="$(echo "$repos" | sed 's/\/\//\/\n\//g')"
 
