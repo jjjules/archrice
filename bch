@@ -7,7 +7,7 @@ LOW_BATTERY=12
 # critical battery in %
 CRITICAL_BATTERY=6
 # display icon
-# ICON="/opt/icons/battery-low-icon.png"
+ICON="/usr/share/icons/Adwaita/16x16/status/dialog-warning-symbolic.symbolic.png"
 
 # Getting the actual percentage of each battery
 PERC0=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -19,11 +19,11 @@ if [ -n "$(acpi --ac-adapter | grep "off-line")" ]
 then
 		if [ "$PERC" -lt "$CRITICAL_BATTERY" ]
 		then
-			notify-send -u critical "Battery too low,\nThe computer will be suspended in 5 seconds"
-			sleep 5
+			dunstify -u critical -i $ICON "Battery too low, will suspend in 20 seconds"
+			sleep 20
 			systemctl suspend
 		elif [ "$PERC" -lt "$LOW_BATTERY" ]
 		then
-				notify-send -u critical "Battery is low !!!"
+			dunstify -u critical -i $ICON "Battery is low !!!"
 		fi
 fi
