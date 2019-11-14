@@ -72,67 +72,68 @@ bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_up"
 #bindsym XF86Display
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
 #bindsym XF86Tools
-bindsym XF86Search						exec --no-startup-id "$scripts/lockscreen"
+bindsym XF86Search						exec --no-startup-id "systemctl suspend"
+bindsym Shift+XF86Search			exec --no-startup-id "$scripts/lockscreen"
 bindsym XF86LaunchA			      exec --no-startup-id "$scripts/prompt 'Do you really want to reboot?' 'systemctl reboot'"
 bindsym XF86Explorer          exec --no-startup-id "$scripts/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
 ## Letter Key Bindings ##
-bindsym $mod+q					[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
+bindsym $mod+q						[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
 #bindsym $mod+Shift+q
 
-bindsym $mod+w					focus parent
-bindsym $mod+Shift+w		focus child
+bindsym $mod+w						focus parent
+bindsym $mod+Shift+w			focus child
 
-bindsym $mod+e					layout toggle split
-bindsym $mod+Shift+e		layout tabbed
+bindsym $mod+e						layout toggle split
+bindsym $mod+Shift+e			layout tabbed
 
-bindsym $mod+r					exec --no-startup-id "urxvt -e ranger"
-#bindsym $mod+Shift+r
+bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
+bindsym $mod+Shift+r			exec --no-startup-id "urxvt -e htop"
 
-bindsym $mod+t					floating toggle
-bindsym $mod+Shift+t		focus mode_toggle
+bindsym $mod+t						floating toggle
+bindsym $mod+Shift+t			focus mode_toggle
 
-bindsym $mod+z 					[instance="dropdown_calc"] scratchpad show ; move position center
-bindsym $mod+Shift+z 		[instance="dropdown_term"] scratchpad show ; move position center
+bindsym $mod+z 						[instance="dropdown_calc"] scratchpad show ; move position center
+bindsym $mod+Shift+z 			[instance="dropdown_term"] scratchpad show ; move position center
 
-bindsym $mod+u					resize shrink width 1 px or 1 ppt
+bindsym $mod+u						resize shrink width 1 px or 1 ppt
 #bindsym $mod+Shift+u
 
-bindsym $mod+i					resize shrink height 1 px or 1 ppt
+bindsym $mod+i						resize shrink height 1 px or 1 ppt
 #bindsym $mod+Shift+i
 
-bindsym $mod+o					resize grow height 1 px or 1 ppt
+bindsym $mod+o						resize grow height 1 px or 1 ppt
 #bindsym $mod+Shift+o
 
-bindsym $mod+p					resize grow width 1 px or 1 ppt
-bindsym $mod+Shift+p		exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+p						resize grow width 1 px or 1 ppt
+bindsym $mod+Shift+p			exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
-bindsym $mod+a					exec --no-startup-id "$scripts/i3focusleft"
+bindsym $mod+a						exec --no-startup-id "$scripts/i3focusleft"
 #bindsym $mod+Shift+a
 
-#bindsym $mod+s
+bindsym $mod+s						exec --no-startup-id "gpg --decrypt /home/jules/e1.asc >> /home/jules/asci3"
 #bindsym $mod+Shift+s
 
-bindsym $mod+d					exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+d		exec --no-startup-id "urxvt -e $scripts/flalt"
+bindsym $mod+d						exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $scripts/flalt"
 
-bindsym $mod+f 					fullscreen toggle
-bindsym $mod+Shift+f		workspace back_and_forth ; workspace back_and_forth
+bindsym $mod+f 						fullscreen toggle
+bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
 
-#bindsym $mod+g
-bindsym $mod+Shift+g		exec --no-startup-id "$scripts/togaps"
+bindsym --release $mod+g	exec --no-startup-id "$scripts/test"
+bindsym $mod+Shift+g			exec --no-startup-id "$scripts/togaps"
 
-bindsym $mod+h 					focus left
-bindsym $mod+Shift+h 		move left
+bindsym $mod+h 						focus left
+bindsym $mod+Shift+h 			move left
 
-bindsym $mod+j 					focus down
-bindsym $mod+Shift+j 		move down
+bindsym $mod+j 						focus down
+bindsym $mod+Shift+j 			move down
 
-bindsym $mod+k 					focus up
-bindsym $mod+Shift+k 		move up
+bindsym $mod+k 						focus up
+bindsym $mod+Shift+k 			move up
 
-bindsym $mod+l					focus right
-bindsym $mod++Shift+l		move right
+bindsym $mod+l						focus right
+bindsym $mod++Shift+l			move right
 
 #bindsym $mod+y
 #bindsym $mod++Shift+y
@@ -140,21 +141,20 @@ bindsym $mod++Shift+l		move right
 #bindsym $mod+x
 #bindsym $mod++Shift+x
 
-bindsym $mod+c					split h
+bindsym $mod+c						split h
 #bindsym $mod++Shift+c
 
-bindsym $mod+v 					split v
+bindsym $mod+v 						split v
 #bindsym $mod+Shift+v
 
-bindsym $mod+b 					exec qutebrowser
+bindsym $mod+b 						exec qutebrowser
 #bindsym $mod+Shift+b
 
 #bindsym $mod+n
 #bindsym $mod+Shift+n
 
-bindsym $mod+m					exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
-#bindsym $mod+Shift+m
-#bindsym $mod+Shift+m		exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace 1'; i3-msg 'workspace 2' ; i3-msg 'workspace previous' ; i3-msg 'workspace previous'"
+bindsym $mod+m						exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+#bindsym $mod+Shift+m			exec --no-startup-id
 
 ## Workspace Bindings ##
 bindsym $mod+1		workspace $ws1

@@ -2,7 +2,8 @@
 	email = jules.gottraux@epfl.ch
 	name = Jules Gottraux
 [alias]
-	s = status
+	s = status -sb
+	st = status
 	a = add
 	c = commit
 	co = checkout

@@ -2,7 +2,7 @@
 local loc_hostname=""
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]
 then
-	loc_hostname="%{$fg[green]%}$(hostname)%{$reset_color%}:"
+	loc_hostname="%{$fg[orange]%}$(hostname)%{$reset_color%}:"
 fi
 
 # Path

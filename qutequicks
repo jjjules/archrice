@@ -1,4 +1,6 @@
-drive-me https://drive.google.com/drive/u/0/shared-with-me
+drive-me https://drive.google.com/drive/u/0/
+drive-me-epfl https://drive.google.com/drive/u/2/
+drive-flo https://drive.google.com/open?id=0B6C3Q_vH6gL0TkpMT0JCVVdheFE
 gmail https://mail.google.com/mail/u/0/?pli=1#inbox
 whatsapp https://web.whatsapp.com/
 facebook https://www.facebook.com
@@ -6,7 +8,8 @@ telegram https://web.telegram.org/#/im?p=u762956268_15416077209856257576
 youtube https://www.youtube.com/feed/subscriptions
 cff https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml
 soundcloud https://soundcloud.com/stream
-bcv-login https://www.bcv.ch/bcvd-login/authenticateAction.do
+bcv https://www.bcv.ch/bcvd-login/authenticateAction.do
+viseca-one https://one.viseca.ch/login/login?lang=en
 netflix https://www.netflix.com/browse
 19h30 https://www.rts.ch/play/tv/emission/19h30?id=105932&station=a9e7621504c6959e35c3ecbe7f6bed0446cdf8da
 maps https://www.google.ch/maps
@@ -27,13 +30,13 @@ gists https://gist.github.com/JulesssG
 bas-login https://wwwsec.abs.ch/authen/login?lang=fr
 doc-converter https://document.online-convert.com/fr
 drive-ic https://drive.google.com/drive/u/0/folders/0B1V4guVusMb3VnJFLUxWYWxJYnM
-drive-flo https://drive.google.com/open?id=0B6C3Q_vH6gL0TkpMT0JCVVdheFE
 matrix-calc http://comnuan.com/cmnn01010/
 pdf-join https://www.pdfjoin.com/
 pdf-rotate https://www.rotatepdf.net/
 api-scala https://www.scala-lang.org/api/current/
 api-numpy https://docs.scipy.org/doc/numpy/reference/
 api-spark https://spark.apache.org/docs/1.6.2/programming-guide.html
+api-spark-python https://spark.apache.org/docs/2.2.0/api/python/pyspark.html
 api-scipy https://docs.scipy.org/doc/scipy/reference/
 api-panda https://pandas.pydata.org/pandas-docs/stable/
 api-nltk http://www.nltk.org/api/nltk.html

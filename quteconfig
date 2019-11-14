@@ -30,6 +30,7 @@ config.bind('gl', 'tab-move +')
 config.bind('gh', 'tab-move -')
 config.bind('tg', 'tab-give')
 config.bind('tc', 'tab-clone')
+config.bind('<Ctrl-Shift-h>', 'tab-clone ;; back')
 config.bind('tt', 'set-cmd-text :tab-take')
 config.bind('D', 'tab-next ;; tab-close')
 
@@ -55,7 +56,7 @@ c.url.searchengines = {
 "DEFAULT": "https://duckduckgo.com/?q={}",
 "g": "https://www.google.com/search?q={}",
 "mit": "https://www.google.ch/maps/dir/{}",
-"mapi": "https://www.google.com/maps/search/{}",
+"maps": "https://www.google.com/maps/search/{}",
 "tef": "https://translate.google.com/#view=home&op=translate&sl=en&tl=fr&text={}",
 "tfe": "https://translate.google.com/#view=home&op=translate&sl=fr&tl=en&text={}",
 "w": "https://fr.wikipedia.org/wiki/{}",
