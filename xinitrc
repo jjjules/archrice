@@ -1,11 +1,18 @@
-setxkbmap -model thinkpad -layout ch -variant fr 	# Set Keyboard Layout
+# Set Keyboard Layout
+setxkbmap -model thinkpad -layout ch -variant fr
 xinput set-prop 11 301 1 													# Enable Tap on Touchpad
 xinput set-prop 11 309 1 													# Enable Natural Scroll
 /home/jules/scripts/escaps												# Exchange caps and escape
 
-feh --no-fehbg --bg-center ~/pics/fractal_wp/342753.jpg
+# Set screen saver
+xset s 300 5
+xss-lock -l -n "/home/jules/dimscreen" -- $HOME/scripts/lockscreen &
+
+# Mute volume by default
+pactl set-sink-mute 0 toggle
+
+# Set wallpaper and start background programs
+/home/jules/scripts/setwp
 unclutter &
 dunst &
-xset dpms 300 300 300
-xss-lock -l -- $HOME/scripts/lockscreen &
 exec i3
