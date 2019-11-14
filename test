@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if ! [ -d /tmp/screenshot ]
+then
+	mkdir /tmp/screenshot
+fi
+
+date=$(date +"%Y-%m-%d_%T")
+tmpname='/tmp/screenshot/$date.png'
+echo $tmpname
+
+scrot -s $tmpname
+newname=$(i3-input -P 'filename: ' | grep '^output' | sed 's/output = //')
+mv $tmpname $HOME/pics/screenshots/$newname
