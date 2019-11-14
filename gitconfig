@@ -13,7 +13,6 @@
 	r = remote
 	br = branch
 	rs = restore --staged
-	rsa = "!gitrsa() { git restore --staged $(git rev-parse --show-toplevel); }; gitrsa"
 [core]
 	editor = vim
 	pager = cat
