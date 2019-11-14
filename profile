@@ -1,5 +1,5 @@
-export EPFL_DIR="/home/jules/documents/epfl/ma1"
-export PATH="/home/jules/scripts:$PATH"
+export EPFL_DIR="$HOME/documents/epfl/ma1"
+export PATH="$(find "$HOME/scripts" -type d -name '.git' -prune -o -type d -name '*' | grep -v '\.git' | tr '\n' ':'):$PATH"
 export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump"
 export HISTFILE="$HOME/.history/zsh"
 export HISTSIZE=100000
