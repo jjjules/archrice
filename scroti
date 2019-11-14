@@ -11,7 +11,13 @@ tmpname="/tmp/screenshots/$date.png"
 scrot -s $tmpname
 if [ $? -ne 0 ]
 then
-	exit
+	exit 1
 fi
-newname=$(i3-input -P 'filename: ' | grep '^output' | sed 's/output = //')
+newname=$(i3-input -P 'filename: ' | grep '^output' | sed -e 's/output = //' -e 's/$/.png/')
+new_name_abs="$HOME/pics/screenshots/$newname"
+if [ -f $new_name_abs ]
+then
+	echo "This file already exists"
+	exit 1
+fi
 mv "$tmpname" "$HOME/pics/screenshots/$newname"

@@ -13,5 +13,5 @@ if [ $? -ne 0 ]
 then
 	exit
 fi
-newname=$(i3-input -P 'filename: ' | grep '^output' | sed 's/output = //')
+newname=$(i3-input -P 'filename: ' | grep '^output' | sed -e 's/output = //' -e 's/$/.png/')
 mv "$tmpname" "$HOME/pics/screenshots/$newname"
