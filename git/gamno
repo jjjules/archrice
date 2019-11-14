@@ -1,0 +1,6 @@
+#!/bin/sh
+
+gr
+git add .
+cd -
+git commit --amend --no-edit

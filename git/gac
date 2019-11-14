@@ -1,0 +1,7 @@
+#!/bin/sh
+
+gr
+git add .
+cd -
+git restore --staged "$@"
+git commit
