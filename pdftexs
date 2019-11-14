@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ $# -ne 1 ]
+then
+	echo "Only first argument is evaluated"
+fi
+pdflatex "$1"
+base=$(sed 's/\.tex$//' <<< "$1")
+rm "$base".aux "$base".log
