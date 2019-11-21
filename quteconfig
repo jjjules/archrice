@@ -64,7 +64,9 @@ c.url.searchengines = {
 "wa": "https://wiki.archlinux.org/?search={}",
 "we": "https://en.wikipedia.org/wiki/{}",
 "yt": "https://www.youtube.com/results?search_query={}",
-"pb":  "https://www.thepiratebay.org/s/?q={}"}
+"pb":  "https://www.thepiratebay.org/s/?q={}",
+"n": "https://docs.scipy.org/doc/numpy/search.html?q={}&check_keywords=yes&area=default",
+"pd": "https://pandas.pydata.org/pandas-docs/stable/search.html?q={}&check_keywords=yes&area=default"}
 
 c.aliases = {
 "jsf": "set content.pdfjs false",
