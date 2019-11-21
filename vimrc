@@ -47,11 +47,15 @@ set smartcase
 	nnoremap		<leader>c :let save_cursor = getpos('.')<CR>I#<Esc>:call setpos('.', save_cursor)<CR>l
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
-	nnoremap		<leader>l :b#<CR>
+	nnoremap		<leader>i :b#<CR>
+	nnoremap		<leader>ls :!pdftexs %<CR>
+	nnoremap		<leader>lv :!pdftex %<CR>
+	nnoremap		<leader>o :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
 	nnoremap		<leader>ee :Explore<CR>
 	nnoremap		<leader>et :Texplore<CR>
 	nnoremap		<leader>es :Sexplore<CR>
 	nnoremap		<leader>ev :Vexplore<CR>
+	nnoremap		<leader>r :call RangerExplorer()<CR>
 
 	" Copy and Pasting
 	nnoremap		<leader>p "0p
@@ -61,7 +65,7 @@ set smartcase
 	vnoremap 		<C-x> "*d :let @+=@*<CR>
 	nnoremap 		<C-p> "+P
 	inoremap 		<C-p> <Esc>"+pa
-	nnoremap		<C-a> ggVG"*y :let @+=@*<CR>
+	nnoremap		<C-a> :%y *<CR>:let @+=@*<CR>
 
 	" Normal mode direct action
 	nnoremap		 o<Esc>
@@ -125,3 +129,12 @@ set smartcase
 	autocmd BufWinLeave *.* mkview
 	autocmd BufWinEnter *.* silent loadview
 	set viewoptions-=options	" Avoid directory change because of loadview
+
+function RangerExplorer()
+    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+    if filereadable('/tmp/vim_ranger_current_file')
+        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+        call system('rm /tmp/vim_ranger_current_file')
+    endif
+    redraw!
+endfun
