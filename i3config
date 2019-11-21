@@ -55,12 +55,15 @@ set $ws9 "9"
 set $ws10 "10"
 
 ## Special Key Bindings ##
-bindsym $mod+Return 			exec urxvt
-bindsym $mod+Tab					workspace next
-#bindsym $mod+Backspace		workspace prev
-bindsym $mod+Escape 			reload
-bindsym $mod+Shift+Escape exec --no-startup-id "$scripts/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
-bindsym $mod+Print				exec deepin-screenshot
+bindsym $mod+Return 					exec urxvt
+bindsym $mod+Tab							workspace next
+#bindsym $mod+Backspace				workspace prev
+bindsym $mod+Escape 					reload
+bindsym $mod+Shift+Escape 		exec --no-startup-id "$scripts/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
+bindsym --release $mod+Print	exec --no-startup-id "$scripts/autoscrot"
+bindsym --release $mod+Shift+Print			exec --no-startup-id "$scripts/autoscrot u"
+bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$scripts/autoscrot f"
+bindsym $mod+Ctrl+Print				exec --no-startup-id deepin-screenshot
 
 ## Media Keys Bindings ##
 bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute 0 toggle"
@@ -120,7 +123,7 @@ bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $scripts/flalt"
 bindsym $mod+f 						fullscreen toggle
 bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
 
-bindsym --release $mod+g	exec --no-startup-id "$scripts/test"
+#bindsym $mode+g
 bindsym $mod+Shift+g			exec --no-startup-id "$scripts/togaps"
 
 bindsym $mod+h 						focus left
@@ -147,13 +150,14 @@ bindsym $mod+c						split h
 bindsym $mod+v 						split v
 #bindsym $mod+Shift+v
 
-bindsym $mod+b 						exec qutebrowser
+bindsym $mod+b 						exec --no-startup-id qutebrowser
 #bindsym $mod+Shift+b
 
 #bindsym $mod+n
 #bindsym $mod+Shift+n
 
-bindsym $mod+m						exec --no-startup-id "$scripts/mwep $EPFL_DIR ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+m						exec --no-startup-id "$scripts/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+Ctrl+m				exec --no-startup-id "$scripts/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 #bindsym $mod+Shift+m			exec --no-startup-id
 
 ## Workspace Bindings ##
