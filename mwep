@@ -1,14 +1,21 @@
 #!/bin/sh
-source ~/.profile
+source $HOME/.profile
 
-prefix_file=~/downloads
-file="$(du -a -d 1 ${prefix_file} | cut --complement -f1 | sed -e "$ d" -e "s,${prefix_file}/,," | dmenu -p "file" | sed -e "s, ,\ ,g")"
+# File definition
+prefix_file="$HOME/downloads"
+if [ $# -eq 1 -a "$1" = '-r' ]
+then
+	file="$(\ls --color=tty -v -alhtr "$prefix_file" | grep -v '\s\.\+$' | tail -n1 | awk -F' ' '{print $NF}' | sed 's/ /\ /g')"
+else
+	file="$(du -a -d 1 "$prefix_file" | cut --complement -f1 | sed -e "$ d" -e "s,"$prefix_file"/,," | dmenu -p "file: " | sed -e "s, ,\ ,g")"
+fi
 if [ -z "$file" ]
 then
 	exit
 fi
 file="${prefix_file}/${file}"
 
+# Destination definition
 prefix_dir=${EPFL_DIR}
 dir="$(du -d 4 ${prefix_dir} | cut --complement -f1 | sed -e "s,${prefix_dir},," | grep -Fv . | dmenu -p "dir"| sed -e "s, ,\ ,g")"
 if ! [ -n "$dir" ]
