@@ -8,7 +8,7 @@ telegram https://web.telegram.org/#/im?p=u762956268_15416077209856257576
 youtube https://www.youtube.com/feed/subscriptions
 cff https://www.sbb.ch/fr/acheter/pages/fahrplan/fahrplan.xhtml
 soundcloud https://soundcloud.com/stream
-bcv https://www.bcv.ch/bcvd-login/authenticateAction.do
+bcv-login https://www.bcv.ch/bcvd-login/authenticateAction.do
 viseca-one https://one.viseca.ch/login/login?lang=en
 netflix https://www.netflix.com/browse
 19h30 https://www.rts.ch/play/tv/emission/19h30?id=105932&station=a9e7621504c6959e35c3ecbe7f6bed0446cdf8da
@@ -68,3 +68,6 @@ ml-github https://github.com/epfml/ML_course
 ml-aircrowd https://www.aicrowd.com/challenges/epfl-machine-learning-higgs-2019/leaderboards
 mattermost-ada https://icmattermost.epfl.ch/cs-401-2019/channels/announcement
 amazon-dataset http://jmcauley.ucsd.edu/data/amazon/
+master-projects https://www.epfl.ch/schools/ic/fr/education-fr/master-fr/informatique/projets-labo-in/
+amazon-grocery-gourmet https://www.amazon.com/grocery-breakfast-foods-snacks-organic/b?node=16310101
+appart-subvention https://www.lausanne.ch/vie-pratique/logement/logements-subventionnes/logements-subventionnes-disponibles.html
