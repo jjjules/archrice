@@ -1,8 +1,7 @@
 # Set Keyboard Layout
-setxkbmap -model thinkpad -layout ch -variant fr
+/home/scripts/setkb
 xinput set-prop 11 301 1 													# Enable Tap on Touchpad
 xinput set-prop 11 309 1 													# Enable Natural Scroll
-/home/jules/scripts/escaps												# Exchange caps and escape
 
 # Set screen saver
 xset s 300 5
