@@ -96,26 +96,26 @@ bindsym $mod+Shift+r			exec --no-startup-id "urxvt -e htop"
 bindsym $mod+t						floating toggle
 bindsym $mod+Shift+t			focus mode_toggle
 
-bindsym $mod+z 						[instance="dropdown_calc"] scratchpad show ; move position center
-bindsym $mod+Shift+z 			[instance="dropdown_term"] scratchpad show ; move position center
+bindsym $mod+z 						exec --no-startup-id "gpg --decrypt /home/jules/e1.asc >> /home/jules/asci3"
+#bindsym $mod+Shift+z
 
-bindsym $mod+u						resize shrink width 1 px or 1 ppt
+bindsym $mod+u						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink width 1 px or 1 ppt
 #bindsym $mod+Shift+u
 
-bindsym $mod+i						resize shrink height 1 px or 1 ppt
+bindsym $mod+i						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink height 1 px or 1 ppt
 #bindsym $mod+Shift+i
 
-bindsym $mod+o						resize grow height 1 px or 1 ppt
+bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow height 1 px or 1 ppt
 #bindsym $mod+Shift+o
 
-bindsym $mod+p						resize grow width 1 px or 1 ppt
+bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 1 px or 1 ppt
 bindsym $mod+Shift+p			exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+a						exec --no-startup-id "$scripts/i3focusleft"
 #bindsym $mod+Shift+a
 
-bindsym $mod+s						exec --no-startup-id "gpg --decrypt /home/jules/e1.asc >> /home/jules/asci3"
-#bindsym $mod+Shift+s
+bindsym $mod+s						[instance="dropdown_calc"] scratchpad show ; move position center
+bindsym $mod+Shift+s			[instance="dropdown_term"] scratchpad show ; move position center
 
 bindsym $mod+d						exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $scripts/flalt"
