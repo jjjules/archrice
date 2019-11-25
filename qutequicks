@@ -60,7 +60,7 @@ moodle https://moodle.epfl.ch/my/
 moodle-unil https://moodle.unil.ch/course/view.php?id=14104
 ml-moodle https://moodle.epfl.ch/course/view.php?id=14221
 sds-moodle https://moodle.epfl.ch/course/view.php?id=15506
-natlang https://coling.epfl.ch/
+nlp https://coling.epfl.ch/
 isp-moodle https://moodle.epfl.ch/course/view.php?id=15812
 isp-site http://com402.epfl.ch/
 ada https://dlab.epfl.ch/teaching/fall2019/cs401/
@@ -71,3 +71,4 @@ amazon-dataset http://jmcauley.ucsd.edu/data/amazon/
 master-projects https://www.epfl.ch/schools/ic/fr/education-fr/master-fr/informatique/projets-labo-in/
 amazon-grocery-gourmet https://www.amazon.com/grocery-breakfast-foods-snacks-organic/b?node=16310101
 appart-subvention https://www.lausanne.ch/vie-pratique/logement/logements-subventionnes/logements-subventionnes-disponibles.html
+linux-general-guide https://github.com/mayfrost/guides
