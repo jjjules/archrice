@@ -90,8 +90,8 @@ bindsym $mod+Shift+w			focus child
 bindsym $mod+e						layout toggle split
 bindsym $mod+Shift+e			layout tabbed
 
-bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
-bindsym $mod+Shift+r			exec --no-startup-id "urxvt -e htop"
+bindsym $mod+r						[instance="dropdown_term"] scratchpad show ; move position center
+bindsym $mod+Shift+r			[instance="dropdown_calc"] scratchpad show ; move position center
 
 bindsym $mod+t						floating toggle
 bindsym $mod+Shift+t			focus mode_toggle
@@ -114,14 +114,14 @@ bindsym $mod+Shift+p			exec --no-startup-id "passmenu ; i3-msg 'workspace back_a
 bindsym $mod+a						exec --no-startup-id "$scripts/i3focusleft"
 #bindsym $mod+Shift+a
 
-bindsym $mod+s						[instance="dropdown_calc"] scratchpad show ; move position center
-bindsym $mod+Shift+s			[instance="dropdown_term"] scratchpad show ; move position center
+#bindsym $mod+s
+#bindsym $mod+Shift+s
 
 bindsym $mod+d						exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $scripts/flalt"
 
 bindsym $mod+f 						fullscreen toggle
-bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
+bindsym $mod+Shift+f			exec --no-startup-id "urxvt -e ranger"
 
 #bindsym $mode+g
 bindsym $mod+Shift+g			exec --no-startup-id "$scripts/togaps"
@@ -141,8 +141,8 @@ bindsym $mod++Shift+l			move right
 #bindsym $mod+y
 #bindsym $mod++Shift+y
 
-#bindsym $mod+x
-#bindsym $mod++Shift+x
+bindsym $mod+x						exec --no-startup-id "urxvt -e htop"
+bindsym $mod++Shift+x			workspace back_and_forth ; workspace back_and_forth
 
 bindsym $mod+c						split h
 #bindsym $mod++Shift+c
@@ -157,8 +157,7 @@ bindsym $mod+b 						exec --no-startup-id qutebrowser
 #bindsym $mod+Shift+n
 
 bindsym $mod+m						exec --no-startup-id "$scripts/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
-bindsym $mod+Ctrl+m				exec --no-startup-id "$scripts/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
-#bindsym $mod+Shift+m			exec --no-startup-id
+bindsym $mod+Shift+m			exec --no-startup-id "$scripts/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 ## Workspace Bindings ##
 bindsym $mod+1		workspace $ws1
