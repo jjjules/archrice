@@ -1,0 +1,3 @@
+WORDCHARS='*_-.'
+
+exec startx
