@@ -14,4 +14,5 @@ pactl set-sink-mute 0 toggle
 /home/jules/scripts/setwp
 unclutter &
 dunst &
+redshift -l 46.5:6.64 -g 0.8 &
 exec i3
