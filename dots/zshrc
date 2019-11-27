@@ -1,5 +1,4 @@
 # Oh-My-Zsh
-export ZSH="$HOME/.config/zsh/oh-my-zsh"
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 ZSH_THEME="ownTheme"
 _Z_DATA="$HOME/.cache/z/z_data"
@@ -39,6 +38,8 @@ bindkey -M menuselect 'l' vi-forward-char
 bindkey 'e' edit-command-line
 
 # Aliases
+## Temp
+alias b='bindkey "\t" expand-or-complete'
 ## Arch
 alias pm="pacman"
 alias pms="sudo pacman -S $1"
