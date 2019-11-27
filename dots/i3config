@@ -60,9 +60,9 @@ bindsym $mod+Tab							workspace next
 #bindsym $mod+Backspace				workspace prev
 bindsym $mod+Escape 					reload
 bindsym $mod+Shift+Escape 		exec --no-startup-id "$scripts/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
-bindsym --release $mod+Print	exec --no-startup-id "$scripts/autoscrot"
-bindsym --release $mod+Shift+Print			exec --no-startup-id "$scripts/autoscrot u"
-bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$scripts/autoscrot f"
+bindsym --release $mod+Print	exec --no-startup-id "$scripts/autoscrot -s"
+bindsym --release $mod+Shift+Print			exec --no-startup-id "$scripts/autoscrot -u"
+bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$scripts/autoscrot -f"
 bindsym $mod+Ctrl+Print				exec --no-startup-id deepin-screenshot
 
 ## Media Keys Bindings ##
