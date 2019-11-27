@@ -1,0 +1,18 @@
+#!/bin/bash
+# Set keyboard layout for thinkpad T460s
+# And remap keys as follows for easy access:
+# Escape <-> Caps_lock
+# ö -> /
+# ä -> ~
+# altGr+à -> |
+
+setxkbmap -model thinkpad -layout ch -variant fr
+xmodmap -e 'remove Lock = Caps_Lock'
+xmodmap -e 'keycode 66 = Escape'
+xmodmap -e 'keycode 9 = Caps_Lock'
+
+xmodmap -e 'keycode  16 = 7 odiaeresis 7 slash bar seveneighths bar'
+xmodmap -e 'keycode  47 = eacute slash eacute odiaeresis bar dead_doubleacute dead_acute'
+xmodmap -e 'keycode  48 = agrave asciitilde agrave adiaeresis braceleft'
+xmodmap -e 'keycode 117 = Prior NoSymbol Next NoSymbol Next'
+xmodmap -e 'keycode 112 = Next NoSymbol Prior NoSymbol Prior'

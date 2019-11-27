@@ -1,0 +1,52 @@
+#!/bin/sh
+source $HOME/.profile
+
+# File definition
+prefix_file="$HOME/downloads"
+
+# Option handling
+if [ $# -eq 1 -a "$1" = '-r' ]
+then
+	file="$(\ls --color=tty -v -alhtr downloads | \
+		grep -v '\s\.\+$' | \
+		tail -n1 | \
+		sed 's,\s\+, ,g' | \
+		cut -d' ' -f9-)"
+else
+	file="$(du -a -d 1 "$prefix_file" | \
+		cut --complement -f1 | \
+		sed -e "$ d" -e "s,"$prefix_file"/,," | \
+		dmenu -p "file: ")"
+fi
+
+# Short filename creation
+if [ $(echo -n $file | wc -c) -gt 15 ]
+then
+	file_short=$(sed 's/\(.\{15\}\).*/\1.../' <<< "$file")
+else
+	file_short="$file"
+fi
+
+# Exit if file not provided
+if [ -z "$file" ]
+then
+	exit
+fi
+
+file="${prefix_file}/${file}"
+
+# Destination definition
+prefix_dir=${EPFL_DIR}
+dir="$(du -d 4 ${prefix_dir} | \
+	cut --complement -f1 | \
+	sed -e "s,${prefix_dir},," | \
+	grep -Fv . | \
+	dmenu -p "move '$file_short' to : "| \
+	sed -e "s, ,\ ,g")"
+if ! [ -n "$dir" ]
+then
+	exit
+fi
+dir="${prefix_dir}${dir}"
+
+mv "$file" "$dir"

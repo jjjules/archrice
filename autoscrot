@@ -1,0 +1,34 @@
+#!/bin/sh
+# A wrapper around scrot, naming is handled
+# at runtime and screenshot will be stored
+# in $DEST
+DEST=$HOME/pics/screenshots
+
+if ! [ -d /tmp/screenshots ]
+then
+	mkdir /tmp/screenshots
+fi
+
+tmpname="$(date +"%Y-%m-%d_%T").png"
+tmpname_abs="/tmp/screenshots/$tmpname"
+
+scrot $(sed -r 's/\s+[^-]\S*//g' <<< "$@") $tmpname_abs
+if [ $? -ne 0 ]
+then
+	exit 1
+fi
+newname=$(i3-input -P 'filename: ' | grep '^output' | sed -e 's/output = //' -e 's/$/.png/')
+if [ "$newname" = ".png" ]
+then
+	newname=$tmpname
+	newname_abs="$DEST/$newname"
+else
+	newname_abs="$DEST/$newname"
+	if [ -f $newname_abs ]
+	then
+		echo "This file already exists"
+		exit 1
+	fi
+fi
+
+mv "$tmpname_abs" "$newname_abs"

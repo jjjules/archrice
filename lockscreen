@@ -1,0 +1,15 @@
+#!/bin/sh
+
+i3lock --blur=10 -e --pass-screen-keys --indicator -k \
+        --veriftext="" \
+        --wrongtext="" \
+        --datecolor=ffffffff \
+        --timecolor=ffffffff \
+        --ringcolor=06060acc \
+        --ringvercolor=f26924cc \
+        --ringwrongcolor=d60d0dcc \
+        --insidecolor=06060acc \
+        --insidevercolor=06060acc \
+        --insidewrongcolor=06060acc \
+				--linecolor=06060acc \
+				--datestr="%A, %e %b"

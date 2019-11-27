@@ -1,0 +1,12 @@
+#!/bin/sh
+
+actual=$(cat /sys/class/backlight/intel_backlight/brightness)
+min=0
+new=$(expr $actual - 50)
+
+if [ "$min" -ge "$new" ]
+then
+	new=$min
+fi
+
+echo $new > /sys/class/backlight/intel_backlight/brightness
