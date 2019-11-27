@@ -1,10 +1,8 @@
 #!/bin/sh
-
-option='s'
-if [ $# -eq 1 -a $(wc -m <<<"$1") -eq 2 ]
-then
-	option="$1"
-fi
+# A wrapper around scrot, naming is handled
+# at runtime and screenshot will be stored
+# in $DEST
+DEST=$HOME/pics/screenshots
 
 if ! [ -d /tmp/screenshots ]
 then
@@ -14,7 +12,7 @@ fi
 tmpname="$(date +"%Y-%m-%d_%T").png"
 tmpname_abs="/tmp/screenshots/$tmpname"
 
-scrot -$option $tmpname_abs
+scrot $(sed -r 's/\s+[^-]\S*//g' <<< "$@") $tmpname_abs
 if [ $? -ne 0 ]
 then
 	exit 1
@@ -23,9 +21,9 @@ newname=$(i3-input -P 'filename: ' | grep '^output' | sed -e 's/output = //' -e 
 if [ "$newname" = ".png" ]
 then
 	newname=$tmpname
-	newname_abs="$HOME/pics/screenshots/$newname"
+	newname_abs="$DEST/$newname"
 else
-	newname_abs="$HOME/pics/screenshots/$newname"
+	newname_abs="$DEST/$newname"
 	if [ -f $newname_abs ]
 	then
 		echo "This file already exists"
