@@ -1,6 +1,8 @@
+source /home/jules/.profile
+
 # Oh-My-Zsh
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
-ZSH_THEME="ownTheme"
+ZSH_THEME="mytheme"
 _Z_DATA="$HOME/.cache/z/z_data"
 plugins=(
 	z
@@ -12,7 +14,6 @@ source $ZSH/oh-my-zsh.sh
 ZSH_HIGHLIGHT_STYLES[path]="none" # Do not highlight path url-like
 
 # General
-source /home/jules/.profile
 eval $( dircolors -b $DOTS_PATH/ls_colors )
 export PATH="$HOME/.local/bin:$PATH"	# pip scripts directory
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
@@ -110,6 +111,7 @@ alias jptl="jupyter lab >/dev/null"
 alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 alias clust040="ssh gottraux@iccluster040.iccluster.epfl.ch"
 ## Dots Shortcuts
+alias supdatesl="sudo -E updatesl"
 alias szrc="source ~/.zshrc"
 alias zd="cd $DOTS_PATH"
 alias dots="vim $DOTS_PATH"
@@ -140,6 +142,7 @@ alias archey="archey3 --config=$HOME/.config/archey3/archkey3.conf"
 alias zshman="man zshzle"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
+alias activate_3-7="source $EPFL_DIR/.venv-3.7.0/bin/activate"
 
 # Functions
 function mvep() {

@@ -1,6 +1,8 @@
 #!/bin/sh
 
-i3lock --blur=10 -e --pass-screen-keys --indicator -k \
+i3lock --blur=10 -e --indicator -k \
+				--pass-media-keys \
+				--pass-screen-keys \
         --veriftext="" \
         --wrongtext="" \
         --datecolor=ffffffff \

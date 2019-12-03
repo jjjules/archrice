@@ -1,6 +1,5 @@
 ## Basic definitions and appearance ##
 set $mod Mod4
-set $scripts $HOME/scripts
 
 gaps inner 10
 gaps outer 0
@@ -59,26 +58,26 @@ bindsym $mod+Return 					exec urxvt
 bindsym $mod+Tab							workspace next
 #bindsym $mod+Backspace				workspace prev
 bindsym $mod+Escape 					reload
-bindsym $mod+Shift+Escape 		exec --no-startup-id "$scripts/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
-bindsym --release $mod+Print	exec --no-startup-id "$scripts/autoscrot -s"
-bindsym --release $mod+Shift+Print			exec --no-startup-id "$scripts/autoscrot -u"
-bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$scripts/autoscrot -f"
+bindsym $mod+Shift+Escape 		exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
+bindsym --release $mod+Print	exec --no-startup-id "$SCRIPTS_PATH/autoscrot -s"
+bindsym --release $mod+Shift+Print			exec --no-startup-id "$SCRIPTS_PATH/autoscrot -u"
+bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$SCRIPTS_PATH/autoscrot -f"
 bindsym $mod+Ctrl+Print				exec --no-startup-id deepin-screenshot
 
 ## Media Keys Bindings ##
 bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute 0 toggle"
-bindsym XF86AudioLowerVolume 	exec --no-startup-id "$scripts/volume_down"
-bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$scripts/volume_up"
+bindsym XF86AudioLowerVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume_down"
+bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume_up"
 #bindsym XF86AudioMicMute
-bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $scripts/brightness_down"
-bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $scripts/brightness_up"
+bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $SCRIPTS_PATH/brightness_down"
+bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $SCRIPTS_PATH/brightness_up"
 #bindsym XF86Display
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
 #bindsym XF86Tools
 bindsym XF86Search						exec --no-startup-id "systemctl suspend"
-bindsym Shift+XF86Search			exec --no-startup-id "$scripts/lockscreen"
-bindsym XF86LaunchA			      exec --no-startup-id "$scripts/prompt 'Do you really want to reboot?' 'systemctl reboot'"
-bindsym XF86Explorer          exec --no-startup-id "$scripts/prompt 'Do you really want to power off?' 'systemctl poweroff'"
+bindsym Shift+XF86Search			exec --no-startup-id "$SCRIPTS_PATH/lockscreen"
+bindsym XF86LaunchA			      exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
+bindsym XF86Explorer          exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
 ## Letter Key Bindings ##
 bindsym $mod+q						[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
@@ -111,20 +110,20 @@ bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize g
 bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 1 px or 1 ppt
 bindsym $mod+Shift+p			exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
-bindsym $mod+a						exec --no-startup-id "$scripts/i3focusleft"
+bindsym $mod+a						exec --no-startup-id "$SCRIPTS_PATH/i3focusleft"
 #bindsym $mod+Shift+a
 
 #bindsym $mod+s
 #bindsym $mod+Shift+s
 
 bindsym $mod+d						exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $scripts/flalt"
+bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $SCRIPTS_PATH/flalt"
 
 bindsym $mod+f 						fullscreen toggle
 bindsym $mod+Shift+f			exec --no-startup-id "urxvt -e ranger"
 
 #bindsym $mode+g
-bindsym $mod+Shift+g			exec --no-startup-id "$scripts/togaps"
+bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps"
 
 bindsym $mod+h 						focus left
 bindsym $mod+Shift+h 			move left
@@ -156,8 +155,8 @@ bindsym $mod+b 						exec --no-startup-id qutebrowser
 #bindsym $mod+n
 #bindsym $mod+Shift+n
 
-bindsym $mod+m						exec --no-startup-id "$scripts/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
-bindsym $mod+Shift+m			exec --no-startup-id "$scripts/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+m						exec --no-startup-id "$SCRIPTS_PATH/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+Shift+m			exec --no-startup-id "$SCRIPTS_PATH/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 ## Workspace Bindings ##
 bindsym $mod+1		workspace $ws1

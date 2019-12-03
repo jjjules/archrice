@@ -70,7 +70,6 @@ set smartcase
 	" Normal mode direct action
 	nnoremap		 o<Esc>
 	nnoremap		<leader> O<Esc>
-	nnoremap		 X
 
 	" Insert mode direct action
 	inoremap		<C-h> <C-o>b
@@ -78,7 +77,7 @@ set smartcase
 	inoremap		<C-k> <Up>
 	inoremap		<C-l> <C-o>w
 	inoremap		<C-e> <C-o>$
-	inoremap		<C-a> <C-o>0
+	inoremap		<C-a> <C-o>^
 
 	" Splits
 	nnoremap <C-h> <C-w>h

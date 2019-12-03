@@ -1,0 +1,36 @@
+#!/bin/sh
+source $HOME/.profile
+TMP=/tmp/updatesl-backups
+mkdir $TMP 2>/dev/null
+rm $TMP/*
+ZSH_CUSTOM="$ZSH/custom"
+
+# Executables
+mv /usr/bin/dmenu $TMP
+ln -s $SCRIPTS_PATH/dmenu /usr/bin/dmenu
+
+# Theme zsh
+mv $ZSH_CUSTOM/themes/mytheme.zsh-theme $TMP
+ln -s $DOTS_PATH/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
+
+# Config files in home
+mv $HOME/{.profile,.zprofile,.zshrc,.xinitrc,.Xdefaults,.vimrc,.gitconfig} $TMP
+ln -s $DOTS_PATH/profile $HOME/.profile
+ln -s $DOTS_PATH/zprofile $HOME/.zprofile
+ln -s $DOTS_PATH/zshrc $HOME/.zshrc
+ln -s $DOTS_PATH/xinitrc $HOME/.xinitrc
+ln -s $DOTS_PATH/xdefaults $HOME/.Xdefaults
+ln -s $DOTS_PATH/vimrc $HOME/.vimrc
+ln -s $DOTS_PATH/gitconfig $HOME/.gitconfig
+
+# Config files in .config
+mkdir $HOME/.config/archey3 2>/dev/null
+mv $HOME/.config/{archey3/archey3.conf,dunst/dunstrc,i3/config,qutebrowser/config.py,qutebrowser/quickmarks,ranger/rc.conf,ranger/rifle.conf,zathura/zathurarc} $TMP
+ln -s $DOTS_PATH/archey3.conf $HOME/.config/archey3/archey3.conf
+ln -s $DOTS_PATH/dunstrc $HOME/.config/dunst/dunstrc
+ln -s $DOTS_PATH/i3config $HOME/.config/i3/config
+ln -s $DOTS_PATH/quteconfig $HOME/.config/qutebrowser/config.py
+ln -s $DOTS_PATH/qutequicks $HOME/.config/qutebrowser/quickmarks
+ln -s $DOTS_PATH/ranger-rc.conf $HOME/.config/ranger/rc.conf
+ln -s $DOTS_PATH/ranger-rifle.conf $HOME/.config/ranger/rifle.conf
+ln -s $DOTS_PATH/zathurarc $HOME/.config/zathura/zathurarc
