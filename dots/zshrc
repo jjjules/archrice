@@ -51,7 +51,7 @@ alias pmy="sudo pacman -Syu"
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias cdw="cd ~/downloads"
+alias zw="cd ~/downloads"
 alias d="dirs -v"
 alias cp="nocorrect cp"
 alias mkd="nocorrect mkdir -pv"
@@ -138,7 +138,7 @@ alias ra="ranger"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
-alias archey="archey3 --config=$HOME/.config/archey3/archkey3.conf"
+alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
