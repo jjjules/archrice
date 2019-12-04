@@ -137,3 +137,19 @@ function RangerExplorer()
     endif
     redraw!
 endfun
+
+" Some funky status bar code its seems
+" https://stackoverflow.com/questions/9065941/how-can-i-change-vim-status-line-colour
+set laststatus=2            " set the bottom status bar
+hi statusline guibg=White ctermfg=Gray guifg=DarkSlateGray ctermbg=Black
+set statusline=%f                           " file name
+set statusline+=%{getbufvar(bufnr('%'),'&mod')?'+':''} "modified flag
+set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%y      "filetype
+set statusline+=%h      "help file flag
+set statusline+=%r      "read only flag
+set statusline+=\ %=                        " align left
+set statusline+=%l/%L\ %p%%            " line X of Y [percent of file]
+set statusline+=\ %n                    " Buffer number
+set statusline+=\ [%b,0x%B]\               " ASCII and byte code under cursor
