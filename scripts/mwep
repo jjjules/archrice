@@ -3,50 +3,63 @@ source $HOME/.profile
 
 # File definition
 prefix_file="$HOME/downloads"
-
-# Option handling
-if [ $# -eq 1 -a "$1" = '-r' ]
+if [ $# -eq 1 ]
 then
-	file="$(\ls --color=tty -v -alhtr downloads | \
-		grep -v '\s\.\+$' | \
-		tail -n1 | \
-		sed 's,\s\+, ,g' | \
-		cut -d' ' -f9-)"
+	if [ "$1" = '-r' ]
+	then
+		file="$(\ls --color=tty -v -alhtr $prefix_file |\
+			grep -v '\s\.\+$' |\
+			tail -n1 |\
+			sed 's,\s\+, ,g' |\
+			cut -d' ' -f9-)"
+	fi
+
+	if [ "$1" = '-m' ]
+	then
+		multiple_option=1
+		file="$(ls $HOME/downloads | fzf -m | sed 's, ,\ ,g')"
+	fi
 else
-	file="$(du -a -d 1 "$prefix_file" | \
-		cut --complement -f1 | \
-		sed -e "$ d" -e "s,"$prefix_file"/,," | \
-		dmenu -p "file: ")"
+	file=$(ls $prefix_file | dmenu -p "file: ")
 fi
+[ -z "$file" ] && exit
+echo "$file"
 
 # Short filename creation
-if [ $(echo -n $file | wc -c) -gt 15 ]
+if [ $multiple_option -eq 1 ]
+then
+	file_short="$(wc -l <<< "$file") files"
+elif [ $(echo -n $file | wc -c) -gt 15 ]
 then
 	file_short=$(sed 's/\(.\{15\}\).*/\1.../' <<< "$file")
 else
 	file_short="$file"
 fi
+echo "$file"
 
-# Exit if file not provided
-if [ -z "$file" ]
-then
-	exit
-fi
-
-file="${prefix_file}/${file}"
+# Conversion to absolute path
+file=$(sed "s,^,$prefix_file/," <<< "$file")
+echo $file
 
 # Destination definition
 prefix_dir=${EPFL_DIR}
-dir="$(du -d 4 ${prefix_dir} | \
-	cut --complement -f1 | \
-	sed -e "s,${prefix_dir},," | \
-	grep -Fv . | \
-	dmenu -p "move '$file_short' to : "| \
+dir="$(du -d 4 ${prefix_dir} |\
+	cut --complement -f1 |\
+	sed -e "s,${prefix_dir},," |\
+	grep -Fv . |\
+	dmenu -p "move '$file_short' to : "|\
 	sed -e "s, ,\ ,g")"
-if ! [ -n "$dir" ]
+if [ -z "$dir" ]
 then
 	exit
 fi
 dir="${prefix_dir}${dir}"
 
-mv "$file" "$dir"
+if [ $multiple_option -eq 1 ]
+then
+	echo "$file"
+	echo last
+	echo "$file" | xargs -n1 -I files mv files "$dir"
+else
+	mv "$file" "$dir"
+fi
