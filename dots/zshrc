@@ -1,6 +1,4 @@
-source /home/jules/.profile
-
-# Oh-My-Zsh
+source /home/jules/.profile # Oh-My-Zsh
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 ZSH_THEME="mytheme"
 _Z_DATA="$HOME/.cache/z/z_data"
@@ -65,7 +63,7 @@ alias du="du -h"
 alias tree='tree -a -I ".git|venv|.venv|*.class"'
 alias tp="tree -C | less"
 ### Process management
-alias sudo="sudo "
+alias sudo=$'nocorrect sudo\t'
 alias c="clear"
 alias j="jobs"
 alias h="history"
@@ -135,6 +133,7 @@ alias v="vim"
 alias sv="sudo vim"
 alias gvim="vim"
 alias ra="ranger"
+alias neo="neomutt"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"

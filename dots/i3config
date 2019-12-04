@@ -152,7 +152,7 @@ bindsym $mod+v 						split v
 bindsym $mod+b 						exec --no-startup-id qutebrowser
 #bindsym $mod+Shift+b
 
-#bindsym $mod+n
+bindsym $mod+n						exec --no-startup-id "urxvt -e neomutt"
 #bindsym $mod+Shift+n
 
 bindsym $mod+m						exec --no-startup-id "$SCRIPTS_PATH/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
