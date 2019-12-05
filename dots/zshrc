@@ -19,9 +19,7 @@ export IPYTHONDIR="$HOME/.config/ipython"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
 
 # Key Bindings
-bindkey '\t' expand-or-complete
 bindkey '^@' autosuggest-execute
-bindkey '^I' backward-kill-line
 bindkey '^O' kill-line
 bindkey '^P' vi-end-of-line
 bindkey '^H' vi-backward-word
