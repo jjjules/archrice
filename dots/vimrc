@@ -1,6 +1,14 @@
-let mapleader=" "
+" Initialize Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'ycm-core/YouCompleteMe'
+Plugin 'djoshea/vim-autoread'
+call vundle#end()
 
 " Basics behavior and appearance
+let mapleader=" "
+
 set nocompatible
 set showcmd
 set mouse=a
@@ -15,6 +23,7 @@ filetype plugin indent on
 " Auto-completion
 set wildmode=longest,list,full
 set completeopt=longest,menuone
+let g:ycm_autoclose_preview_window_after_completion=1
 
 " Handle tabs
 set shiftwidth=2
@@ -48,7 +57,7 @@ set smartcase
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>i :b#<CR>
-	nnoremap		<leader>ls :!pdftexs %<CR>
+	nnoremap		<leader>ls :w<CR>:!pdftexs %<CR>
 	nnoremap		<leader>lv :!pdftex %<CR>
 	nnoremap		<leader>o :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
 	nnoremap		<leader>ee :Explore<CR>
