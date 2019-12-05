@@ -157,6 +157,7 @@ bindsym $mod+n						exec --no-startup-id "urxvt -e neomutt"
 
 bindsym $mod+m						exec --no-startup-id "$SCRIPTS_PATH/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 bindsym $mod+Shift+m			exec --no-startup-id "$SCRIPTS_PATH/mwep ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+Ctrl+m				exec --no-startup-id "urxvt -e $SCRIPTS_PATH/mwep -m; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 ## Workspace Bindings ##
 bindsym $mod+1		workspace $ws1
