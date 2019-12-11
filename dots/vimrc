@@ -52,14 +52,15 @@ set smartcase
 	nnoremap 		<C-s> <Nop>
 	noremap			0 ^
 	inoremap		<Home> <Esc>I
-	noremap			<leader>s /
+	noremap			<leader>s :setlocal spell<CR>
+	noremap			<leader><leader>s :setlocal nospell<CR>
 	nnoremap		<leader>c :let save_cursor = getpos('.')<CR>I#<Esc>:call setpos('.', save_cursor)<CR>l
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>i :b#<CR>
 	nnoremap		<leader>ls :w<CR>:!pdftexs %<CR>
 	nnoremap		<leader>lv :!pdftex %<CR>
-	nnoremap		<leader>o :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
+	nnoremap		<leader>op :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
 	nnoremap		<leader>ee :Explore<CR>
 	nnoremap		<leader>et :Texplore<CR>
 	nnoremap		<leader>es :Sexplore<CR>
@@ -84,7 +85,7 @@ set smartcase
 	inoremap		<C-h> <C-o>b
 	inoremap		<C-j> <Down>
 	inoremap		<C-k> <Up>
-	inoremap		<C-l> <C-o>w
+	inoremap		<C-l> <Esc>ea
 	inoremap		<C-e> <C-o>$
 	inoremap		<C-a> <C-o>^
 
