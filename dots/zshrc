@@ -104,6 +104,7 @@ alias vtd="vim ${EPFL_DIR}/todo.md"
 alias sdock="sudo docker"
 alias jptn="jupyter notebook >/dev/null"
 alias jptl="jupyter lab >/dev/null"
+alias jptln="jupyter lab --no-browser >/dev/null"
 alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 alias clust040="ssh gottraux@iccluster040.iccluster.epfl.ch"
 ## Dots Shortcuts
@@ -142,6 +143,25 @@ alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n
 alias activate_3-7="source $EPFL_DIR/.venv-3.7.0/bin/activate"
 
 # Functions
+## Empty command run the last command
+function precmd(){
+	retval=$?
+	if [ $retval -eq 130 ]
+	then
+		return
+	fi
+	if [ "$cmd" ]
+	then
+		lcmd=$cmd
+		cmd=
+	else
+		[ -n "$lcmd" ] && "$lcmd"
+	fi
+}
+function preexec(){
+	cmd=$1
+}
+## Misc
 function mvep() {
 	mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }

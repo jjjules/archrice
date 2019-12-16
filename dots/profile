@@ -11,4 +11,4 @@ export LESSHISTFILE="$HOME/.history/less"
 export HYPHEN_INSENSITIVE="true"
 export EDITOR="vim"
 export VISUAL="vim"
-export BROWSER='/usr/bin/qutebrowser'
+export BROWSER='/usr/bin/firefox'

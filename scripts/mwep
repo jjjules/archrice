@@ -23,7 +23,6 @@ else
 	file=$(ls $prefix_file | dmenu -p "file: ")
 fi
 [ -z "$file" ] && exit
-echo "$file"
 
 # Short filename creation
 if [ $multiple_option -eq 1 ]
@@ -35,11 +34,9 @@ then
 else
 	file_short="$file"
 fi
-echo "$file"
 
 # Conversion to absolute path
 file=$(sed "s,^,$prefix_file/," <<< "$file")
-echo $file
 
 # Destination definition
 prefix_dir=${EPFL_DIR}
@@ -57,8 +54,6 @@ dir="${prefix_dir}${dir}"
 
 if [ $multiple_option -eq 1 ]
 then
-	echo "$file"
-	echo last
 	echo "$file" | xargs -n1 -I files mv files "$dir"
 else
 	mv "$file" "$dir"

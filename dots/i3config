@@ -149,7 +149,7 @@ bindsym $mod+c						split h
 bindsym $mod+v 						split v
 #bindsym $mod+Shift+v
 
-bindsym $mod+b 						exec --no-startup-id qutebrowser
+bindsym $mod+b 						exec --no-startup-id firefox
 #bindsym $mod+Shift+b
 
 bindsym $mod+n						exec --no-startup-id "urxvt -e neomutt"
