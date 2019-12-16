@@ -92,8 +92,8 @@ bindsym $mod+Shift+e			layout tabbed
 bindsym $mod+r						[instance="dropdown_term"] scratchpad show ; move position center
 bindsym $mod+Shift+r			[instance="dropdown_calc"] scratchpad show ; move position center
 
-bindsym $mod+t						floating toggle
-bindsym $mod+Shift+t			focus mode_toggle
+#bindsym $mod+t
+#bindsym $mod+Shift+t
 
 bindsym $mod+z 						exec --no-startup-id "gpg --decrypt /home/jules/e1.asc >> /home/jules/asci3"
 #bindsym $mod+Shift+z
