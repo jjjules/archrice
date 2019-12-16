@@ -58,8 +58,7 @@ set smartcase
 	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>i :b#<CR>
-	nnoremap		<leader>ls :w<CR>:!pdftexs %<CR>
-	nnoremap		<leader>lv :!pdftex %<CR>
+	nnoremap		<leader>ls :w<CR>:!texsilent %<CR>
 	nnoremap		<leader>op :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
 	nnoremap		<leader>ee :Explore<CR>
 	nnoremap		<leader>et :Texplore<CR>

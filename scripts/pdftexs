@@ -4,6 +4,6 @@ if [ $# -ne 1 ]
 then
 	echo "Only first argument is evaluated"
 fi
-pdflatex "$1"
+latexmk --pdf "$1"
 base=$(sed 's/\.tex$//' <<< "$1")
-rm "$base".aux "$base".log
+rm "$base".aux "$base".log "$base".fls   "$base".out  "$base".fdb_latexmk 2>/dev/null
