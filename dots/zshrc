@@ -132,36 +132,25 @@ alias v="vim"
 alias sv="sudo vim"
 alias gvim="vim"
 alias ra="ranger"
+alias ghs="\gs"
 alias neo="neomutt"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
+alias wifis="sudo vim /etc/NetworkManager/system-connections"
+alias seam="sudo mount -o gid=998,uid=1000 /dev/sdb1 /media/seagate"
+alias seaum="sudo umount /media/seagate"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
 alias activate_3-7="source $EPFL_DIR/.venv-3.7.0/bin/activate"
 
 # Functions
-## Empty command run the last command
-function precmd(){
-	retval=$?
-	if [ $retval -eq 130 ]
-	then
-		return
-	fi
-	if [ "$cmd" ]
-	then
-		lcmd=$cmd
-		cmd=
-	else
-		[ -n "$lcmd" ] && "$lcmd"
-	fi
-}
-function preexec(){
-	cmd=$1
-}
 ## Misc
+function weather(){
+	curl wttr.in/$1
+}
 function mvep() {
 	mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }
