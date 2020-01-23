@@ -44,6 +44,7 @@ dir="$(du -d 4 ${prefix_dir} |\
 	cut --complement -f1 |\
 	sed -e "s,${prefix_dir},," |\
 	grep -Fv . |\
+	tac |\
 	dmenu -p "move '$file_short' to : "|\
 	sed -e "s, ,\ ,g")"
 if [ -z "$dir" ]
