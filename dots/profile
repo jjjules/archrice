@@ -12,3 +12,4 @@ export HYPHEN_INSENSITIVE="true"
 export EDITOR="vim"
 export VISUAL="vim"
 export BROWSER='/usr/bin/firefox'
+export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'

@@ -1,5 +1,4 @@
 source /home/jules/.profile # Oh-My-Zsh
-export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 ZSH_THEME="mytheme"
 _Z_DATA="$HOME/.cache/z/z_data"
 plugins=(
@@ -19,24 +18,28 @@ export IPYTHONDIR="$HOME/.config/ipython"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
 
 # Key Bindings
-bindkey '^@' autosuggest-execute
-bindkey '^O' kill-line
-bindkey '^P' vi-end-of-line
-bindkey '^H' vi-backward-word
-bindkey 'h' backward-char
-bindkey '^J' history-beginning-search-forward
-bindkey '^K' history-beginning-search-backward
-bindkey 'l' forward-char
-bindkey '^L' vi-forward-word
+bindkey '^@'	autosuggest-execute
+bindkey '^Z'	undo
+bindkey ',' delete-char
+bindkey '^O'	kill-line
+bindkey '^H'	vi-backward-word
+bindkey 'h'	backward-char
+bindkey '^J'	history-beginning-search-forward
+bindkey '^K'	history-beginning-search-backward
+bindkey 'l'	forward-char
+bindkey '^L'	vi-forward-word
+bindkey 'e'	edit-command-line
+## Replace arrows by vim bindings in menu selection
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
-bindkey 'e' edit-command-line
+bindkey -M menuselect '^[[A' undefined-key
+#bindkey -M menuselect '^[[B' -r
+#bindkey -M menuselect '^[[C' -r
+#bindkey -M menuselect '^[[D' -r
 
 # Aliases
-## Temp
-alias b='bindkey "\t" expand-or-complete'
 ## Arch
 alias pm="pacman"
 alias pms="sudo pacman -S $1"
@@ -120,7 +123,8 @@ alias brc="v $DOTS_PATH/bashrc"
 alias grc="v $DOTS_PATH/gitconfig"
 alias zs="cd $SCRIPTS_PATH"
 alias scripts="v $SCRIPTS_PATH"
-alias zc="cd ~/.config/"
+alias zco="cd ~/.config/"
+alias zcu="cd ~/custom" # Not modular
 alias qrc="v ~/.config/qutebrowser/config.py"
 alias qrc2="v ~/.config/qutebrowser/config-default.py"
 alias irc="v ~/.config/i3/config"
@@ -132,6 +136,7 @@ alias v="vim"
 alias sv="sudo vim"
 alias gvim="vim"
 alias ra="ranger"
+alias cal="cal -m"
 alias ghs="\gs"
 alias neo="neomutt"
 alias untar="tar -zxvf"
@@ -171,8 +176,22 @@ function gamno() {
 function grsa() {
 	git restore --staged $(git rev-parse --show-toplevel)
 }
+function gsjoin() {
+	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dFIXEDMEDIA -dPDFFitPage -sPAPERSIZE=a4 -sOutputFile="$1" "${@:2}"
+}
+# Not working
+function gsopt(){
+	if ! [[ "$1" =~ ".*\.pdf" ]]
+	then
+		echo "Not a pdf"
+		return 1
+	fi
+	cp "$1" gsopt-save.pdf
+	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -sOutputFile="$1" "$1"
+	[ $? -eq 0] && rm gsopt-save.pdf
+}
 function playm() {
-	ffplay "$(find ~/music -type f | fzf)" &> /dev/null
+	ffplay "$(find ~/save-seagate/musics -type f | fzf)" &> /dev/null
 }
 
 # InfoSec Aliases and Functions
