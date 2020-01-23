@@ -1,0 +1,26 @@
+# Excluded URLs and keys
+https?://localhost:8888/*
+https?://127.0.0.1:8888/*
+
+# Custom key mappings
+map J nextTab
+map K previousTab
+
+# Custom search engines
+d: https://duckduckgo.com/?q=%s
+g: https://www.google.com/search?q=%s
+mit: https://www.google.ch/maps/dir/%s
+maps: https://www.google.com/maps/search/%s
+tef: https://translate.google.com/#view=home&op=translate&sl=en&tl=fr&text=%s
+tfe: https://translate.google.com/#view=home&op=translate&sl=fr&tl=en&text=%s
+w: https://fr.wikipedia.org/wiki/%s
+wa: https://wiki.archlinux.org/?search=%s
+we: https://en.wikipedia.org/?search=%s
+yt: https://www.youtube.com/results?search_query=%s
+pb:  https://www.thepiratebay.org/s/?q=%s
+np: https://docs.scipy.org/doc/numpy/search.html?q=%s&check_keywords=yes&area=default
+pd: https://pandas.pydata.org/pandas-docs/stable/search.html?q=%s&check_keywords=yes&area=default
+sk: https://scikit-learn.org/stable/search.html?q=%s
+sp: https://docs.scipy.org/doc/scipy/reference/search.html?q=%s&check_keywords=yes&area=default
+nx: https://networkx.github.io/documentation/stable/search.html?q=%s&check_keywords=yes&area=default
+mp: https://matplotlib.org/search.html?q=%s
