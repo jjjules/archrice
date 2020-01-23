@@ -1,3 +1,17 @@
-#!/bin/sh
+#!/bin/zsh
 
-nohup xdg-open "$1" &>/dev/null & disown
+if [[ "$1" =~ ".*\.R?md" ]]
+then
+	if [[ "$1" =~ "^/.*" ]]
+	then
+		path=$(sed 's,[^/]*$,,' <<< "$1")
+		echo "(nohup pandoc -V geometry:margin=1in --resource-path  $path -f markdown -t pdf "$1" &>/dev/null | zathura - ) &" > ~/flaltmd
+		nohup pandoc -V geometry:margin=1in --resource-path  "$path" -f markdown -t pdf "$1" &>/dev/null | zathura - &
+	else
+		nohup pandoc -V geometry:margin=1in  -f markdown -t pdf "$1" &>/dev/null | zathura -  &
+	fi
+else
+	nohup xdg-open "$1" &>/dev/null &
+fi
+
+disown %$(grep $! <<< $(jobs -l) | sed 's/^\[\(.\)\].*$/\1/')
