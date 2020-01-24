@@ -1,6 +1,8 @@
 # Excluded URLs and keys
 https?://localhost:8888/*
 https?://127.0.0.1:8888/*
+https?://www.facebook.com/*	jkl
+https?://www.youtube.com/*	fml123456789
 
 # Custom key mappings
 map J nextTab
