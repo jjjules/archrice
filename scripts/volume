@@ -16,7 +16,8 @@ echo $sink
 pactl set-sink-mute $sink 0
 pactl set-sink-volume $sink ${1}5%
 # Assuming left and right are the same
-vol=$(pactl list sinks | perl -000ne 'if(/#6/){/(Volume:.*)/; print "$1\n"}' | grep --only-matching "\s[0-9]*%" | sed 1q)
+print_expr="print \"\$1\\\n\""
+vol=$(pactl list sinks | perl -000ne "if(/#$sink/){/(Volume:.*)/; $print_expr}" | grep --only-matching "\s[0-9]*%" | sed 1q)
 if [ $(tr -d '%' <<< $vol) -gt 150 ]
 then
 	pactl set-sink-volume $sink 150%
