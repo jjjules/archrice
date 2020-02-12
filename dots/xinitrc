@@ -2,8 +2,8 @@ source $HOME/.profile
 
 # Set Keyboard Layout
 $SCRIPTS_PATH/setkb
-xinput set-prop 11 301 1 													# Enable Tap on Touchpad
-xinput set-prop 11 309 1 													# Enable Natural Scroll
+xinput set-prop 11 304 1 													# Enable Tap on Touchpad
+xinput set-prop 11 312 1 													# Enable Natural Scroll
 
 # Set screen saver
 xset s 300 5
