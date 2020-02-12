@@ -1,0 +1,20 @@
+#!/bin/sh
+export DISPLAY=:0.0
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+ICON="/usr/share/icons/Adwaita/16x16/status/display-brightness-symbolic.symbolic.png"
+
+actual=$(cat /sys/class/backlight/intel_backlight/brightness)
+min=0
+max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+brightness=$(expr $actual $1 50)
+
+if [ "$min" -ge "$brightness" ]
+then
+	brightness=$min
+elif [ "$brightness" -ge "$max" ]
+then
+	brightness=$max
+fi
+
+echo $brightness > /sys/class/backlight/intel_backlight/brightness
+dunstify -u normal -r 30003 -i $ICON "$brightness"
