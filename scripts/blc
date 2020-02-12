@@ -1,0 +1,28 @@
+#!/bin/sh
+dev="$1"
+if [ -z $dev ]
+then
+	read dev
+fi
+
+if [ -z $dev ]
+then
+	echo "No device provided"
+	exit 1
+fi
+
+systemctl restart bluetooth.service
+sleep 1
+
+if [ "$1" = "boom" ]
+then
+	mac="88:C6:26:92:FA:9A"
+elif [ "$1" = "headset" ]
+then
+	mac="2C:4D:79:A9:04:0D"
+else
+	echo "Name of device invalid"
+	exit 1
+fi
+
+echo -e "power on\nconnect $mac\n" | bluetoothctl
