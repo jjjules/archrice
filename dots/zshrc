@@ -162,6 +162,9 @@ function mvep() {
 function cpep() {
 	cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }
+function findpdfgrep() {
+	find . -name "$1" -exec pdfgrep -i "$2" {} +
+}
 function gr() {
 	cd $(git rev-parse --show-toplevel)
 }
@@ -193,21 +196,3 @@ function gsopt(){
 function playm() {
 	ffplay "$(find ~/save-seagate/musics -type f | fzf)" &> /dev/null
 }
-
-# InfoSec Aliases and Functions
-ISP_DIR="/home/jules/documents/epfl/ma1/isp/homework/attacks"
-ISP_SSH_DIR="/home/user/sploits"
-function ispc {
-	sshpass -p user ssh -p 2222 user@127.0.0.1
-}
-function isps {
-	scp -P 2222 "$1" user@127.0.0.1:${ISP_SSH_DIR}
-}
-function ispr {
-	scp -P 2222 "user@127.0.0.1:${ISP_SSH_DIR}/$1" ${ISP_DIR}
-}
-function ispra {
-	scp -P 2222 "user@127.0.0.1:$1" ${ISP_DIR}
-}
-# Ada cluster
-alias sshrp="ssh -N -L 9389:localhost:9389 gottraux@iccluster040.iccluster.epfl.ch"
