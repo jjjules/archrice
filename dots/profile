@@ -1,6 +1,7 @@
-export EPFL_DIR="$HOME/documents/epfl/ma1"
-export DOTS_PATH="$HOME/custom/dots"
-export SCRIPTS_PATH="$HOME/custom/scripts"
+export EPFL_DIR="$HOME/documents/epfl/ma2"
+export CUSTOM_PATH="$HOME/custom"
+export DOTS_PATH="$CUSTOM_PATH/dots"
+export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
 export PATH="$(find "$SCRIPTS_PATH" -type d -name '.git' -prune -o -type d -name '*' | grep -v '\.git' | tr '\n' ':'):$PATH"
 export ZSH="$HOME/.config/zsh/oh-my-zsh"
 export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump"
@@ -13,3 +14,5 @@ export EDITOR="vim"
 export VISUAL="vim"
 export BROWSER='/usr/bin/firefox'
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
+export NLTK_DATA="$HOME/documents/python-package-data/nltk_data"
+export SCIKIT_LEARN_DATA="$HOME/documents/python-package-data/scikit_learn_data"
