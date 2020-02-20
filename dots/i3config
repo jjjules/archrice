@@ -5,6 +5,7 @@ gaps inner 10
 gaps outer 0
 for_window [class="^.*"] border pixel 2
 font pango:mono 12
+floating_modifier Mod4
 
 ## Color setup ##
 	# class                 border  backgr. text    indicator child_border
@@ -38,10 +39,13 @@ for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_calc"] resize set 850 450
-for_window [instance="dropdown_term"] resize set 850 600
+for_window [instance="dropdown_term"] resize set 850 597
 
 exec --no-startup-id urxvt -name dropdown_calc -e bpython
 exec --no-startup-id urxvt -name dropdown_term
+
+## Other Windows Properties ##
+for_window [class="Pavucontrol"] floating enable
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
@@ -61,6 +65,8 @@ bindsym button5								nop
 bindsym $mod+Return 					exec urxvt
 bindsym $mod+Tab							workspace next
 #bindsym $mod+Backspace				workspace prev
+bindsym $mod+space 						focus mode_toggle
+bindsym $mod+Shift+space			floating toggle
 bindsym $mod+Escape 					reload
 bindsym $mod+Shift+Escape 							exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
 bindsym --release $mod+Print						exec --no-startup-id "$SCRIPTS_PATH/autoscrot -s"
@@ -69,13 +75,13 @@ bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$SCRIPTS_PATH/auto
 bindsym $mod+Ctrl+Print									exec --no-startup-id deepin-screenshot
 
 ## Media Keys Bindings ##
-bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-surround-40 toggle"
+bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute alsa_output.pci-0000_00_1f.3.analog-stereo toggle"
 bindsym XF86AudioLowerVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume -"
 bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume +"
 #bindsym XF86AudioMicMute
 bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $SCRIPTS_PATH/brightness +"
-#bindsym XF86Display
+bindsym XF86Display						exec --no-startup-id "xrandr --output HDMI-2 --auto --right-of eDP-1 ; outhdmi"
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
 #bindsym XF86Tools
 bindsym XF86Search						exec --no-startup-id "systemctl suspend"
@@ -125,21 +131,21 @@ bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $SCRIPTS_PATH/flalt"
 bindsym $mod+Ctrl+d				exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle
-bindsym $mod+Shift+f			exec --no-startup-id "$SCRIPTS_PATH/i3focusleft"
+bindsym $mod+Shift+f			floating toggle
 
 #bindsym $mode+g
 bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps"
 
-bindsym $mod+h 						focus left
+bindsym $mod+h 						exec --no-startup-id "$SCRIPTS_PATH/i3focus left"
 bindsym $mod+Shift+h 			move left 50
 
-bindsym $mod+j 						focus down
-bindsym $mod+Shift+j 			move down 50
+bindsym $mod+j 						exec --no-startup-id "$SCRIPTS_PATH/i3focus down"
+bindsym $mod+Shift+j 			move absolute position 0 px
 
-bindsym $mod+k 						focus up
-bindsym $mod+Shift+k 			move up 50
+bindsym $mod+k 						exec --no-startup-id "$SCRIPTS_PATH/i3focus up"
+bindsym $mod+Shift+k 			move up 60
 
-bindsym $mod+l						focus right
+bindsym $mod+l						exec --no-startup-id "$SCRIPTS_PATH/i3focus right"
 bindsym $mod++Shift+l			move right 50
 
 #bindsym $mod+y
