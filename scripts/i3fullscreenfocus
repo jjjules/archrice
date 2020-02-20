@@ -1,0 +1,24 @@
+#!/bin/python
+
+import json
+import subprocess
+import re
+
+i3_cmd = 'i3-msg -t get_tree'
+
+def get_layout():
+    get_tree = subprocess.Popen(i3_cmd.split(), stdout=subprocess.PIPE)
+    stdout = get_tree.communicate()[0]
+    try:
+        tree = json.loads(stdout)
+    except ValueError:
+        tree = {}
+    return tree
+
+def focused_fullscreen(node):
+    if node['window']:
+        return node['fullscreen_mode'] == 1 and node['focused']
+    return any(focused_fullscreen(n) for n in node.get('nodes', ''))
+
+if __name__ == '__main__':
+    print(int(focused_fullscreen(get_layout())))

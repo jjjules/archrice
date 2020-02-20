@@ -1,0 +1,38 @@
+#!/bin/sh
+
+if [ "$1" = 'left' ]
+then
+	if [ $(i3fullscreenfocus) = '1' ]
+	then
+		i3-msg 'fullscreen disable, focus left, fullscreen enable'
+	else
+		i3-msg focus left
+	fi
+fi
+if [ "$1" = 'down' ]
+then
+	if [ $(i3fullscreenfocus) -eq 1 ]
+	then
+		i3-msg 'fullscreen disable, focus down, fullscreen enable'
+	else
+		i3-msg focus down
+	fi
+fi
+if [ "$1" = 'up' ]
+then
+	if [ $(i3fullscreenfocus) -eq 1 ]
+	then
+		i3-msg 'fullscreen disable, focus up, fullscreen enable'
+	else
+		i3-msg focus up
+	fi
+fi
+if [ "$1" = 'right' ]
+then
+	if [ $(i3fullscreenfocus) -eq 1 ]
+	then
+		i3-msg 'fullscreen disable, focus right, fullscreen enable'
+	else
+		i3-msg focus right
+	fi
+fi
