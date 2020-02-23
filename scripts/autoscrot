@@ -2,7 +2,7 @@
 # A wrapper around scrot, naming is handled
 # at runtime and screenshot will be stored
 # in $DEST
-DEST=$HOME/pics/screenshots
+DEST=$HOME/images/screenshots
 
 if ! [ -d /tmp/screenshots ]
 then
