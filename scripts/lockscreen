@@ -15,3 +15,7 @@ i3lock --blur=10 -e --indicator -k \
         --insidewrongcolor=06060acc \
 				--linecolor=06060acc \
 				--datestr="%A, %e %b"
+
+xset dpms force off
+
+
