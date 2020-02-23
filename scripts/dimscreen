@@ -1,9 +1,9 @@
 #!/bin/sh
 
-#brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+brightness=$(xbacklight -get)
 trap 'exit 0' TERM INT
-trap "echo startdim >> /home/jules/dim; kill %%" EXIT #"sudo echo $brightness > /sys/class/backlight/intel_backlight/brightness; kill %%" EXIT
-#sudo echo 0 > /sys/class/backlight/intel_backlight/brightness
-echo "bright0" >> /home/jules/dim
+trap "xbacklight -set $brightness; kill %%" EXIT
+xbacklight -set 0
+
 sleep 2147483647 &
 wait
