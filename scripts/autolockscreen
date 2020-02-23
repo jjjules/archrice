@@ -1,0 +1,11 @@
+#!/bin/sh
+
+pid=$(ps aux | grep 'xss-lock' | grep -v 'grep' | awk '{print $2}' | sed 's/ \+//g')
+
+if [ ! -z $pid ]
+then
+	kill $pid
+else
+	xss-lock -l -n "$SCRIPTS_PATH/dimscreen" -- $SCRIPTS_PATH/lockscreen &
+fi
+
