@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# i3-get-window-criteria - Get criteria for use with i3 config commands
+# i3getwindowcriteria - Get criteria for use with i3 config commands
+#	source: https://faq.i3wm.org/question/2172/how-do-i-find-the-criteria-for-use-with-i3-config-commands-like-for_window-eg-to-force-splashscreens-and-dialogs-to-show-in-floating-mode.1.html
 
 # To use, run this script, then click on a window.
 # Output is in the format: [<name>=<value> <name>=<value> ...]
