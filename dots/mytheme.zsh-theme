@@ -27,3 +27,12 @@ my_prompt=''
 my_prompt+="$loc_hostname"
 my_prompt+="$loc_pwd"
 PROMPT='${my_prompt}$(git_prompt)${loc_jobs} %(!.#.%%) %{$reset_color%}'
+
+function get_name_git() {
+	if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]
+	then
+		repo_name="$(git rev-parse --show-toplevel)"
+		echo "%{$fg[9]%}$(basename $repo_name)%{$reset_color%}"
+	fi
+}
+RPROMPT='$(get_name_git)'
