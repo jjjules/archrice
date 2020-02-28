@@ -23,12 +23,15 @@ bindkey '^Z'	undo
 bindkey ',' delete-char
 bindkey '^O'	kill-line
 bindkey '^H'	vi-backward-word
+bindkey 'Od'	vi-backward-word
 bindkey 'h'	backward-char
 bindkey '^J'	history-beginning-search-forward
 bindkey '^K'	history-beginning-search-backward
 bindkey 'l'	forward-char
 bindkey '^L'	vi-forward-word
+bindkey 'Oc'	vi-forward-word
 bindkey 'e'	edit-command-line
+bindkey 'm' run-help
 ## Replace arrows by vim bindings in menu selection
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
@@ -95,20 +98,18 @@ alias gll="git log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) -
 ## EPFL
 ### cds
 alias ze="cd $EPFL_DIR"
-alias zea="cd ${EPFL_DIR}/ada"
-alias zeap="cd ${EPFL_DIR}/ada/project"
-alias zei="cd ${EPFL_DIR}/isp"
-alias zem="cd ${EPFL_DIR}/ml"
-alias zemp="cd $EPFL_DIR/ml/ml-project2"
-alias zen="cd ${EPFL_DIR}/nlp"
 alias zes="cd ${EPFL_DIR}/sds"
+alias zel="cd $EPFL_DIR/lds"
+alias zedl="cd $EPFL_DIR/dl"
+alias zedv="cd $EPFL_DIR/dv"
+alias zedi="cd $EPFL_DIR/dis"
+alias zeo="cd $EPFL_DIR/oml"
 ### Misc
 alias vtd="vim ${EPFL_DIR}/todo.md"
 alias sdock="sudo docker"
 alias jptn="jupyter notebook >/dev/null"
 alias jptl="jupyter lab >/dev/null"
 alias jptln="jupyter lab --no-browser >/dev/null"
-alias vpnep="sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux"
 alias clust040="ssh gottraux@iccluster040.iccluster.epfl.ch"
 ## Dots Shortcuts
 alias supdatesl="sudo -E updatesl"
@@ -149,6 +150,7 @@ alias seam="sudo mount -o gid=998,uid=1000 /dev/sdb1 /media/seagate"
 alias seaum="sudo umount /media/seagate"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
+alias ffmpeg-screenrec="ffmpeg -f x11grab -y -r 30 -s 1920x1080 -i :0.0 -vcodec huffyuv out.avi "
 alias activate_3-7="source $EPFL_DIR/.venv-3.7.0/bin/activate"
 
 # Functions
@@ -194,5 +196,5 @@ function gsopt(){
 	[ $? -eq 0] && rm gsopt-save.pdf
 }
 function playm() {
-	ffplay "$(find ~/save-seagate/musics -type f | fzf)" &> /dev/null
+	ffplay "$(find ~/seagate/musics -type f | fzf)" &> /dev/null
 }
