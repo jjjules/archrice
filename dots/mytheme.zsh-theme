@@ -2,11 +2,11 @@
 local loc_hostname=""
 if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" ]]
 then
-	loc_hostname="%{$fg[orange]%}$(hostname)%{$reset_color%}:"
+	loc_hostname="%{$fg[blue]%}$(hostname)%{$reset_color%}:"
 fi
 
 # Path
-local loc_pwd="%{$fg[blue]%}%3~%{$reset_color%}"
+local loc_pwd="$FG[248]%3~%{$reset_color%}"
 
 # Jobs
 local loc_jobs="%(1j. [%{$fg[yellow]%}%j%{$reset_color%}].)%{$reset_color%}"
@@ -32,7 +32,7 @@ function get_name_git() {
 	if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]
 	then
 		repo_name="$(git rev-parse --show-toplevel)"
-		echo "%{$fg[9]%}$(basename $repo_name)%{$reset_color%}"
+		echo "$FG[208]$(basename $repo_name)%{$reset_color%}"
 	fi
 }
 RPROMPT='$(get_name_git)'
