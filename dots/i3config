@@ -81,8 +81,8 @@ bindsym XF86AudioMute 				exec --no-startup-id "pactl set-sink-mute alsa_output.
 bindsym XF86AudioLowerVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume -"
 bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume +"
 #bindsym XF86AudioMicMute
-bindsym XF86MonBrightnessDown	exec --no-startup-id "sudo $SCRIPTS_PATH/brightness -"
-bindsym XF86MonBrightnessUp		exec --no-startup-id "sudo $SCRIPTS_PATH/brightness +"
+bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
+bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 bindsym XF86Display						exec --no-startup-id "xrandr --output HDMI2 --auto --right-of eDP1 ; outhdmi"
 bindsym Shift+XF86Display			exec --no-startup-id "$SCRIPTS_PATH/autolockscreen"
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
