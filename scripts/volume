@@ -13,7 +13,6 @@ else
 	sink=$active_sink
 fi
 
-echo $sink
 pactl set-sink-mute $sink 0
 pactl set-sink-volume $sink ${1}5%
 # Assuming left and right are the same
