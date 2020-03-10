@@ -1,9 +1,14 @@
 #!/bin/sh
+# updatesl along with supdatesl (dmenu, xorg) for correct automatic permissions?
+# Add xprofile, Xdefault->resources
 source $HOME/.profile
 TMP=/tmp/updatesl-backups
 mkdir $TMP 2>/dev/null
 rm $TMP/*
 ZSH_CUSTOM="$ZSH/custom"
+
+# Xorg
+ln -s $DOTS_PATH/xorg.conf.d/90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
 # Executables
 mv /usr/bin/dmenu $TMP
@@ -22,6 +27,7 @@ ln -s $DOTS_PATH/xinitrc $HOME/.xinitrc
 ln -s $DOTS_PATH/xdefaults $HOME/.Xdefaults
 ln -s $DOTS_PATH/vimrc $HOME/.vimrc
 ln -s $DOTS_PATH/gitconfig $HOME/.gitconfig
+chown jules:wheel $HOME/{.profile,.zprofile,.zshrc,.xinitrc,.Xdefaults,.vimrc,.gitconfig}
 
 # Config files in .config
 mkdir $HOME/.config/archey3 2>/dev/null
@@ -34,3 +40,5 @@ ln -s $DOTS_PATH/qutequicks $HOME/.config/qutebrowser/quickmarks
 ln -s $DOTS_PATH/ranger-rc.conf $HOME/.config/ranger/rc.conf
 ln -s $DOTS_PATH/ranger-rifle.conf $HOME/.config/ranger/rifle.conf
 ln -s $DOTS_PATH/zathurarc $HOME/.config/zathura/zathurarc
+chown jules:wheel $HOME/.config/{archey3/archey3.conf,dunst/dunstrc,i3/config,qutebrowser/config.py,qutebrowser/quickmarks,ranger/rc.conf,ranger/rifle.conf,zathura/zathurarc}
+
