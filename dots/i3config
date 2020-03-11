@@ -100,36 +100,37 @@ bindsym $mod+Shift+w			focus child
 bindsym $mod+e						layout toggle split tabbed
 bindsym $mod+Shift+e			layout tabbed
 
-bindsym $mod+r						[instance="dropdown_term"] scratchpad show
-bindsym $mod+Shift+r			[instance="dropdown_calc"] scratchpad show
+bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
+#bindsym $mod+Shift+r
 
 #bindsym $mod+t
 #bindsym $mod+Shift+t
 
-bindsym $mod+z 						exec --no-startup-id "gpg --decrypt /home/jules/e1.asc >> /home/jules/asci3"
+#bindsym $mod+z
 #bindsym $mod+Shift+z
 
-bindsym $mod+u						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink width 1 px or 1 ppt
+bindsym $mod+u						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink width 10 px
 #bindsym $mod+Shift+u
 
-bindsym $mod+i						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink height 1 px or 1 ppt
+bindsym $mod+i						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize shrink height 10 px
 #bindsym $mod+Shift+i
 
-bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow height 1 px or 1 ppt
+bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow height 10 px
 #bindsym $mod+Shift+o
 
-bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 1 px or 1 ppt
+bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 10 px
 bindsym $mod+Shift+p			exec --no-startup-id "passmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+a						split v
 bindsym $mod+Shift+a			split h
 
-bindsym $mod+s						mark --add "swapee"; mode "swap"
-#bindsym $mod+Shift+s
+bindsym $mod+s						[instance="dropdown_term"] scratchpad show
+bindsym $mod+Shift+s			[instance="dropdown_calc"] scratchpad show
+bindsym $mod+Alt+s				mark --add "swapee"; mode "swap"
 
-bindsym $mod+d						exec --no-startup-id "urxvt -e ranger"
-bindsym $mod+Shift+d			exec --no-startup-id "urxvt -e $SCRIPTS_PATH/flalt"
-bindsym $mod+Ctrl+d				exec --no-startup-id i3-dmenu-desktop
+
+bindsym $mod+d						exec --no-startup-id "urxvt -e $SCRIPTS_PATH/flalt"
+bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle
 bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
@@ -164,7 +165,7 @@ bindsym $mod++Shift+c			exec --no-startup-id "xdotool mousemove --sync 850 950 c
 bindsym $mod+b 						exec --no-startup-id firefox
 bindsym $mod+Shift+b			exec --no-startup-id "echo -e 'boom\nhead\n' | dmenu -p 'Device: '| $SCRIPTS_PATH/blc"
 
-bindsym $mod+n						exec --no-startup-id "urxvt -e neomutt"
+bindsym $mod+n						exec --no-startup-id mailspring
 #bindsym $mod+Shift+n
 
 bindsym $mod+m						exec --no-startup-id "$SCRIPTS_PATH/mwep -r; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
