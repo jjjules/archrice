@@ -10,7 +10,7 @@ export EPFL_DIR="$HOME/documents/epfl/ma2"
 export CUSTOM_PATH="$HOME/custom"
 export DOTS_PATH="$CUSTOM_PATH/dots"
 export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
-export PATH="$(find "$SCRIPTS_PATH" -type d -name '.git' -prune -o -type d -name '*' | grep -v '\.git' | tr '\n' ':'):$PATH"
+export PATH="$(find "$SCRIPTS_PATH" -type d -name '.git' -prune -o -type d -name '*' | grep -v "^\.git$\|^$SCRIPTS_PATH/progress$" | tr '\n' ':')$PATH"
 export BROWSER='/usr/bin/firefox'
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export NLTK_DATA="$HOME/documents/python-package-data/nltk_data"
