@@ -1,0 +1,31 @@
+#!/bin/python
+import pandas as pd
+import numpy as np
+
+bindings_jupyter=np.array(["""bindsym --release Ctrl+h [con_id=\"__focused__\" class=\"firefox\"] exec --no-startup-id \"xdotool key \'Left\' \"
+bindsym --release Ctrl+l [con_id=\"__focused__\" class=\"firefox\"] exec --no-startup-id \"xdotool key \'Right\'"""])
+
+with open('/home/jules/.config/i3/config', 'r') as f_i3:
+    i3conf = pd.Series(f_i3.readlines())
+
+mask_start = i3conf.str.match('#-Jupyterlab-mode-start').to_numpy()
+start_i = np.where(mask_start)[0]
+
+mask_end = i3conf.str.match('#-Jupyterlab-mode-end').to_numpy()
+end_i = np.where(mask_end)[0]
+
+if len(start_i) != 1 or len(end_i) != 1:
+    exit()
+start_i, end_i = start_i[0], end_i[0]
+
+print(start_i, end_i)
+if end_i - start_i == 1:
+    i3numpy = i3conf.to_numpy()
+    before = i3numpy[:start_i+1]
+    after = i3numpy[end_i:]
+
+    print(before[:10], bindings_jupyter, after[:10])
+    print('concatenated')
+    print(np.concatenate((before, bindings_jupyter, after)))
+
+    np.concatenate((before, bindings_jupyter, after)).tofile('/home/jules/.config/i3/configtest', sep='\n')
