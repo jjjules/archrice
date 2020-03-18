@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pid=$(ps aux | grep '/usr/bin/openconnect' | grep -v 'grep' | awk '{print $2}' | sed 's/ \+//g')
+if [ $# -eq 0 ]
+then
+	if [ ! -z $pid ]
+	then
+		sudo kill $pid
+	else
+		sudo -u jules pass show epfl.ch/gottraux | sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux --passwd-on-stdin
+	fi
+elif [ $1 = 'off' ] && [ ! -z $pid ]
+then
+	sudo kill $pid
+elif [ $1 = 'on' ] && [ -z $pid ]
+then
+	echo 1
+	sudo -u jules pass show epfl.ch/gottraux | sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux --passwd-on-stdin
+fi
