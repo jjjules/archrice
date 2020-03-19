@@ -18,6 +18,8 @@ floating_modifier Mod4
 
 ## Status Bar ##
 bar {
+	wheel_up_cmd nop
+  wheel_down_cmd nop
 	font pango:mono 11
 	status_command i3status
 	#status command i3blocks
