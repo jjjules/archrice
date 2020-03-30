@@ -14,6 +14,5 @@ then
 	sudo kill $pid
 elif [ $1 = 'on' ] && [ -z $pid ]
 then
-	echo 1
 	sudo -u jules pass show epfl.ch/gottraux | sudo /usr/bin/openconnect -b vpn.epfl.ch -u gottraux --passwd-on-stdin
 fi
