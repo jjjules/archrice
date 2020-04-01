@@ -2,11 +2,15 @@
 https?://localhost:8888/*
 https?://127.0.0.1:8888/*
 https?://www.facebook.com/*	jkl
-https?://www.youtube.com/*	fml123456789
+https?://www.youtube.com/*	ml123456789
 
 # Custom key mappings
 map J nextTab
 map K previousTab
+unmap f
+unmap F
+map s LinkHints.activateMode
+map S LinkHints.activateModeToOpenInNewTab
 
 # Custom search engines
 d: https://duckduckgo.com/?q=%s
@@ -26,3 +30,4 @@ sk: https://scikit-learn.org/stable/search.html?q=%s
 sp: https://docs.scipy.org/doc/scipy/reference/search.html?q=%s&check_keywords=yes&area=default
 nx: https://networkx.github.io/documentation/stable/search.html?q=%s&check_keywords=yes&area=default
 mp: https://matplotlib.org/search.html?q=%s
+torch: https://pytorch.org/docs/stable/search.html?q=%s&check_keywords=yes&area=default
