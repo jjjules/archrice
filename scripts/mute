@@ -10,4 +10,13 @@ else
 	sink=$active_sink
 fi
 
-pactl set-sink-mute $sink toggle
+if [ $# -eq 0 ]
+then
+	pactl set-sink-mute $sink toggle
+elif [ $1 = 'off' ]
+then
+	pactl set-sink-mute $sink 0
+elif [ $1 = 'on' ]
+then
+	pactl set-sink-mute $sink 1
+fi
