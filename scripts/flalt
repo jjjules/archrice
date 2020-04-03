@@ -1,19 +1,24 @@
 #!/bin/zsh
+source $HOME/.profile
+
 cd $HOME
 directory=$(pwd)
 files=$(fzf -m)
 cd -
 
-#i3-msg layout default
-i=0
+mpvs=()
 while read -r file; do
-	#if [ $i -eq 0 ]
-	#then
-	#	i3-msg split toggle
-	#fi
+	[ -z "$file" ] && continue
 	file="'$file'"
-	i3-msg exec xdg-open "$file"
-	i+=1
+	#ftype=$(xdg-mime query filetype $file)
+	#echo "xdg-mime query filetype $file"
+	#if [[ "$ftype" =~ video/.* ]]
+	if [[ "$file" =~ .*\.mkv\|.*\.mp4\|.*\.avi ]]
+	then
+		mpvs+="$file"
+	else
+		i3-msg "exec --no-startup-id o $HOME/$file"
+	fi
 done <<< "$files"
 
-#i3-msg layout tabbed
+i3-msg "exec --no-startup-id mpv ${mpvs[@]}"
