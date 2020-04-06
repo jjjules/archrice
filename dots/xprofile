@@ -3,7 +3,6 @@ $SCRIPTS_PATH/setkb
 
 # Set screen saver
 xset s 300 10
-xss-lock -l -n "$SCRIPTS_PATH/dimscreen" -- $SCRIPTS_PATH/lockscreen &
 
 # Set wallpaper and start background programs
 $SCRIPTS_PATH/setwp
