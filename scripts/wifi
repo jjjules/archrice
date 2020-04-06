@@ -1,0 +1,25 @@
+#!/bin/sh
+export DISPLAY=:0.0
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+echo "Previous state: $(nmcli radio wifi)"
+state="$1"
+if [ $# -eq 0 ]
+then
+	if [ "$(nmcli radio wifi)" = "enabled" ]
+	then
+		state="off"
+		nmcli radio wifi off
+	else
+		state="on"
+		nmcli radio wifi on
+	fi
+elif [ $1 = 'off' ]
+then
+	nmcli radio wifi off
+elif [ $1 = 'on' ]
+then
+	nmcli radio wifi on
+fi
+
+dunstify -u normal -r 30010 "Wifi $state"
