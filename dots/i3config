@@ -1,4 +1,4 @@
-## Basic definitions and appearance ##
+# Basic definitions and appearance ##
 set $mod Mod4
 
 gaps inner 10
@@ -77,15 +77,16 @@ bindsym --release $mod+Ctrl+Shift+Print	exec --no-startup-id "$SCRIPTS_PATH/auto
 bindsym $mod+Ctrl+Print									exec --no-startup-id deepin-screenshot
 
 ## Media Keys Bindings ##
-bindsym XF86AudioMute 				exec --no-startup-id "$SCRIPTS_PATH/mutetoggle"
+bindsym XF86AudioMute 				exec --no-startup-id "$SCRIPTS_PATH/mute"
 bindsym XF86AudioLowerVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume -"
 bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume +"
 bindsym XF86AudioMicMute			exec --no-startup-id "$SCRIPTS_PATH/micmutetoggle"
+
 bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 bindsym XF86Display						exec --no-startup-id "xrandr --output HDMI2 --auto --right-of eDP1 ; outhdmi"
-bindsym Shift+XF86Display			exec --no-startup-id "$SCRIPTS_PATH/autolockscreen"
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
+
 #bindsym XF86Tools
 bindsym XF86Search						exec --no-startup-id "systemctl suspend"
 bindsym Shift+XF86Search			exec --no-startup-id "$SCRIPTS_PATH/lockscreen"
