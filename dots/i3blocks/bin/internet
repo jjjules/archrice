@@ -1,0 +1,10 @@
+#!/bin/sh
+
+eth_status=$(cat /sys/class/net/e*/operstate)
+wlan_status=$(cat /sys/class/net/w*/operstate)
+
+[ $(cat /sys/class/net/w*/operstate) = "up" ] && status_icon="📶"
+[ $(cat /sys/class/net/e*/operstate) = "up" ] && status_icon="🔗"
+[ -z $status_icon ] && status_icon="❌"
+
+printf "$status_icon\n"

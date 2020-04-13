@@ -1,0 +1,5 @@
+#!/bin/bash
+
+clock=$(date '+%A %d.%m.%y %H:%M')
+
+printf "%s\n" "$clock"

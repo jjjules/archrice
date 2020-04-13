@@ -20,9 +20,9 @@ floating_modifier Mod4
 bar {
 	wheel_up_cmd nop
   wheel_down_cmd nop
-	font pango:mono 11
-	status_command i3status
-	#status command i3blocks
+	font pango:monospace 11
+	#status_command i3status
+	status_command i3blocks
 	position bottom
 
 	colors {
@@ -84,7 +84,7 @@ bindsym XF86AudioMicMute			exec --no-startup-id "$SCRIPTS_PATH/micmutetoggle"
 
 bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
-bindsym XF86Display						exec --no-startup-id "xrandr --output HDMI2 --auto --right-of eDP1 ; outhdmi"
+bindsym XF86Display						exec --no-startup-id "xrandr --output HDMI2 --auto --same-as eDP1 ; outhdmi"
 bindsym XF86WLAN							exec --no-startup-id "sudo systemctl restart NetworkManager"
 
 #bindsym XF86Tools

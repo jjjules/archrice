@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+# low battery in %
+low_threshold=20
+crit_threshold=10
+
+# Getting the actual percentage of each battery
+capacity0=$(cat /sys/class/power_supply/BAT0/capacity)
+capacity1=$(cat /sys/class/power_supply/BAT1/capacity)
+capacity=$(echo "$capacity0*0.5+$capacity1*0.2" | bc)
+capacity=${capacity%.*}
+
+# Getting the statuses
+status0=$(cat /sys/class/power_supply/BAT0/status)
+status1=$(cat /sys/class/power_supply/BAT1/status)
+
+battery_emoji="🔋"
+status_charging="⚡"
+status_low="⚠️"
+
+# Test status
+if [ "$status0" = "Charging" ] || [ "$status1" = "Charging" ]
+then
+	printf "%s%s%s\n" "$capacity%" "$battery_emoji" "$status_charging"
+elif [ "$capacity" -gt "$low_threshold" ]
+then
+	printf "%s%s\n" "$capacity%" "$battery_emoji"
+elif [ "$capacity" -le "$crit_threshold" ]
+then
+	printf "%s%s%s\n\n#ff0000\n" "$capacity%" "$battery_emoji" "$status_low"
+else
+	printf "%s%s\n\n#ff0000\n" "$capacity%" "$battery_emoji"
+fi
