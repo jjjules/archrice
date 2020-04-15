@@ -7,4 +7,23 @@ wlan_status=$(cat /sys/class/net/w*/operstate)
 [ $(cat /sys/class/net/e*/operstate) = "up" ] && status_icon="🔗"
 [ -z $status_icon ] && status_icon="❌"
 
-printf "$status_icon\n"
+name=$(iw dev wlp4s0 link | grep 'SSID' | sed 's/^\s*SSID: //')
+[ $(wc -c <<< $name) -gt 22 ] && other="$(cut -c 1-19 <<< $name)..."
+name="$name "
+
+signal="$(iw dev wlp4s0 link | grep 'signal' | sed -e 's/^\s*signal: //' -e 's/\s//') "
+signal_num=$(grep -P -o '\d+' <<< $signal)
+if [ $signal_num -lt 60 ]
+then
+	color='green'
+elif [ $signal_num -lt 70 ]
+then
+	color='orange'
+elif [ $signal_num -lt 80 ]
+then
+	color='yellow'
+else
+	color='red'
+fi
+
+printf "<span foreground=\'$color\'>$name</span>$signal$status_icon\n"
