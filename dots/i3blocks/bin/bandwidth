@@ -53,12 +53,12 @@ done
 if [ -z $(default_interface) ]
 then
 	status_icon="❌"
-	printf "$status_icon"
+	printf "$status_icon\n"
 else
 	[[ $(default_interface) =~ 'w.*' ]] && status_icon="📶"
 	[[ $(default_interface) =~ 'e.*' ]] && status_icon="🔗"
 	[ -z $status_icon ] && status_icon="❓"
-	printf_command="${PRINTF_COMMAND:-"printf \"%.1f/%.1f${LABEL} $status_icon\\n\", rx, wx;"}"
+	printf_command="${PRINTF_COMMAND:-"printf \"%.1f/%.1f${LABEL} ${status_icon}\\n\", rx, wx;"}"
 
 	iface="${iface:-$(default_interface)}"
 	while [ -z "$iface" ]; do
