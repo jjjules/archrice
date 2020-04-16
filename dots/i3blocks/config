@@ -2,10 +2,19 @@ command=$HOME/.config/i3blocks/bin/$BLOCK_NAME
 separator_block_width=10
 markup=pango
 
-# SIGNALS
-# 1: volume
-# 2: brightness
-# 3: spotify
+[cpu_use]
+interval=persist
+min_width=100.00%
+REFRESH_TIME=2
+WARN_PERCENT=50
+CRIT_PERCENT=80
+DECIMALS=2
+
+[cpu_temp]
+interval=10
+
+[ram]
+interval=10
 
 [bandwidth]
 interval=persist
@@ -16,24 +25,7 @@ UNIT=KB
 interval=1
 
 [battery]
-interval=1
+interval=10
 
 [clock]
-interval=1
-full_text=<span foreground="red" size="x-large">Roses</span> and <i><span color="#EE37B8">violets</span></i>!
-
-#[cpu_use]
-#LABEL=
-#interval=persist
-#min_width=100.00%
-#REFRESH_TIME=2
-#WARN_PERCENT=50
-#CRIT_PERCENT=80
-#DECIMALS=2
-#
-#[cpu_temp]
-#interval=10
-#
-#[ram]
-#label=
-#interval=10
+interval=5

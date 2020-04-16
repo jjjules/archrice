@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+t_warn=70.0
+t_crit=90.0
+temperature=$(sensors -u coretemp-isa-0000 | grep "temp1_input" | awk '{print $NF}')
+
+if [[ "$temperature" -ge "$t_crit" ]]; then
+	printf "<span color='red'>%.1f°C</span>\n" "$temperature"
+	exit 33
+elif [[ "$temperature" -ge "$t_warn" ]]; then
+	printf "<span color='orange'>%.1f°C</span>\n" "$temperature"
+else
+	printf "%.1f°C\n" "$temperature"
+fi
+
