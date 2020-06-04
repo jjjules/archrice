@@ -48,12 +48,15 @@ alias pm="pacman"
 alias pms="sudo pacman -S $1"
 alias pmr="sudo pacman -Rns $1"
 alias pmy="sudo pacman -Syu"
+alias yayy="yay -Syua"
 ## GNU
 ### Dirs and Files
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias zw="cd ~/downloads"
+alias zm="cd ~/videos/movies"
+alias zi="cd ~/images"
 alias d="dirs -v"
 alias cp="nocorrect cp"
 alias mkd="nocorrect mkdir -pv"
@@ -83,7 +86,7 @@ alias kb="kill $(ps aux | grep '/bin/bash.*bch$' | awk '{print $2}')"
 alias nmr="nmcli device wifi rescan"
 alias nml="nmcli device wifi list"
 alias nmc="nmcli -a device wifi connect"
-alias nmcn="nmcli connection"
+alias nmu="nmcli -p con up"
 ## Git
 alias g="git"
 alias gs="git status -s -b"
@@ -140,22 +143,39 @@ alias ra="ranger"
 alias cal="cal -m"
 alias ghs="\gs"
 alias lcp="fc -e 'sed -i -e \"s/$/ \| xsel -ib/\"'"
+alias xsetoff="xset s off -dpms"
+alias xseton="xset s on +dpms;xset s 300 7"
 alias neo="neomutt"
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
 alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
-alias wifis="sudo vim /etc/NetworkManager/system-connections"
-alias seam="sudo mount -o gid=998,uid=1000 /dev/sdb1 /media/seagate"
-alias seaum="sudo umount /media/seagate"
+alias seam="sudo mount /dev/sdb2 /mnt/seagate"
+alias seaum="sudo umount /mnt/seagate"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
-alias ffmpeg-screenrec="ffmpeg -f x11grab -y -r 30 -s 1920x1080 -i :0.0 -vcodec huffyuv out.avi "
-alias activate_3-7="source $EPFL_DIR/.venv-3.7.0/bin/activate"
+alias condasource="source /opt/miniconda3/etc/profile.d/conda.sh"
 
 # Functions
 ## Misc
+function stopwatch(){
+  date1=`date +%s`;
+   while true; do
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
+    sleep 0.1
+   done
+}
+function timer(){
+	date1=$((`date +%s` + $1))
+	while [ "$date1" -ge `date +%s` ]
+	do
+		echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+		sleep 0.1
+	done
+	[[ $2 = 's' ]] && return 0
+	ffplay -nodisp "$HOME/musics/Eagles - Hotel California.mp3" > /dev/null
+}
 function weather(){
 	curl wttr.in/$1
 }
@@ -164,6 +184,12 @@ function mvep() {
 }
 function cpep() {
 	cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
+}
+function mvp() {
+	rsync -aP --remove-source-files $1 $2 && rm -r $1
+}
+function cpp() {
+	rsync -aP $1 $2
 }
 function findpdfgrep() {
 	find . -name "$1" -exec pdfgrep -i "$2" {} +
@@ -199,3 +225,8 @@ function gsopt(){
 function playm() {
 	ffplay "$(find ~/seagate/musics -type f | fzf)" &> /dev/null
 }
+
+# Save last directory
+precmd() { pwd > /tmp/LASTDIRSAVE}
+
+source /home/jules/.config/broot/launcher/bash/br

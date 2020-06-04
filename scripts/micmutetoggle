@@ -16,11 +16,11 @@ BEGIN {default_found=0;}
     if (default_found) {
         if ($2=="yes") {
             mute=0;
-            icon="microphone-sensitivity-medium";
+            icon="/usr/share/icons/Adwaita/16x16/legacy/microphone-sensitivity-medium.png";
             status="unmuted"
         } else {
             mute=1;
-            icon="microphone-sensitivity-muted";
+            icon="/usr/share/icons/Adwaita/16x16/legacy/microphone-sensitivity-muted.png";
             status="muted"
         }
         system("pacmd set-source-mute " name " " mute);

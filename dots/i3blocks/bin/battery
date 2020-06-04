@@ -1,7 +1,10 @@
 #!/usr/bin/bash
+#case $BLOCK_BUTTON in
+#	1) kill $(ps aux | grep $HOME/.config/i3blocks/bin/battery | grep -v 'grep' | tr -s " " | cut -d' ' -f2) ;;
+#esac
 
 # low battery in %
-low_threshold=20
+low_threshold=15
 crit_threshold=10
 
 # Getting the actual percentage of each battery
@@ -18,6 +21,8 @@ battery_emoji="🔋"
 status_charging="⚡"
 status_low="⚠️"
 
+crit_icon='/usr/share/icons/Adwaita/16x16/status/dialog-warning-symbolic.symbolic.png'
+
 # Test status
 if [ "$status0" = "Charging" ] || [ "$status1" = "Charging" ]
 then
@@ -27,6 +32,10 @@ then
 	printf "%s%s\n" "$capacity%" "$battery_emoji"
 elif [ "$capacity" -le "$crit_threshold" ]
 then
+	if [[ $capacity -lt 4 ]]
+	then
+		dunstify -u critical -r 30004 -i $crit_icon "Critical battery"
+	fi
 	printf "%s%s%s\n\n#ff0000\n" "$capacity%" "$battery_emoji" "$status_low"
 else
 	printf "%s%s\n\n#ff0000\n" "$capacity%" "$battery_emoji"
