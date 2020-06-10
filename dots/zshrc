@@ -152,7 +152,9 @@ alias ffplay="ffplay -hide_banner"
 alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
 alias seam="sudo mount -U 7b4ac17c-102b-4bbb-8f6c-b15b0c46a014 /mnt/seagate"
+alias seacm="sudo mount -U b9489d7f-ad22-3eff-b11f-0015c086226b /mnt/seagate-chloe"
 alias seaum="sudo umount /mnt/seagate"
+alias seacum="sudo umount /mnt/seagate-chloe"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
 alias condasource="source /opt/miniconda3/etc/profile.d/conda.sh"
@@ -185,10 +187,10 @@ function mvep() {
 function cpep() {
 	cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }
-function mvp() {
+function mvsync() {
 	rsync -aP --remove-source-files $1 $2 && rm -r $1
 }
-function cpp() {
+function cpsync() {
 	rsync -aP $1 $2
 }
 function findpdfgrep() {
