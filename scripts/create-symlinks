@@ -8,7 +8,7 @@ rm $TMP/*
 ZSH_CUSTOM="$ZSH/custom"
 
 # Xorg
-ln -s $DOTS_PATH/xorg.conf.d/90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
+ln -s $DOTS_PATH/xorg-90-touchpad.conf /etc/X11/xorg.conf.d/90-touchpad.conf
 
 # Executables
 mv /usr/bin/dmenu $TMP
