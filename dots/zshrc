@@ -70,7 +70,7 @@ alias du="du -h"
 alias tree='tree -a -I ".git|venv|.venv|*.class"'
 alias tp="tree -C | less"
 ### Process management
-alias sudo=$'nocorrect sudo\t'
+alias sudo="nocorrect sudo "
 alias c="clear"
 alias j="jobs"
 alias h="history"
