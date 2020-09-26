@@ -1,46 +1,114 @@
+let mapleader=" "
+
 " Initialize Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'djoshea/vim-autoread'
+	Plugin 'VundleVim/Vundle.vim'
+	Plugin 'ycm-core/YouCompleteMe'
+	Plugin 'djoshea/vim-autoread'
+	Plugin 'tpope/vim-commentary'
+	Plugin 'christoomey/vim-system-copy'
+	Plugin 'kana/vim-textobj-user'
+	Plugin 'kana/vim-textobj-entire'
+	Plugin 'kana/vim-textobj-line'
+	Plugin 'kana/vim-textobj-underscore'
+	Plugin 'michaeljsmith/vim-indent-object'
+	Plugin 'JulesssG/targets.vim'
+	Plugin 'yegappan/taglist'
+	Plugin 'machakann/vim-sandwich'
+	Plugin 'lambdalisue/fern.vim'
+	Plugin 'easymotion/vim-easymotion'
+	Plugin 'tpope/vim-repeat'
+	" Plugin 'unblevable/quick-scope'
+	" Plugin 'christoomey/vim-titlecase'
+	" Plugin 'rhysd/git-messenger.vim'
 call vundle#end()
+" Plugin mappings and options
+	"" Commentary
+	nmap cm gc
+
+	"" Titlecase
+	" let g:titlecase_map_keys = 0
+	" nmap <leader>gt <Plug>Titlecase
+	" vmap <leader>gt <Plug>Titlecase
+	" nmap <leader>gT <Plug>TitlecaseLine
+
+	"" quickscope
+	" let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+	" let g:ycm_autoclose_preview_window_after_completion=1
+
+	"" Sandwich
+	let g:sandwich_no_default_key_mappings = 1
+	let g:operator_sandwich_no_default_key_mappings = 1
+	let g:textobj_sandwich_no_default_key_mappings = 1
+	silent! nmap <unique> Sa <Plug>(operator-sandwich-add)
+	silent! xmap <unique> Sa <Plug>(operator-sandwich-add)
+	silent! omap <unique> Sa <Plug>(operator-sandwich-g@)
+	silent! nmap <unique><silent> Sd <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+	silent! nmap <unique><silent> Sr <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-query-a)
+	silent! nmap <unique><silent> Sdb <Plug>(operator-sandwich-delete)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+	silent! nmap <unique><silent> Srb <Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)
+
+	"" Fern
+	noremap <leader>e :Fern . -drawer -toggle<CR>
+	function! s:init_fern() abort
+		nmap <buffer> H <Plug>(fern-action-open:split)
+		nmap <buffer> V <Plug>(fern-action-open:vsplit)
+		nmap <buffer> F <Plug>(fern-action-new-file)
+		nmap <buffer> C <Plug>(fern-action-new-copy)
+		nmap <buffer> D <Plug>(fern-action-new-dir)
+		nmap <buffer> S <Plug>(fern-action-hidden-toggle)
+	endfunction
+	augroup fern-custom
+		autocmd! *
+		autocmd FileType fern call s:init_fern()
+	augroup END
+
+	"" Easymotion
+	let g:EasyMotion_smartcase = 1
+	let g:EasyMotion_move_highlight = 0
+	nmap <leader>f <Plug>(easymotion-f)
+	nmap <leader>F <Plug>(easymotion-F)
+	nmap <leader>g <Plug>(easymotion-f2)
+	nmap <leader>G <Plug>(easymotion-F2)
+	nmap <leader>; <Plug>(easymotion-next)
+	nmap <leader>, <Plug>(easymotion-prev)
+
 
 " Basics behavior and appearance
-let mapleader=" "
-
-set nocompatible
-set showcmd
-set mouse=a
-set backspace=indent,eol,start
-set number relativenumber
-set encoding=utf-8
-set splitbelow splitright
-syntax on
-filetype plugin indent on
+	set nocompatible
+	set showcmd
+	set mouse=a
+	set backspace=indent,eol,start
+	set number relativenumber
+	set encoding=utf-8
+	set splitbelow splitright
+	set fillchars+=vert:.
+	highlight VertSplit cterm=NONE
+	syntax on
+	filetype plugin indent on
 
 " Theme
-set bg=light
-hi clear SpellBad
-hi SpellBad cterm=underline ctermfg=Red
+	set bg=light
+	hi clear SpellBad
+	hi SpellBad cterm=underline ctermfg=Red
 
 " Auto-completion
-set wildmode=longest,list,full
-set completeopt=longest,menuone
-let g:ycm_autoclose_preview_window_after_completion=1
+	set wildmode=longest,list,full
+	set completeopt=longest,menuone
 
 " Handle tabs
-set shiftwidth=2
-set tabstop=2
-set autoindent
-set smartindent
-set infercase
+	set shiftwidth=2
+	set tabstop=2
+	set autoindent
+	set smartindent
+	set infercase
 
 " Searching
-set incsearch
-set ignorecase
-set smartcase
-"set hlsearch
+	set incsearch
+	set ignorecase
+	set smartcase
+	"set hlsearch
 
 " Set to auto read when a file is changed from the outside
 	set autoread
@@ -55,33 +123,32 @@ set smartcase
 	map					Q <Nop>
 	nnoremap 		<C-s> <Nop>
 	noremap			0 ^
-	inoremap		<Home> <Esc>I
-	noremap			<leader>s :setlocal spell!<CR>
-	nnoremap		<leader>c :let save_cursor = getpos('.')<CR>I#<Esc>:call setpos('.', save_cursor)<CR>l
-	nnoremap		<leader>d :let save_cursor = getpos('.')<CR>^x:call setpos('.', save_cursor)<CR>h
+	noremap 		^ 0
+	noremap			<leader>ac :setlocal spell!<CR>
 	nnoremap		<leader>h :nohlsearch<CR>
 	nnoremap		<leader>i :b#<CR>
+	nnoremap		<leader>ra :call RangerExplorer()<CR>
+	"" Latex
 	nnoremap		<leader>ls :w<CR>:!texsilent %<CR>
 	nnoremap		<leader>op :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
-	nnoremap		<leader>ee :Explore<CR>
-	nnoremap		<leader>et :Texplore<CR>
-	nnoremap		<leader>es :Sexplore<CR>
-	nnoremap		<leader>ev :Vexplore<CR>
-	nnoremap		<leader>r :call RangerExplorer()<CR>
+	"" Incrementing, check https://www.reddit.com/r/vim/comments/gk53u1/just_discovered_ca_and_cx/ for more
+	nnoremap + <C-a>
+
 
 	" Copy and Pasting
 	nnoremap		<leader>p "0p
 	nnoremap		<leader>P "0P
+	nnoremap		<leader><leader>p "+p
+	nnoremap		<leader><leader>P "+P
 	nnoremap		Y y$
-	vnoremap		<C-c> "*y :let @+=@*<CR>
-	vnoremap 		<C-x> "*d :let @+=@*<CR>
-	nnoremap 		<C-p> "+P
-	inoremap 		<C-p> <Esc>"+pa
-	nnoremap		<C-a> :%y *<CR>:let @+=@*<CR>
+	vnoremap		<C-c> "+y :let @*=@+<CR>
+	vnoremap 		<C-x> "+d :let @*=@+<CR>
+
 
 	" Normal mode direct action
 	nnoremap		 o<Esc>
 	nnoremap		<leader> O<Esc>
+
 
 	" Insert mode direct action
 	inoremap		<C-h> <C-o>b
@@ -98,6 +165,7 @@ set smartcase
 	nnoremap <C-j> <C-w>j
 	nnoremap <C-k> <C-w>k
 	nnoremap <C-l> <C-w>l
+
 
 	" Completion
 	inoremap <C-Space> <C-n>
@@ -143,27 +211,38 @@ set smartcase
 	autocmd BufWinEnter *.* silent loadview
 	set viewoptions-=options	" Avoid directory change because of loadview
 
-function RangerExplorer()
-    exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-    if filereadable('/tmp/vim_ranger_current_file')
-        exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-        call system('rm /tmp/vim_ranger_current_file')
-    endif
-    redraw!
-endfun
+	function RangerExplorer()
+			exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
+			if filereadable('/tmp/vim_ranger_current_file')
+					exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
+					call system('rm /tmp/vim_ranger_current_file')
+			endif
+			redraw!
+	endfun
 
 " Some funky status bar code its seems
 " https://stackoverflow.com/questions/9065941/how-can-i-change-vim-status-line-colour
-set laststatus=2            " set the bottom status bar
-hi statusline guibg=White ctermfg=Gray guifg=DarkSlateGray ctermbg=Black
-set statusline=%f                           " file name
-set statusline+=%{getbufvar(bufnr('%'),'&mod')?'+':''} "modified flag
-set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-set statusline+=%{&ff}] "file format
-set statusline+=%y      "filetype
-set statusline+=%h      "help file flag
-set statusline+=%r      "read only flag
-set statusline+=\ %=                        " align left
-set statusline+=%l/%L\ %p%%            " line X of Y [percent of file]
-set statusline+=\ %n                    " Buffer number
-set statusline+=\ [%b,0x%B]\               " ASCII and byte code under cursor
+	set laststatus=2            " set the bottom status bar
+	hi statusline guibg=White ctermfg=Gray guifg=DarkSlateGray ctermbg=Black
+	set statusline=%f                           " file name
+	set statusline+=%{getbufvar(bufnr('%'),'&mod')?'+':''} "modified flag
+	set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
+	set statusline+=%{&ff}] "file format
+	set statusline+=%y      "filetype
+	set statusline+=%h      "help file flag
+	set statusline+=%r      "read only flag
+	set statusline+=\ %=                        " align left
+	set statusline+=%l/%L\ %p%%            " line X of Y [percent of file]
+	set statusline+=\ %n                    " Buffer number
+	set statusline+=\ [%b,0x%B]\               " ASCII and byte code under cursor
+
+" https://vim.fandom.com/wiki/Capitalize_words_in_insert_and_normal_modes_without_moving_the_cursor
+"Place in vimrc file
+"<F7> for word case toggle & <F8> for word capitalization
+"Normal mode mappings:
+	nmap <F7> mzg~iw`z
+	nmap <F8> mzgUiw`z
+
+	"Insert mode mappings:
+	imap <F7> _<Esc>mza<C-Right><Esc>bg~iw`zi<Del>
+	imap <F8> _<Esc>mza<C-Right><Esc>bgUiw`zi<Del>
