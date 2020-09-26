@@ -6,7 +6,7 @@ zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 } # Avoid puttin
 export HYPHEN_INSENSITIVE="true"
 export EDITOR="vim"
 export VISUAL="vim"
-export EPFL_DIR="$HOME/documents/epfl/ma2"
+export EPFL_DIR="$HOME/documents/epfl/ma3"
 export CUSTOM_PATH="$HOME/custom"
 export DOTS_PATH="$CUSTOM_PATH/dots"
 export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
