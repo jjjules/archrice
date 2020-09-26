@@ -41,7 +41,7 @@
 URxvt.background:				#000000
 URxvt.font: 						xft:monospace:size=11
 urxvt*transparent: 			true
-urxvt*shading: 					17
+urxvt*shading: 					25
 
 URxvt.letterSpace: 			0
 URxvt.lineSpace: 				0
