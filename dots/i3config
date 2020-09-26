@@ -145,7 +145,7 @@ bindsym $mod+h 						exec --no-startup-id "$SCRIPTS_PATH/i3focus left"
 bindsym $mod+Shift+h 			move left 50
 
 bindsym $mod+j 						exec --no-startup-id "$SCRIPTS_PATH/i3focus down"
-bindsym $mod+Shift+j 			move absolute position 0 px
+bindsym $mod+Shift+j 			move down 60
 
 bindsym $mod+k 						exec --no-startup-id "$SCRIPTS_PATH/i3focus up"
 bindsym $mod+Shift+k 			move up 60
@@ -162,11 +162,11 @@ bindsym $mod+x						exec --no-startup-id "urxvt -e htop"
 bindsym $mod+c						move position center
 bindsym $mod++Shift+c			exec --no-startup-id "xdotool mousemove --sync 850 950 click 1 mousemove restore"
 
-#bindsym $mod+v
+bindsym $mod+v						exec --no-startup-id pavucontrol
 #bindsym $mod+Shift+v
 
 bindsym $mod+b 						exec --no-startup-id firefox
-bindsym $mod+Shift+b			exec --no-startup-id "echo -e 'boom\nhead\n' | dmenu -p 'Device: '| $SCRIPTS_PATH/blc"
+bindsym $mod+Shift+b			exec --no-startup-id blueberry
 
 bindsym $mod+n						exec --no-startup-id mailspring
 #bindsym $mod+Shift+n
