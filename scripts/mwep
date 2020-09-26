@@ -1,4 +1,13 @@
 #!/bin/sh
+# Script allowing to efficiently move
+# downloaded files to epfl directory
+#
+# Default behavior is to prompt for a single file
+# Available options (one at a time):
+# -l, --last: move the most recent file
+# -r, --rename: if only one file is moved, rename it
+# -m: prompt for multiple files
+
 source $HOME/.profile
 
 # File definition
