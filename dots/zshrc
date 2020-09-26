@@ -18,6 +18,10 @@ export IPYTHONDIR="$HOME/.config/ipython"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
 
 # Key Bindings
+# bindkey -v
+# bindkey "^?" backward-delete-char
+# bindkey "^W" backward-kill-word
+# bindkey "^U" backward-kill-line
 bindkey '^@'	autosuggest-execute
 bindkey '^Z'	undo
 bindkey ',' delete-char
@@ -56,6 +60,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias zw="cd ~/downloads"
 alias zm="cd ~/videos/movies"
+alias zmu="cd ~/musics/"
 alias zi="cd ~/images"
 alias d="dirs -v"
 alias cp="nocorrect cp"
@@ -69,6 +74,7 @@ alias rm="rm -I"
 alias du="du -h"
 alias tree='tree -a -I ".git|venv|.venv|*.class"'
 alias tp="tree -C | less"
+alias mv="mv -i"
 ### Process management
 alias sudo="nocorrect sudo "
 alias c="clear"
@@ -80,6 +86,8 @@ alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias psg="ps aux | grep $@"
 alias ka="killall"
+alias km="killall mailspring"
+alias kz="killall zoom"
 alias k="kill"
 alias kb="kill $(ps aux | grep '/bin/bash.*bch$' | awk '{print $2}')"
 ## Wifi
@@ -101,12 +109,9 @@ alias gll="git log --oneline --graph --format=format:'%C(bold blue)%h%C(reset) -
 ## EPFL
 ### cds
 alias ze="cd $EPFL_DIR"
-alias zes="cd ${EPFL_DIR}/sds"
-alias zel="cd $EPFL_DIR/lds"
-alias zedl="cd $EPFL_DIR/dl"
-alias zedv="cd $EPFL_DIR/dv"
-alias zedi="cd $EPFL_DIR/dis"
-alias zeo="cd $EPFL_DIR/oml"
+alias zep="cd $EPFL_DIR/project"
+alias zef="cd $EPFL_DIR/foundations"
+alias zem="cd $EPFL_DIR/md"
 ### Misc
 alias todo="v ${EPFL_DIR}/todo.md"
 alias programs="v $EPFL_DIR/programs"
@@ -157,6 +162,7 @@ alias seaum="sudo umount /mnt/seagate"
 alias seacum="sudo umount /mnt/seagate-chloe"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
+alias ytdla="youtube-dl -x --audio-format mp3 -o '%(title)s.%(ext)s'"
 alias condasource="source /opt/miniconda3/etc/profile.d/conda.sh"
 
 # Functions
@@ -227,6 +233,27 @@ function gsopt(){
 function playm() {
 	ffplay "$(find ~/seagate/musics -type f | fzf)" &> /dev/null
 }
+
+# Change cursor shape for different vi modes. (Luke's)
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 # Save last directory
 precmd() { pwd > /tmp/LASTDIRSAVE}
