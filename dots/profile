@@ -15,3 +15,9 @@ export BROWSER='/usr/bin/firefox'
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export NLTK_DATA="$HOME/documents/python-package-data/nltk_data"
 export SCIKIT_LEARN_DATA="$HOME/documents/python-package-data/scikit_learn_data"
+
+export CM_SELECTIONS="clipboard"
+export CM_DEBUG=0
+export CM_OUTPUT_CLIP=0
+export CM_MAX_CLIPS=100
+export CM_HISTLENGTH=10
