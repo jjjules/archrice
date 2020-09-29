@@ -1,7 +1,7 @@
 # Basic definitions and appearance ##
 set $mod Mod4
 
-gaps inner 30
+gaps inner 20
 gaps outer 0
 for_window [class="^.*"] border pixel 2
 font pango:mono 12
@@ -139,7 +139,7 @@ bindsym $mod+f 						fullscreen toggle
 bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
 
 #bindsym $mode+g
-bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps"
+bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+h 						exec --no-startup-id "$SCRIPTS_PATH/i3focus left"
 bindsym $mod+Shift+h 			move left 50
