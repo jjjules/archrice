@@ -1,11 +1,6 @@
 #!/usr/bin/bash
-#case $BLOCK_BUTTON in
-#	1) kill $(ps aux | grep $HOME/.config/i3blocks/bin/battery | grep -v 'grep' | tr -s " " | cut -d' ' -f2) ;;
-#esac
 
-# low battery in %
-low_threshold=15
-crit_threshold=10
+crit_threshold=4
 
 # Getting the actual percentage of each battery
 capacity0=$(cat /sys/class/power_supply/BAT0/capacity)
@@ -32,7 +27,7 @@ then
 	printf "%s%s\n" "$capacity%" "$battery_emoji"
 elif [ "$capacity" -le "$crit_threshold" ]
 then
-	if [[ $capacity -lt 4 ]]
+	if [[ $capacity -lt $crit_threshold ]]
 	then
 		dunstify -u critical -r 30004 -i $crit_icon "Critical battery"
 	fi
