@@ -188,6 +188,12 @@ function timer(){
 function weather(){
 	curl wttr.in/$1
 }
+function twoshot() {
+	oneshot $1
+	if [ $? -eq 0 ]; then
+		oneshot $1
+	fi
+}
 function mvep() {
 	mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
 }
