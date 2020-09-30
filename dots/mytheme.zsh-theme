@@ -26,7 +26,7 @@ function git_prompt() {
 my_prompt=''
 my_prompt+="$loc_hostname"
 my_prompt+="$loc_pwd"
-PROMPT='${my_prompt}$(git_prompt)${loc_jobs} %(!.#.%%) %{$reset_color%}'
+PROMPT='${my_prompt}$(git_prompt)${loc_jobs} %(?..%{$fg[red]%})%% %{$reset_color%}'
 
 function get_name_git() {
 	if [[ "$(git rev-parse --is-inside-work-tree 2>/dev/null)" = "true" ]]
