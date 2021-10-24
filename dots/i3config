@@ -166,7 +166,7 @@ bindsym $mod+l						exec --no-startup-id "$SCRIPTS_PATH/i3focus right"
 bindsym $mod++Shift+l			move right 50
 
 bindsym $mod+y						exec 	--no-startup-id signal-desktop
-bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunstify 'Notifications activated'"
+bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunstify -r 30356 'Notifications activated'"
 
 bindsym $mod+x						exec --no-startup-id "urxvt -e htop"
 #bindsym $mod++Shift+x

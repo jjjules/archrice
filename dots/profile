@@ -19,6 +19,7 @@ export PYTHON_DATA="$HOME/.local/python-package-data"
 export NLTK_DATA="$PYTHON_DATA_DIR/nltk_data"
 export SCIKIT_LEARN_DATA="$PYTHON_DATA_DIR/scikit_learn_data"
 export CARGO_HOME=".config/cargo/"
+export GOPATH=".local/share/go"
 
 export I3_DEFAULT_GAPS=20
 export CM_SELECTIONS="clipboard"
