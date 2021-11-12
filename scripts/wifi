@@ -31,8 +31,8 @@ elif [ $1 = '-r' -o $1 = '--restart' ]; then
 		if nmcli dev wifi list | grep xiaojules >/dev/null; then
 			echo 'Connection to xiaojules'
 			nmcli -p con up xiaojules && exit 0
-		elif nmcli dev wifi list | grep 'iPhone de Chloé' >/dev/null; then
-			nmcli -p con up 'iPhone de Chloé' && exit 0
+		elif nmcli dev wifi list | grep Khole >/dev/null; then
+			nmcli -p con up Khole && exit 0
 		fi
 		let "i++"
 		sleep 0.05
