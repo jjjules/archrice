@@ -213,7 +213,8 @@ function timer(){
 		sleep 0.1
 	done
 	[[ $2 = 's' ]] && return 0
-	ffplay -nodisp "$HOME/musics/Eagles - Hotel California.mp3" > /dev/null
+	dunstify -u normal -r 30503 "End of timer"
+	ffplay -loglevel error -nodisp -loop 0 "$CUSTOM_PATH/misc/radio-alert.mp3" > /dev/null
 }
 function weather(){
 	curl wttr.in/$1
