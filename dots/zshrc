@@ -188,6 +188,7 @@ alias condasource="source /opt/miniconda3/etc/profile.d/conda.sh"
 alias pubip="curl ifconfig.me"
 alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
+alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 
 # Functions
 ## Misc
