@@ -18,8 +18,9 @@ export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export PYTHON_DATA="$HOME/.local/python-package-data"
 export NLTK_DATA="$PYTHON_DATA_DIR/nltk_data"
 export SCIKIT_LEARN_DATA="$PYTHON_DATA_DIR/scikit_learn_data"
-export CARGO_HOME=".config/cargo/"
-export GOPATH=".local/share/go"
+export CARGO_HOME="$HOME/.config/cargo/"
+export GOPATH="$HOME/.local/share/go"
+export CONDARC="$HOME/.config/conda/condarc"
 
 export I3_DEFAULT_GAPS=20
 export CM_SELECTIONS="clipboard"

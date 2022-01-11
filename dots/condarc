@@ -1,0 +1,10 @@
+channel_priority: strict
+channels:
+  - conda-forge
+  - defaults
+
+envs_dirs:
+  - /home/jules/.local/share/conda
+pkg_dirs:
+  - /home/jules/.local/share/conda
+env_prompt: '($(basename {default_env})) '
