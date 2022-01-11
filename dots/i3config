@@ -115,7 +115,7 @@ bindsym $mod+e						layout toggle split tabbed
 bindsym $mod+Shift+e			layout tabbed
 
 bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
-#bindsym $mod+Shift+r
+bindsym $mod+Shift+r			exec --no-startup-id i3-input -F "rename workspace to "$(i3-msg -t get_workspaces | jq -r "map(select(.focused))[0].num"):%s"" -P "New name: "
 
 #bindsym $mod+t
 #bindsym $mod+Shift+t
@@ -188,16 +188,16 @@ bindsym $mod+Shift+m			exec --no-startup-id "$SCRIPTS_PATH/mwep ; i3-msg 'worksp
 bindsym $mod+Ctrl+m				exec --no-startup-id "urxvt -e $SCRIPTS_PATH/mwep -m; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 ## Workspace Bindings ##
-bindsym $mod+1		workspace $ws1
-bindsym $mod+2		workspace $ws2
-bindsym $mod+3		workspace $ws3
-bindsym $mod+4		workspace $ws4
-bindsym $mod+5		workspace $ws5
-bindsym $mod+6		workspace $ws6
-bindsym $mod+7		workspace $ws7
-bindsym $mod+8		workspace $ws8
-bindsym $mod+9		workspace $ws9
-bindsym $mod+0		workspace $ws10
+bindsym $mod+1		workspace number 1
+bindsym $mod+2		workspace number 2
+bindsym $mod+3		workspace number 3
+bindsym $mod+4		workspace number 4
+bindsym $mod+5		workspace number 5
+bindsym $mod+6		workspace number 6
+bindsym $mod+7		workspace number 7
+bindsym $mod+8		workspace number 8
+bindsym $mod+9		workspace number 9
+bindsym $mod+0		workspace number 10
 
 bindsym $mod+Shift+1		move container to workspace $ws1
 bindsym $mod+Shift+2		move container to workspace $ws2
