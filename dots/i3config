@@ -115,7 +115,7 @@ bindsym $mod+e						layout toggle split tabbed
 bindsym $mod+Shift+e			layout tabbed
 
 bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
-#bindsym $mod+Shift+r
+bindsym $mod+Shift+r			exec --no-startup-id i3-input -F "rename workspace to "$(i3-msg -t get_workspaces | jq -r "map(select(.focused))[0].num"):%s"" -P "New name: "
 
 #bindsym $mod+t
 #bindsym $mod+Shift+t
