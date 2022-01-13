@@ -1,0 +1,4 @@
+#!/bin/sh
+
+rmdir $HOME/Desktop
+rmdir $HOME/Downloads

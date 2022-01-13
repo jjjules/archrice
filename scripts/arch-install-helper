@@ -15,6 +15,7 @@ source $HOME/custom/dots/profile
 systemctl enable sddm.service
 systemctl enable bluetooth.service
 
+## Install vim plugin manager and paru
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u jules -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 if [ ! -f /usr/bin/paru ];then
 	echo "Installing paru..."
@@ -64,6 +65,9 @@ ln -s $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 ## Dmenu
 [ ! -f /usr/bin/dmenuexec ] && mv /usr/bin/dmenu /usr/bin/dmenuexec
 ln -sf $SCRIPTS_PATH/dmenu /usr/bin/dmenu
+
+## Add cron jobs
+(crontab -l 2>/dev/null; echo "*/5 * * * * $SCRIPTS_PATH/rmdir_maj_home") | crontab -
 
 ## Config files in home
 homenames=('.profile' '.zprofile' '.xprofile' '.zshrc' '.xinitrc' '.Xresources' '.vimrc' '.gitconfig' '.inputrc')
