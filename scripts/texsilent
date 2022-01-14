@@ -16,7 +16,7 @@ trap "cleanup '$nfiles'" EXIT
 
 if [ $# -eq 1 ]
 then
-	engine='latexmk --pdf'
+	engine='xelatex'
 elif [ $# -eq 2 ]
 then
 	engine=$2
