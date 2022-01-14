@@ -1,12 +1,27 @@
-#!/bin/sh
+#!/bin/sh -e
 # Silent compiler for latex file.
 # Provided the name of the latex file (in *.tex format),
 # it will compile it and remove all auxiliary files.
+# Take an optional second parameter specifying the latex engine.
 
-if [ $# -ne 1 ]
+cleanup () {
+	nfiles_before=$1
+	nfiles_after=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
+	ncreatedfiles=$(($nfiles_after-$nfiles))
+
+	ls -trp | grep -Ev '/$|*\.pdf' | tail -n $ncreatedfiles | xargs rm --
+}
+nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
+trap "cleanup '$nfiles'" EXIT
+
+if [ $# -eq 1 ]
 then
-	echo "Only first argument is evaluated"
+	engine='latexmk --pdf'
+elif [ $# -eq 2 ]
+then
+	engine=$2
+else
+	echo 'The maximum number of arguments is 2 (file and engine)'
 fi
-latexmk --pdf "$1"
-base=$(sed 's/\.tex$//' <<< "$1")
-rm "$base".aux "$base".log "$base".fls   "$base".out  "$base".fdb_latexmk 2>/dev/null
+
+$engine "$1"

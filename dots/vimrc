@@ -140,9 +140,9 @@ endif
 	nnoremap		<leader>i :b#<CR>
 	nnoremap		<leader>ra :call RangerExplorer()<CR>
 	"" Latex
-	nnoremap		<leader>ls :w<CR>:!texsilent %<CR>
+	nnoremap		<leader>lc :w<CR>:!texsilent %<CR>
 	nnoremap		<leader>op :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
-	nnoremap		<leader>cp :w<CR>:!pandoc %  -o <C-r>=expand("%:t:r")<CR>.pdf<CR>
+	nnoremap		<leader>mc :w<CR>:!pandoc %  -o <C-r>=expand("%:t:r")<CR>.pdf<CR>
 	"" Incrementing, check https://www.reddit.com/r/vim/comments/gk53u1/just_discovered_ca_and_cx/ for more
 	nnoremap + <C-a>
 

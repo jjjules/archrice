@@ -85,8 +85,8 @@ alias mkd="nocorrect mkdir -pv"
 alias mv="nocorrect mv -i"
 alias ls="ls --color=tty -v --group-directories-first"
 alias la="ls -a"
-alias l='\ls --color=tty -v -alhtr'
-alias ll='\ls --color=tty -v -alht'
+alias l='\ls --color=tty -v -Alhtr'
+alias ll='\ls --color=tty -v -Alht'
 alias rm="rm -I"
 alias du="du -h"
 alias tree='tree -a -I ".git|venv|.venv|*.class"'
