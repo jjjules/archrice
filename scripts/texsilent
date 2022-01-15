@@ -1,27 +1,70 @@
-#!/bin/sh -e
+#!/bin/bash
 # Silent compiler for latex file.
 # Provided the name of the latex file (in *.tex format),
 # it will compile it and remove all auxiliary files.
 # Take an optional second parameter specifying the latex engine.
 
+# Prepare clean on EXIT
 cleanup () {
 	nfiles_before=$1
 	nfiles_after=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
 	ncreatedfiles=$(($nfiles_after-$nfiles))
 
-	ls -trp | grep -Ev '/$|*\.pdf' | tail -n $ncreatedfiles | xargs rm --
+	[ $ncreatedfiles -gt 0 ] && ls -trp | grep -Ev '/$|*\.pdf' | tail -n $ncreatedfiles | xargs rm --
 }
 nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
 trap "cleanup '$nfiles'" EXIT
 
-if [ $# -eq 1 ]
+# Declare available engines and handle optional arguments
+ENGINES=(xelatex 'latexmk --pdf' pdflatex luatex)
+out_redirection='&>/dev/null'
+interact_opt='-interaction=nonstopmode'
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -e|--engine)
+      engine="$2"
+			[ $engine = 'latexmk' ] && $engine+=' --pdf'
+      shift
+      shift
+      ;;
+    -v|--verbose)
+      unset out_redirection
+      shift
+      ;;
+    -i|--interact)
+      unset interact_opt
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+			! [ -z $texfile ] && echo 'More than one positional argument passed.' && exit 1
+      texfile="$1"
+      shift
+      ;;
+  esac
+done
+if [ -z $engine ]
 then
-	engine='xelatex'
-elif [ $# -eq 2 ]
-then
-	engine=$2
-else
-	echo 'The maximum number of arguments is 2 (file and engine)'
+	engine=${ENGINES[0]}
+	ENGINES=("${ENGINES[@]:1}")
 fi
 
+# Compile
+echo "Try to compile with $engine"
+eval $engine $interact_opt "$texfile" $out_redirection
+[ $? -eq 0 ] && echo 'Done' && exit 0
+
+while [ ${#ENGINES[@]} -ne 0 ]
+do
+	echo "Try to compile with ${ENGINES[0]}"
+	eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection
+[ $? -eq 0 ] && echo 'Done' && exit 0
+	ENGINES=("${ENGINES[@]:1}")
+done
+
+# If none successfull, show error
+echo "\nShow error when compiling with $engine:"
 $engine "$1"
