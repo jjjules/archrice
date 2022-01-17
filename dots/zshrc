@@ -168,7 +168,7 @@ alias seacum="sudo umount /mnt/seagate-chloe"
 alias keyum="sudo umount /mnt/usbkey"
 alias keyF32um="sudo umount /mnt/usbkeyF32"
 ## Others
-alias v="vim"
+alias vr="vim -c 'History'"
 alias sv="sudo vim"
 alias gvim="vim"
 alias ra="ranger"

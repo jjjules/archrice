@@ -27,9 +27,11 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 	call vundle#end()
 	" Plugin mappings and options
 		"" Fzf
-		nnoremap <leader>zf :Files<CR>
-		nnoremap <leader>zh :History<CR>
-		nnoremap <leader>zhc :History/<CR>
+		nnoremap <leader>zf		:Files<CR>
+		nnoremap <leader>zm		:Maps<CR>
+		nnoremap <leader>zhf	:History<CR>
+		nnoremap <leader>zhs	:History/<CR>
+		nnoremap <leader>zhc	:History:<CR>
 
 		"" Commentary
 		nmap cm gc
@@ -84,6 +86,7 @@ endif
 
 " Basics behavior and appearance
 	set nocompatible
+	set viminfo=<500,'100,:100,/100,h,n~/.vim/.viminfo
 	set showcmd
 	set mouse=a
 	set backspace=indent,eol,start
