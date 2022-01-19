@@ -45,6 +45,7 @@ bindkey '^L'	vi-forward-word
 bindkey 'Oc'	vi-forward-word
 bindkey 'e'	edit-command-line
 bindkey 'm' run-help
+bindkey -s '^[,' '$(ls -tp | grep -v '/$' | tail -n 1)'
 ## Replace arrows by vim bindings in menu selection
 zstyle ':completion:*' menu-select
 zmodload zsh/complist
@@ -87,6 +88,7 @@ alias ls="ls --color=tty -v --group-directories-first"
 alias la="ls -a"
 alias l='\ls --color=tty -v -Alhtr'
 alias ll='\ls --color=tty -v -Alht'
+alias laf="ls -tp | grep -v '/$' | tail -n 1"
 alias rm="rm -I"
 alias du="du -h"
 alias tree='tree -a -I ".git|venv|.venv|*.class"'
