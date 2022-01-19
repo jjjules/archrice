@@ -27,11 +27,10 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 	call vundle#end()
 	" Plugin mappings and options
 		"" Fzf
-		nnoremap <leader>zf		:Files<CR>
-		nnoremap <leader>zm		:Maps<CR>
+		nnoremap <leader>f		:Files<CR>
 		nnoremap <leader>zhf	:History<CR>
-		nnoremap <leader>zhs	:History/<CR>
-		nnoremap <leader>zhc	:History:<CR>
+		nnoremap <leader>/		:History/<CR>
+		nnoremap <leader>:		:History:<CR>
 
 		"" Commentary
 		nmap cm gc
@@ -141,17 +140,16 @@ endif
 	noremap			<leader>s :setlocal spell!<CR>
 	nnoremap		<leader>h :set invhlsearch<CR>
 	nnoremap		<leader>i :b#<CR>
-	nnoremap		<leader>ra :call RangerExplorer()<CR>
+	nnoremap		<leader>r	:call RangerExplorer()<CR>
 	"" Latex
-	nnoremap		<leader>lc :w<CR>:!texsilent %<CR>
+	nnoremap		<leader>cc	:w<CR>:!texsilent %<CR>
 	function LatexBlock ()
 		let name = input("Block name: ")
-		exe "norm! I\\begin{" . name . "} \n\\end{" . name . "}\<Esc>O"
-		startinsert
+		exe "norm! I\\begin{" . name . "}\n\\end{" . name . "}\<Esc>=k"
 	endfunction
-	inoremap		<C-b>	<Esc>:call LatexBlock()<CR>
-	nnoremap		<leader>op :!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
-	nnoremap		<leader>mc :w<CR>:!pandoc %  -o <C-r>=expand("%:t:r")<CR>.pdf<CR>
+	inoremap		<C-b>				<Esc>:call LatexBlock()<CR>
+	nnoremap		<leader>o 	:!nohup xdg-open <C-r>=expand("%:t:r")<CR>.pdf &>/dev/null & disown<CR>
+	nnoremap		<leader>cm	:w<CR>:!pandoc %  -o <C-r>=expand("%:t:r")<CR>.pdf<CR>
 	"" Incrementing, check https://www.reddit.com/r/vim/comments/gk53u1/just_discovered_ca_and_cx/ for more
 	nnoremap + <C-a>
 
@@ -159,8 +157,6 @@ endif
 	" Copy and Pasting
 	nnoremap		<leader>p "0p
 	nnoremap		<leader>P "0P
-	nnoremap		<leader><leader>p "+p
-	nnoremap		<leader><leader>P "+P
 	nnoremap		Y y$
 	vnoremap 		<C-x> "+d :let @*=@+<CR>
 
