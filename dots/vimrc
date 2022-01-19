@@ -1,4 +1,4 @@
-let mapleader=" "
+	let mapleader=" "
 
 if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vim"'))
 	" Initialize Vundle
@@ -28,7 +28,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 	" Plugin mappings and options
 		"" Fzf
 		nnoremap <leader>f		:Files<CR>
-		nnoremap <leader>zhf	:History<CR>
+		nnoremap <leader>h		:History<CR>
 		nnoremap <leader>/		:History/<CR>
 		nnoremap <leader>:		:History:<CR>
 
@@ -75,10 +75,10 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		"" Easymotion
 		let g:EasyMotion_smartcase = 1
 		let g:EasyMotion_move_highlight = 0
-		nmap <leader>f <Plug>(easymotion-f)
-		nmap <leader>F <Plug>(easymotion-F)
-		nmap <leader>g <Plug>(easymotion-f2)
-		nmap <leader>G <Plug>(easymotion-F2)
+		nmap <leader>s <Plug>(easymotion-f)
+		nmap <leader>S <Plug>(easymotion-F)
+		nmap <leader>d <Plug>(easymotion-f2)
+		nmap <leader>D <Plug>(easymotion-F2)
 		nmap <leader>; <Plug>(easymotion-next)
 		nmap <leader>, <Plug>(easymotion-prev)
 endif
@@ -137,8 +137,7 @@ endif
 	nnoremap		<leader>0 ^
 	nnoremap		n	nzzzv
 	nnoremap		N	Nzzzv
-	noremap			<leader>s :setlocal spell!<CR>
-	nnoremap		<leader>h :set invhlsearch<CR>
+	noremap			<leader>a :setlocal spell!<CR>
 	nnoremap		<leader>i :b#<CR>
 	nnoremap		<leader>r	:call RangerExplorer()<CR>
 	"" Latex

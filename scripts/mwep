@@ -50,22 +50,35 @@ file=$(sed "s,^,$prefix_file/," <<< "$file")
 
 # Destination definition
 prefix_dir=${EPFL_DIR}
-dir="$(du -d 4 ${prefix_dir} |\
-	cut --complement -f1 |\
-	sed -e "s,${prefix_dir},," |\
-	grep -Fv . |\
-	tac |\
-	dmenu -p "move '$file_short' to : "|\
-	sed -e "s, ,\ ,g")"
+dir=$(find $prefix_dir -maxdepth 4 -type d |\
+	sed -e "s,$prefix_dir/,," -e "s,^$prefix_dir,/," |\
+	grep -Fv .|\dmenu -p "move $file_short to: " |\
+	sed -e "s, ,\ ,g")
 if [ -z "$dir" ]
 then
 	exit
 fi
-dir="${prefix_dir}${dir}"
+dir="${prefix_dir}/${dir}"
 
 if [ $multiple_option -eq 1 ]
 then
-	echo "$file" | xargs -n1 -I files mv files "$dir"
+	echo "$file" | xargs -n1 -I file mv file "$dir"
 else
-	mv "$file" "$dir"
+	new_name=$(basename $file)
+	while [ -f "$dir/$new_name" ]
+	do
+		prompt 'File exists, overwrite?' "mv $file $dir"
+		if [ $? -ne 0 ]
+		then
+			new_name=$(i3-input -P "Rename file $file_short: " |\
+				grep output | cut --complement -d' ' -f1-2)
+			if [ -z "$new_name" ]
+			then
+				exit 0
+			fi
+		fi
+	done
+	dunstify "mv $file $dir/$new_name"
+	mv "$file" "$dir/$new_name"
+	[ $? -ne 0 ] && dunstify -u normal -r 876667 "File could not been moved"
 fi
