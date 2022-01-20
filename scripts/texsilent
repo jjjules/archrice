@@ -16,7 +16,7 @@ nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
 trap "cleanup '$nfiles'" EXIT
 
 # Declare available engines and handle optional arguments
-ENGINES=(xelatex 'latexmk --pdf' pdflatex luatex)
+ENGINES=('latexmk --pdf' xelatex pdflatex luatex)
 out_redirection='&>/dev/null'
 interact_opt='-interaction=nonstopmode'
 while [[ $# -gt 0 ]]; do
