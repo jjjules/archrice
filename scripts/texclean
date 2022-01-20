@@ -1,0 +1,50 @@
+#!/bin/zsh
+
+prompt=0
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -y|--yes)
+			prompt=1
+      shift
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+			! [ -z $name ] && echo 'More than one positional argument passed.' && exit 1
+      name="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z $name ]
+then
+	if [ "$(ls | grep '\.tex$' | wc -l)" -eq 1 ]
+	then
+		name="$(ls | grep '\.tex$')"
+	else
+		echo 'You need to provide an .tex file.'
+		exit 1
+	fi
+fi
+
+if [[ "$name" =~ '.*\.tex$' ]]
+then
+	name=${name%.*}
+fi
+
+setopt extended_glob
+files=$(ls | grep "^$name\." | egrep -v '\.pdf|\.tex' | tr '\n' ' ' | sed 's/ $//')
+if [ $prompt -ne 1 ]
+then
+	vared -p "Delete $files? " -c reply
+	if ! [[ $reply =~ "^[yY](es)?$" ]]
+	then
+		exit 0
+	fi
+fi
+[ -z $files ] && exit 0
+xargs rm <<<$files
+unsetopt extended_glob

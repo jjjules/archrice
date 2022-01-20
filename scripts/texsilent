@@ -53,12 +53,14 @@ then
 fi
 
 # Compile
+texclean -y $texfile
 echo "Try to compile with $engine"
 eval $engine $interact_opt "$texfile" $out_redirection
 [ $? -eq 0 ] && echo 'Done' && exit 0
 
 while [ ${#ENGINES[@]} -ne 0 ]
 do
+	texclean -y $texfile
 	echo "Try to compile with ${ENGINES[0]}"
 	eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection
 [ $? -eq 0 ] && echo 'Done' && exit 0
@@ -66,5 +68,6 @@ do
 done
 
 # If none successfull, show error
+texclean -y $texfile
 echo "\nShow error when compiling with $engine:"
 $engine "$1"
