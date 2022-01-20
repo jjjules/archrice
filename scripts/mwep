@@ -78,7 +78,6 @@ else
 			fi
 		fi
 	done
-	dunstify "mv $file $dir/$new_name"
 	mv "$file" "$dir/$new_name"
 	[ $? -ne 0 ] && dunstify -u normal -r 876667 "File could not been moved"
 fi
