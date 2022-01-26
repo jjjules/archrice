@@ -1,4 +1,4 @@
 #!/bin/sh
 
-rmdir $HOME/Desktop
-rmdir $HOME/Downloads
+rmdir /home/jules/Desktop
+rmdir /home/jules/Downloads
