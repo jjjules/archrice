@@ -29,7 +29,7 @@ timedatectl set-ntp true
 3. Others: ...
 
 # Install
-pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware sudo git zsh
+pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware intel-ucode sudo git zsh
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-root /mnt
 
