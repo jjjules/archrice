@@ -70,8 +70,8 @@ ln -sf $SCRIPTS_PATH/dmenu /usr/bin/dmenu
 (crontab -l 2>/dev/null; echo "*/5 * * * * $SCRIPTS_PATH/rmdir_maj_home") | crontab -
 
 ## Config files in home
-homenames=('.profile' '.zprofile' '.xprofile' '.zshrc' '.xinitrc' '.Xresources' '.vimrc' '.gitconfig' '.inputrc')
-dotsnames=('profile' 'zprofile' 'xprofile' 'zshrc' 'xinitrc' 'xresources' 'vimrc' 'gitconfig' 'inputrc')
+homenames=('.profile' '.zprofile' '.xprofile' '.zshrc' '.xinitrc' '.Xresources' '.vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc')
+dotsnames=('profile'  'zprofile'  'xprofile'  'zshrc'  'xinitrc'  'xresources'  'vimrc'  'vim-ftplugin'  'gitconfig'  'inputrc')
 for i in {1..${#homenames[@]}}; do
 	mv $HOME/$homenames[$i] $TMP 2> /dev/null
 	sudo -u jules -g wheel ln -s $DOTS_PATH/$dotsnames[$i] $HOME/$homenames[$i]
