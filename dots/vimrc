@@ -7,7 +7,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		Plugin 'VundleVim/Vundle.vim'
 		Plugin 'ycm-core/YouCompleteMe'
 		Plugin 'junegunn/fzf.vim'
-		Plugin 'djoshea/vim-autoread'
+		" Plugin 'djoshea/vim-autoread'
 		Plugin 'tpope/vim-commentary'
 		Plugin 'christoomey/vim-system-copy'
 		Plugin 'kana/vim-textobj-user'
@@ -21,6 +21,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		Plugin 'lambdalisue/fern.vim'
 		Plugin 'easymotion/vim-easymotion'
 		Plugin 'tpope/vim-repeat'
+		" Plugin 'Yggdroot/indentLine'
 		" Plugin 'unblevable/quick-scope'
 		" Plugin 'christoomey/vim-titlecase'
 		" Plugin 'rhysd/git-messenger.vim'
@@ -81,6 +82,9 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		nmap <leader>D <Plug>(easymotion-F2)
 		nmap <leader>; <Plug>(easymotion-next)
 		nmap <leader>, <Plug>(easymotion-prev)
+
+		"" IndentLine
+		" let g:indentLine_setColors = 0
 endif
 
 " Basics behavior and appearance
@@ -101,6 +105,7 @@ endif
 	set bg=light
 	hi clear SpellBad
 	hi SpellBad cterm=underline ctermfg=Red
+	hi SpecialKey ctermfg=8 guifg=gray
 
 " Auto-completion
 	set wildmode=longest,list,full
@@ -207,7 +212,7 @@ endif
     call setreg('/', old_query)
 	endfun
 
-	autocmd FileType markdown,rmd let b:noStripWhitespace=1
+	autocmd FileType markdown,rmd,vim let b:noStripWhitespace=1
 	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
 	autocmd BufWritePre * :%s,^\s\+$,,e
 
