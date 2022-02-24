@@ -201,8 +201,11 @@ endif
 	autocmd CmdwinEnter * nnoremap <CR> <CR>
 	autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
-
-
+" When opening a file, put cursor at last position it was in it
+autocmd BufReadPost *
+	\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+	\ |   exe "normal! g`\""
+	\ | endif
 
 " Automatically deletes trailing white spaces on save
 	fun! DeleteTrailinfWhiteSpaces()
