@@ -28,8 +28,8 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 	call vundle#end()
 	" Plugin mappings and options
 		"" Fzf
-		nnoremap <leader>f		:Files<CR>
-		nnoremap <leader>h		:History<CR>
+		nnoremap <leader>f		:w<CR>:Files<CR>
+		nnoremap <leader>h		:w<CR>:History<CR>
 		nnoremap <leader>/		:History/<CR>
 		nnoremap <leader>:		:History:<CR>
 
@@ -89,13 +89,15 @@ endif
 
 " Basics behavior and appearance
 	set nocompatible
-	set viminfo=<500,'100,:100,/100,h,n~/.vim/.viminfo
+	set viminfo=<500,'100,:100,/100,h,n~/.vim/viminfo
 	set showcmd
 	set mouse=a
 	set backspace=indent,eol,start
 	set number relativenumber
 	set encoding=utf-8
 	set splitbelow splitright
+	set undofile
+	set undodir=~/.vim/undo/
 	set fillchars+=vert:.
 	highlight VertSplit cterm=NONE
 	syntax on
