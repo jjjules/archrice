@@ -88,7 +88,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 endif
 
 " Basics behavior and appearance
-	set nocompatible
+	if &compatible | set nocompatible | endif " Set nocompatible only if not set to avoid side effects
 	set viminfo=<500,'100,:100,/100,h,n~/.vim/viminfo
 	set showcmd
 	set mouse=a
