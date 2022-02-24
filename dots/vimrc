@@ -94,6 +94,7 @@ endif
 	set mouse=a
 	set backspace=indent,eol,start
 	set number relativenumber
+	set textwidth=130
 	set encoding=utf-8
 	set splitbelow splitright
 	set undofile
@@ -144,9 +145,10 @@ endif
 	nnoremap		<leader>0 ^
 	nnoremap		n	nzzzv
 	nnoremap		N	Nzzzv
-	noremap			<leader>a :setlocal spell!<CR>
-	nnoremap		<leader>i :b#<CR>
-	nnoremap		<leader>r	:call RangerExplorer()<CR>
+	nnoremap		<leader>aw	m':g/^/norm gqq<CR>''zz
+	noremap			<leader>ac	:setlocal spell!<CR>
+	nnoremap		<leader>i		:b#<CR>
+	nnoremap		<leader>r		:call RangerExplorer()<CR>
 	"" Latex
 	nnoremap		<leader>cc	:w<CR>:!texsilent %<CR>
 	function LatexBlock ()
