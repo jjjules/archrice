@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash +x
 # Silent compiler for latex file.
 # Provided the name of the latex file (in *.tex format),
 # it will compile it and remove all auxiliary files.
@@ -12,12 +12,10 @@ cleanup () {
 
 	[ $ncreatedfiles -gt 0 ] && ls -trp | grep -Ev '/$|*\.pdf' | tail -n $ncreatedfiles | xargs rm --
 }
-nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
-trap "cleanup '$nfiles'" EXIT
 
 # Declare available engines and handle optional arguments
 ENGINES=('latexmk --pdf' xelatex pdflatex luatex)
-out_redirection='&>/dev/null'
+out_redirection='' #&>/dev/null'
 interact_opt='-interaction=nonstopmode'
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -51,17 +49,35 @@ then
 	engine=${ENGINES[0]}
 	ENGINES=("${ENGINES[@]:1}")
 fi
+if ! grep '\\begin{document}' $texfile
+then
+	for f in $(find ${texfile%/*/*} -type f -name '*.tex')
+	do
+		if grep '\\begin{document}' $f &>/dev/null
+		then
+			texfile="$f"
+			texdir="${f%/*}"
+		fi
+	done
+else
+	texdir='.'
+fi
+cd "$texdir"
+nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
+trap "cleanup '$nfiles'" EXIT
 
 # Compile
 texclean -y $texfile
 echo "Try to compile with $engine"
 eval $engine $interact_opt "$texfile" $out_redirection
+sed -n 's/\\include{\(.*\)}\s*$/\1/p' $texfile | xargs -I {} rm "$texdir"/{}.aux
 [ $? -eq 0 ] && echo 'Done' && exit 0
 
 while [ ${#ENGINES[@]} -ne 0 ]
 do
 	texclean -y $texfile
 	echo "Try to compile with ${ENGINES[0]}"
+	echo "with 'eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection'"
 	eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection
 [ $? -eq 0 ] && echo 'Done' && exit 0
 	ENGINES=("${ENGINES[@]:1}")
