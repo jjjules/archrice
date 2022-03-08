@@ -15,7 +15,7 @@ cleanup () {
 
 # Declare available engines and handle optional arguments
 ENGINES=('latexmk --pdf' xelatex pdflatex luatex)
-out_redirection='' #&>/dev/null'
+out_redirection='&>/dev/null'
 interact_opt='-interaction=nonstopmode'
 while [[ $# -gt 0 ]]; do
   case $1 in
