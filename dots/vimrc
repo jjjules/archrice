@@ -234,8 +234,8 @@ autocmd BufReadPost *
 
 
 " Setup automatic fold
-	autocmd BufWinLeave *.* mkview
-	autocmd BufWinEnter *.* silent loadview
+	autocmd BufWinLeave * mkview
+	autocmd BufWinEnter * silent loadview
 	set viewoptions-=options	" Avoid directory change because of loadview
 
 	function RangerExplorer()
