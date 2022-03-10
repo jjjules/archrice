@@ -49,7 +49,7 @@ then
 	engine=${ENGINES[0]}
 	ENGINES=("${ENGINES[@]:1}")
 fi
-if ! grep '\\begin{document}' $texfile
+if ! grep '\\begin{document}' $texfile &>/dev/null
 then
 	for f in $(find ${texfile%/*/*} -type f -name '*.tex')
 	do
