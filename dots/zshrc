@@ -84,6 +84,7 @@ alias d="dirs -v"
 alias cp="nocorrect cp -i"
 alias mkd="nocorrect mkdir -pv"
 alias mv="nocorrect mv -i"
+alias smv='sudo \mv'
 alias ls="ls --color=tty -v --group-directories-first"
 alias la="ls -a"
 alias l='\ls --color=tty -v -Alhtr'

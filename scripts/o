@@ -2,20 +2,5 @@
 # Script useful to open any file from the terminal so that it
 # is independent of it (can close the terminal).
 
-if [[ "$1" =~ ".*\.R?md" ]]
-then
-	if [[ "$1" =~ "^/.*" ]]
-	then
-		path=$(sed 's,[^/]*$,,' <<< "$1")
-		echo "(nohup pandoc -V geometry:margin=1in --resource-path  $path -f markdown -t pdf "$1" &>/dev/null | zathura - ) &" > ~/flaltmd
-		echo "nohup pandoc -V geometry:margin=1in --resource-path  $path -f markdown -t pdf "$1" &>/dev/null | zathura - &"
-		nohup pandoc -V geometry:margin=1in --resource-path  "$path" -f markdown -t pdf "$1" &>/dev/null | zathura - &
-	else
-		nohup pandoc -V geometry:margin=1in  -f markdown -t pdf "$1" &>/dev/null | zathura -  &
-	fi
-else
-	echo nohup xdg-open "'$1'" &>/dev/null &
-	nohup xdg-open "$1" &>/dev/null &
-fi
-
+nohup xdg-open "$1" &>/dev/null &
 disown %$(grep $! <<< $(jobs -l) | sed 's/^\[\(.\)\].*$/\1/')
