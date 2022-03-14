@@ -28,8 +28,8 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 	call vundle#end()
 	" Plugin mappings and options
 		"" Fzf
-		nnoremap <leader>f		:w<CR>:Files<CR>
-		nnoremap <leader>h		:w<CR>:History<CR>
+		nnoremap <leader>f		:update<CR>:Files<CR>
+		nnoremap <leader>h		:update<CR>:History<CR>
 		nnoremap <leader>/		:History/<CR>
 		nnoremap <leader>:		:History:<CR>
 
@@ -137,12 +137,14 @@ endif
 
 " Mappings
 	" Misc
-	nnoremap		<leader>w :w<CR>
-	map					Q <Nop>
-	nnoremap 		<C-s> <Nop>
+	nnoremap		<C-S>				:update<CR>
+	vnoremap		<C-S>				<C-C>:update<CR>
+	inoremap		<C-S>				<C-O>:update<CR>
+	nnoremap		<C-6>				:update<C-6>
+	map					Q						<Nop>
 	noremap			0 ^
 	noremap 		^ 0
-	nnoremap		<leader>0 ^
+	nnoremap		<leader>0		^
 	nnoremap		n	nzzzv
 	nnoremap		N	Nzzzv
 	nnoremap		<leader>aw	m':g/^/norm gqq<CR>''zz
@@ -150,7 +152,7 @@ endif
 	nnoremap		<leader>i		:b#<CR>
 	nnoremap		<leader>r		:call RangerExplorer()<CR>
 	"" Latex
-	nnoremap		<leader>cc	:w<CR>:!texsilent %<CR>
+	nnoremap		<leader>cc	:w<CR>:!texsilent -v %<CR>
 	function LatexBlock ()
 		let name = input("Block name: ")
 		exe "norm! I\\begin{" . name . "}\n\\end{" . name . "}\<Esc>=k"
@@ -232,9 +234,21 @@ autocmd BufReadPost *
 
 
 " Setup automatic fold
-	autocmd BufWinLeave *.* mkview
-	autocmd BufWinEnter *.* silent loadview
-	set viewoptions-=options	" Avoid directory change because of loadview
+" -> https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
+"
+" Add?:
+" set viewoptions=folds,cursor
+" set sessionoptions=folds
+augroup AutoSaveGroup
+  autocmd!
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  " BufHidden for compatibility with `set hidden`
+  autocmd BufWinLeave,BufLeave,BufWritePost,BufHidden,QuitPre ?* nested silent! mkview!
+  autocmd BufWinEnter ?* silent! loadview
+augroup end
+set viewoptions-=options	" Avoid directory change because of loadview
 
 	function RangerExplorer()
 			exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
