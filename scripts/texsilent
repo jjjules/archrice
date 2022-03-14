@@ -1,4 +1,4 @@
-#!/bin/bash +x
+#!/bin/bash
 # Silent compiler for latex file.
 # Provided the name of the latex file (in *.tex format),
 # it will compile it and remove all auxiliary files.
@@ -10,13 +10,17 @@ cleanup () {
 	nfiles_after=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
 	ncreatedfiles=$(($nfiles_after-$nfiles))
 
-	[ $ncreatedfiles -gt 0 ] && ls -trp | grep -Ev '/$|*\.pdf' | tail -n $ncreatedfiles | xargs rm --
+	if [ $ncreatedfiles -gt 0 ]; then
+		toclean=$(ls -trp | grep -Ev '/$|*\.pdf' | tail -n ${ncreatedfiles})
+		echo
+		echo Cleaning files: $(sed -E "s/^|$/'/g" <<<$toclean | tr '\n' ' ')
+		xargs rm -- <<<$toclean
+	fi
 }
 
 # Declare available engines and handle optional arguments
 ENGINES=('latexmk --pdf' xelatex pdflatex luatex)
-out_redirection='&>/dev/null'
-interact_opt='-interaction=nonstopmode'
+interact_opt='-interaction=batchmode'
 while [[ $# -gt 0 ]]; do
   case $1 in
     -e|--engine)
@@ -26,10 +30,6 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     -v|--verbose)
-      unset out_redirection
-      shift
-      ;;
-    -i|--interact)
       unset interact_opt
       shift
       ;;
@@ -44,11 +44,15 @@ while [[ $# -gt 0 ]]; do
       ;;
   esac
 done
+
 if [ -z $engine ]
 then
 	engine=${ENGINES[0]}
 	ENGINES=("${ENGINES[@]:1}")
 fi
+
+texfile=$(readlink -f "$texfile")
+dir=${texfile%/*}
 if ! grep '\\begin{document}' $texfile &>/dev/null
 then
 	for f in $(find ${texfile%/*/*} -type f -name '*.tex')
@@ -56,30 +60,28 @@ then
 		if grep '\\begin{document}' $f &>/dev/null
 		then
 			texfile="$f"
-			texdir="${f%/*}"
+			dir="${f%/*}"
 		fi
 	done
-else
-	texdir='.'
 fi
-cd "$texdir"
+
+cd "$dir"
 nfiles=$(eval "ls -p | grep -Ev '/$|*\.pdf' | wc -l")
 trap "cleanup '$nfiles'" EXIT
 
 # Compile
 texclean -y $texfile
 echo "Try to compile with $engine"
-eval $engine $interact_opt "$texfile" $out_redirection
-sed -n 's/\\include{\(.*\)}\s*$/\1/p' $texfile | xargs -I {} rm "$texdir"/{}.aux
-[ $? -eq 0 ] && echo 'Done' && exit 0
+eval $engine $interact_opt "$texfile"
+[ $? -eq 0 ] && echo -e '\nSuccess' && exit 0
 
 while [ ${#ENGINES[@]} -ne 0 ]
 do
 	texclean -y $texfile
 	echo "Try to compile with ${ENGINES[0]}"
-	echo "with 'eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection'"
-	eval ${ENGINES[0]} $interact_opt "$texfile" $out_redirection
-[ $? -eq 0 ] && echo 'Done' && exit 0
+	echo "with 'eval ${ENGINES[0]} $interact_opt "$texfile"'"
+	eval ${ENGINES[0]} $interact_opt "$texfile"
+	[ $? -eq 0 ] && echo 'Done' && exit 0
 	ENGINES=("${ENGINES[@]:1}")
 done
 
