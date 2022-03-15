@@ -41,8 +41,8 @@ for_window [instance="dropdown_*"] sticky enable
 for_window [instance="dropdown_calc"] resize set 850 450
 for_window [instance="dropdown_term"] resize set 850 540
 
-exec --no-startup-id urxvt -name dropdown_calc -e bpython
-exec --no-startup-id urxvt -name dropdown_term
+exec --no-startup-id urxvt -name dropdown_calc -e zsh -c 'bpython && zsh && zsh && zsh && zsh && zsh'
+exec --no-startup-id urxvt -name dropdown_term -e zsh -c 'zsh && zsh && zsh && zsh && zsh && zsh && zsh'
 exec --no-startup-id 'i3-msg [instance="dropdown_*"] move position center'
 
 ## Other Windows Properties ##

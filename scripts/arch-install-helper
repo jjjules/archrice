@@ -12,6 +12,7 @@ export HOME='/home/jules'
 source $HOME/custom/dots/profile
 
 # Enable systemd services
+systemctl enable systemd-timesyncd.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
 
