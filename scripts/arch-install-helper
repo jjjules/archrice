@@ -108,6 +108,9 @@ for i in {1..${#confignames[@]}}; do
 	fi
 done
 
+# Add urxvt vim launcher
+sudo sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | sudo tee /usr/share/applications/vim-urxvt.desktop
+
 # Sddm login manager
 ln -s $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
 tar -xzvf $HOME/custom/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
