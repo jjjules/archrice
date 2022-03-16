@@ -1,0 +1,10 @@
+# vim: filetype=conf
+mpd_host = localhost
+mpd_port = 6600
+
+ncmpcpp_directory = "~/.config/ncmpcpp"
+lyrics_directory = "~/.local/share/lyrics"
+mpd_music_dir = "~/musics"
+
+external_editor = vim
+use_console_editor = yes

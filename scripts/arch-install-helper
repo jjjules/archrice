@@ -4,7 +4,7 @@ set -e
 
 # Package installation
 pacman -Sy
-pacman -S pacman-contrib openssh sshpass pass openconnect mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk feh ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree ranger w3m ffmpegthumbnailer fzf dunst dunstify dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects --needed --noconfirm
+pacman -S pacman-contrib openssh sshpass pass openconnect mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk feh ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree ranger w3m ffmpegthumbnailer fzf dunst dunstify dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects --needed --noconfirm
 
 pip3 install --user -U readchar numpy
 
@@ -16,6 +16,7 @@ systemctl enable systemd-timesyncd.service
 systemctl enable cronie.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
+systemctl --user enable mpd.service
 
 # Install vim plugin manager and paru
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u jules -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
@@ -95,8 +96,8 @@ for i in {1..${#homenames[@]}}; do
 done
 
 # Config files in .config
-confignames=('archey3/archey3.conf' 'dunst/dunstrc' 'i3/config' 'i3blocks' 'ranger/rc.conf' 'ranger/rifle.conf' 'ranger/scope.sh' 'zathura/zathurarc' 'bpython/config' 'mpv/mpv.conf' 'mpv/input.conf' 'autostart/check-update' 'conda/condarc')
-dotsnames=('archey3.conf' 'dunstrc' 'i3config' 'i3blocks' 'ranger-rc.conf' 'ranger-rifle.conf' 'ranger-scope.sh' 'zathurarc' 'bpython-config' 'mpv.conf' 'mpv-input.conf' 'check-update' 'condarc')
+confignames=('archey3/archey3.conf' 'dunst/dunstrc' 'i3/config' 'i3blocks' 'ranger/rc.conf' 'ranger/rifle.conf' 'ranger/scope.sh' 'zathura/zathurarc' 'bpython/config' 'mpv/mpv.conf' 'mpv/input.conf' 'autostart/check-update' 'conda/condarc' 'mpd/mpd.conf' 'ncmpcpp/config')
+dotsnames=('archey3.conf' 'dunstrc' 'i3config' 'i3blocks' 'ranger-rc.conf' 'ranger-rifle.conf' 'ranger-scope.sh' 'zathurarc' 'bpython-config' 'mpv.conf' 'mpv-input.conf' 'check-update' 'condarc' 'mpd.conf' 'ncmpcpp-config')
 for i in {1..${#confignames[@]}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/.config/$confignames[$i]"
@@ -114,6 +115,8 @@ done
 
 # Add urxvt vim launcher
 sudo sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | sudo tee /usr/share/applications/vim-urxvt.desktop
+
+#
 
 # Sddm login manager
 ln -s $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
