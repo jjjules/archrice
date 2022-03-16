@@ -67,9 +67,8 @@ bindkey "^[:" copy-earlier-word
 alias pm="pacman"
 alias pms="sudo pacman -S $1"
 alias pmr="sudo pacman -Rns $1"
-alias pmy="sudo pacman -Sy"
-alias pmu="sudo pacman -Syu"
-alias paruu="paru -Syuu"
+alias pmu="sudo pacman -Syyu"
+alias paruu="paru -Syyu"
 ## GNU
 ### Dirs and Files
 alias ..='cd ..'

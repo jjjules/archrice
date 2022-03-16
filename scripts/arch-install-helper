@@ -13,6 +13,7 @@ source $HOME/custom/dots/profile
 
 # Enable systemd services
 systemctl enable systemd-timesyncd.service
+systemctl enable cronie.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
 
@@ -68,7 +69,9 @@ ln -s $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 ln -sf $SCRIPTS_PATH/dmenu /usr/bin/dmenu
 
 # Add cron jobs
-(crontab -l 2>/dev/null; echo "*/5 * * * * $SCRIPTS_PATH/rmdir_maj_home") | crontab -
+crontab -l 2>/dev/null
+echo "*/5 * * * * $SCRIPTS_PATH/rmdir_maj_home" | crontab -
+echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
 
 # Misc bootstrap setup for programs config
 mkdir -p "$HOME/.vim/undo"

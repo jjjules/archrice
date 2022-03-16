@@ -1,0 +1,11 @@
+#!/bin/sh
+export DISPLAY=:0.0
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+
+dfout=$(df -h | \grep -E '9[789]%|100%')
+if ! [ -z $dfout ]
+then
+	summary_full_partition=$(awk '{print "On "$6": "$3"/"$2" ("$5")"}' <<<$dfout)
+	dunstify -u critical -r 44474 "Some partitions are full: $summary_full_partition"
+
+fi
