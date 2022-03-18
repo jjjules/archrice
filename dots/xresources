@@ -37,6 +37,9 @@
 *.color7:       #bfbaac
 *.color15:      #fdf6e3
 
+!! URxvt settings
+URxvt.saveLines: 50000
+
 !! URxvt Appearance
 URxvt.background:				#000000
 URxvt.font: 						xft:monospace:size=11
