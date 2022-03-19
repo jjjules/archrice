@@ -84,7 +84,7 @@ ln -sf $SCRIPTS_PATH/dmenu /usr/bin/dmenu
 
 # Add cron jobs
 crontab -l 2>/dev/null
-echo "*/5 * * * * $SCRIPTS_PATH/rmdir_maj_home" | crontab -
+echo "*/5 * * * * $SCRIPTS_PATH/cron-rmdir-maj-home" | crontab -
 echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
 
 # Misc bootstrap setup for programs config
