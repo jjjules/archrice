@@ -4,8 +4,8 @@ $SCRIPTS_PATH/setkb
 $SCRIPTS_PATH/setwp
 unclutter &
 dunst &
-redshift -l 46.5:6.64 -g 0.8 &
+redshift -l 46.55:6.6006 -g 0.8 -b 1:0.8 &
 $SCRIPTS_PATH/mute on &
-$SCRIPTS_PATH/lockhook &
+betterlockscreen -w dim
 
 exec i3

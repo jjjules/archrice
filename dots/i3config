@@ -63,7 +63,8 @@ set $ws9 "9"
 set $ws10 "10"
 
 ## Startup scripts
-exec "$HOME/.config/autostart/check-update"
+exec --no-startup-id "$HOME/.config/autostart/check-update"
+exec --no-startup-id "$HOME/custom/scripts/lockhook"
 
 ## Special Key Bindings ##
 # bindsym Ctrl+D [con_id="__focused__" instance="^(?dropdown_).*$"] nop

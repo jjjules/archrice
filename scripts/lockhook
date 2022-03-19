@@ -15,13 +15,11 @@ xidlehook \
   --not-when-audio \
   `# Dim the screen after first inactivity period, undim if user becomes active` \
   --timer $waitbeforedim \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness .1' \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1' \
+		"redshift -oPr -b 0.1 -l '46.55:6.6006'" \
+		"redshift -oPr -b 1 -l '46.55:6.6006'" \
   `# Undim & lock after second inactivity period` \
   --timer $waitbeforelock \
-    'xrandr --output "$PRIMARY_DISPLAY" --brightness 1; "$SCRIPTS_PATH/lockscreen"' \
-    '' \
+		"$SCRIPTS_PATH/lockscreen" "" \
   `# Finally, suspend the system` \
   --timer $waitbeforesuspend \
-    '"$SCRIPTS_PATH"/vpn off; systemctl suspend' \
-    ''
+		"systemctl suspend" ""
