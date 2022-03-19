@@ -23,3 +23,19 @@ xidlehook \
   `# Finally, suspend the system` \
   --timer $waitbeforesuspend \
 		"systemctl suspend" ""
+
+
+
+# Adapt below code and add toggle option. To be able to disable when running long
+# jupyter kernels for example. To pause `kill -STOP $PID` to restart auto-idling
+# `kill -CONT $PID`
+#
+#pid=$(ps aux | grep 'xss-lock' | grep -v 'grep' | awk '{print $2}' | sed 's/ \+//g')
+#
+#if [ ! -z $pid ]
+#then
+#	kill $pid
+#else
+#	xss-lock -l -n "$SCRIPTS_PATH/dimscreen" -- $SCRIPTS_PATH/lockscreen &
+#fi
+#
