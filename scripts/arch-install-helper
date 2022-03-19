@@ -55,12 +55,17 @@ sudo -u jules -g wheel mkdir $ZSH/custom/themes
 sudo -u jules -g wheel ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
 
 # Get zsh plugins
-dest="$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-[ ! -d $dest ] && sudo -u jules -g wheel git clone https://github.com/zsh-users/zsh-autosuggestions.git $dest
-echo
-dest="$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-[ ! -d $dest ] && sudo -u jules -g wheel git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $dest
-echo
+plugins=('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
+plugins_url=('https://github.com/zsh-users/zsh-autosuggestions.git' 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'https://github.com/TamCore/autoupdate-oh-my-zsh-plugins')
+for name url in (${plugins:^plugins_url})
+do
+	dest="$ZSH_CUSTOM/plugins/$name"
+	if ! [ -d $dest ]
+	then
+		sudo -u jules -g wheel git clone $url $dest
+	fi
+	echo
+done
 
 # Touchpad setup
 ln -s $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
