@@ -1,14 +1,27 @@
 #!/bin/sh
-
-# TODO: merge beamer_md_compile to this script
+# Compile a markdown document. Either to as a standard pdf or to beamer
+# presentation slides (according to option -b).
+# For the presentation slides, a header is appended to the latex file. This
+# header will be the header.tex file if present, otherwise defaults to the
+# md-beamer-header.tex file in misc/
 
 pipe=0
+beamer=0
+prompt=1
 while [[ $# -gt 0 ]]; do
   case $1 in
     -p|--pipe)
 			pipe=1
       shift
       ;;
+		-b|--beamer)
+			beamer=1
+			shift
+			;;
+		-y|--yes)
+			prompt=0
+			shift
+			;;
     -*|--*)
       echo "Unknown option $1"
       exit 1
@@ -24,14 +37,47 @@ done
 file=$(readlink -f "$file")
 dir=${file%/*}
 base="${file%.*}"
+base="${base##*/}" # Make base relative to current directory
 ext="${file##*.}"
 
+if [ $ext != 'md' ]
+then
+	echo "The file given must be a markdown file. The extension of the given file was $ext"
+	exit 1
+fi
 cd "$dir" || exit 1
 
-options='--highlight-style=tango -V geometry:margin=1in -s'
-if [ $pipe -eq 0 ]
+if [ $beamer -eq 0 ]
 then
-	pandoc $options -o "$base.pdf" "$file"
+	# Create standard markdown file
+	options='--highlight-style=tango -V geometry:margin=1in -s'
+	if [ $pipe -eq 0 ]
+	then
+		pandoc $options -o "$base.pdf" "$file"
+	else
+		pandoc $options -t pdf "$file"
+	fi
 else
-	pandoc $options -t pdf "$file"
+	# Define header file
+	if [ -f header.tex ]
+	then
+		headerfile=header.tex
+	elif [ -f "$CUSTOM_PATH/misc/md-beamer-header.tex" ]
+	then
+		headerfile="$CUSTOM_PATH/misc/md-beamer-header.tex"
+	fi
+	! [ -z $headerfile ] && headerinclude="--include-in-header=$headerfile"
+
+	# Create slides using markdown
+	sed -i "s/^date:.*/date: $(date +'%B %d, %Y')/" "$file"
+	pandoc --to=beamer $headerinclude -o "$base.tex" -s --pdf-engine=pdflatex "$file"
+
+	# Additional post-processing of latex file
+	sed -i 's/^.*newenv.*Shaded.*$/\\newenvironment{Shaded}{\\scriptsize}{}/' "$base.tex"
+
+	pdflatex "$base.tex"
+
+	[ $prompt -eq 0 ] && yesopt='-y'
+
+	texclean $yesopt "$base"
 fi

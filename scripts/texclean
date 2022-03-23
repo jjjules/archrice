@@ -1,10 +1,10 @@
 #!/bin/zsh
 
-prompt=0
+prompt=1
 while [[ $# -gt 0 ]]; do
   case $1 in
     -y|--yes)
-			prompt=1
+			prompt=0
       shift
       ;;
     -*|--*)
@@ -35,9 +35,10 @@ then
 	name=${name%.*}
 fi
 
+files=$(ls | grep "^$name\." | egrep -v '\.pdf|\.tex|\.md' | tr '\n' ' ' | sed 's/ $//')
+[ -z $files ] && exit 0
 setopt extended_glob
-files=$(ls | grep "^$name\." | egrep -v '\.pdf|\.tex' | tr '\n' ' ' | sed 's/ $//')
-if [ $prompt -ne 1 ]
+if [ $prompt -eq 1 ]
 then
 	vared -p "Delete $files? " -c reply
 	if ! [[ $reply =~ "^[yY](es)?$" ]]
@@ -45,6 +46,5 @@ then
 		exit 0
 	fi
 fi
-[ -z $files ] && exit 0
 xargs rm <<<$files
 unsetopt extended_glob
