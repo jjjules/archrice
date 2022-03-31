@@ -2,6 +2,8 @@
 # Wrapper around passmenu that avoid writting
 # the copied passwords to plain text.
 
+source $HOME/.profile
+
 clipctl disable
 passmenu
 clipctl enable

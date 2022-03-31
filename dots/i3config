@@ -134,8 +134,7 @@ bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize g
 #bindsym $mod+Shift+o
 
 bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 10 px
-bindsym $mod+Shift+p			exec --no-startup-id "passmenusec ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
-bindsym $mod+Ctrl+p				exec --no-startup-id "cd $HOME/.password-store && find . -type f -not -path './.git/*' | sed -e 's:^\./::' -e 's/\.gpg$//' | dmenu | cut -d/ -f2 | tr -d '\n' | xsel -ib ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+Shift+p			exec --no-startup-id "$SCRIPTS_PATH/passmenusec ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+a						split v
 bindsym $mod+Shift+a			split h
@@ -149,7 +148,7 @@ bindsym $mod+d						exec --no-startup-id "urxvt -e $SCRIPTS_PATH/fl"
 bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle
-bindsym $mod+Shift+f			exec --no-startup-id "urxvt -e lfub"
+bindsym $mod+Shift+f			exec --no-startup-id "urxvt -e $SCRIPTS_PATH/lfub"
 
 bindsym $mod+g						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
@@ -172,7 +171,7 @@ bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunst
 bindsym $mod+x						exec --no-startup-id "urxvt -e htop"
 #bindsym $mod++Shift+x
 
-bindsym $mod+c						exec --no-startup-id "clipmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+c						exec --no-startup-id "source $HOME/.profile && clipmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 bindsym $mod++Shift+c			move position center
 
 bindsym $mod+v						exec --no-startup-id pavucontrol
