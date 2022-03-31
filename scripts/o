@@ -2,5 +2,4 @@
 # Script useful to open any file from the terminal so that it
 # is independent of it (can close the terminal).
 
-nohup xdg-open "$1" &>/dev/null &
-disown %$(grep $! <<< $(jobs -l) | sed 's/^\[\(.\)\].*$/\1/')
+setsid -f xdg-open "$1"

@@ -1,10 +1,27 @@
 #!/bin/zsh
 # Fast file launcher for i3 using fzf
+#
+# Optionally take the starting where to look for files
 
 source $HOME/.profile
 
-cd $HOME
-directory=$(pwd)
+dir=''
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -*|--*)
+      echo "This script doesn't have any option"
+      exit 1
+      ;;
+    *)
+			! [ -z $dir ] && echo 'More than one positional argument passed.' && exit 1
+      dir="$1"
+      shift
+      ;;
+  esac
+done
+[ -z "$dir" ] && dir="$HOME"
+
+cd $dir
 export FZF_DEFAULT_COMMAND="find * -path '*/\.*' -prune -o -path 'musics/*' -prune -o -type f -print -o -type l -print 2> /dev/null"
 files=$(fzf -m)
 
@@ -12,13 +29,15 @@ mpvs=()
 while read -r file; do
 	[ -z "$file" ] && continue
 	ftype="$(xdg-mime query filetype $file)"
-	file="'$file'"
+	file="$file"
 	if [[ "$ftype" =~ '^video.*' ]]
 	then
 		mpvs+="$file"
 	else
-		i3-msg "exec  o $HOME/$file"
+		echo $(pwd)
+		echo $file
+		setsid -f o "$file"
 	fi
 done <<< "$files"
 
-i3-msg "exec  mpv ${mpvs[@]}"
+[ ${#mpvs} -gt 0 ] && i3-msg "exec  mpv ${mpvs[@]}"
