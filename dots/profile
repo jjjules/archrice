@@ -32,3 +32,8 @@ export CM_SELECTIONS="clipboard"
 export CM_OUTPUT_CLIP=0
 export CM_MAX_CLIPS=100
 export CM_HISTLENGTH=10
+
+if [ -f $DOTS_PATH/lf/LF_ICONS ]
+then
+	LF_ICONS="$(tr '\n' ':' < $DOTS_PATH/lf/LF_ICONS)" && export LF_ICONS
+fi

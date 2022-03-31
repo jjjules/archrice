@@ -115,7 +115,7 @@ bindsym $mod+Shift+w			focus child
 bindsym $mod+e						layout toggle split tabbed
 bindsym $mod+Shift+e			layout tabbed
 
-bindsym $mod+r						exec --no-startup-id "urxvt -e ranger"
+#bindsym $mod+r
 bindsym $mod+Shift+r			exec --no-startup-id i3-input -F "rename workspace to "$(i3-msg -t get_workspaces | jq -r "map(select(.focused))[0].num"):%s"" -P "New name: "
 
 #bindsym $mod+t
@@ -149,7 +149,7 @@ bindsym $mod+d						exec --no-startup-id "urxvt -e $SCRIPTS_PATH/fl"
 bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle
-bindsym $mod+Shift+f			workspace back_and_forth ; workspace back_and_forth
+bindsym $mod+Shift+f			exec --no-startup-id "urxvt -e lfub"
 
 bindsym $mod+g						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"

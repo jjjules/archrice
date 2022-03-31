@@ -8,7 +8,7 @@ pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux
 
 # Package installation
 pacman -Sy
-pacman -S pacman-contrib reflector openssh sshpass pass openconnect htop gvim mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most doc2txt scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ranger w3m ffmpegthumbnailer fzf dunst dunstify dosfstools gdmap dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
+pacman -S pacman-contrib reflector openssh sshpass pass openconnect htop gvim mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most doc2txt scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer odt2txt bat lynx fzf dunst dunstify dosfstools gdmap dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
 
 pip3 install --user -U readchar numpy
 
@@ -37,7 +37,7 @@ fi
 
 # AUR package installation
 paru -Sy
-paru -S betterlockscreen xidlehook dragon-drag-and-drop mailspring miniconda3 tldr++ hfsprogs --noconfirm
+paru -S lf atool mediainfo betterlockscreen xidlehook dragon-drag-and-drop mailspring miniconda3 tldr++ hfsprogs --noconfirm
 
 # Get custom repository
 [ -d $HOME/custom ] || sudo -u jules -g wheel	git clone https://github.com/JulesssG/custom.git $HOME/custom
@@ -109,8 +109,8 @@ for i in {1..${#homenames[@]}}; do
 done
 
 # Config files in .config
-confignames=('archey3/archey3.conf' 'dunst/dunstrc' 'i3/config' 'i3blocks' 'mimeapps.list' 'ranger/rc.conf' 'ranger/rifle.conf' 'ranger/scope.sh' 'zathura/zathurarc' 'bpython/config' 'mpv/mpv.conf' 'mpv/input.conf' 'autostart/check-update' 'conda/condarc' 'mpd/mpd.conf' 'ncmpcpp/config' 'betterlockscreenrc')
-dotsnames=('archey3.conf' 'dunstrc' 'i3config' 'i3blocks' 'mimeapps.list' 'ranger-rc.conf' 'ranger-rifle.conf' 'ranger-scope.sh' 'zathurarc' 'bpython-config' 'mpv.conf' 'mpv-input.conf' 'check-update' 'condarc' 'mpd.conf' 'ncmpcpp-config' 'betterlockscreenrc')
+confignames=('archey3/archey3.conf' 'dunst/dunstrc' 'i3/config' 'i3blocks' 'mimeapps.list' 'lf' 'zathura/zathurarc' 'bpython/config' 'mpv/mpv.conf' 'mpv/input.conf' 'autostart/check-update' 'conda/condarc' 'mpd/mpd.conf' 'ncmpcpp/config' 'betterlockscreenrc')
+dotsnames=('archey3.conf' 'dunstrc' 'i3config' 'i3blocks' 'mimeapps.list' 'lf' 'zathurarc' 'bpython-config' 'mpv.conf' 'mpv-input.conf' 'check-update' 'condarc' 'mpd.conf' 'ncmpcpp-config' 'betterlockscreenrc')
 for i in {1..${#confignames[@]}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/.config/$confignames[$i]"

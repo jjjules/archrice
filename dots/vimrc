@@ -200,6 +200,21 @@ endif
 	"inoremap <expr> <C-n> call pumvisible() ? '<C-n>' :
   "\ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
+" Status bar (inspired from https://stackoverflow.com/questions/9065941/how-can-i-change-vim-status-line-colour)
+	set laststatus=2  " set the bottom status bar
+	hi statusline guibg=White ctermfg=Gray guifg=DarkSlateGray ctermbg=Black
+	set statusline=%f                           						" file name
+	set statusline+=%{getbufvar(bufnr('%'),'&mod')?'+':''}	"modified flag
+	set statusline+=\ [%{strlen(&fenc)?&fenc:'none'},				"file encoding
+	set statusline+=%{&ff}] "file format
+	set statusline+=%y      "filetype
+	set statusline+=%h      "help file flag
+	set statusline+=%r      "read only flag
+	set statusline+=\ %=          " align left
+	set statusline+=%l/%L\ %p%%   " line X of Y [percent of file]
+	set statusline+=\ %n          " Buffer number
+	set statusline+=\ [%b,0x%B]\  " ASCII and byte code under cursor
+
 " Mysterious command for the map of <CR> in normal mode
 	autocmd CmdwinEnter * nnoremap <CR> <CR>
 	autocmd BufReadPost quickfix nnoremap <CR> <CR>
@@ -250,31 +265,6 @@ augroup AutoSaveGroup
   autocmd BufWinEnter ?* silent! loadview
 augroup end
 set viewoptions-=options	" Avoid directory change because of loadview
-
-	function RangerExplorer()
-			exec "silent !ranger --choosefile=/tmp/vim_ranger_current_file " . expand("%:p:h")
-			if filereadable('/tmp/vim_ranger_current_file')
-					exec 'edit ' . system('cat /tmp/vim_ranger_current_file')
-					call system('rm /tmp/vim_ranger_current_file')
-			endif
-			redraw!
-	endfun
-
-" Some funky status bar code its seems
-" https://stackoverflow.com/questions/9065941/how-can-i-change-vim-status-line-colour
-	set laststatus=2            " set the bottom status bar
-	hi statusline guibg=White ctermfg=Gray guifg=DarkSlateGray ctermbg=Black
-	set statusline=%f                           " file name
-	set statusline+=%{getbufvar(bufnr('%'),'&mod')?'+':''} "modified flag
-	set statusline+=\ [%{strlen(&fenc)?&fenc:'none'}, "file encoding
-	set statusline+=%{&ff}] "file format
-	set statusline+=%y      "filetype
-	set statusline+=%h      "help file flag
-	set statusline+=%r      "read only flag
-	set statusline+=\ %=                        " align left
-	set statusline+=%l/%L\ %p%%            " line X of Y [percent of file]
-	set statusline+=\ %n                    " Buffer number
-	set statusline+=\ [%b,0x%B]\               " ASCII and byte code under cursor
 
 " https://vim.fandom.com/wiki/Capitalize_words_in_insert_and_normal_modes_without_moving_the_cursor
 "Place in vimrc file
