@@ -152,6 +152,7 @@ endif
 	nnoremap		<leader>i		:b#<CR>
 	nnoremap		<leader>r		:call RangerExplorer()<CR>
 	nnoremap		<leader>cm	:w<CR>:!mdcompile %:p<CR>
+	nnoremap		<leader>cb	:w<CR>:!mdcompile -b -y %:p<CR>
 	nnoremap		<leader>o 	:!nohup xdg-open <C-r>=expand("%:p:r")<CR>.pdf &>/dev/null & disown<CR>
 	"" Latex
 	nnoremap		<leader>cl	:w<CR>:!texsilent %:p<CR>

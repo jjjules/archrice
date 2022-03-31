@@ -1,9 +1,9 @@
 #!/bin/sh
 # Compile a markdown document. Either to as a standard pdf or to beamer
 # presentation slides (according to option -b).
-# For the presentation slides, a header is appended to the latex file. This
-# header will be the header.tex file if present, otherwise defaults to the
-# md-beamer-header.tex file in misc/
+# For the presentation slides, a header is added to the latex file. This
+# header is created from the header.tex file of the markdown directory and
+# the `md-beamer-header.tex` file in `misc/`.
 
 pipe=0
 beamer=0
@@ -59,14 +59,16 @@ then
 	fi
 else
 	# Define header file
+	headertmp=$(mktemp)
+	if [ -f "$CUSTOM_PATH/misc/md-beamer-header.tex" ]
+	then
+		cat "$CUSTOM_PATH/misc/md-beamer-header.tex" >> $headertmp
+	fi
 	if [ -f header.tex ]
 	then
-		headerfile=header.tex
-	elif [ -f "$CUSTOM_PATH/misc/md-beamer-header.tex" ]
-	then
-		headerfile="$CUSTOM_PATH/misc/md-beamer-header.tex"
+		cat header.tex >> $headertmp
 	fi
-	! [ -z $headerfile ] && headerinclude="--include-in-header=$headerfile"
+	! [ -z "$(cat $headertmp)" ] && cat $headertmp > /home/jules/header && headerinclude="--include-in-header=$headertmp"
 
 	# Create slides using markdown
 	sed -i "s/^date:.*/date: $(date +'%B %d, %Y')/" "$file"
