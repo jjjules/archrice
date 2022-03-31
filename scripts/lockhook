@@ -1,41 +1,58 @@
-#!/usr/bin/env bash
+#!/usr/bin/zsh
 
-# Only exported variables can be used within the timer's command.
-export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
+toggle=0
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -t|--toogle)
+			toggle=1
+      shift
+      ;;
+    *)
+      echo "Ignoring inputs given to lockhook"
+      ;;
+  esac
+done
 
-waitbeforedim=180
-waitbeforelock=15
-waitbeforesuspend=10
+if [ $toggle -eq 1 ]
+then
+	psxidle="$(ps aux | grep 'xidlehook' | grep -v 'grep')"
+	if [ ! -z "$psxidle" ]
+	then
+		pid="$(awk '{print $2}' <<< $psxidle)"
+		pstate="$(awk '{print $8}' <<< $psxidle)"
+		if [[ "$pstate" =~ '^T.*' ]]
+		then
+			action=CONT
+		else
+			action=STOP
+		fi
 
-# Run xidlehook
-xidlehook \
-  `# Don't lock when there's a fullscreen application` \
-  --not-when-fullscreen \
-  `# Don't lock when there's audio playing` \
-  --not-when-audio \
-  `# Dim the screen after first inactivity period, undim if user becomes active` \
-  --timer $waitbeforedim \
-		"redshift -oPr -b 0.1 -l '46.55:6.6006'" \
-		"redshift -oPr -b 1 -l '46.55:6.6006'" \
-  `# Undim & lock after second inactivity period` \
-  --timer $waitbeforelock \
-		"$SCRIPTS_PATH/lockscreen" "" \
-  `# Finally, suspend the system` \
-  --timer $waitbeforesuspend \
-		"systemctl suspend" ""
+		kill -$action $pid
+	else
+		echo 'Cannot toggle xidlehook, process is not running'
+	fi
+else
+	# Only exported variables can be used within the timer's command.
+	export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
 
+	waitbeforedim=180
+	waitbeforelock=15
+	waitbeforesuspend=10
 
-
-# Adapt below code and add toggle option. To be able to disable when running long
-# jupyter kernels for example. To pause `kill -STOP $PID` to restart auto-idling
-# `kill -CONT $PID`
-#
-#pid=$(ps aux | grep 'xss-lock' | grep -v 'grep' | awk '{print $2}' | sed 's/ \+//g')
-#
-#if [ ! -z $pid ]
-#then
-#	kill $pid
-#else
-#	xss-lock -l -n "$SCRIPTS_PATH/dimscreen" -- $SCRIPTS_PATH/lockscreen &
-#fi
-#
+	# Run xidlehook
+	xidlehook \
+		`# Don't lock when there's a fullscreen application` \
+		--not-when-fullscreen \
+		`# Don't lock when there's audio playing` \
+		--not-when-audio \
+		`# Dim the screen after first inactivity period, undim if user becomes active` \
+		--timer $waitbeforedim \
+			"redshift -oPr -b 0.1 -l '46.55:6.6006'" \
+			"redshift -oPr -b 1 -l '46.55:6.6006'" \
+		`# Undim & lock after second inactivity period` \
+		--timer $waitbeforelock \
+			"$SCRIPTS_PATH/lockscreen" "" \
+		`# Finally, suspend the system` \
+		--timer $waitbeforesuspend \
+			"systemctl suspend" ""
+fi
