@@ -19,14 +19,19 @@ fi
 [ -d /opt/miniconda3 ] && source /opt/miniconda3/etc/profile.d/conda.sh
 
 
-# General
+
+##########     General     ##########
+
 eval $( dircolors -b $DOTS_PATH/ls_colors )
 export PATH="$HOME/.local/bin:$PATH"	# pip scripts directory
 export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
 export IPYTHONDIR="$HOME/.config/ipython"
 export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
 
-# Key Bindings
+
+
+##########  Key Bindings  ##########
+
 # bindkey -v
 # bindkey "^?" backward-delete-char
 # bindkey "^W" backward-kill-word
@@ -62,8 +67,11 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey "^[:" copy-earlier-word
 
-# Aliases
-## Arch
+
+
+##########     Aliases     ##########
+
+# Arch
 alias pm='pacman'
 alias pms='sudo pacman -S'
 alias pmss='sudo pacman -Ss'
@@ -72,11 +80,12 @@ alias pmu='sudo pacman -Syyu'
 alias parus='paru -S'
 alias paruss='paru -Ss'
 alias paruu='paru -Syyu'
-## GNU
-### Dirs and Files
+
+# GNU
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
+alias ze="cd $HOME/documents/epfl"
 alias zw="cd ~/downloads"
 alias zm="cd ~/videos/movies"
 alias zmu="cd ~/musics/"
@@ -88,32 +97,29 @@ alias mv="nocorrect mv -i"
 alias ls="ls --color=tty -v --group-directories-first"
 alias la="ls -a"
 alias l='\ls --color=tty -v -Alhtr'
-alias laf="ls -tp | grep -v '/$' | tail -n 1"
 alias rm="rm -I"
 alias du="du -h"
-alias tree='tree -a -I ".git|venv|.venv|*.class"'
-alias tp="tree -C | less"
-### Process management
 alias sudo="nocorrect sudo "
 alias c="clear"
 alias j="jobs"
 alias h="history"
 alias hg="history | grep $@"
-	#alias less='less -F -X -b -1'
+#alias less='less -F -X -b -1'
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
 alias psg="ps aux | grep $@"
 alias ka="killall"
 alias km="killall mailspring"
 alias kz="killall zoom"
-alias k="kill"
 alias kb="kill $(ps aux | grep '/bin/bash.*bch$' | awk '{print $2}')"
-## Wifi
+
+# Wifi
 alias nmr="nmcli device wifi rescan"
 alias nml="nmcli device wifi list"
 alias nmc="nmcli -a device wifi connect"
 alias nmu="nmcli -p con up"
-## Git
+
+# Git
 alias g="git"
 alias gs="git status -s -b"
 alias ga="git add"
@@ -127,28 +133,8 @@ alias gp="git push"
 alias gcno="git commit --amend --no-edit"
 alias gl="git --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
 alias gll="git log --all --oneline --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
-## EPFL
-### cds
-alias ze="cd $EPFL_DIR"
-alias ze4="cd $EPFL_DIR/../ma4"
-alias ze3="cd $EPFL_DIR/../ma3/"
-alias ze2="cd $EPFL_DIR/../ma2/"
-### Misc
-alias todo="vim ${EPFL_DIR}/../ma4/todo.md"
-alias programs="vim $EPFL_DIR/../ma4/programs"
-alias sdock="sudo docker"
-alias jptn="jupyter notebook >/dev/null"
-alias jptl="jupyter lab >/dev/null"
-alias jptln="jupyter lab --no-browser >/dev/null"
-cix='iccluster041.iccluster.epfl.ch'
-c1='86.119.43.181'
-c2='86.119.42.190'
-c3='86.119.42.214'
-c4='86.119.39.171'
-export KUBECONFIG="$EPFL_DIR/project/renku-deployment/kube-configs/jules_gottraux.config"
-alias helmn="helm -n student-project"
-alias kuben="kubectl -n student-project"
-## Dots Shortcuts
+
+# Dotfiles Shortcuts
 alias szrc="source ~/.zshrc"
 alias zd="cd $DOTS_PATH"
 alias xrc="vim $DOTS_PATH/xinitrc"
@@ -159,24 +145,31 @@ alias zs="cd $SCRIPTS_PATH"
 alias zco="cd ~/.config/"
 alias zcu="cd $CUSTOM_PATH"
 alias irc="vim ~/.config/i3/config"
-## Mounting devices
+
+# Mounting devices
 alias seam="sudo mount -U 7b4ac17c-102b-4bbb-8f6c-b15b0c46a014 /mnt/seagate"
 alias seacm="sudo mount -U b9489d7f-ad22-3eff-b11f-0015c086226b /mnt/seagate-chloe -o uid=$UID,gid=$GID,umask=022"
 alias keym="sudo mount -U 088D-EFA8 /mnt/usbkey -o uid=$UID,gid=$GID,umask=022"
 alias seaum="sudo umount /mnt/seagate"
 alias seacum="sudo umount /mnt/seagate-chloe"
 alias keyum="sudo umount /mnt/usbkey"
-## Others
+
+# Utilities
+alias todo="vim $CUSTOM_PATH/todo.md"
+alias programs="vim $CUSTOM_PATH/misc/programs"
+alias ccp='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
+alias ocp='fc -e - | head -n1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
+alias mocp='fc -e - | xsel -ib'
+
+# Special programs
 alias vr="vim -c 'History'"
 alias vf="vim -c 'Files'"
 alias sv="sudo vim"
 alias gvim="vim"
 alias lf="lfub"
+alias tree='tree -a -I ".git|venv|.venv|*.class"'
 alias cal="cal -m"
 alias ghs="\gs"
-alias ccp='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
-alias ocp='fc -e - | head -n1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
-alias mocp='fc -e - | xsel -ib'
 alias untar="tar -zxvf"
 alias ffmpeg="ffmpeg -hide_banner"
 alias ffplay="ffplay -hide_banner"
@@ -184,14 +177,34 @@ alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
 alias pipu="pip3 install --user -U"
 alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
+alias jptl="jupyter lab >/dev/null"
+alias jptln="jupyter lab --no-browser >/dev/null"
 alias ytdla="youtube-dl -x --audio-format mp3 -o '%(title)s.%(ext)s'"
 alias pubip="curl ifconfig.me"
 alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 
-# Functions
-## Misc
+
+
+##########     Functions     ##########
+
+function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
+function cpsync() {	  rsync -aP $1 $2   }
+function weather(){   curl wttr.in/$1   }
+function twoshot() {
+	oneshot $1
+	if [ $? -eq 0 ]; then
+		oneshot $1
+	fi
+}
+function gr() {  	cd $(git rev-parse --show-toplevel)   }
+function gac() {
+	git add $(git rev-parse --show-toplevel)
+	git commit
+}
+function grsa() {   git restore --staged $(git rev-parse --show-toplevel)   }
+function gsjoin() {  	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dFIXEDMEDIA -dPDFFitPage -sPAPERSIZE=a4 -sOutputFile="$1" "${@:2}"   }
 function stopwatch(){
   date1=`date +%s`;
    while true; do
@@ -217,43 +230,6 @@ function timer(){
 	dunstify -u normal -r 30503 "End of timer"
 	ffplay -loglevel error -nodisp -loop 0 "$CUSTOM_PATH/misc/radio-alert.mp3" > /dev/null
 }
-function weather(){
-	curl wttr.in/$1
-}
-function twoshot() {
-	oneshot $1
-	if [ $? -eq 0 ]; then
-		oneshot $1
-	fi
-}
-function mvep() {
-	mv "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
-}
-function cpep() {
-	cp "$@" "$(du -a -d 3 $EPFL_DIR | awk '{print $2}' | grep -Fv . | fzf)"
-}
-function mvsync() {
-	rsync -aP --remove-source-files $1 $2 && rm -r $1
-}
-function cpsync() {
-	rsync -aP $1 $2
-}
-function findpdfgrep() {
-	find . -name "$1" -exec pdfgrep -i "$2" {} +
-}
-function gr() {
-	cd $(git rev-parse --show-toplevel)
-}
-function gac() {
-	git add $(git rev-parse --show-toplevel)
-	git commit
-}
-function grsa() {
-	git restore --staged $(git rev-parse --show-toplevel)
-}
-function gsjoin() {
-	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dFIXEDMEDIA -dPDFFitPage -sPAPERSIZE=a4 -sOutputFile="$1" "${@:2}"
-}
 if [ -f /usr/bin/pass ];then
 	function pass() {
 		/usr/bin/pass $@
@@ -263,27 +239,6 @@ if [ -f /usr/bin/pass ];then
 		fi
 	}
 fi
-# Temp for epfl
-function all-nodes() {
-	(echo '############### hadoop-1 ###############' && ssh centos@$c1 $*; echo '############### hadoop-2 ###############' && ssh centos@$c2 $*; echo '############### hadoop-3 ###############' && ssh centos@$c3 $*;echo '############### hadoop-4 ###############' && ssh centos@$c4 $*)
-}
-function clustres() {
-	ldapsearch -h ldap.epfl.ch -b 'c=ch' -LLL -x uid=$1
-}
-# Not working
-function gsopt(){
-	if ! [[ "$1" =~ ".*\.pdf" ]]
-	then
-		echo "Not a pdf"
-		return 1
-	fi
-	cp "$1" gsopt-save.pdf
-	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/printer -sOutputFile="$1" "$1"
-	[ $? -eq 0] && rm gsopt-save.pdf
-}
-function playm() {
-	ffplay "$(find ~/seagate/musics -type f | fzf)" &> /dev/null
-}
 
 # Change cursor shape for different vi modes. (Luke's)
 # function zle-keymap-select {

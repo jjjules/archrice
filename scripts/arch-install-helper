@@ -37,7 +37,7 @@ fi
 
 # AUR package installation
 paru -Sy
-paru -S lf atool mediainfo betterlockscreen xidlehook dragon-drag-and-drop mailspring miniconda3 tldr++ hfsprogs --noconfirm
+paru -S lf atool mediainfo steghide betterlockscreen xidlehook dragon-drag-and-drop mailspring miniconda3 tldr++ hfsprogs --noconfirm
 
 # Get custom repository
 [ -d $HOME/custom ] || sudo -u jules -g wheel	git clone https://github.com/JulesssG/custom.git $HOME/custom

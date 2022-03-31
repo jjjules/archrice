@@ -1,4 +1,4 @@
-export PATH="$(find "$SCRIPTS_PATH" -type d -name '.git' -prune -o -type d -name '*' | grep -v "^\.git$\|^$SCRIPTS_PATH/progress$" | tr '\n' ':')$PATH"
+export PATH="$SCRIPTS_PATH:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -8,7 +8,7 @@ export VISUAL="vim"
 export BROWSER='/usr/bin/firefox'
 export WORDCHARS='*_-.|&<>'
 export HYPHEN_INSENSITIVE="true"
-export ZSH="$HOME/.config/zsh/oh-my-zsh"
+export ZSH="$XDG_CONFIG_HOME/zsh/oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 export ZSH_COMPDUMP="$HOME/.cache/zsh/zcompdump"
 export LESSHISTFILE='$HOME/.cache/lesshst'
@@ -19,12 +19,12 @@ export EPFL_DIR="$HOME/documents/epfl/spacedrep"
 export CUSTOM_PATH="$HOME/custom"
 export DOTS_PATH="$CUSTOM_PATH/dots"
 export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
-export PYTHON_DATA_DIR="$HOME/.local/share/python-package-data"
-export NLTK_DATA="$PYTHON_DATA_DIR/nltk_data"
-export SCIKIT_LEARN_DATA="$PYTHON_DATA_DIR/scikit_learn_data"
-export CARGO_HOME="$HOME/.config/cargo/"
-export GOPATH="$HOME/.local/share/go"
-export CONDARC="$HOME/.config/conda/condarc"
+export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
+export CARGO_HOME="$XDG_CONFIG_HOME/cargo/"
+export PYTHON_DATA_DIR="$XDG_DATA_HOME/python-package-data"
+export NLTK_DATA="$XDG_DATA_HOME/python-package-data/nltk_data"
+export SCIKIT_LEARN_DATA="$XDG_DATA_HOME/python-package-data/scikit_learn_data"
+export GOPATH="$XDG_DATA_HOME/go"
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export I3_DEFAULT_GAPS=20
