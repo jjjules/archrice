@@ -1,7 +1,7 @@
 #!/bin/zsh
 # Fast file launcher for i3 using fzf
 #
-# Optionally take the starting where to look for files
+# Optionally take a directory as argument where it will look for files
 
 source $HOME/.profile
 
