@@ -8,7 +8,7 @@ pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux
 
 # Package installation
 pacman -Sy
-pacman -S pacman-contrib reflector openssh sshpass pass openconnect htop gvim mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most doc2txt scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer odt2txt bat lynx fzf dunst dunstify dosfstools gdmap dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
+pacman -S pacman-contrib reflector openssh sshpass pass openconnect htop gvim mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboaRd xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most doc2txt scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer odt2txt bat lynx fzf dunst dunstify dosfstools gdmap dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
 
 pip3 install --user -U readchar numpy
 
@@ -20,7 +20,7 @@ systemctl enable systemd-timesyncd.service
 systemctl enable cronie.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
-systemctl --user enable mpd.service
+systemctl --user enable clipmenud.service
 systemctl --user enable clipmenud.service
 
 # Install vim plugin manager and paru

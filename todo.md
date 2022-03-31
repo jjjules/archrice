@@ -1,13 +1,7 @@
 # Misc
-- Add ability to pause xidlehook (for jupyter computation for example):
-	- kill -STOP $PID
-	- kill -CONT $PID
-
-	And inquire dimscreen script, as it may work better with it
 - Helper for chloé showing useful shortcuts that can be shown in floting mode easily
 - Save photos
 - Save old pass store and add passphrase
-- Setup music with mpd, tags on musics for automatic playlist generation
 - zsh as in arch install: autocorrect, tab does not directly enter the 'visual' mode(+ better tab propositions)
 
 # Bugs
@@ -41,7 +35,11 @@
 	- add map in vim similar to latex block for for inline blocks (e.g. textit or textbf)
 	- Texsilent: re-add redirection for silent but better detection of success ($? is zero even if some of it fails, maybe detect
 	"all target up to date"). If it fails, don't remove the *.log file
+- music:
+	- For full control of music (pause/next/previous/etc), use playerctl with mpDris2 so that it also works with mpd
+		https://www.youtube.com/watch?v=XpzNdXtpKDc
 - wifi: Add distinctive icon when wifi has been deactivated
+- xidlehook: inquire dimscreen script, as it may work better with it
 
 # Thing to learn/improve
 - Switch to miniforge or mamba (or mambaforge)

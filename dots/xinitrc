@@ -2,10 +2,11 @@ xrdb -merge $HOME/.Xresources
 
 $SCRIPTS_PATH/setkb
 $SCRIPTS_PATH/setwp
+$SCRIPTS_PATH/mute on &
+redshift -l 46.55:6.6006 -g 0.8 -b 1:0.8 &
+betterlockscreen -w dim
 unclutter &
 dunst &
-redshift -l 46.55:6.6006 -g 0.8 -b 1:0.8 &
-$SCRIPTS_PATH/mute on &
-betterlockscreen -w dim
+mpd &
 
 exec i3
