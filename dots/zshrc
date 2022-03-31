@@ -64,11 +64,14 @@ bindkey "^[:" copy-earlier-word
 
 # Aliases
 ## Arch
-alias pm="pacman"
-alias pms="sudo pacman -S $1"
-alias pmr="sudo pacman -Rns $1"
-alias pmu="sudo pacman -Syyu"
-alias paruu="paru -Syyu"
+alias pm='pacman'
+alias pms='sudo pacman -S'
+alias pmss='sudo pacman -Ss'
+alias pmr='sudo pacman -Rns'
+alias pmu='sudo pacman -Syyu'
+alias parus='paru -S'
+alias paruss='paru -Ss'
+alias paruu='paru -Syyu'
 ## GNU
 ### Dirs and Files
 alias ..='cd ..'
