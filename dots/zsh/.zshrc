@@ -128,11 +128,11 @@ alias gl="git --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(re
 alias gll="git log --all --oneline --graph --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
 
 # Dotfiles Shortcuts
-alias szrc="source ~/.zshrc"
+alias szrc="source ${ZDOTDIR:-$HOME}/.zshrc"
 alias zd="cd $DOTS_PATH"
 alias xrc="vim $DOTS_PATH/xinitrc"
 alias prc="vim $DOTS_PATH/profile"
-alias zrc="vim $DOTS_PATH/zshrc"
+alias zrc="vim ${ZDOTDIR:-$HOME}/.zshrc"
 alias vrc="vim $DOTS_PATH/vimrc"
 alias zs="cd $SCRIPTS_PATH"
 alias zco="cd ~/.config/"

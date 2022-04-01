@@ -1,4 +1,8 @@
+export CUSTOM_PATH="$HOME/custom"
+export DOTS_PATH="$CUSTOM_PATH/dots"
+export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
 export PATH="$SCRIPTS_PATH:$HOME/.local/bin:$PATH"
+
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
@@ -15,9 +19,6 @@ export HISTSIZE=100000
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 ;} # Avoid adding wrong command to history
 
 export EPFL_DIR="$HOME/documents/epfl"
-export CUSTOM_PATH="$HOME/custom"
-export DOTS_PATH="$CUSTOM_PATH/dots"
-export SCRIPTS_PATH="$CUSTOM_PATH/scripts"
 
 export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
@@ -29,6 +30,7 @@ export SCIKIT_LEARN_DATA="$XDG_DATA_HOME/python-package-data/scikit_learn_data"
 export SURPRISE_DATA_FOLDER="$XDG_DATA_HOME/python-package-data/surprise"
 export GOPATH="$XDG_DATA_HOME/go"
 export IPYTHONDIR="$XDG_DATA_HOME/ipython"
+export _JAVA_OPTIONS='-Duser.home=/tmp/java-home'
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export I3_DEFAULT_GAPS=20
