@@ -42,9 +42,9 @@ cmd delete ${{
 	clear; tput cup $(($(tput lines)/3)); tput bold
 	set -f
 	printf "%s\n\t" "$fx"
-	printf "delete?[y/N]"
+	printf "delete?[y/N] "
 	read ans
-	[ $ans = "y" ] && mv $fx "${XDG_DATA_HOME:-$HOME/.local/share}/trash"
+	[ $ans = "y" ] && mv "$fx" "${XDG_DATA_HOME:-$HOME/.local/share}/trash"
 }}
 
 cmd bulkrename ${{
