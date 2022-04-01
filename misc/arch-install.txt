@@ -1,7 +1,12 @@
-# Check this to improve the installation
-https://gist.github.com/0snap/d95531542c113f90cf483ebe3d0f2baa
-+ Check zshrc of iso and of https://forums.archlinux.fr/viewtopic.php?t=8999
+# Other resources
+Post-installation cheat sheet: https://gist.github.com/0snap/d95531542c113f90cf483ebe3d0f2baa
 
+# Build custom ISO using archiso
+mkdir custom_iso and cd custom_iso
+sudo mkarchiso -v /usr/share/archiso/configs/NAME_OF_CONFIG
+sudo chown -R jules:wheel out/ work/
+
+########################################################################################
 
 # Set the keyboard layout
 loadkeys fr_CH

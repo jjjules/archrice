@@ -4,7 +4,9 @@ channels:
   - defaults
 
 envs_dirs:
-  - /home/jules/.local/share/conda
-pkg_dirs:
-  - /home/jules/.local/share/conda
+  - /home/jules/.local/share/conda/envs
+
+pkgs_dirs:
+  - /home/jules/.local/share/conda/pkgs
+
 env_prompt: '($(basename {default_env})) '

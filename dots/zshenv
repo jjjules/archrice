@@ -1,0 +1,3 @@
+source $HOME/.profile
+export ZDOTDIR=$DOTS_PATH/zsh
+source $ZDOTDIR/.zshenv

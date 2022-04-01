@@ -14,6 +14,7 @@ pip3 install --user -U readchar numpy
 
 export HOME='/home/jules'
 source $HOME/custom/dots/profile
+source $DOTS_PATH/zshenv
 
 # Enable systemd services
 systemctl enable systemd-timesyncd.service
@@ -89,10 +90,11 @@ echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
 
 # Misc bootstrap setup for programs config
 mkdir -p "$HOME/.vim/undo"
+cp $DOTS_PATH/zshenv $HOME/.zshenv
 
 # Config files in home
-homenames=('.profile' '.zprofile' '.xprofile' '.zshrc' '.xinitrc' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc')
-dotsnames=('profile'  'zprofile'  'xprofile'  'zshrc'  'xinitrc'  'xresources'  'vimrc'  'vim-ftplugin'  'gitconfig'  'inputrc')
+homenames=('.profile' '.xprofile' '.xinitrc' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc')
+dotsnames=('profile'  'xprofile'  'xinitrc'  'xresources'  'vimrc'  'vim-ftplugin'  'gitconfig'  'inputrc')
 for i in {1..${#homenames[@]}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/$homenames[$i]"
@@ -128,8 +130,6 @@ done
 
 # Add urxvt vim launcher
 sudo sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | sudo tee /usr/share/applications/vim-urxvt.desktop
-
-#
 
 # Sddm login manager
 ln -s $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf

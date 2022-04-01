@@ -1,6 +1,5 @@
+export ENABLE_CORRECTION='true'
 if [ -d $ZSH ];then
-
-  source /home/jules/.profile
   if [ -f $ZSH_CUSTOM/themes/mytheme.zsh-theme ];then
 		ZSH_THEME="mytheme"
 	else
@@ -20,15 +19,7 @@ fi
 
 
 
-##########     General     ##########
-
 eval $( dircolors -b $DOTS_PATH/ls_colors )
-export PATH="$HOME/.local/bin:$PATH"	# pip scripts directory
-export JUPYTER_CONFIG_DIR="$HOME/.config/jupyter"
-export IPYTHONDIR="$HOME/.config/ipython"
-export NPM_CONFIG_USERCONFIG="$HOME/.config/npm"
-
-
 
 ##########  Key Bindings  ##########
 
@@ -50,7 +41,6 @@ bindkey '^L'	vi-forward-word
 bindkey 'Oc'	vi-forward-word
 bindkey 'e'	edit-command-line
 bindkey 'm' run-help
-bindkey -s '^[,' '$(ls -tp | grep -v '/$' | tail -n 1)'
 ## Replace arrows by vim bindings in menu selection
 zstyle ':completion:*' menu-select
 zmodload zsh/complist
@@ -71,6 +61,13 @@ bindkey "^[:" copy-earlier-word
 
 ##########     Aliases     ##########
 
+# Pipe
+alias -g H='| head'
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g L='| less'
+alias -g V='|vim -'
+
 # Arch
 alias pm='pacman'
 alias pms='sudo pacman -S'
@@ -86,24 +83,20 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias ze="cd $HOME/documents/epfl"
-alias zw="cd ~/downloads"
-alias zm="cd ~/videos/movies"
-alias zmu="cd ~/musics/"
-alias zi="cd ~/images"
-alias zmt="cd /mnt"
-alias d="dirs -v"
-alias cp="nocorrect cp -i"
-alias mv="nocorrect mv -i"
-alias ls="ls --color=tty -v --group-directories-first"
-alias la="ls -a"
+alias zw='cd ~/downloads'
+alias zm='cd ~/videos/movies'
+alias zmu='cd ~/musics/'
+alias zi='cd ~/images'
+alias zmt='cd /mnt'
+alias d='dirs -v'
+alias rm='rm -I'
+alias cp='cp -i'
+alias mv='mv -i'
+alias ls='ls --color=tty -v --group-directories-first'
+alias la='ls -a'
 alias l='\ls --color=tty -v -Alhtr'
-alias rm="rm -I"
-alias du="du -h"
-alias sudo="nocorrect sudo "
-alias c="clear"
-alias j="jobs"
-alias h="history"
-alias hg="history | grep $@"
+alias sudo='sudo '
+alias hg='history | grep'
 #alias less='less -F -X -b -1'
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
@@ -205,6 +198,51 @@ function gac() {
 }
 function grsa() {   git restore --staged $(git rev-parse --show-toplevel)   }
 function gsjoin() {  	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dFIXEDMEDIA -dPDFFitPage -sPAPERSIZE=a4 -sOutputFile="$1" "${@:2}"   }
+# Compress and Extract functions (https://forums.archlinux.fr/viewtopic.php?p=85628#p85628)
+xtrct () {
+	# Usage: xtrct COMPRESSED_FILE
+	if [ -f $1 ] ; then
+		case $1 in
+			*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
+			*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
+			*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
+			*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
+			*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+			*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
+			*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+			*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
+			*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+			*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
+			*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
+			*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
+			*)		echo "don't know how to extract '$1'..." ;;
+		esac
+	else
+		echo "Error: '$1' is not a valid file!"
+		exit 0
+	fi
+}
+cmpr () {
+	# Usage: cmpr COMPRESSION_TYPE FILE_OR_DIRECTORY
+	case "$1" in
+		tar.bz2|.tar.bz2)	tar cvjf "${2%%/}.tar.bz2" "${2%%/}/" ;;
+		tbz2|.tbz2)			tar cvjf "${2%%/}.tbz2" "${2%%/}/" ;;
+		tbz|.tbz)			tar cvjf "${2%%/}.tbz" "${2%%/}/" ;;
+		tar.gz|.tar.gz)		tar cvzf "${2%%/}.tar.gz" "${2%%/}/" ;;
+		tar.Z|.tar.Z)		tar Zcvf "${2%%/}.tar.Z" "${2%%/}/" ;;
+		tgz|.tgz)			tar cvjf "${2%%/}.tgz" "${2%%/}/" ;;
+		tar|.tar)			tar cvf "${2%%/}.tar" "${2%%/}/" ;;
+		rar|.rar)			rar a "${2%%/}.rar" "${2%%/}/" ;;
+		zip|.zip)			zip -r9 "${2}.zip" "$2" ;;
+		7z|.7z)				7z a "${2}.7z" "$2" ;;
+		lzo|.lzo)			lzop -v "$2" ;;
+		gz|.gz)				gzip -v "$2" ;;
+		bz2|.bz2)			bzip2 -v "$2" ;;
+		xz|.xz)				xz -v "$2" ;;
+		lzma|.lzma)			lzma -v "$2" ;;
+		*)	echo "Error, please go away.";;
+	esac
+}
 function stopwatch(){
   date1=`date +%s`;
    while true; do
