@@ -28,29 +28,32 @@ timedatectl set-ntp true
 2. Swap: 150% of RAM -> type 19 (Linux swap)
 3. Other partition
 
-# Format partition
-1. Boot: mkfs.fat -F32
-2. Swap: mkswap
-3. Others: mkfs.ext4
+For example with gdisk:
+		Size	Code	fdisk	Name										Mnt location
+1.	500MB	EF00	1			EFI system partition		/boot/efi
+2.	24GB	8200	19		Linux Swap
+3.	30GB	8303	23		Linux x86 root (/)			/
+4.	20GB	8311	20		Linux /var/tmp					/var
+5.	10GB	8311	20		Linux /var/tmp					/tmp
+6.				8302	41		Linux /home							/home
 
-# Mount partitions
-1. Boot: /mnt/boot/efi
-2. Swap: swapon
-3. Others: ...
+# Format partition
+1. Boot: mkfs.fat -F32 BOOT_PARTITION
+2. Swap: mkswap SWAP_PARTITION
+3. Others: mkfs.ext4 PARTITION
+
+Then mount the partitions:
+	- Use swapon for swap partition
+	- Mount the / partition
+	- Mount other partitions (don't mount the ESP partition (i.e. boot partition) !!!)
 
 # Install
-pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware intel-ucode sudo git zsh
+pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware intel-ucode xf86-video-intel
+sudo git zsh openssh libfido2
 genfstab -U /mnt >> /mnt/etc/fstab
-arch-root /mnt
-
-# Setup grub
-grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi --removable
-Add 'GRUB_FORCE_HIDDEN_MENU="true"' line to /etc/default/grub
-copy 31_hold_shift to /etc/grub.d (and chmod +x)
-grub-mkconfig -o /boot/grub/grub.cfg
+arch-chroot /mnt
 
 # Environment setup
-systemctl enable NetworkManager.service
 vim /etc/pacman.d/mirrorlist -> put one close mirror at the top
 vim /etc/locale.gen -> uncomment en_US
 locale-gen
@@ -59,15 +62,40 @@ ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 hwclock --systohc
 systemctl enable NetworkManager
 echo jules > /etc/hostname
-vim hosts -> setup as install.txt
+echo '127.0.0.1	localhost\n::1	localhost' >> /etc/hosts
 useradd -m jules
 passwd jules
 usermod -aG wheel,audio,video,optical,storage jules
-sed '/%wheel ALL=(ALL) ALL/s/^# //' /etc/sudoers
+sed '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
 add 'ALL ALL=(ALL) NOPASSWD: /usr/bin/xbacklight, /usr/bin/systemctl restart NetworkManager, /home/jules/custom/scripts/vpn off, /usr/bin/dmidecode' to sudoers file
 chsh jules -> /bin/zsh
+Login as jules
+ssh-keygen -t rsa -b 4096 -C "jules.gottraux@gmail.com"
+eval "$(ssh-agent -s)" (To verify the agent is running
+ssh-add /home/jules/.ssh/id_rsa
+-> Generate personal access token on github with write-keys permission
+curl -H "Authorization: token GENERATEDTOKEN" --data "{\"title\":\"KEYNAME\",\"key\":\"$(cat .ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
+git clone git@github.com:jjules/custom.git
+
+# Setup grub -> Worked without the GRUB_FORCE_HIDDEN_MENU and 31_hold_shift script but halt to loading initial ram when added
+Mount the ESP partition to /boot/efi
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+grub-mkconfig -o /boot/grub/grub.cfg
+Didnt work with hold shift script and hidden grub menu, but would want to:
+	add 'GRUB_FORCE_HIDDEN_MENU="true"' line to /etc/default/grub
+	copy 31_hold_shift to /etc/grub.d
+
+reboot to verify installation
 run arch-install-helper
+systemctl --user enable clipmenud
 reboot
+
+########################################################################################
+
+git clone git@github.com:jjjules/custom.git
+-> recover private key to KEY
+gpg --import KEY
+-> trust key with gpg --edit-key
 
 # Reclone custom with ssh
 # Lockscreen

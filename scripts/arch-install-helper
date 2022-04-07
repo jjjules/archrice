@@ -2,17 +2,14 @@
 trap "exit" INT
 set -e
 
-####
-pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware intel-ucode sudo git zsh
-####
-
 # Package installation
 pacman -Sy
-pacman -S pacman-contrib reflector openssh sshpass pass openconnect htop gvim mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboaRd xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-droid ttf-font-awesome ctags curl wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most doc2txt scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer odt2txt bat lynx fzf dunst dunstify dosfstools gdmap dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
+pacman -S pacman-contrib reflector sshpass pass xclip openconnect htop mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-font-awesome noto-fonts noto-fonts-emoji noto-fonts-cjk ctags wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python python-pip bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer docx2txt odt2txt bat lynx fzf dunst dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
 
 pip3 install --user -U readchar numpy
 
-export HOME='/home/jules'
+USER=jules
+export HOME="/home/$USER"
 source $HOME/custom/dots/profile
 source $DOTS_PATH/zshenv
 
@@ -21,32 +18,24 @@ systemctl enable systemd-timesyncd.service
 systemctl enable cronie.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
-systemctl --user enable clipmenud.service
-systemctl --user enable clipmenud.service
+#sudo -u $USER systemctl --user enable clipmenud.service
 
 # Install vim plugin manager and paru
-[ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u jules -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+[ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 if [ ! -f /usr/bin/paru ];then
 	echo "Installing paru..."
-	sudo -u jules -g wheel mkdir -p $HOME/documents/repos
+	sudo -u $USER -g wheel mkdir -p $HOME/documents/repos
 	cd $HOME/documents/repos
-	sudo -u jules -g wheel git clone https://aur.archlinux.org/paru.git
+	sudo -u $USER -g wheel git clone https://aur.archlinux.org/paru.git
 	cd paru
-	sudo -u jules -g wheel makepkg -si
+	sudo -u $USER -g wheel makepkg -si
 	echo "Done"
 fi
 
 # AUR package installation
-paru -Sy
-paru -S lf atool mediainfo steghide betterlockscreen xidlehook dragon-drag-and-drop mailspring miniconda3 tldr++ hfsprogs --noconfirm
+sudo -u $USER paru -Sy
+echo 'Ignore aur package installation' #sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
 
-# Get custom repository
-[ -d $HOME/custom ] || sudo -u jules -g wheel	git clone https://github.com/JulesssG/custom.git $HOME/custom
-if [ ! -f $HOME/custom/dots/profile ];then
-	echo "Must have custom directory in home to use this script"
-	exit 1
-fi
-source $HOME/custom/dots/profile
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
 echo "Backup at $TMP"
 
@@ -56,53 +45,47 @@ if [ -d $ZSH ]; then
 	if [[ $reply =~ "^[yY](es)?$" ]]
 	then
 		rm -rf $ZSH
-		KEEP_ZSHRC=yes RUNZSH=no sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-		chown -R jules:wheel $ZSH
 	fi
 fi
-sudo -u jules -g wheel mkdir $ZSH/custom/themes
-sudo -u jules -g wheel ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+sudo -u $USER -g wheel --preserve-env=ZSH sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo -u $USER -g wheel ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
 
 # Get zsh plugins
 plugins=('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
 plugins_url=('https://github.com/zsh-users/zsh-autosuggestions.git' 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'https://github.com/TamCore/autoupdate-oh-my-zsh-plugins')
-for name url in (${plugins:^plugins_url})
+for i in {1..${#plugins}}
 do
-	dest="$ZSH_CUSTOM/plugins/$name"
-	if ! [ -d $dest ]
-	then
-		sudo -u jules -g wheel git clone $url $dest
-	fi
+	url=${plugins_url[$i]}
+	dest="$ZSH_CUSTOM/plugins/${plugins[$i]}"
+	! [ -d $dest ] && sudo -u $USER -g wheel git clone $url $dest
 	echo
 done
 
 # Touchpad setup
-ln -s $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
-
-# Dmenu
-[ ! -f /usr/bin/dmenuexec ] && mv /usr/bin/dmenu /usr/bin/dmenuexec
-ln -sf $SCRIPTS_PATH/dmenu /usr/bin/dmenu
+ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 
 # Add cron jobs
-crontab -l 2>/dev/null
-echo "*/5 * * * * $SCRIPTS_PATH/cron-rmdir-maj-home" | crontab -
-echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
+# Must run as $USER and make sure it works when no cron file exists
+#crontab -l 2>/dev/null
+#echo "*/5 * * * * $SCRIPTS_PATH/cron-rmdir-maj-home" | crontab -
+#echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
 
 # Misc bootstrap setup for programs config
-mkdir -p "$HOME/.vim/undo"
-cp $DOTS_PATH/zshenv $HOME/.zshenv
+sudo -u jules -g wheel mkdir -p "$HOME/.vim/undo" | true
+sudo -u jules -g wheel mkdir -p $XDG_DATA_HOME/{trash,bash,zsh} || true
+sudo -u jules -g wheel cp $DOTS_PATH/zshenv $HOME/.zshenv
 
+echo 'Before config in home'
 # Config files in home
 homenames=('.profile' '.xprofile' '.xinitrc' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc')
 dotsnames=('profile'  'xprofile'  'xinitrc'  'xresources'  'vimrc'  'vim-ftplugin'  'gitconfig'  'inputrc')
-for i in {1..${#homenames[@]}}; do
+for i in {1..${#homenames}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/$homenames[$i]"
-	mv $to $TMP 2> /dev/null
-	if [[ "${to#*/}" != "$to" ]]; then
-		# Need to create necessary directory for symlink
-		sudo -u jules -g wheel mkdir -p ${to%/*}
-	sudo -u jules -g wheel ln -s $from $to
+	[ -f $to -o -d $to ] && mv $to $TMP
+	! [ -d ${to%/*} ] && sudo -u $USER -g wheel mkdir -p ${to%/*}
+
+	sudo -u $USER -g wheel ln -s $from $to
 	if [ $? -eq 0 ]; then
 		echo "$homenames[$i] -> $dotsnames[$i]: Done"
 	else
@@ -110,17 +93,17 @@ for i in {1..${#homenames[@]}}; do
 	fi
 done
 
+echo 'Before config in .config'
 # Config files in .config
 confignames=('archey3/archey3.conf' 'dunst/dunstrc' 'i3/config' 'i3blocks' 'mimeapps.list' 'lf' 'zathura/zathurarc' 'bpython/config' 'mpv/mpv.conf' 'mpv/input.conf' 'autostart/check-update' 'conda/condarc' 'mpd/mpd.conf' 'ncmpcpp/config' 'betterlockscreenrc')
 dotsnames=('archey3.conf' 'dunstrc' 'i3config' 'i3blocks' 'mimeapps.list' 'lf' 'zathurarc' 'bpython-config' 'mpv.conf' 'mpv-input.conf' 'check-update' 'condarc' 'mpd.conf' 'ncmpcpp-config' 'betterlockscreenrc')
-for i in {1..${#confignames[@]}}; do
+for i in {1..${#confignames}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/.config/$confignames[$i]"
-	mv $to $TMP 2> /dev/null
-	if [[ "${to#*/}" != "$to" ]]; then
-		# Need to create necessary directory for symlink
-		sudo -u jules -g wheel mkdir -p ${to%/*}
-	sudo -u jules -g wheel ln -s $from $to
+	[ -f $to -o -d $to ] && mv $to $TMP
+	! [ -d ${to%/*} ] && sudo -u $USER -g wheel mkdir -p ${to%/*}
+
+	sudo -u $USER -g wheel ln -s $from $to
 	if [ $? -eq 0 ]; then
 		echo "$confignames[$i] -> $dotsnames[$i]: Done"
 	else
@@ -129,17 +112,20 @@ for i in {1..${#confignames[@]}}; do
 done
 
 # Add urxvt vim launcher
-sudo sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | sudo tee /usr/share/applications/vim-urxvt.desktop
+sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-urxvt.desktop > /dev/null
 
 # Sddm login manager
 ln -s $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
+echo 'Extracting sddm-chili theme'
 tar -xzvf $HOME/custom/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
-
-# Mimes
-app='org.pwmt.zathura.desktop'
-[ -f /usr/share/applications/$app ] && xdg-mime default org.pwmt.zathura.desktop application/pdf
+echo
 
 # Correct ownership and verifications
-chown jules:wheel -R $HOME/.cache
+find $HOME -maxdepth 1 -name '.zsh*' -o -name '.zcompdump*' | grep -v '.zshenv' | xargs -n1 rm --
+rm .viminfo .lesshst
+[ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
+[ -d $HOME/.cargo -a ! -z $CARGO_HOME] && mv $HOME/.cargo $CARGO_HOME
+sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
+chown $USER:wheel -R $HOME/.cache
 echo " File left in home belonging to root:"
-find $HOME -user root | grep -v '\.custom/'
+find $HOME -user root
