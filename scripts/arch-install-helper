@@ -34,7 +34,7 @@ fi
 
 # AUR package installation
 sudo -u $USER paru -Sy
-echo 'Ignore aur package installation' #sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
+sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
 
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
 echo "Backup at $TMP"

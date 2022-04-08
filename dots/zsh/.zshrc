@@ -1,19 +1,20 @@
-export ENABLE_CORRECTION='true'
+export ENABLE_CORRECTION='false'
 if [ -d $ZSH ];then
   if [ -f $ZSH_CUSTOM/themes/mytheme.zsh-theme ];then
 		ZSH_THEME="mytheme"
 	else
 		ZSH_THEME="robbyrussell"
 	fi
-	plugins=(colored-man-pages)
-	if [ -d $ZSH_CUSTOM/plugins/zsh-autosuggestions ]; then
-		plugins+=zsh-autosuggestions
-	fi
-	if [ -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ]; then
-		plugins+=zsh-syntax-highlighting
-	fi
+
+	PLUGINS_PATH=$ZSH_CUSTOM/plugins
+	plugins=(colored-man-pages thefuck pip)
+	for plugin_name ('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
+	do
+		[ -d $PLUGINS_PATH/$plugin_name ] && plugins+=$plugin_name
+	done
+
   source $ZSH/oh-my-zsh.sh
-	[ -d $ZSH_CUSTOM/plugins/zsh-syntax-highlighting ] && ZSH_HIGHLIGHT_STYLES[path]="none"
+	[ -d $PLUGINS_PATH/zsh-syntax-highlighting ] && ZSH_HIGHLIGHT_STYLES[path]="none"
 fi
 [ -d /opt/miniconda3 ] && source /opt/miniconda3/etc/profile.d/conda.sh
 

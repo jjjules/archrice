@@ -28,24 +28,24 @@ timedatectl set-ntp true
 2. Swap: 150% of RAM -> type 19 (Linux swap)
 3. Other partition
 
-For example with gdisk:
-		Size	Code	fdisk	Name										Mnt location
-1.	500MB	EF00	1			EFI system partition		/boot/efi
-2.	24GB	8200	19		Linux Swap
-3.	30GB	8303	23		Linux x86 root (/)			/
-4.	20GB	8311	20		Linux /var/tmp					/var
-5.	10GB	8311	20		Linux /var/tmp					/tmp
-6.				8302	41		Linux /home							/home
+For example with fdisk:
+		Size	fdisk	Name										Mnt location
+1.	512MB	1			EFI system partition		/boot/efi
+2.	24GB	19		Linux Swap
+3.	30GB	23		Linux x86 root (/)			/
+4.	20GB	20		Linux filesystem				/var
+5.	10GB	20		Linux filesystem				/tmp
+6.	-			41		Linux /home							/home
 
 # Format partition
-1. Boot: mkfs.fat -F32 BOOT_PARTITION
-2. Swap: mkswap SWAP_PARTITION
+1. Boot: mkfs.fat -F32 -n BOOT BOOT_PARTITION
+2. Swap: mkswap -L SWAP SWAP_PARTITION
 3. Others: mkfs.ext4 PARTITION
 
 Then mount the partitions:
 	- Use swapon for swap partition
 	- Mount the / partition
-	- Mount other partitions (don't mount the ESP partition (i.e. boot partition) !!!)
+	- Mount other partitions
 
 # Install
 pacstrap /mnt base base-devel vi vim networkmanager iw iwd grub efibootmgr linux man linux-firmware intel-ucode xf86-video-intel
@@ -54,11 +54,10 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt
 
 # Environment setup
-vim /etc/pacman.d/mirrorlist -> put one close mirror at the top
 vim /etc/locale.gen -> uncomment en_US
 locale-gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 hwclock --systohc
 systemctl enable NetworkManager
 echo jules > /etc/hostname
@@ -69,7 +68,7 @@ usermod -aG wheel,audio,video,optical,storage jules
 sed '/%wheel ALL=(ALL:ALL) ALL/s/^# //' /etc/sudoers
 add 'ALL ALL=(ALL) NOPASSWD: /usr/bin/xbacklight, /usr/bin/systemctl restart NetworkManager, /home/jules/custom/scripts/vpn off, /usr/bin/dmidecode' to sudoers file
 chsh jules -> /bin/zsh
-Login as jules
+su jules
 ssh-keygen -t rsa -b 4096 -C "jules.gottraux@gmail.com"
 eval "$(ssh-agent -s)" (To verify the agent is running
 ssh-add /home/jules/.ssh/id_rsa
@@ -77,8 +76,7 @@ ssh-add /home/jules/.ssh/id_rsa
 curl -H "Authorization: token GENERATEDTOKEN" --data "{\"title\":\"KEYNAME\",\"key\":\"$(cat .ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
 git clone git@github.com:jjules/custom.git
 
-# Setup grub -> Worked without the GRUB_FORCE_HIDDEN_MENU and 31_hold_shift script but halt to loading initial ram when added
-Mount the ESP partition to /boot/efi
+# Setup grub
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 Didnt work with hold shift script and hidden grub menu, but would want to:
@@ -97,12 +95,7 @@ git clone git@github.com:jjjules/custom.git
 gpg --import KEY
 -> trust key with gpg --edit-key
 
-# Reclone custom with ssh
-# Lockscreen
-- paru -S betterlockscreen
+# TODO: Lockscreen
 - sudo ln -sf $DOTS_PATH/betterlockscreen@.service /usr/lib/systemd/system/betterlockscreen@.service
 - systemctl enable betterlockscreen@jules.service
 - betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
-# Add password store
-- follow https://gist.github.com/abtrout/d64fb11ad6f9f49fa325
-# Install xidle from AUR
