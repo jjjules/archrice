@@ -86,16 +86,14 @@ Didnt work with hold shift script and hidden grub menu, but would want to:
 reboot to verify installation
 run arch-install-helper
 systemctl --user enable clipmenud
+systemctl --user enable betterlockscreen@USER
+betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
 reboot
 
 ########################################################################################
 
 git clone git@github.com:jjjules/custom.git
--> recover private key to KEY
-gpg --import KEY
+-> recover private key to KEYFILE
+gpg --import KEYFILE
 -> trust key with gpg --edit-key
-
-# TODO: Lockscreen
-- sudo ln -sf $DOTS_PATH/betterlockscreen@.service /usr/lib/systemd/system/betterlockscreen@.service
-- systemctl enable betterlockscreen@jules.service
-- betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
+shred the KEYFILE

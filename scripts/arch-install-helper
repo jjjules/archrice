@@ -18,7 +18,6 @@ systemctl enable systemd-timesyncd.service
 systemctl enable cronie.service
 systemctl enable sddm.service
 systemctl enable bluetooth.service
-#sudo -u $USER systemctl --user enable clipmenud.service
 
 # Install vim plugin manager and paru
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
