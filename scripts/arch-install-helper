@@ -77,8 +77,8 @@ sudo -u jules -g wheel cp $DOTS_PATH/zshenv $HOME/.zshenv
 
 echo 'Before config in home'
 # Config files in home
-homenames=('.profile' '.xprofile' '.xinitrc' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc')
-dotsnames=('profile'  'xprofile'  'xinitrc'  'xresources'  'vimrc'  'vim-ftplugin'  'gitconfig'  'inputrc')
+homenames=('.profile' '.xprofile' '.xinitrc' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc' '.gnupg/gpg-agent.conf')
+dotsnames=('profile'  'xprofile'  'xinitrc'  'xresources'  'vim/vimrc'  'vim/ftplugin'  'gitconfig'  'inputrc' 'gpg-agent.conf')
 for i in {1..${#homenames}}; do
 	from="$DOTS_PATH/$dotsnames[$i]"
 	to="$HOME/$homenames[$i]"
@@ -122,9 +122,9 @@ echo
 
 # Correct ownership and verifications
 find $HOME -maxdepth 1 -name '.zsh*' -o -name '.zcompdump*' | grep -v '.zshenv' | xargs -n1 rm --
-rm .viminfo .lesshst
+rm .viminfo .lesshst | true
 [ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
-[ -d $HOME/.cargo -a ! -z $CARGO_HOME] && mv $HOME/.cargo $CARGO_HOME
+[ -d $HOME/.cargo -a ! -z $CARGO_HOME ] && mv $HOME/.cargo $CARGO_HOME
 sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
 chown $USER:wheel -R $HOME/.cache
 echo " File left in home belonging to root:"
