@@ -6,18 +6,12 @@ set -e
 pacman -Sy
 pacman -S pacman-contrib reflector sshpass pass xclip openconnect htop mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal zsh-completions ttf-font-awesome noto-fonts noto-fonts-emoji noto-fonts-cjk ctags wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python python-pip bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer docx2txt odt2txt bat lynx fzf dunst dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
 
-pip3 install --user -U readchar numpy
+pip3 install --user -U readchar numpy thefuck
 
 USER=jules
 export HOME="/home/$USER"
 source $HOME/custom/dots/profile
 source $DOTS_PATH/zshenv
-
-# Enable systemd services
-systemctl enable systemd-timesyncd.service
-systemctl enable cronie.service
-systemctl enable sddm.service
-systemctl enable bluetooth.service
 
 # Install vim plugin manager and paru
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
@@ -34,6 +28,13 @@ fi
 # AUR package installation
 sudo -u $USER paru -Sy
 sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
+
+# Enable systemd services
+systemctl enable systemd-timesyncd.service
+systemctl enable cronie.service
+systemctl enable sddm.service
+systemctl enable bluetooth.service
+systemctl enable betterlockscreen@${USER}
 
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
 echo "Backup at $TMP"
@@ -121,10 +122,10 @@ echo
 
 # Correct ownership and verifications
 find $HOME -maxdepth 1 -name '.zsh*' -o -name '.zcompdump*' | grep -v '.zshenv' | xargs -n1 rm --
-rm .viminfo .lesshst | true
+rm .viminfo .lesshst 2>/dev/null | true
 [ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
 [ -d $HOME/.cargo -a ! -z $CARGO_HOME ] && mv $HOME/.cargo $CARGO_HOME
 sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
-chown $USER:wheel -R $HOME/.cache
+chown ${USER}:wheel -R $HOME/.cache
 echo " File left in home belonging to root:"
 find $HOME -user root

@@ -78,20 +78,17 @@ git clone git@github.com:jjules/custom.git
 
 # Setup grub
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+change GRUB_TIMEOUT to 1 and GRUB_TIMEOUT_STYLE to countdown
 grub-mkconfig -o /boot/grub/grub.cfg
-Didnt work with hold shift script and hidden grub menu, but would want to:
-	add 'GRUB_FORCE_HIDDEN_MENU="true"' line to /etc/default/grub
-	copy 31_hold_shift to /etc/grub.d
 
 reboot to verify installation
-run arch-install-helper
+run arch-install-helper with sudo, redirection and pipe to tee to save logs
 systemctl --user enable clipmenud
-systemctl --user enable betterlockscreen@USER
-betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
 reboot
 
 ########################################################################################
 
+betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
 git clone git@github.com:jjjules/custom.git
 -> recover private key to KEYFILE
 gpg --import KEYFILE
