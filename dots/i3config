@@ -1,15 +1,24 @@
 # Basic definitions and appearance ##
 set $mod Mod4
 
+font xft:DejaVu Sans Mono 12
 gaps inner 20
 gaps outer 0
 for_window [class="^.*"] border pixel 2
-font pango:mono 12
 floating_modifier Mod4
 
 ## Color setup ##
+set_from_resource $black		i3wm.color0 #6E6C7E
+set_from_resource $red 			i3wm.color1 #E38C8F
+set_from_resource $green		i3wm.color2 #B1E3AD
+set_from_resource $yellow		i3wm.color3 #EBDDAA
+set_from_resource $blue			i3wm.color4 #A4B9EF
+set_from_resource $magenta	i3wm.color5 #C6AAE8
+set_from_resource $cyan			i3wm.color6 #E5B4E2
+set_from_resource $white		i3wm.color7 #DADAE8
+
 	# class                 border  backgr. text    indicator child_border
-	client.focused          #a2440c #a2440c #000000 #000000		#a2440c
+	client.focused          $red		$red		#000000	#000000		$red
 	client.focused_inactive #333333 #5f676a #ffffff #484e50   #484e50
 	client.unfocused        #333333 #222222 #888888 #292d2e   #222222
 	client.urgent           #2f343a #900000 #ffffff #900000   #900000
@@ -20,8 +29,6 @@ floating_modifier Mod4
 bar {
 	wheel_up_cmd nop
   wheel_down_cmd nop
-	font pango:monospace 11
-	#status_command i3status
 	status_command i3blocks
 	position bottom
 
@@ -29,8 +36,8 @@ bar {
 		separator		#aaaaaa
     background 	#1b1b1c
 		# class							border	backgr.	text
-		focused_workspace 	#1b1b1c #a2440c #aaaaaa
-		inactive_workspace	#353535	#1b1b1c	#aaaaaa
+		focused_workspace 	#1b1b1c $red		$white
+		inactive_workspace	#353535	#1b1b1c	$white
 	}
 }
 
@@ -38,17 +45,19 @@ bar {
 for_window [instance="dropdown_*"] floating enable
 for_window [instance="dropdown_*"] move scratchpad
 for_window [instance="dropdown_*"] sticky enable
-for_window [instance="dropdown_calc"] resize set 850 450
-for_window [instance="dropdown_term"] resize set 850 540
+for_window [instance="dropdown_*"] resize set 850 540
+for_window [instance="dropdown_*"] move absolute position center
 
-exec --no-startup-id urxvt -name dropdown_calc -e zsh -c 'bpython && zsh && zsh && zsh && zsh && zsh'
-exec --no-startup-id urxvt -name dropdown_term -e zsh -c 'zsh && zsh && zsh && zsh && zsh && zsh && zsh'
-exec --no-startup-id 'i3-msg [instance="dropdown_*"] move position center'
+exec --no-startup-id urxvt -name dropdown_calc -e zsh -c 'bpython || zsh || zsh || zsh || zsh || zsh'
+exec --no-startup-id urxvt -name dropdown_term -e zsh -c 'zsh || zsh || zsh || zsh || zsh || zsh || zsh'
 
 ## Other Windows Properties ##
 for_window [class="Pavucontrol"] floating enable
 for_window [class="firefox" instance="Places" title="Library" window_role="Organizer"] floating enable
 for_window [class="Blueberry.py"] floating enable
+for_window [title="file-launcher"] floating enable
+for_window [title="file-launcher"] resize set 850 540
+for_window [title="file-launcher"] move position center
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
@@ -65,6 +74,7 @@ set $ws10 "10"
 ## Startup scripts
 exec --no-startup-id "$HOME/.config/autostart/startup-check-update"
 exec --no-startup-id "$HOME/custom/scripts/lockhook"
+exec --no-startup-id "picom --experimental-backends -b"
 
 ## Special Key Bindings ##
 # bindsym Ctrl+D [con_id="__focused__" instance="^(?dropdown_).*$"] nop
@@ -144,7 +154,7 @@ bindsym $mod+Shift+s			[instance="dropdown_calc"] scratchpad show
 bindsym $mod+Alt+s				mark --add "swapee"; mode "swap"
 
 
-bindsym $mod+d						exec --no-startup-id "urxvt -e $SCRIPTS_PATH/fl"
+bindsym $mod+d						exec --no-startup-id "urxvt -title file-launcher -e $SCRIPTS_PATH/fl"
 bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle

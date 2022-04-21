@@ -1,5 +1,9 @@
 # Misc
-- Helper for chloé showing useful shortcuts that can be shown in floting mode easily
+- Rice: finish picom, color and rofi config
+- Only use adobe-source-pro font and an emoji font (awesome or nerd)? (No deja vu)
+- Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
+- Rename workspace using rofi
+- Add XDG_DATA_DIRS (needed by rofi) to .profile
 - Save photos
 - Save old pass store and add passphrase
 - zsh as in arch install: autocorrect, tab does not directly enter the 'visual' mode(+ better tab propositions)

@@ -1,50 +1,66 @@
 !! Colorscheme
 
+! black
+#define c00 #263640
+#define c08 #4a697d
+
+! red
+#define c01 #d12f2c
+#define c09 #fa3935
+
+! green
+#define c02 #009404
+#define c10 #00b303
+
+! yellow
+#define c03 #b08500
+#define c11 #d9a400
+
+! blue
+#define c04 #2587cc
+#define c12 #2ca2f5
+
+! magenta
+#define c05 #696ebf
+#define c13 #8086e8
+
+! cyan
+#define c06 #289c93
+#define c14 #33c5ba
+
+! white
+#define c07 #bfbaac
+#define c15 #fdf6e3
+
+
+*.color0:				c00
+*.color8:    		c08
+*.color1:       c01
+*.color9:       c09
+*.color2:       c02
+*.color10:      c10
+*.color3:       c03
+*.color11:      c11
+*.color4:       c04
+*.color12:      c12
+*.color5:       c05
+*.color13:      c13
+*.color6:       c06
+*.color14:      c14
+*.color7:       c07
+*.color15:      c15
+
 ! special
 *.foreground:   #f0f1f1
 *.background:   #020202
 *.cursorColor:  #f0f1f1
-
-! black
-*.color0:       #263640
-*.color8:       #4a697d
-
-! red
-*.color1:       #d12f2c
-*.color9:       #fa3935
-
-! green
-*.color2:       #009404
-*.color10:      #00b303
-
-! yellow
-*.color3:       #b08500
-*.color11:      #d9a400
-
-! blue
-*.color4:       #2587cc
-*.color12:      #2ca2f5
-
-! magenta
-*.color5:       #696ebf
-*.color13:      #8086e8
-
-! cyan
-*.color6:       #289c93
-*.color14:      #33c5ba
-
-! white
-*.color7:       #bfbaac
-*.color15:      #fdf6e3
 
 !! URxvt settings
 URxvt.saveLines: 50000
 
 !! URxvt Appearance
 URxvt.background:				#000000
-URxvt.font: 						xft:monospace:size=11
-urxvt*transparent: 			true
-urxvt*shading: 					25
+URxvt.font: 						xft:DejaVu Sans Mono:size=12:hinting=true:antialias=true
 
 URxvt.letterSpace: 			0
 URxvt.lineSpace: 				0
