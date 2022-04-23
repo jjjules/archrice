@@ -55,9 +55,14 @@ exec --no-startup-id urxvt -name dropdown_term -e zsh -c 'zsh || zsh || zsh || z
 for_window [class="Pavucontrol"] floating enable
 for_window [class="firefox" instance="Places" title="Library" window_role="Organizer"] floating enable
 for_window [class="Blueberry.py"] floating enable
+<<<<<<< Updated upstream
 for_window [title="file-launcher"] floating enable
 for_window [title="file-launcher"] resize set 850 540
 for_window [title="file-launcher"] move position center
+=======
+for_window [class="Arandr"] floating enable
+for_window [class="Arandr"] resize set 850 450
+>>>>>>> Stashed changes
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
