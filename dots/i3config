@@ -27,8 +27,8 @@ set_from_resource $white		i3wm.color7 #DADAE8
 
 ## Status Bar ##
 bar {
-	wheel_up_cmd nop
-  wheel_down_cmd nop
+	bindsym button4 nop
+  bindsym button5 nop
 	status_command i3blocks
 	position bottom
 
@@ -55,14 +55,11 @@ exec --no-startup-id urxvt -name dropdown_term -e zsh -c 'zsh || zsh || zsh || z
 for_window [class="Pavucontrol"] floating enable
 for_window [class="firefox" instance="Places" title="Library" window_role="Organizer"] floating enable
 for_window [class="Blueberry.py"] floating enable
-<<<<<<< Updated upstream
 for_window [title="file-launcher"] floating enable
 for_window [title="file-launcher"] resize set 850 540
 for_window [title="file-launcher"] move position center
-=======
 for_window [class="Arandr"] floating enable
 for_window [class="Arandr"] resize set 850 450
->>>>>>> Stashed changes
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
@@ -108,7 +105,8 @@ bindsym XF86AudioMicMute			exec --no-startup-id "$SCRIPTS_PATH/micmutetoggle"
 
 bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
-bindsym $mod+XF86Display			exec --no-startup-id "$SCRIPTS_PATH/screenlayout/hdmi-same.sh ; outhdmi"
+#bindsym XF86Display						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
+bindsym F8										exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym F9										exec --no-startup-id "$SCRIPTS_PATH/wifi --restart"
 bindsym F10			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to suspend?' 'systemctl suspend'"
 bindsym F11			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
@@ -165,7 +163,7 @@ bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+f 						fullscreen toggle
 bindsym $mod+Shift+f			exec --no-startup-id "eval $(dircolors -b $DOTS_PATH/ls_colors);urxvt -e $SCRIPTS_PATH/lfub"
 
-bindsym $mod+g						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
+#bindsym $mod+g
 bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+h 						exec --no-startup-id "$SCRIPTS_PATH/i3focus left"

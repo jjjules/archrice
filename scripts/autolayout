@@ -1,42 +1,23 @@
 #!/bin/zsh
-# Script for quickly confuring monitor
-# layouts for laptop and desktop computers
+# Automatic detection and setup of monitors
 #
-# d1: Only primary display for desktop
-# d2: Both monitors for desktop
-# l1: Only primary display for laptop
-# l2: Duplicate screen for laptop
-# l3: Side-by-side screens for laptop
-set -e
+# E.g. it will detect all monitors (from laptop,
+# HDMI, etc.), duplicate the screen on all of them
+# and setup the sound output to HDMI if present.
 
-if [ $# -eq 1 ]; then
-	arg=$1
-else
-	if [ "$(sudo dmidecode -t baseboard | grep -i manufacturer | awk '{print tolower($2)}')" = 'asustek' ]; then
-		avlayouts='d1\nd2'
-	else
-		avlayouts='l1\nl2\nl3'
-	fi
-	arg="$(echo -e $avlayouts | dmenu -p 'Select the layout:')"
-fi
+format_xrandr="$(xrandr |\
+									grep -oE '.*(dis)?connected( primary)?|[0-9]+x[0-9]+[^0-9+].*\+'|\
+									sed -r '/\<connected/ {N; s/ *\n/ /}' |\
+									sed '/^\s*[0-9]/d' |\
+									sed -e 's/\(\S\+\) disconnected/--output \1 --off/' |\
+									sed -E 's/([-a-zA-Z0-9]+) connected( primary)? ([0-9]+x[0-9]+).*/--output \1 --mode \3 \2/' |\
+									sed 's/primary/--primary/')"
 
-if [ $arg = 'd1' ]; then
-	xrandr --output DP-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal \
-		--output HDMI-1 --off --output HDMI-2 --off --output HDMI-3 --off
-elif [ $arg = 'd2' ]; then
-	xrandr --output DP-1 --primary --mode 2560x1440 --pos 0x0 --rotate normal --output HDMI-1 \
-		--off --output HDMI-2 --mode 1920x1080 --pos 2560x0 --rotate normal --output HDMI-3 --off
-elif [ $arg = 'l1' ]; then
-	xmodmap -e 'keycode 9 = Caps_Lock'
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --off --output DP-1 --off --output HDMI-2 --off
-elif [ $arg = 'l2' ]; then
-	xmodmap -e 'keycode 9 = Escape'
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal \
-		--output HDMI-1 --mode 1920x1080 --pos 0x0 --rotate normal \
-		--output DP-1 --off --output HDMI-2 --off
-	outhdmi
-elif [ $arg = 'l3' ]; then
-	xmodmap -e 'keycode 9 = Escape'
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output HDMI-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output HDMI-2 --off
+hdmi_present=$(grep -i 'hdmi.*mode' 2>/dev/null <<<$format_xrandr)
+
+if ! [ -z $hdmi_present ]
+then
 	outhdmi
 fi
+
+xargs -- xrandr <<<$format_xrandr
