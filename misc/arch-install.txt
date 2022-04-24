@@ -89,8 +89,11 @@ reboot
 ########################################################################################
 
 betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
-git clone git@github.com:jjjules/custom.git
+
 -> recover private key to KEYFILE
 gpg --import KEYFILE
 -> trust key with gpg --edit-key
 shred the KEYFILE
+
+login to firefox (+ change download folder), mailspring
+install vim plugins, compile YouCompleteMe

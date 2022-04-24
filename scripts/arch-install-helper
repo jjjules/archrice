@@ -65,15 +65,12 @@ done
 ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 
 # Add cron jobs
-# Must run as $USER and make sure it works when no cron file exists
-#crontab -l 2>/dev/null
-#echo "*/5 * * * * $SCRIPTS_PATH/cron-rmdir-maj-home" | crontab -
-#echo "*/30 * * * * $SCRIPTS_PATH/cron-partition-check" | crontab -
+sudo -u $USER sh -c "crontab - <$DOTS_PATH/crontab"
 
 # Misc bootstrap setup for programs config
-sudo -u jules -g wheel mkdir -p "$HOME/.vim/undo" | true
-sudo -u jules -g wheel mkdir -p $XDG_DATA_HOME/{trash,bash,zsh} || true
-sudo -u jules -g wheel cp $DOTS_PATH/zshenv $HOME/.zshenv
+sudo -u $USER -g wheel mkdir -p "$HOME/.vim/undo" | true
+sudo -u $USER -g wheel mkdir -p $XDG_DATA_HOME/{trash,bash,zsh} || true
+sudo -u $USER -g wheel cp $DOTS_PATH/zshenv $HOME/.zshenv
 
 echo 'Before config in home'
 # Config files in home
