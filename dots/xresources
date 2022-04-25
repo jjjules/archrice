@@ -32,7 +32,6 @@
 #define c07 #bfbaac
 #define c15 #fdf6e3
 
-
 *.color0:				c00
 *.color8:    		c08
 *.color1:       c01
@@ -53,44 +52,57 @@
 ! special
 *.foreground:   #f0f1f1
 *.background:   #020202
+*.background:   #020204
 *.cursorColor:  #f0f1f1
 
-!! URxvt settings
-URxvt.saveLines: 50000
 
-!! URxvt Appearance
-URxvt.background:				#000000
-URxvt.font: 						xft:DejaVu Sans Mono:size=12:hinting=true:antialias=true
 
-URxvt.letterSpace: 			0
-URxvt.lineSpace: 				0
-URxvt.internalBorder: 	5
-URxvt.cursorBlink: 			true
-URxvt.cursorUnderline:	false
+
+# General settings
+*.letterSpace: 			0
+*.lineSpace: 				0
+*.internalBorder: 	8
+*.cursorBlink: 			true
+*.cursorUnderline:	false
+
+
+
+
+!! st
+st.font:						DejaVu Sans Mono:size=12:hinting=true:antialias=true,Font Awesome 6 Free:size=11
+
+
+
+
+!! URxvt
+URxvt.saveLines: 				50000
 URxvt.scrollBar: 				false
-URxvt.saveline: 				10000
 URxvt.iso14755: 				false
 URxvt.iso14755_52: 			false
+URxvt.font:							xft:DejaVu Sans Mono:size=12:hinting=true:antialias=true,xft:Font Awesome 6 Free:size=11
+URxvt.colorUL: 					#4682B4
+URxvt.perl-ext-common:	default,clipboard,matcher,resize-font,url-select,keyboard-select
 
-!! Extensions
-URxvt.perl-ext-common:					default,clipboard,matcher,resize-font,url-select,keyboard-select
-URxvt.colorUL: 									#4682B4
-!! clipboard
+! clipboard
 URxvt.keysym.M-c: 							perl:clipboard:copy
 URxvt.keysym.M-v: 							perl:clipboard:paste
 URxvt.clipboard.autocopy: 			true
-!!url-select:
+
+!url-select:
 URxvt.url-select.underline: 		true
 URxvt.url-select.launcher: 			/usr/bin/xdg-open
 URxvt.keysym.M-u:								perl:url-select:select_next
-!! keyboard-select
+
+! keyboard-select
 URxvt.keysym.M-k: 							perl:keyboard-select:activate
 URxvt.keysym.M-s:								perl:keyboard-select:search
 URxvt.keyboard-select.clipboard: true
-!! resize-font
+
+! resize-font
 URxvt.resize-font.bigger:  			M-o
 URxvt.resize-font.smaller: 			M-i
-!! matcher
+
+! matcher
 URxvt.urlLauncher:							/usr/bin/xdg-open
 URxvt.underlineURLs: 						true
 URxvt.matcher.button:						1
