@@ -7,6 +7,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		Plugin 'VundleVim/Vundle.vim'
 		Plugin 'ycm-core/YouCompleteMe'
 		Plugin 'junegunn/fzf.vim'
+		Plugin 'junegunn/goyo.vim'
 		" Plugin 'djoshea/vim-autoread'
 		Plugin 'tpope/vim-commentary'
 		Plugin 'christoomey/vim-system-copy'
@@ -26,12 +27,16 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		" Plugin 'christoomey/vim-titlecase'
 		" Plugin 'rhysd/git-messenger.vim'
 	call vundle#end()
+
 	" Plugin mappings and options
 		"" Fzf
 		nnoremap <leader>f		:update<CR>:Files<CR>
 		nnoremap <leader>h		:update<CR>:History<CR>
 		nnoremap <leader>/		:History/<CR>
 		nnoremap <leader>:		:History:<CR>
+
+		"" Goyo
+		nnoremap <leader>g		:Goyo \| set linebreak<CR>
 
 		"" Commentary
 		nmap cm gc
@@ -141,12 +146,12 @@ endif
 	vnoremap		<C-S>				<C-C>:update<CR>
 	inoremap		<C-S>				<C-O>:update<CR>
 	nnoremap		<C-6>				:update<C-6>
-	map					Q						<Nop>
 	noremap			0 ^
 	noremap 		^ 0
 	nnoremap		<leader>0		^
 	nnoremap		n	nzzzv
 	nnoremap		N	Nzzzv
+	noremap			Q						gq
 	nnoremap		<leader>aw	m':g/^/norm gqq<CR>''zz
 	noremap			<leader>ac	:setlocal spell!<CR>
 	nnoremap		<leader>i		:b#<CR>
@@ -215,15 +220,22 @@ endif
 	set statusline+=\ %n          " Buffer number
 	set statusline+=\ [%b,0x%B]\  " ASCII and byte code under cursor
 
-" Mysterious command for the map of <CR> in normal mode
-	autocmd CmdwinEnter * nnoremap <CR> <CR>
-	autocmd BufReadPost quickfix nnoremap <CR> <CR>
+" Automatic .Xresources loading
+	autocmd BufWritePost \c*xresources,\c*xdefaults !xrdb %
 
 " When opening a file, put cursor at last position it was in it
-autocmd BufReadPost *
-	\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
-	\ |   exe "normal! g`\""
-	\ | endif
+	autocmd BufReadPost *
+		\ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+		\ |   exe "normal! g`\""
+		\ | endif
+
+" :W sudo saves the file
+	command W w !sudo tee % > /dev/null
+
+" Set syntax for known files
+	autocmd BufNewFile,BufRead *profile set syntax=zsh
+	autocmd BufNewFile,BufRead *xinitrc set syntax=sh
+	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 
 " Automatically deletes trailing white spaces on save
 	fun! DeleteTrailinfWhiteSpaces()
@@ -241,14 +253,6 @@ autocmd BufReadPost *
 	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
 	autocmd BufWritePre * :%s,^\s\+$,,e
 
-" :W sudo saves the file
-	command W w !sudo tee % > /dev/null
-
-" Set syntax for known files
-	autocmd BufNewFile,BufRead *profile set syntax=zsh
-	autocmd BufNewFile,BufRead *xinitrc set syntax=sh
-
-
 " Setup automatic fold
 " -> https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
 "
@@ -265,6 +269,10 @@ augroup AutoSaveGroup
   autocmd BufWinEnter ?* silent! loadview
 augroup end
 set viewoptions-=options	" Avoid directory change because of loadview
+
+" Mysterious command for the map of <CR> in normal mode
+	autocmd CmdwinEnter * nnoremap <CR> <CR>
+	autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
 " https://vim.fandom.com/wiki/Capitalize_words_in_insert_and_normal_modes_without_moving_the_cursor
 "Place in vimrc file

@@ -77,6 +77,7 @@ alias pmr='sudo pacman -Rns'
 alias pmu='sudo pacman -Syyu'
 alias parus='paru -S'
 alias paruss='paru -Ss'
+alias parur='paru -Rns'
 alias paruu='paru -Syyu'
 
 # GNU
@@ -134,7 +135,7 @@ alias zd="cd $DOTS_PATH"
 alias xrc="vim $DOTS_PATH/xinitrc"
 alias prc="vim $DOTS_PATH/profile"
 alias zrc="vim ${ZDOTDIR:-$HOME}/.zshrc"
-alias vrc="vim $DOTS_PATH/vimrc"
+alias vrc="vim $DOTS_PATH/vim/vimrc"
 alias zs="cd $SCRIPTS_PATH"
 alias zco="cd ~/.config/"
 alias zcu="cd $CUSTOM_PATH"
