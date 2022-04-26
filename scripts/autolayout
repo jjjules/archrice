@@ -13,11 +13,5 @@ format_xrandr="$(xrandr |\
 									sed -E 's/([-a-zA-Z0-9]+) connected( primary)? ([0-9]+x[0-9]+).*/--output \1 --mode \3 \2/' |\
 									sed 's/primary/--primary/')"
 
-hdmi_present=$(grep -i 'hdmi.*mode' 2>/dev/null <<<$format_xrandr)
-
-if ! [ -z $hdmi_present ]
-then
-	outhdmi
-fi
-
 xargs -- xrandr <<<$format_xrandr
+outhdmi
