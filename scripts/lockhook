@@ -35,7 +35,7 @@ else
 	# Only exported variables can be used within the timer's command.
 	export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
 
-	waitbeforedim=180
+	waitbeforedim=300
 	waitbeforelock=15
 	waitbeforesuspend=10
 
