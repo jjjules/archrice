@@ -11,7 +11,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_DATA_DIRS='/usr/local/share:/usr/share'
 export XDG_CONFIG_DIRS='/etc/xdg'
 
-export TERMINAL='urxvt'
+export TERMINAL='st'
 export EDITOR='vim'
 export VISUAL='vim'
 export BROWSER='/usr/bin/firefox'

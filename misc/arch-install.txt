@@ -83,6 +83,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 reboot to verify installation
 run arch-install-helper with sudo, redirection and pipe to tee to save logs
+clone st fork
 systemctl --user enable clipmenud
 reboot
 

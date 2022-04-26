@@ -1,6 +1,8 @@
 # Misc
 - Rice: finish picom, color and rofi config
+- Switch to st: need search and copy in buffer and urls select
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
+- Move oh-my-zsh, vim plugins and st as submodules of custom/
 - Rename workspace using rofi
 - Save photos
 - Save old pass store and add passphrase

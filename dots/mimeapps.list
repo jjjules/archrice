@@ -1,18 +1,18 @@
 [Default Applications]
-text/plain=vim-urxvt.desktop
-text/english=vim-urxvt.desktop
-text/x-shellscript=vim-urxvt.desktop
-text/x-markdown=vim-urxvt.desktop
-text/x-tex=vim-urxvt.desktop
-text/x-python=vim-urxvt.desktop
-text/x-script.python=vim-urxvt.desktop
-text/x-readme=vim-urxvt.desktop
-text/x-c=vim-urxvt.desktop
-text/x-makefile=vim-urxvt.desktop
-text/c++=vim-urxvt.desktop
-text/x-ruby=vim-urxvt.desktop
-text/x-asm=vim-urxvt.desktop
-application/json=vim-urxvt.desktop
+text/plain=vim-st.desktop
+text/english=vim-st.desktop
+text/x-shellscript=vim-st.desktop
+text/x-markdown=vim-st.desktop
+text/x-tex=vim-st.desktop
+text/x-python=vim-st.desktop
+text/x-script.python=vim-st.desktop
+text/x-readme=vim-st.desktop
+text/x-c=vim-st.desktop
+text/x-makefile=vim-st.desktop
+text/c++=vim-st.desktop
+text/x-ruby=vim-st.desktop
+text/x-asm=vim-st.desktop
+application/json=vim-st.desktop
 
 application/pdf=org.pwmt.zathura.desktop
 

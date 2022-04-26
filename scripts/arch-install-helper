@@ -27,7 +27,7 @@ fi
 
 # AUR package installation
 sudo -u $USER paru -Sy
-sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
+sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook urxvt-resize-font-git libxft-bgra dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
 
 # Enable systemd services
 systemctl enable systemd-timesyncd.service
@@ -108,7 +108,8 @@ for i in {1..${#confignames}}; do
 	fi
 done
 
-# Add urxvt vim launcher
+# Add shell vim launchers
+sed 's/^Exec=\(.*\)/Exec=st -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-st.desktop > /dev/null
 sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-urxvt.desktop > /dev/null
 
 # Sddm login manager
