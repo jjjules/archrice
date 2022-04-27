@@ -79,15 +79,16 @@ cmd bulkrename ${{
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map zz cd /home/jules
+map zr cd /
 map zd cd /home/jules/documents
 map zw cd /home/jules/downloads
 map zi cd /home/jules/images
 map zv cd /home/jules/videos
-map zm cd /home/jules/musics
+map zmu cd /home/jules/musics
+map zmt cd /mnt/
 map zco cd /home/jules/.config
 map zcu cd /home/jules/custom/
-map zs cd /home/jules/custom/scripts/
-map zmt cd /mnt/
+map zs  cd /home/jules/custom/scripts/
 
 map gh
 map g top
@@ -104,10 +105,10 @@ map X !$f
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
-map I push A<c-a> # at the very beginning
+map I push A<c-a> 					# at the very beginning
 map a push A<a-b><a-b><a-f> # before extension
-map A rename # at the very end
-map c push A<c-u> # new rename
+map A rename 								# at the very end
+map c push A<c-u> 					# new rename
 map B bulkrename
 
 map <c-e> down
