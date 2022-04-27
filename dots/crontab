@@ -1,2 +1,3 @@
-* * * * * $HOME/custom/scripts/cron-rmdir-maj-home
-* * * * * $HOME/custom/scripts/cron-partition-check
+*/5  * * * * $HOME/custom/scripts/cron/rmdir-maj-home
+*/30 * * * * $HOME/custom/scripts/cron/partition-check
+*/30 * * * * $HOME/custom/scripts/cron/check-update

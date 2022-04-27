@@ -1,4 +1,0 @@
-#!/bin/sh
-
-rmdir /home/jules/Desktop   &>/dev/null
-rmdir /home/jules/Downloads &>/dev/null

@@ -1,11 +1,13 @@
 # Misc
-- Rice: finish picom, color and rofi config
-- Switch to st: need search and copy in buffer and urls select
+- Rice: picom, color, system tray and rofi config
+- Dmenu should use Xresources for the colors
+- Add pipe to jq for json in lf and handle multiple file deletion with D
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
 - Move oh-my-zsh, vim plugins and st as submodules of custom/
 - Rename workspace using rofi
+- Setup syncthing
+- Setup calendar app
 - Save photos
-- Save old pass store and add passphrase
 - zsh as in arch install: autocorrect, tab does not directly enter the 'visual' mode(+ better tab propositions)
 
 # Bugs

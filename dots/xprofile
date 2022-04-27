@@ -1,12 +1,9 @@
-# Set Keyboard Layout
+xrdb -merge $HOME/.Xresources
+
 $SCRIPTS_PATH/setkb
-
-# Set screen saver
-xset s 300 10
-
-# Set wallpaper and start background programs
 $SCRIPTS_PATH/setwp
+$SCRIPTS_PATH/mute on &
+redshift -l 46.55:6.6006 -g 0.8 -b 1:0.8 &
 unclutter &
 dunst &
-redshift -l 46.5:6.64 -g 0.8 &
-pactl set-sink-mute 0 1
+mpd &

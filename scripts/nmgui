@@ -1,6 +1,6 @@
 #!/bin/bash
-# Script allowing to efficiently connect
-# to a wifi that has complicated setup.
+# Quickly open a graphical interface to
+# connect to a wifi
 
 nm-applet &>/dev/null &
 stalonetray &>/dev/null
