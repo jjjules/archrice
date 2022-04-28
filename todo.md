@@ -1,7 +1,7 @@
 # Misc
 - Rice: picom, color, system tray and rofi config
 - Dmenu should use Xresources for the colors
-- Add pipe to jq for json in lf and handle multiple file deletion with D
+- Handle multiple file deletion with D in lf
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
 - Move oh-my-zsh, vim plugins and st as submodules of custom/
 - Rename workspace using rofi

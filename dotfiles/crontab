@@ -1,0 +1,3 @@
+* * * * * 		rmdir $HOME/{Desktop,Downloads}
+*/30 * * * *	source $HOME/.profile && $SCRIPTS_PATH/cron/partition-check
+*/30 * * * *	source $HOME/.profile && $SCRIPTS_PATH/cron/check-update

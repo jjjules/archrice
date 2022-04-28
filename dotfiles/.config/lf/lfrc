@@ -38,6 +38,7 @@ cmd open ${{
 	esac
 }}
 
+cmd cd $cd "$(echo $* | tr ' ' '\ ')"
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
 cmd delete ${{
@@ -79,6 +80,7 @@ cmd bulkrename ${{
 
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
+#map -  cd -
 map zz cd /home/jules
 map zr cd /
 map zd cd /home/jules/documents
@@ -88,10 +90,9 @@ map zv cd /home/jules/videos
 map zmu cd /home/jules/musics
 map zmt cd /mnt/
 map zco cd /home/jules/.config
-map zcu cd /home/jules/custom/
-map zs  cd /home/jules/custom/scripts/
+map zcu cd /home/jules/archrice
+map zs  cd /home/jules/archrice/scripts
 
-map gh
 map g top
 map D delete
 map E extract
@@ -100,7 +101,7 @@ map M moveto
 map <c-n> push :mkdir<space>
 map <c-r> reload
 map <c-s> set hidden!
-map <enter> shell
+map S shell zsh
 map x $$f
 map X !$f
 map o &mimeopen $f
@@ -109,7 +110,7 @@ map O $mimeopen --ask $f
 map I push A<c-a> 					# at the very beginning
 map a push A<a-b><a-b><a-f> # before extension
 map A rename 								# at the very end
-map c push A<c-u> 					# new rename
+map cc push A<c-u> 					# new rename
 map B bulkrename
 
 map <c-e> down

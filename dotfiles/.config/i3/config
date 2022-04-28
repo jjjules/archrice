@@ -75,7 +75,7 @@ set $ws10 "10"
 
 ## Startup scripts
 exec --no-startup-id "$HOME/.config/autostart/startup-check-update"
-exec --no-startup-id "$HOME/custom/scripts/lockhook"
+exec --no-startup-id "$SCRIPTS_PATH/lockhook"
 exec --no-startup-id "picom --experimental-backends -b"
 
 ## Special Key Bindings ##

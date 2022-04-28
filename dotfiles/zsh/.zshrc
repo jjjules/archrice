@@ -132,7 +132,6 @@ alias gll="git log --all --oneline --graph --format=format:'%C(bold blue)%h%C(re
 # Dotfiles Shortcuts
 alias szrc="source ${ZDOTDIR:-$HOME}/.zshrc"
 alias zd="cd $DOTS_PATH"
-alias xrc="vim $DOTS_PATH/xinitrc"
 alias prc="vim $DOTS_PATH/profile"
 alias zrc="vim ${ZDOTDIR:-$HOME}/.zshrc"
 alias vrc="vim $DOTS_PATH/vim/vimrc"
@@ -152,6 +151,7 @@ alias keyum="sudo umount /mnt/usbkey"
 # Utilities
 alias todo="vim $CUSTOM_PATH/todo.md"
 alias programs="vim $CUSTOM_PATH/misc/programs"
+alias flv='fl --vim'
 alias ccp='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
 alias ocp='fc -e - | head -n1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
 alias mocp='fc -e - | xsel -ib'

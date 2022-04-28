@@ -2,32 +2,63 @@
 trap "exit" INT
 set -e
 
+USER=jules
+export HOME="/home/$USER"
+source $HOME/archrice/dots/profile
+source $DOTS_PATH/zshenv
+
+TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
+echo "Backup at $TMP"
+
+# Install AUR helper
+if [ ! -f /usr/bin/paru ];then
+	echo "Installing paru..."
+	sudo -u $USER mkdir -p $HOME/documents/repos
+	cd $HOME/documents/repos
+	sudo -u $USER git clone https://aur.archlinux.org/paru.git
+	cd paru
+	sudo -u $USER makepkg -si
+	echo "Done"
+fi
+
 # Package installation
 pacman -Sy
 pacman -S pacman-contrib reflector sshpass pass xclip openconnect htop mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal network-manager-applet stalonetray zsh-completions ttf-font-awesome ttf-dejavu ctags wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python python-pip bpython firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer docx2txt odt2txt bat lynx fzf dunst dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
 
-pip3 install --user -U readchar numpy thefuck
-
-USER=jules
-export HOME="/home/$USER"
-source $HOME/custom/dots/profile
-source $DOTS_PATH/zshenv
-
-# Install vim plugin manager and paru
-[ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER -g wheel git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-if [ ! -f /usr/bin/paru ];then
-	echo "Installing paru..."
-	sudo -u $USER -g wheel mkdir -p $HOME/documents/repos
-	cd $HOME/documents/repos
-	sudo -u $USER -g wheel git clone https://aur.archlinux.org/paru.git
-	cd paru
-	sudo -u $USER -g wheel makepkg -si
-	echo "Done"
-fi
-
-# AUR package installation
 sudo -u $USER paru -Sy
 sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook urxvt-resize-font-git libxft-bgra dragon-drop-git mailspring miniconda3 tldr++ hfsprogs --noconfirm
+
+pip3 install --user -U readchar numpy thefuck
+
+# Install vim plugin manager
+[ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+
+# Install Oh-my-zsh
+if [ -d $ZSH ]; then
+	vared -p "Oh-my-zsh folder exists, Delete it? " -c reply
+	if [[ $reply =~ "^[yY](es)?$" ]]
+	then
+		rm -rf $ZSH
+	fi
+fi
+sudo -u $USER --preserve-env=ZSH sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+sudo -u $USER ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+
+# Install zsh plugins
+plugins=('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
+plugins_url=('https://github.com/zsh-users/zsh-autosuggestions.git' 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'https://github.com/TamCore/autoupdate-oh-my-zsh-plugins')
+for i in {1..${#plugins}}
+do
+	url=${plugins_url[$i]}
+	dest="$ZSH_CUSTOM/plugins/${plugins[$i]}"
+	! [ -d $dest ] && sudo -u $USER git clone $url $dest
+	echo
+done
+
+# Install login manager theme
+echo 'Extracting sddm-chili theme ...'
+tar -xzvf $CUSTOM_PATH/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
+echo
 
 # Enable systemd services
 systemctl enable systemd-timesyncd.service
@@ -36,94 +67,68 @@ systemctl enable sddm.service
 systemctl enable bluetooth.service
 systemctl enable betterlockscreen@${USER}
 
-TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
-echo "Backup at $TMP"
-
-# Get Oh-my-zsh
-if [ -d $ZSH ]; then
-	vared -p "Oh-my-zsh folder exists, Delete it? " -c reply
-	if [[ $reply =~ "^[yY](es)?$" ]]
-	then
-		rm -rf $ZSH
-	fi
-fi
-sudo -u $USER -g wheel --preserve-env=ZSH sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-sudo -u $USER -g wheel ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
-
-# Get zsh plugins
-plugins=('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
-plugins_url=('https://github.com/zsh-users/zsh-autosuggestions.git' 'https://github.com/zsh-users/zsh-syntax-highlighting.git' 'https://github.com/TamCore/autoupdate-oh-my-zsh-plugins')
-for i in {1..${#plugins}}
-do
-	url=${plugins_url[$i]}
-	dest="$ZSH_CUSTOM/plugins/${plugins[$i]}"
-	! [ -d $dest ] && sudo -u $USER -g wheel git clone $url $dest
-	echo
-done
-
-# Touchpad setup
-ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
-
 # Add cron jobs
 sudo -u $USER sh -c "crontab - <$DOTS_PATH/crontab"
-
-# Misc bootstrap setup for programs config
-sudo -u $USER -g wheel mkdir -p "$HOME/.vim/undo" | true
-sudo -u $USER -g wheel mkdir -p $XDG_DATA_HOME/{trash,bash,zsh} || true
-sudo -u $USER -g wheel cp $DOTS_PATH/zshenv $HOME/.zshenv
-
-echo 'Before config in home'
-# Config files in home
-homenames=('.profile' '.xprofile' '.Xresources' '.vim/vimrc' '.vim/ftplugin' '.gitconfig' '.inputrc' '.gnupg/gpg-agent.conf')
-dotsnames=('profile'  'xprofile'  'xresources'  'vim/vimrc'  'vim/ftplugin'  'gitconfig'  'inputrc' 'gpg-agent.conf')
-for i in {1..${#homenames}}; do
-	from="$DOTS_PATH/$dotsnames[$i]"
-	to="$HOME/$homenames[$i]"
-	[ -f $to -o -d $to ] && mv $to $TMP
-	! [ -d ${to%/*} ] && sudo -u $USER -g wheel mkdir -p ${to%/*}
-
-	sudo -u $USER -g wheel ln -s $from $to
-	if [ $? -eq 0 ]; then
-		echo "$homenames[$i] -> $dotsnames[$i]: Done"
-	else
-		echo "$homenames[$i] -> $dotsnames[$i]: Failed"
-	fi
-done
-
-echo 'Before config in .config'
-# Config files in .config
-confignames="$(find $DOTS_PATH/.config -maxdepth 1 | sed -n "s:$DOTS_PATH/.config/::p")"
-for name (${(f)confignames})
-do
-	from="$DOTS_PATH/.config/$name"
-	to="$HOME/.config/$name"
-	[ -f $to -o -d $to ] && mv $to $TMP
-	! [ -d ${to%/*} ] && sudo -u $USER -g wheel mkdir -p ${to%/*}
-
-	sudo -u $USER -g wheel ln -s $from $to
-	if [ $? -eq 0 ]; then
-		echo "$confignames[$i] -> $dotsnames[$i]: Done"
-	else
-		echo "$confignames[$i] -> $dotsnames[$i]: Failed"
-	fi
-done
 
 # Add shell vim launchers
 sed 's/^Exec=\(.*\)/Exec=st -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-st.desktop > /dev/null
 sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-urxvt.desktop > /dev/null
 
-# Sddm login manager
-ln -s $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
-echo 'Extracting sddm-chili theme'
-tar -xzvf $HOME/custom/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
+# Setup of dotfiles symbolic links
+echo 'Setup of config files in .config'
+confignames="$(find $DOTS_PATH/.config -maxdepth 1 | sed -n "s:$DOTS_PATH/.config/::p")"
+for name (${(f)confignames})
+do
+	from="$DOTS_PATH/.config/$name"
+	to="$HOME/.config/$name"
+
+	[ -e $to -o -L $to ] && mv $to $TMP
+	sudo -u $USER -g $USER ln -s $from $HOME/.config
+
+	[ $? -eq 0 ] && msg=Done || msg=Failed
+	echo "$to -> $from: $msg"
+done
 echo
 
-# Correct ownership and verifications
-find $HOME -maxdepth 1 -name '.zsh*' -o -name '.zcompdump*' | grep -v '.zshenv' | xargs -n1 rm --
-rm .viminfo .lesshst 2>/dev/null | true
+echo "Setup of other config files using 'config-destinations.txt'"
+while read line
+do
+	read from to <<< "$(envsubst <<< $line)"
+	from="$DOTS_PATH/$from"
+	ls $to
+	[ -e $to -o -L $to ] && echo moving
+
+
+	[ -e $to -o -L $to ] && mv $to $TMP
+	! [ -d ${to%/*} ] && sudo -u $USER -g $USER mkdir -p ${to%/*}
+	sudo -u $USER -g $USER ln -s $from $to
+
+	[ $? -eq 0 ] && msg=Done || msg=Failed
+	echo "$to -> $from: $msg"
+done < $DOTS_PATH/config-destinations.txt
+echo
+
+echo 'Setup theme for zsh'
+sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+echo 'Setup touchpad'
+ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
+echo 'Setup login manager'
+ln -fs $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
+
+# Last adjustements and verifications
 [ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
 [ -d $HOME/.cargo -a ! -z $CARGO_HOME ] && mv $HOME/.cargo $CARGO_HOME
+sudo -u $USER mkdir -p "$HOME/.vim/undo"
+sudo -u $USER mkdir -p $XDG_DATA_HOME/{trash,bash,zsh}
 sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
-chown ${USER}:wheel -R $HOME/.cache
-echo " File left in home belonging to root:"
+
+chown ${USER}:$USER -R $HOME/.cache
+echo 'File left in home belonging to root:'
 find $HOME -user root
+echo
+
+set +e
+find $HOME -maxdepth 1 -name '.zsh*' -o -name '.zcompdump*' | grep -v '.zshenv' | xargs -n1 rm --
+rm .viminfo .lesshst 2>/dev/null
+
+echo 'Done!'

@@ -1,0 +1,9 @@
+import os
+os.environ('CUSTOM_PATH')
+os.environ['CUSTOM_PATH]
+os.environ['CUSTOM_PATH']
+import re
+os.environ['CUSTOM_PATH']
+home = os.environ["HOME"]
+re.sub(home, '', os.environ['CUSTOM_PATH'])
+re.sub(f'{home}/', '', os.environ['CUSTOM_PATH'])

@@ -1,4 +1,4 @@
-# Custom
+# Archrice
 
 This repository contains my personal scripts and various configuration files for Arch Linux with the i3 window manager.
 
