@@ -41,3 +41,7 @@
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [mergetool]
 	prompt = false
+[diff]
+	submodule = log
+[push]
+	recurseSubmodules = check
