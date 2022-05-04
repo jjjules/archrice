@@ -1,3 +1,6 @@
 [submodule "st"]
 	path = st
 	url = git@github.com:jjjules/st.git
+[submodule "dmenu"]
+	path = dmenu
+	url = git@github.com:jjjules/dmenu.git
