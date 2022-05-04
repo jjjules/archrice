@@ -14,4 +14,4 @@ format_xrandr="$(xrandr |\
 									sed 's/primary/--primary/')"
 
 xargs -- xrandr <<<$format_xrandr
-outhdmi
+autosound

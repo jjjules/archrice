@@ -1,6 +1,6 @@
 # Misc
 - Rice: picom, color, system tray and rofi config
-- Change dmenu install to submodule and configure with Xresources
+- Configure with Xresources
 - Handle multiple file deletion with D in lf
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
 - Rename workspace using rofi
