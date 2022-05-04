@@ -1,6 +1,20 @@
 [user]
 	email = jules.gottraux@epfl.ch
 	name = Jules Gottraux
+[core]
+	editor = vim
+	pager = cat
+[color]
+	ui = auto
+[pager]
+	log = less
+	diff = less
+[diff]
+	submodule = log
+[pull]
+	rebase = false
+[push]
+	recurseSubmodules = check
 [alias]
 	s = status -sb
 	st = status
@@ -13,16 +27,7 @@
 	r = remote
 	br = branch
 	rs = restore --staged
-[core]
-	editor = vim
-	pager = cat
-[pager]
-	log = less
-	diff = less
-[color]
-	ui = auto
-[pull]
-	rebase = false
+	sm = submodule
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -41,7 +46,3 @@
 	cmd = git-nbmergetool merge \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [mergetool]
 	prompt = false
-[diff]
-	submodule = log
-[push]
-	recurseSubmodules = check

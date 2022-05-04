@@ -124,7 +124,7 @@ alias gb='git branch'
 alias gco='git checkout'
 alias gpl='git pull'
 alias gpls='git pull --recurse-submodules'
-alias gus='git submodule update --init --recursive'
+alias gsu='git submodule update --init --recursive --merge'
 alias gp="git push"
 alias gcno="git commit --amend --no-edit"
 alias gl="git --no-pager log -10 --oneline --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) -%C(red) %an%C(reset)%C(bold yellow)%+d%C(reset)'"
