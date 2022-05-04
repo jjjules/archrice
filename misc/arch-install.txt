@@ -97,4 +97,5 @@ gpg --import KEYFILE
 shred the KEYFILE
 
 login to firefox (+ change download folder), mailspring
+open deluge and patch core.conf (patch core.conf < $DOTS_PATH/deluge-conf.patch)
 install vim plugins, compile YouCompleteMe

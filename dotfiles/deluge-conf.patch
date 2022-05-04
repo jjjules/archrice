@@ -1,0 +1,54 @@
+--- base.conf	2022-05-04 14:03:05.131874040 +0200
++++ core.conf	2022-05-04 14:07:02.992828817 +0200
+@@ -8,12 +8,12 @@
+     "auto_managed": true,
+     "cache_expiry": 60,
+     "cache_size": 512,
+-    "copy_torrent_file": false,
++    "copy_torrent_file": true,
+     "daemon_port": 58846,
+     "del_copy_torrent_file": false,
+     "dht": true,
+     "dont_count_slow_torrents": false,
+-    "download_location": "/home/jules/Downloads",
++    "download_location": "/home/jules/downloads/torrent",
+     "download_location_paths_list": [],
+     "enabled_plugins": [],
+     "enc_in_policy": 1,
+@@ -25,7 +25,7 @@
+     "listen_interface": "",
+     "listen_ports": [
+         6881,
+-        6891
++        6881
+     ],
+     "listen_random_port": 58880,
+     "listen_reuse_port": true,
+@@ -39,13 +39,13 @@
+     "max_connections_per_torrent": -1,
+     "max_download_speed": -1.0,
+     "max_download_speed_per_torrent": -1,
+-    "max_half_open_connections": 50,
++    "max_half_open_connections": 20,
+     "max_upload_slots_global": 4,
+     "max_upload_slots_per_torrent": -1,
+     "max_upload_speed": -1.0,
+     "max_upload_speed_per_torrent": -1,
+-    "move_completed": false,
+-    "move_completed_path": "/home/jules/Downloads",
++    "move_completed": true,
++    "move_completed_path": "/home/jules/downloads/torrent/done",
+     "move_completed_paths_list": [],
+     "natpmp": true,
+     "new_release_check": true,
+@@ -89,7 +89,7 @@
+     "stop_seed_at_ratio": false,
+     "stop_seed_ratio": 2.0,
+     "super_seeding": false,
+-    "torrentfiles_location": "/home/jules/Downloads",
++    "torrentfiles_location": "/home/jules/downloads/torrent",
+     "upnp": true,
+     "utpex": true
+-}
++}
+\ No newline at end of file
