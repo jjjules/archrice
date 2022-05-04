@@ -1,9 +1,8 @@
 # Misc
 - Rice: picom, color, system tray and rofi config
-- Dmenu should use Xresources for the colors
+- Change dmenu install to submodule and configure with Xresources
 - Handle multiple file deletion with D in lf
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
-- Move oh-my-zsh, vim plugins and st as submodules of custom/
 - Rename workspace using rofi
 - Setup syncthing
 - Setup calendar app

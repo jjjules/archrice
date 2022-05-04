@@ -6,7 +6,8 @@ export PATH=/usr/bin
 USER_NAME=$(who | awk -v vt=tty$(fgconsole) '$0 ~ vt {print $1}')
 USER_ID=$(id -u "$USER_NAME")
 CARD_PATH="/sys/class/drm/card0/"
-AUDIO_OUTPUT="$(pacmd list-sinks | sed -n 's/\s*device\.profile\.name = \"\(.*\)\"/\1/p')"
+AUDIO_OUTPUT="analog-stereo"
+echo "default output: $AUDIO_OUTPUT"
 PULSE_SERVER="unix:/run/user/"$USER_ID"/pulse/native"
 
 for OUTPUT in $(cd "$CARD_PATH" && echo card*); do
