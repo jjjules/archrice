@@ -76,7 +76,8 @@ set $ws10 "10"
 ## Startup scripts
 exec --no-startup-id "$HOME/.config/autostart/startup-check-update"
 exec --no-startup-id "$SCRIPTS_PATH/lockhook"
-exec --no-startup-id "picom --experimental-backends -b"
+exec --no-startup-id 'picom --experimental-backends -b'
+exec --no-startup-id autotiling
 
 ## Special Key Bindings ##
 # bindsym Ctrl+D [con_id="__focused__" instance="^(?dropdown_).*$"] nop

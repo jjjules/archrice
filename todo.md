@@ -1,6 +1,6 @@
 # Misc
 - Rice: picom, color, system tray and rofi config
-- Configure with Xresources
+- Handle update of paru/st/dmenu (for suckless add info of original remote in repo for checking)
 - Handle multiple file deletion with D in lf
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
 - Rename workspace using rofi
