@@ -47,6 +47,7 @@
 - xidlehook: inquire dimscreen script, as it may work better with it
 
 # Thing to learn/improve
+- Switch autotiling behavior (for example with i3-master-stack)
 - Switch to miniforge or mamba (or mambaforge)
 - Check https://www.reddit.com/r/i3wm/comments/6txwcz/light_desktop_environment_to_use_i3_on/ for "desktop env." setup just using independent programs (screen locking etc.) Also https://gist.github.com/lbrame/1678c00213c2bd069c0a59f8733e0ee6
 - Switch to vifm? (with qmv (rename-utils) for bulkrename) 
