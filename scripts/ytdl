@@ -1,0 +1,227 @@
+#!/bin/bash
+#
+# Very simple UI using zenity to download videos/musics from
+# Youtube either with a list of urls in a file or interactively.
+# Default to download the sound only in $HOME/ytdl-musics.
+#
+# Depencies: zenity, yt-dlp or youtube-dl, and ytfzf for interactive searching
+#
+# Run `sudo ytdl --install` to install the program as a desktop application
+
+usage () {
+printf "%s" \
+  "Usage: ytdl [OPTIONS...]
+
+  OPTIONS:
+  -h, --help        Show this help text
+  -t, --threads     Number of parallel threads to use when downloading from a file
+                    (default to 7)
+  -v, --video       Use video instead of only audio
+  -p, --play        Play the music or video instead of downloading
+  -o, --output      Output directory to put the downloads
+	--install         Install the script as a desktop application
+                    (must be run with root privilege)
+	--uninstall       Uninstall the application
+  "
+}
+
+install() {
+	if [ "$EUID" -ne 0 ]
+	then
+		echo "Please run as root to install"
+		exit 3
+	fi
+
+	set -e
+	ytdl_script_name="$(basename "$0")"
+	ytdl_dir="$(dirname "$0")"
+	echo 'Copying script to /usr/bin/'
+	cp "$ytdl_dir/$ytdl_script_name" /usr/bin/
+
+	echo 'Creating desktop application'
+	printf "%s" \
+		"[Desktop Entry]
+Name=ytdl
+GenericName=Youtube downloader UI base on yt-dlp
+Icon=ytdl
+Exec=ytdl
+Terminal=false
+Type=Application
+Categories=Network;AudioVideo;FileTransfer;
+StartupNotify=true
+" > /usr/share/applications/ytdl.desktop
+
+	if [ -f "${ytdl_dir%/*}/misc/ytdl.png" ]
+	then
+		echo 'Found icon for desktop application'
+		cp "${ytdl_dir%/*}/misc/ytdl.png" /usr/share/pixmaps/
+	fi
+
+	read -p "Enter the target directory for the downloads (defaults to ~/ytdl-musics): "\
+		output_dir
+	output_dir=${output_dir:-'ytdl-musics'}
+	if [ "${output_dir::1}" = '/' ]
+	then
+		echo "Using $output_dir as default target directory"
+	else
+		echo "Using ~/$output_dir as default target directory"
+		output_dir='$HOME/'"$output_dir"
+	fi
+	sed -i "s;OUTPUT_DIR='.*';OUTPUT_DIR='$output_dir';" /usr/bin/ytdl
+
+	echo
+	echo Done
+	exit 0
+}
+
+uninstall() {
+	if [ "$EUID" -ne 0 ]
+	then
+		echo "Please run as root to uninstall"
+		exit 3
+	fi
+
+	echo Removing script, desktop application and icon
+	rm /usr/bin/ytdl /usr/share/applications/ytdl.desktop /usr/share/pixmaps/ytdl.png &>/dev/null
+
+	echo
+	echo Done
+	exit 0
+}
+
+OUTPUT_DIR="$HOME/ytdl-musics/"
+OUTPUT_FORMAT='%(title)s.%(ext)s'
+NTHREADS=7
+
+which 'yt-dlp' &>/dev/null && DL_PROG="yt-dlp" || DL_PROG="youtube-dl"
+! which $DL_PROG &>/dev/null && echo 'You need a youtube downloader installed.' && exit 1
+
+if ! which zenity &>/dev/null
+then
+  echo 'You must have zenity iinstalled to use the UI.' && exit 1
+fi
+
+# Handle options
+YTFZF_OPTS='-m -d -t -s'
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -h|--help)
+      usage && exit 0
+      ;;
+    -t|--threads)
+      NTHREADS=$2
+      [ -n "$NTHREADS" ] && [ "$NTHREADS" -eq "$NTHREADS" ] 2>/dev/null
+      [ $? -ne 0 ] && echo 'The number of threads must be an integer' && exit 2
+      shift
+      shift
+      ;;
+    -v|--video)
+      YTFZF_OPTS="${YTFZF_OPTS/-m/}"
+      shift
+      ;;
+    -p|--play)
+      YTFZF_OPTS="${YTFZF_OPTS/ -d/}"
+      shift
+      ;;
+    -o|--output)
+      OUTPUT_DIR="$2"
+      shift
+      shift
+      ;;
+		--install)
+			install
+			;;
+		--uninstall)
+			uninstall
+			;;
+    -*)
+      echo "Unknown option $1"
+      exit 2
+      ;;
+    *)
+      echo The ui does not take any argument
+      exit 2
+      ;;
+  esac
+done
+
+# Select terminal
+terms=(xterm st urxvt alacritty gnome-terminal terminator tilda)
+i=0
+while [ -z $TERMINAL ] && [ $i -lt ${#terms[@]} ]
+do
+	term=${terms[$i]}
+	which $term &>/dev/null && TERMINAL=$term && break
+	((i=i+1))
+done
+run_command_in_terminal() {
+	case $TERMINAL in
+		gnome-terminal)
+			$TERMINAL -- bash -c "$1"
+			;;
+		terminator|konsole)
+			$TERMINAL -e "bash -c '$1'"
+			;;
+		tilda)
+			$TERMINAL -c "bash -c '$1'"
+			;;
+		*)
+			$TERMINAL -e bash -c "$1"
+			;;
+	esac
+}
+
+
+
+ui_select_file_and_download() {
+	FILE="$(zenity --file-selection --title='Select a File')"
+	case $? in
+		0)
+			echo "'$FILE' selected."
+			;;
+		1)
+			echo 'No file selected.'
+			;;
+		-1)
+			echo 'An unexpected error has occurred.'
+			;;
+	esac
+
+	COMMAND="xargs -I '{}' -P $NTHREADS \
+    			$DL_PROG --add-metadata --no-playlist -ciw -x \
+					-o '$OUTPUT_DIR/$OUTPUT_FORMAT' {} < $FILE"
+	run_command_in_terminal "$COMMAND"
+}
+
+
+
+YTFZF_COMMAND="ytfzf $YTFZF_OPTS"
+ui_ytsearch() {
+  ! which ytfzf >/dev/null && echo 'You need to have ytfzf installed.' && exit 1
+
+  ytquery="$(zenity --entry --title='ytdl: youtube search query' --text="Type your youtube search query")"
+  ! [ -d "$OUTPUT_DIR" ] && mkdir -p "$OUTPUT_DIR"
+
+	COMMAND="cd $OUTPUT_DIR && $YTFZF_COMMAND $ytquery"
+	run_command_in_terminal "$COMMAND"
+}
+
+
+
+launch_ui(){
+  file_mode_string="From file with url list"
+  search_mode_string="With interactive searching"
+  ui_mode="$(zenity --list --title='Choose how you want to query youtube:'\
+		--column='0' "$file_mode_string" "$search_mode_string"\
+		--hide-header --width=100 --height=300)"
+
+  if [ "$ui_mode" = "$file_mode_string" ]
+  then
+    ui_select_file_and_download
+  elif [ "$ui_mode" = "$search_mode_string" ]
+  then
+    ui_ytsearch
+  fi
+}
+
+launch_ui

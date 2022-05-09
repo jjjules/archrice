@@ -1,5 +1,6 @@
 shell:				zsh + oh-my-zsh
-font:					ttf-droid, noto-font-emoji (+ttf-font-awesome for i3block's monitor script)
+shell syntax: shellcheck
+font:					ttf-dejavu, ttf-font-awesome
 terminal:			rxvt-unicode + urxvt-perls + urxvt-resize-font-git (AUR)
 text edit:		vim + gvim (clipboard) + Vundle, featherpad (standard graphical)
 latex:				texlive-most

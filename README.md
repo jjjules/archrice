@@ -8,6 +8,7 @@ This repository contains my personal scripts and various configuration files for
 Here is the description of some of the most relevant scripts:
 
 - arch-install-helper: automate the setup after a clean Arch Linux installation. It sets up important packages, an AUR helper, a locking system as well as all the configurations present in `dots/`.
+- ytdl: Simple UI built on top of [yt-dlp](https://github.com/yt-dlp/yt-dlp) and [ytfzf](https://github.com/pystardust/ytfzf) for easily download/play content from Youtube either interactively or from a list of URLs present in a file.
 - texsilent: automate the compilation of LaTeX document. The compilation is silent meaning it removes auxiliary files created
 during the compilation.
 - mdcompile: compile markdown document, either to standard PDF or presentation slides (beamer markdown).
