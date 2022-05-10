@@ -13,5 +13,11 @@ format_xrandr="$(xrandr |\
 									sed -E 's/([-a-zA-Z0-9]+) connected( primary)? ([0-9]+x[0-9]+).*/--output \1 --mode \3 \2/' |\
 									sed 's/primary/--primary/')"
 
-xargs -- xrandr <<<$format_xrandr
+if [ "$(grep -- '--mode \S\+' <<< "$format_xrandr" | sort -u | wc -l)" -gt 1 ]
+then
+	primary_output="$(sed -e '/primary/!d' -e 's/--output \(\S\+\).*/\1/' <<< "$format_xrandr")"
+	format_xrandr="$(sed "/primary/!s/--mode \S\+/& --right-of $primary_output/" <<< "$format_xrandr")"
+fi
+
+xargs -- xrandr <<< "$format_xrandr"
 autosound
