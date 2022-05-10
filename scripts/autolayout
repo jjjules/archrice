@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 # Automatic detection and setup of monitors
 #
 # E.g. it will detect all monitors (from laptop,
@@ -15,8 +15,17 @@ format_xrandr="$(xrandr |\
 
 if [ "$(grep -- '--mode \S\+' <<< "$format_xrandr" | sort -u | wc -l)" -gt 1 ]
 then
+	# Multiple monitors with different resolutions
+
+	# Scale and duplicate display
 	primary_output="$(sed -e '/primary/!d' -e 's/--output \(\S\+\).*/\1/' <<< "$format_xrandr")"
-	format_xrandr="$(sed "/primary/!s/--mode \S\+/& --right-of $primary_output/" <<< "$format_xrandr")"
+	highest_res="$(grep -oP '\d+x\d+' <<< "$format_xrandr" | sort -gr | head -n1)"
+	format_xrandr="--fb $highest_res $(sed	-e "s/--primary/& --scale-from $highest_res/" \
+																					-e "/primary/!s/--mode.*/& --same-as $primary_output/" \
+																					<<< "$format_xrandr")"
+	# To put side-by-side instead:
+	# format_xrandr="$(sed "/primary/!s/--mode \S\+/& --right-of $primary_output/" <<< "$format_xrandr")"
+
 fi
 
 xargs -- xrandr <<< "$format_xrandr"
