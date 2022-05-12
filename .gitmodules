@@ -4,3 +4,6 @@
 [submodule "dmenu"]
 	path = dmenu
 	url = git@github.com:jjjules/dmenu.git
+[submodule "scripts/z.lua"]
+	path = scripts/z.lua
+	url = git@github.com:skywind3000/z.lua.git

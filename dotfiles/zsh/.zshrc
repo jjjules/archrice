@@ -132,13 +132,9 @@ alias gll="git log --all --oneline --graph --format=format:'%C(bold blue)%h%C(re
 
 # Dotfiles Shortcuts
 alias szrc="source ${ZDOTDIR:-$HOME}/.zshrc"
-alias zd="cd $DOTS_PATH"
 alias prc="vim $DOTS_PATH/profile"
 alias zrc="vim ${ZDOTDIR:-$HOME}/.zshrc"
 alias vrc="vim $DOTS_PATH/vim/vimrc"
-alias zs="cd $SCRIPTS_PATH"
-alias zco="cd ~/.config/"
-alias zcu="cd $CUSTOM_PATH"
 alias irc="vim ~/.config/i3/config"
 
 # Mounting devices
@@ -303,3 +299,4 @@ fi
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 [ ! -f /home/jules/.config/broot/launcher/bash/br ] || source /home/jules/.config/broot/launcher/bash/br
+eval "$(lua "$SCRIPTS_PATH/z.lua" --init zsh enhanced once echo)"
