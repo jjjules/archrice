@@ -1,4 +1,8 @@
-# Misc
+# Misc$
+- VSCode setup:
+	- vscodium package
+	- extensions: anaconda extension pack, jupyter, python, vim
+	- for remapped ESC key to work: add `"keyboard.dispatch": "keyCode"` in settings.json ([issue](https://github.com/microsoft/vscode/issues/23991))
 - Rice: picom, color, system tray, rofi config, userchrome.css for firefox
 - Handle update of paru/st/dmenu (for suckless add info of original remote in repo for checking)
 - Handle multiple file deletion with D in lf
