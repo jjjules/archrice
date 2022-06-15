@@ -28,9 +28,9 @@ done
 [ -z "$dir" ] && dir="$HOME"
 
 cd $dir
-export FZF_DEFAULT_COMMAND="find . -path '*/\.git*' -prune -o\
-																	 -path 'images/*' -prune -o\
-																	 -path 'musics/*' -prune -o\
+prune_patterns=('*/\.git*' 'images/*' 'musics/*' 'aaa/*')
+prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
+export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted\
 																	 -type f -print 2> /dev/null"
 files=$(fzf -m)
 
