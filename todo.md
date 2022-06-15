@@ -11,7 +11,7 @@
 - Setup syncthing
 - Setup calendar app
 - Save photos
-- zsh as in arch install: autocorrect, tab does not directly enter the 'visual' mode(+ better tab propositions)
+- Check zsh-lovers man page
 
 # Bugs
 - Video blocking:
@@ -51,6 +51,7 @@
 - xidlehook: inquire dimscreen script, as it may work better with it
 
 # Thing to learn/improve
+- Change deepin screenshot to flameshot ? (more powerful, less heavy, independent)
 - Switch autotiling behavior (for example with i3-master-stack)
 - Switch to miniforge or mamba (or mambaforge)
 - Check https://www.reddit.com/r/i3wm/comments/6txwcz/light_desktop_environment_to_use_i3_on/ for "desktop env." setup just using independent programs (screen locking etc.) Also https://gist.github.com/lbrame/1678c00213c2bd069c0a59f8733e0ee6

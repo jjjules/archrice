@@ -59,6 +59,7 @@ screen temp handler:	redshift
 arch's updates news:	archnews2 (AUR)
 program launcher:			dmenu
 tree file listing:		tree
+term dir. navigation:	z.lua, broot
 term file browser:		lf (AUR) + atool, mediainfo in AUR and ueberzug, ffmpegthumbnailer,
 											odt2txt, bat and lynx
 pacman mirror update:	reflector

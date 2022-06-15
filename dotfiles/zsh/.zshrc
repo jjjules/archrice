@@ -298,5 +298,4 @@ fi
 # echo -ne '\e[5 q' # Use beam shape cursor on startup.
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-[ ! -f /home/jules/.config/broot/launcher/bash/br ] || source /home/jules/.config/broot/launcher/bash/br
-eval "$(lua "$SCRIPTS_PATH/z.lua" --init zsh enhanced once echo)"
+eval "$(lua "$SCRIPTS_PATH/z.lua/z.lua" --init zsh enhanced once echo)"
