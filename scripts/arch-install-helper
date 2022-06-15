@@ -10,6 +10,73 @@ source $DOTS_PATH/zshenv
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
 echo "Backup at $TMP"
 
+update_dotfiles() {
+	echo 'Setup of config files in .config'
+	confignames="$(find $DOTS_PATH/.config -maxdepth 1 | sed -n "s:$DOTS_PATH/.config/::p")"
+	for name (${(f)confignames})
+	do
+		from="$DOTS_PATH/.config/$name"
+		to="$HOME/.config/$name"
+
+		[ -e $to -o -L $to ] && mv $to $TMP
+		sudo -u $USER -g $USER ln -s $from $HOME/.config
+
+		[ $? -eq 0 ] && msg=Done || msg=Failed
+		echo "$to -> $from: $msg"
+	done
+	echo
+
+	echo "Setup of other config files using 'config-destinations.txt'"
+	while read line
+	do
+		read from to <<< "$(envsubst <<< $line)"
+		from="$DOTS_PATH/$from"
+		ls $to
+		[ -e $to -o -L $to ] && echo moving
+
+
+		[ -e $to -o -L $to ] && mv $to $TMP
+		! [ -d ${to%/*} ] && sudo -u $USER -g $USER mkdir -p ${to%/*}
+		sudo -u $USER -g $USER ln -s $from $to
+
+		[ $? -eq 0 ] && msg=Done || msg=Failed
+		echo "$to -> $from: $msg"
+	done < $DOTS_PATH/config-destinations.txt
+	echo
+
+	echo 'Setup theme for zsh'
+	sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+	echo 'Setup touchpad'
+	ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
+	echo 'Setup login manager'
+	ln -fs $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
+	echo 'Setup for cron jobs'
+	sudo -u $USER sh -c "crontab - <$DOTS_PATH/crontab"
+}
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		--update-dotfiles)
+			ONLY_DOTFILE_UPDATE=true
+			shift
+			;;
+		*)
+			echo 'Unknown argument. Exiting...'
+			exit 127
+			;;
+	esac
+done
+
+if [ $ONLY_DOTFILE_UPDATE ]
+then
+	update_dotfiles
+	exit 0
+fi
+
+
+
+
+
 # Install AUR helper
 if [ ! -f /usr/bin/paru ];then
 	echo "Installing paru..."
@@ -67,55 +134,13 @@ systemctl enable sddm.service
 systemctl enable bluetooth.service
 systemctl enable betterlockscreen@${USER}
 
-# Add cron jobs
-sudo -u $USER sh -c "crontab - <$DOTS_PATH/crontab"
-
 # Add shell vim launchers
 sed 's/^Exec=\(.*\)/Exec=st -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-st.desktop > /dev/null
 sed 's/^Exec=\(.*\)/Exec=urxvt -e \1/' /usr/share/applications/vim.desktop | tee /usr/share/applications/vim-urxvt.desktop > /dev/null
+sed -i -e 's/^#\s*Color\s*$/Color/' -e 's/^#\s*\(ParallelDownloads.*\)$/\1/' /etc/pacman.conf
 
 # Setup of dotfiles symbolic links
-echo 'Setup of config files in .config'
-confignames="$(find $DOTS_PATH/.config -maxdepth 1 | sed -n "s:$DOTS_PATH/.config/::p")"
-for name (${(f)confignames})
-do
-	from="$DOTS_PATH/.config/$name"
-	to="$HOME/.config/$name"
-
-	[ -e $to -o -L $to ] && mv $to $TMP
-	sudo -u $USER -g $USER ln -s $from $HOME/.config
-
-	[ $? -eq 0 ] && msg=Done || msg=Failed
-	echo "$to -> $from: $msg"
-done
-echo
-
-echo "Setup of other config files using 'config-destinations.txt'"
-while read line
-do
-	read from to <<< "$(envsubst <<< $line)"
-	from="$DOTS_PATH/$from"
-	ls $to
-	[ -e $to -o -L $to ] && echo moving
-
-
-	[ -e $to -o -L $to ] && mv $to $TMP
-	! [ -d ${to%/*} ] && sudo -u $USER -g $USER mkdir -p ${to%/*}
-	sudo -u $USER -g $USER ln -s $from $to
-
-	[ $? -eq 0 ] && msg=Done || msg=Failed
-	echo "$to -> $from: $msg"
-done < $DOTS_PATH/config-destinations.txt
-echo
-
-echo 'Setup theme for zsh'
-sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
-echo 'Setup touchpad'
-ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
-echo 'Setup login manager'
-ln -fs $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
-echo 'Setup pacman'
-sed -i -e 's/^#\s*Color\s*$/Color/' -e 's/^#\s*\(ParallelDownloads.*\)$/\1/' /etc/pacman.conf
+update_dotfiles
 
 # Last adjustements and verifications
 [ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
