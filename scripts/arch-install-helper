@@ -147,6 +147,7 @@ update_dotfiles
 [ -d $HOME/.cargo -a ! -z $CARGO_HOME ] && mv $HOME/.cargo $CARGO_HOME
 sudo -u $USER mkdir -p "$HOME/.vim/undo"
 sudo -u $USER mkdir -p $XDG_DATA_HOME/{trash,bash,zsh}
+sudo -u $USER mkdir -p $XDG_CONFIG_HOME/mpd/playlists
 sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
 
 chown ${USER}:$USER -R $HOME/.cache

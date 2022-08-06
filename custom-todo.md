@@ -1,11 +1,27 @@
-# Misc$
-- Rice: picom, color, system tray, rofi config, userchrome.css for firefox
-- Handle update of paru/st/dmenu (for suckless add info of original remote in repo for checking)
+# Current config
+- Verify no leak of info from magma! (history, clipboard, ...)
+- .gitignore for whitelist of configs in archrice directories
+- Import improvement from laptop to desktop (in install helper, modification of repository structure)
+- Then clean desktop (and xdg-ninja) + clearer list of programs and needed step for reinstallation
+- bookmarks (epfl, magma, downloads, mnt, etc.) for lf, gch, etc.
+
+todo:
+- ModuleNotFoundError 'readchar' and 'numpy' in gch
+- create directory for playlists of mpd
+- vscode
+- picom
+- micromamba
+- zsh, vim -> .config
+
+# Misc
+- Rice: finish picom, color and rofi config
+- Only use adobe-source-pro font and an emoji font (awesome or nerd)? (No deja vu)
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
 - Rename workspace using rofi
-- Setup syncthing
-- Setup calendar app
-- Check zsh-lovers man page
+- Add XDG_DATA_DIRS (needed by rofi) to .profile
+- Save photos
+- Save old pass store and add passphrase
+- zsh as in arch install: autocorrect, tab does not directly enter the 'visual' mode(+ better tab propositions)
 
 # Bugs
 - Video blocking:
@@ -23,7 +39,7 @@
 # Scripts improvements
 - autoscrot -> autoscrnshot (use deepin instead)
 - Correct prompt for overwriting with $mod+m (mwep)
-- rmdir_maj doesn't act in crone job
+- rmdir_maj don't act in crone job
 - `o`:
 	- Check for video with xdg-mime instead of pattern
 	- Make markdown work
@@ -45,8 +61,6 @@
 - xidlehook: inquire dimscreen script, as it may work better with it
 
 # Thing to learn/improve
-- Change deepin screenshot to flameshot ? (more powerful, less heavy, independent)
-- Switch autotiling behavior (for example with i3-master-stack)
 - Switch to miniforge or mamba (or mambaforge)
 - Check https://www.reddit.com/r/i3wm/comments/6txwcz/light_desktop_environment_to_use_i3_on/ for "desktop env." setup just using independent programs (screen locking etc.) Also https://gist.github.com/lbrame/1678c00213c2bd069c0a59f8733e0ee6
 - Switch to vifm? (with qmv (rename-utils) for bulkrename) 
@@ -65,6 +79,7 @@
 
 # New scripts
 - Like fl but for dragon-drap-and-drop to easily send files
+- Binding to search argument history and insert while typing command
 - Check grip (AUR) for cd ROM
 - Python script for pdf handling (extract, rotate, ...)
 - Screencast
