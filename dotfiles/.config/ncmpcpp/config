@@ -8,3 +8,4 @@ mpd_music_dir = "~/musics"
 
 external_editor = vim
 use_console_editor = yes
+execute_on_song_change = notify-send "Now Playing" "$(mpc --format '%title% \n%artist% - %album%' current)"
