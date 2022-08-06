@@ -92,31 +92,23 @@ map zmt cd /mnt/
 map zco cd /home/jules/.config
 map zcu cd /home/jules/archrice
 map zs  cd /home/jules/archrice/scripts
+map zma cd /home/jules/documents/magma
 
-map g top
+map <enter> open
 map D delete
 map E extract
 map C copyto
 map M moveto
-map <c-n> push :mkdir<space>
+map m push :mkdir<space>
 map <c-r> reload
-map <c-s> set hidden!
-map S shell zsh
-map x $$f
-map X !$f
-map o &mimeopen $f
-map O $mimeopen --ask $f
+map gh set hidden!
+# map o &mimeopen $f
+# map O $mimeopen --ask $f
+map Y $printf "%s" "$fx" | xclip -selection clipboard
+map W $setsid -f $TERMINAL >/dev/null 2>&1
 
 map I push A<c-a> 					# at the very beginning
 map a push A<a-b><a-b><a-f> # before extension
 map A rename 								# at the very end
-map cc push A<c-u> 					# new rename
+map r push A<c-u> 					# new rename
 map B bulkrename
-
-map <c-e> down
-map <c-y> up
-map V push :!vim<space>
-
-map W $setsid -f $TERMINAL >/dev/null 2>&1
-
-map Y $printf "%s" "$fx" | xclip -selection clipboard
