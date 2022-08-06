@@ -1,4 +1,13 @@
-# Misc$
+# Current
+- Verify no leak of info! (history, clipboard, ...)
+- .gitignore for whitelist of configs in archrice directories (mainly vscode, verify vscode does not overwrite
+symlink)
+- Update dotfiles on desktop to finish repo import
+- Then clean desktop (and xdg-ninja) + clearer list of programs and needed step for reinstallation
+- bookmarks (epfl, magma, downloads, mnt, etc.) for lf, gch, etc.
+
+
+# Misc
 - Rice: picom, color, system tray, rofi config, userchrome.css for firefox
 - Handle update of paru/st/dmenu (for suckless add info of original remote in repo for checking)
 - Prompt with rofi instead of dmenu (and more secure, have to type 'yes')
@@ -65,6 +74,7 @@
 
 # New scripts
 - Like fl but for dragon-drap-and-drop to easily send files
+- Binding to search argument history and insert while typing command
 - Check grip (AUR) for cd ROM
 - Python script for pdf handling (extract, rotate, ...)
 - Screencast

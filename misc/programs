@@ -32,6 +32,17 @@ wallpaper:		feh
 browser:			firefox (plugins: honey, grammarly, sci-hub, fb container, tab stash, tab focus google search,
 							ublock, vimium, HTTPS everywhere)
 							qutebrowser (+ pdfjs for pdf in browser)
+IDE:					vscodium (AUR), linter: flake8 (need to pipu). Extensions:
+							python - ms-python
+							anaconda - ms-python
+							docs-view - bierner
+							draw.io - hediet
+							git graph - mhutchie
+							jupyter - ms-toolsai
+							jupyter keymap - ms-toolsai
+							jupyter notebook renderer - ms-toolsai
+							vim - vscodevim
+							vscode-pdf - tomokj1207
 torrent:			deluge
 conferences:	skypeforlinux-stable-bin (AUR), zoom (AUR), discord (AUR)
 gdb:					gef (GDB Enhanced Features)
@@ -42,7 +53,9 @@ ssh:					openssh (+ sshpass to directly give password)
 vpn:					openconnect
 wifi:					networkmanager + nmcli + iw
 wifi-gui:			nm-applet + stalonetray
-key mapper:	xorg-xmodmap
+key mapper:		xorg-xmodmap
+home cleaner:	xdg-ninja
+cd ripper:		sound-juicer (gui), abcde (cli, more robust but less automation)
 terminal swallowing:	devour (AUR)
 login manager:				sddm with sddm-chili (dependencies: qt5, qt5-quickcontrols, qt5-graphicaleffects)
 compression:					unrar, gzip, tar, bzip ...
