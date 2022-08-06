@@ -179,7 +179,7 @@ bindsym $mod+Shift+k 			move up 60
 bindsym $mod+l						exec --no-startup-id "$SCRIPTS_PATH/i3focus right"
 bindsym $mod++Shift+l			move right 50
 
-bindsym $mod+y						exec 	--no-startup-id signal-desktop
+bindsym $mod+y						exec 	signal-desktop
 bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunstify -r 30356 'Notifications activated'"
 
 bindsym $mod+x						exec --no-startup-id "$TERMINAL -e btop"
@@ -188,11 +188,11 @@ bindsym $mod+x						exec --no-startup-id "$TERMINAL -e btop"
 bindsym $mod+c						exec --no-startup-id "source $HOME/.profile && clipmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 bindsym $mod++Shift+c			move position center
 
-bindsym $mod+v						exec --no-startup-id pavucontrol
-#bindsym $mod+Shift+v
+bindsym $mod+v						exec vscodium
+bindsym $mod+Shift+v			exec pavucontrol
 
-bindsym $mod+b 						exec --no-startup-id firefox
-bindsym $mod+Shift+b			exec --no-startup-id blueberry
+bindsym $mod+b 						exec firefox
+bindsym $mod+Shift+b			exec blueberry
 
 bindsym $mod+n						exec --no-startup-id mailspring
 bindsym $mod+Shift+n			exec --no-startup-id "killall mailspring; mailspring"
