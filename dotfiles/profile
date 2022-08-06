@@ -20,11 +20,13 @@ export HYPHEN_INSENSITIVE='true'
 export LESSHISTFILE="$XDG_DATA_HOME/less_history"
 export HISTFILE="$XDG_DATA_HOME/bash/bash_history"
 export HISTIGNORE='ls:l:cd:gs:zd:zs:zcu:zrc:vrc:lf:fg:bg'
-export HISTSIZE=100000
+export HISTSIZE=10000000
+export HISTFILESIZE=10000000
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 ;} # Avoid adding wrong command to history
 
 export EPFL_DIR="$HOME/documents/epfl"
-
+export MAMBA_EXE="/usr/bin/micromamba"
+export MAMBA_ROOT_PREFIX="$XDG_DATA_HOME/micromamba"
 export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"

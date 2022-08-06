@@ -74,7 +74,7 @@ eval "$(ssh-agent -s)" (To verify the agent is running
 ssh-add /home/jules/.ssh/id_rsa
 -> Generate personal access token on github with write-keys permission
 curl -H "Authorization: token GENERATEDTOKEN" --data "{\"title\":\"KEYNAME\",\"key\":\"$(cat .ssh/id_rsa.pub)\"}" https://api.github.com/user/keys
-git clone --recurse-submodules git@github.com:jjules/archrice.git
+git clone --recurse-submodules git@github.com:jjjules/archrice.git
 git submodule foreach git checkout master
 
 # Setup grub

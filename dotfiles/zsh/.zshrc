@@ -16,7 +16,23 @@ if [ -d $ZSH ];then
   source $ZSH/oh-my-zsh.sh
 	[ -d $PLUGINS_PATH/zsh-syntax-highlighting ] && ZSH_HIGHLIGHT_STYLES[path]="none"
 fi
-[ -d /opt/miniconda3 ] && source /opt/miniconda3/etc/profile.d/conda.sh
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba init' !!
+source /home/jules/.profile
+__mamba_setup="$('/usr/bin/micromamba' shell hook --shell zsh --prefix $MAMBA_ROOT_PREFIX 2> /dev/null)"
+if [ $? -eq 0 ]; then
+       eval "$__mamba_setup"
+else
+    if [ -f "$MAMBA_ROOT_PREFIX/etc/profile.d/micromamba.sh" ]; then
+                       . "$MAMBA_ROOT_PREFIX/etc/profile.d/micromamba.sh"
+    else
+                       # extra space after export prevents interference from conda init
+                       export  PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
+    fi
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+alias mm='micromamba
 
 
 
@@ -168,7 +184,6 @@ alias ffplay="ffplay -hide_banner"
 alias archey="archey3 --config=$HOME/.config/archey3/archey3.conf"
 alias zshman="man zshzle"
 alias pipu="pip3 install --user -U"
-alias pipua="pip3 list --outdated | sed 1,2d | sed 's/\(\S*\).*$/\1/' | xargs -n1 pip install --user -U"
 alias jptl="jupyter lab >/dev/null"
 alias jptln="jupyter lab --no-browser >/dev/null"
 alias ytdla="youtube-dl -x --audio-format mp3 -o '%(title)s.%(ext)s'"
@@ -177,6 +192,8 @@ alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 
+alias start="echo start: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
+alias stop="echo stop: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
 
 
 ##########     Functions     ##########
