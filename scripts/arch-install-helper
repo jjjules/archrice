@@ -100,6 +100,11 @@ pip3 install --user -U readchar numpy thefuck
 # Install vim plugin manager
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 
+# Install st
+cd $CUSTOM_PATH/st
+make install
+cd -
+
 # Install Oh-my-zsh
 if [ -d $ZSH ]; then
 	vared -p "Oh-my-zsh folder exists, Delete it? " -c reply
