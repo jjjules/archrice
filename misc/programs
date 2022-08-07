@@ -96,3 +96,11 @@ vaudtaxe dependency:	webkit2gtk
 OCR tool (extract text from images): tesseract
 
 visudo: /usr/bin/systemctl restart NetworkManager, /home/jules/custom/scripts/vpn off, /usr/bin/xbacklight -inc 5, /usr/bin/xbacklight -dec 5
+
+Phone:
+
+apps:
+m f-droid: newpipe
+From play store: reddit, revolut, bcv, twint, maps.me, tl, cff, meteo swiss, wikr, telegram, signal, WhatsApp, Facebook messenger, firefox
+
+Then ensure photos from whatsapp and messenger are downloaded.
