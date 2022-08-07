@@ -100,4 +100,5 @@ shred the KEYFILE
 login to firefox, change download folder, set compact toolbar (browser.compactmode.show in about:config)
 login to mailspring
 open deluge and patch core.conf (patch core.conf < $DOTS_PATH/deluge-conf.patch)
+import vscode settings into vscode under `User/`
 install vim plugins, compile YouCompleteMe

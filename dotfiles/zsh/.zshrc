@@ -191,6 +191,9 @@ alias pubip="curl ifconfig.me"
 alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
+alias exportvscode="for f (keybindings.json settings.json); do
+                      cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$CUSTOM_PATH/vscode-$f'\
+                    done"
 
 alias start="echo start: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
 alias stop="echo stop: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
