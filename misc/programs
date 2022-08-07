@@ -7,7 +7,7 @@ latex:				texlive-most
 text conv:		docx2txt
 git:					git, bfg (AUR)
 clipboard:		xsel
-clip manager: clipmenu (need to enable --user)
+clip manager: clipmenu
 image viewer: sxiv
 image editor: pinta
 gif viewer:		gifsicle (then gifview -a FILE)
