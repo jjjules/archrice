@@ -25,21 +25,33 @@ export HISTFILESIZE=10000000
 zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 ;} # Avoid adding wrong command to history
 
 export EPFL_DIR="$HOME/documents/epfl"
+
+export _ZL_DATA="$XDG_DATA_HOME/zlua"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
+export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 export MAMBA_EXE="/usr/bin/micromamba"
 export MAMBA_ROOT_PREFIX="$XDG_DATA_HOME/micromamba"
 export CONDARC="$XDG_CONFIG_HOME/conda/condarc"
 export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
-export NPM_CONFIG_CACHE="$XDG_DATA_HOME/npm"
-export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
-export _ZL_DATA="$XDG_DATA_HOME/zlua"
-export CARGO_HOME="$XDG_DATA_HOME/cargo/"
+export KERAS_HOME="${XDG_DATA_HOME}/python-package-data/keras"
 export NLTK_DATA="$XDG_DATA_HOME/python-package-data/nltk_data"
 export SCIKIT_LEARN_DATA="$XDG_DATA_HOME/python-package-data/scikit_learn_data"
 export SURPRISE_DATA_FOLDER="$XDG_DATA_HOME/python-package-data/surprise"
-export GOPATH="$XDG_DATA_HOME/go"
 export IPYTHONDIR="$XDG_DATA_HOME/ipython"
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
+export NPM_CONFIG_CACHE="$XDG_DATA_HOME/npm"
+export CARGO_HOME="$XDG_DATA_HOME/cargo/"
+export GOPATH="$XDG_DATA_HOME/go"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export _JAVA_OPTIONS='-Duser.home=/tmp/java-home'
+export ANDROID_HOME="$XDG_DATA_HOME/android"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+export GRIPHOME="$XDG_CONFIG_HOME/grip"
+export STACK_ROOT="$XDG_DATA_HOME/stack"
+export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export I3_DEFAULT_GAPS=20
