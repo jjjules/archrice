@@ -7,11 +7,8 @@
 
 todo:
 - ModuleNotFoundError 'readchar' and 'numpy' in gch
-- create directory for playlists of mpd
-- vscode
 - picom
 - micromamba
-- zsh, vim -> .config
 
 # Misc
 - Rice: finish picom, color and rofi config

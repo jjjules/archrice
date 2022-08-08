@@ -95,7 +95,7 @@ pacman -S pacman-contrib reflector sshpass pass xclip openconnect htop btop mloc
 sudo -u $USER paru -Sy
 sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook urxvt-resize-font-git libxft-bgra dragon-drop-git mailspring micromamba vscodium-bin tldr++ hfsprogs --noconfirm
 
-pip3 install --user -U readchar numpy thefuck
+pip3 install --user -U readchar numpy thefuck flake8
 
 # Install vim plugin manager
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
