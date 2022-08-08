@@ -1,0 +1,33 @@
+#!/bin/zsh
+trap "exit" INT
+set -e
+
+backup_path='/mnt/seagate'
+dirs_to_sync=('documents' 'downloads/' 'images' 'videos')
+
+echo Backup to $backup_path, containing:
+ls --color=always $backup_path
+
+for dir in $dirs_to_sync
+do
+	output_file="$(mktemp /tmp/backup-script_${dir%/}.XXXX)"
+	dir="${dir%/}/"
+
+	echo
+	echo Backing up directory "'~/$dir'" to "'$backup_path'":
+	echo Running dry run ...
+	rsync --dry-run --size-only -avP "$HOME/$dir" "$backup_path/$dir" > $output_file
+	echo Dry run available at $output_file.
+	if read -q "reply?Execute the backup? [y/Y] "
+	then
+		echo
+		echo Launching execution
+		echo -e '\n\n\n\n\nReal execution:' >> $output_file
+		rsync --size-only -avP "$HOME/$dir" "$backup_path/$dir" | tee -a $output_file
+
+		echo Done with $dir
+	else
+		echo
+		echo Aborting for this directory
+	fi
+done
