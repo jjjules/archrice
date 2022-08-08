@@ -15,7 +15,7 @@ import numpy as np
 # Repo variables
 epfl_dir = os.environ["EPFL_DIR"]
 home = os.environ["HOME"]
-custom = re.sub(f'{home}', '', os.environ['CUSTOM_PATH'])
+custom = re.sub(f'{home}', '', os.environ['RICE_PATH'])
 other_repos = [custom, '/.password-store']
 exclude_patterns = ['project/renku-repos', 'mlbd', 'client-configuration/repos/']
 

@@ -88,7 +88,7 @@ reboot
 
 ########################################################################################
 
-betterlockscreen -u $CUSTOM_PATH/misc/default-lockscreen.jpg
+betterlockscreen -u $RICE_PATH/misc/default-lockscreen.jpg
 
 -> recover private key to KEYFILE
 gpg --import KEYFILE

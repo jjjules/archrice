@@ -50,7 +50,7 @@ update_dotfiles() {
 	echo
 
 	echo 'Setup theme for zsh'
-	sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+	sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
 	echo 'Setup touchpad'
 	ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 	echo 'Setup login manager'
@@ -106,7 +106,7 @@ pip3 install --user -U readchar numpy thefuck flake8
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 
 # Install st
-cd $CUSTOM_PATH/st
+cd $RICE_PATH/st
 make install
 cd -
 
@@ -119,7 +119,7 @@ if [ -d $ZSH ]; then
 	fi
 fi
 sudo -u $USER --preserve-env=ZSH sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-sudo -u $USER ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH/custom/themes/mytheme.zsh-theme
+sudo -u $USER ln -fs $DOTS_PATH/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
 
 # Install zsh plugins
 plugins=('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
@@ -134,7 +134,7 @@ done
 
 # Install login manager theme
 echo 'Extracting sddm-chili theme ...'
-tar -xzvf $CUSTOM_PATH/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
+tar -xzvf $RICE_PATH/misc/sddm-chili.tar.gz -C /usr/share/sddm/themes > /dev/null
 echo
 
 # Enable systemd services

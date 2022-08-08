@@ -162,8 +162,8 @@ alias seacum="sudo umount /mnt/seagate-chloe"
 alias keyum="sudo umount /mnt/usbkey"
 
 # Utilities
-alias todo="vim $CUSTOM_PATH/todo.md"
-alias programs="vim $CUSTOM_PATH/misc/programs"
+alias todo="vim $RICE_PATH/todo.md"
+alias programs="vim $RICE_PATH/misc/programs"
 alias flv='fl --vim'
 alias ccp='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
 alias ocp='fc -e - | head -n1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
@@ -192,7 +192,7 @@ alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 alias exportvscode="for f (keybindings.json settings.json); do
-                      cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$CUSTOM_PATH/vscode-$f'\
+                      cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
                     done"
 
 alias start="echo start: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
@@ -285,7 +285,7 @@ function timer(){
 	done
 	[[ $2 = 's' ]] && return 0
 	dunstify -u normal -r 30503 "End of timer"
-	ffplay -loglevel error -nodisp -loop 0 "$CUSTOM_PATH/misc/radio-alert.mp3" > /dev/null
+	ffplay -loglevel error -nodisp -loop 0 "$RICE_PATH/misc/radio-alert.mp3" > /dev/null
 }
 if [ -f /usr/bin/pass ];then
 	function pass() {

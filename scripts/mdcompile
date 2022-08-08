@@ -60,9 +60,9 @@ then
 else
 	# Define header file
 	headertmp=$(mktemp)
-	if [ -f "$CUSTOM_PATH/misc/md-beamer-header.tex" ]
+	if [ -f "$RICE_PATH/misc/md-beamer-header.tex" ]
 	then
-		cat "$CUSTOM_PATH/misc/md-beamer-header.tex" >> $headertmp
+		cat "$RICE_PATH/misc/md-beamer-header.tex" >> $headertmp
 	fi
 	if [ -f header.tex ]
 	then

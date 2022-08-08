@@ -95,7 +95,7 @@ fun term cleaning:		wipeclean (sudo npm install wipeclean -g)
 vaudtaxe dependency:	webkit2gtk
 OCR tool (extract text from images): tesseract
 
-visudo: /usr/bin/systemctl restart NetworkManager, /home/jules/custom/scripts/vpn off, /usr/bin/xbacklight -inc 5, /usr/bin/xbacklight -dec 5
+visudo: /usr/bin/systemctl restart NetworkManager, /home/jules/archrice/scripts/vpn off, /usr/bin/xbacklight -inc 5, /usr/bin/xbacklight -dec 5
 
 Phone:
 

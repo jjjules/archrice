@@ -2,7 +2,7 @@
 
 [ -f $HOME/.profile ] && source $HOME/.profile
 
-default="$CUSTOM_PATH/misc/default-wallpaper.jpg"
+default="$RICE_PATH/misc/default-wallpaper.jpg"
 chosen="$HOME/images/wallpapers/fractals/397421.jpg"
 if [ -f -chosen ]; then
 	feh --no-fehbg --bg-scale $chosen
