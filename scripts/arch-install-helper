@@ -1,10 +1,16 @@
 #!/bin/zsh
+#                                            #
+# To avoid conflicts when updating dotfiles, #
+# remove `.profile` before running.          #
+#                                            #
+##############################################
+
 trap "exit" INT
 set -e
 
 USER=jules
 export HOME="/home/$USER"
-source $HOME/archrice/dots/profile
+source $HOME/archrice/dotfiles/profile
 source $DOTS_PATH/zshenv
 
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
@@ -31,8 +37,7 @@ update_dotfiles() {
 	do
 		read from to <<< "$(envsubst <<< $line)"
 		from="$DOTS_PATH/$from"
-		ls $to
-		[ -e $to -o -L $to ] && echo moving
+		# [ -e $to -o -L $to ] && echo moving
 
 
 		[ -e $to -o -L $to ] && mv $to $TMP
