@@ -1,6 +1,7 @@
 profile $HOME/.profile
 xprofile $HOME/.xprofile
 xresources $HOME/.Xresources
+xinitrc $HOME/.xinitrc
 zshenv $HOME/.zshenv
 vim/vimrc $HOME/.vim/vimrc
 vim/ftplugin $HOME/.vim/ftplugin
