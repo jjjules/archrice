@@ -1,10 +1,8 @@
 # Current
-- Verify no leak of info! (history, clipboard, ...)
 - .gitignore for whitelist of configs in archrice directories (mainly vscode, verify vscode does not overwrite
 symlink)
-- Update dotfiles on desktop to finish repo import
-- Then clean desktop (and xdg-ninja) + clearer list of programs and needed step for reinstallation
-- bookmarks (epfl, magma, downloads, mnt, etc.) for lf, gch, etc.
+- Clearer list of programs and needed step for reinstallation
+- bookmarks (epfl, magma, downloads, mnt, etc.) for lf, gch, etc. (can use data from `z` to add relevant paths)
 
 
 # Misc
@@ -32,7 +30,6 @@ symlink)
 # Scripts improvements
 - autoscrot -> autoscrnshot (use deepin instead)
 - Correct prompt for overwriting with $mod+m (mwep)
-- rmdir_maj doesn't act in crone job
 - `o`:
 	- Check for video with xdg-mime instead of pattern
 	- Make markdown work
