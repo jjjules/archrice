@@ -6,3 +6,6 @@ export ZSH_CUSTOM="$ZSH/custom"
 export ZSH_COMPDUMP="$XDG_DATA_HOME/zsh/zcompdump"
 
 [ -f $HOME/.magma_envs ] && source $HOME/.magma_envs
+
+# Avoid adding wrong command to history
+zshaddhistory() { whence ${${(z)1}[1]} >| /dev/null || return 1 ;}

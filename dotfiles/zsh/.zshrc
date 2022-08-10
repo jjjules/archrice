@@ -195,12 +195,11 @@ alias exportvscode="for f (keybindings.json settings.json); do
                       cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
                     done"
 
-alias start="echo start: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
-alias stop="echo stop: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours"
 
 
 ##########     Functions     ##########
 
+function work() { echo $1: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours }
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
 function cpsync() {	  rsync -aP $1 $2   }
 function weather(){   curl wttr.in/$1   }
