@@ -1,6 +1,6 @@
 shell:				zsh + oh-my-zsh
 shell syntax: shellcheck
-font:					ttf-dejavu, ttf-font-awesome
+font:					ttf-dejavu (terminal), ttf-font-awesome (i3-bar), ttf-symbola in AUR (emoji)
 terminal:			rxvt-unicode + urxvt-perls + urxvt-resize-font-git (AUR)
 text edit:		vim + gvim (clipboard) + Vundle, featherpad (standard graphical)
 latex:				texlive-most
