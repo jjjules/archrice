@@ -28,10 +28,10 @@ done
 [ -z "$dir" ] && dir="$HOME"
 
 cd $dir
-prune_patterns=('*/\.git*' './images/*' './musics/*' './aaa/*')
+prune_patterns=('./\.*' '*/\.git*' './images/*' './musics/*')
 prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
-export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted\
-																	 -type f -print 2> /dev/null"
+export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted -type f -print 2> /dev/null"
+
 files=$(fzf -m)
 
 mpvs=()
