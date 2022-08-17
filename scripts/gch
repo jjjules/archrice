@@ -1,26 +1,25 @@
 #!/usr/bin/python
-# Script that automatically checks (and pull if possible) all git repos as defined in the
-# `load_repositories_definition function. The script search recursively in `recursive_repos_dirs`
-# for git repositories and add repositories in `repos` to it.
-#
+# Script that automatically checks (and pull if possible) all git repos. The script
+# search recursively in epfl_dir and add all other_repos to the list of repos to check.
 # Add pattern (substring) in exclude_pattern to exclude repos.
 #
 # Inspired from https://github.com/Gorzen/.files/blob/master/.local/bin/dirty-git-epfl
 
 import os
+import sys
+import tty
+import termios
 import subprocess as sp
 import multiprocessing
-import readchar
 import re
 import numpy as np
 
-def load_repositories_definition():
-    base_path = os.environ["HOME"]
-    recursive_repo_dirs = [f"documents/magma"]
-    repo_dirs = [os.environ['PASSWORD_STORE_DIR'], os.environ['RICE_PATH']]
-    exclude_patterns = []
-
-    return base_path, repo_dirs, recursive_repo_dirs, exclude_patterns
+# Repo variables
+epfl_dir = os.environ["EPFL_DIR"]
+home = os.environ["HOME"]
+custom = re.sub(f'{home}', '', os.environ['RICE_PATH'])
+other_repos = [custom, '/.password-store']
+exclude_patterns = ['project/renku-repos', 'mlbd', 'client-configuration/repos/']
 
 # Colors
 HEADER = '\033[95m'
@@ -40,29 +39,23 @@ def run_command(cmd, cwd="."):
 
     return stdout.decode("utf-8")
 
-def check_relative_path(base_path, repos):
-    repos = [repo if os.path.isabs(repo) else os.path.join(base_path, repo) for repo in repos]
 
-    return repos
-
-def get_repos(base_path, repo_paths, recursive_repo_dirs):
-    repo_paths = check_relative_path(base_path, repo_paths)
-    recursive_repo_dirs = check_relative_path(base_path, recursive_repo_dirs)
-
+def get_repos():
     # Find repos
-    found_repos = []
-    find_git_repo_cmd = "find {} -name '.git' -type d | sed 's/\.git$//'"
-    for dir_ in recursive_repo_dirs:
-        stream = os.popen(find_git_repo_cmd.format(dir_))
-        output = stream.read().split('\n')
-        found_repos += list(filter(None, output))
+    stream = os.popen(f"find {epfl_dir} -name '.git' -type d")
+    output = stream.read().split('\n')
+    repos = list(filter(None, output))
 
-    all_repos = repo_paths + found_repos
+    # Remove "/.git" from repo path
+    repos = [repo[:-4] for repo in repos]
 
-    return all_repos
+    # Add permanent repos outside EPFL
+    repos = repos + [home+path for path in other_repos]
+
+    return filter_repos(repos)
 
 
-def filter_repos(repos, exclude_patterns):
+def filter_repos(repos):
     # Filter non-directory repos
     repos = list(filter(os.path.isdir, repos))
 
@@ -107,43 +100,56 @@ def printProgressBar(iteration, total, length=60, fill="█"):
     if iteration == total:
         print('\n')
 
+def ask_input(prompt):
+    print(prompt, end=' ', flush=True)
+    # key_read = readchar.readkey()
+    fd = sys.stdin.fileno()
+    old_settings = termios.tcgetattr(fd)
+    try:
+        tty.setraw(sys.stdin.fileno())
+        key_read = sys.stdin.read(1)
+    finally:
+        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
-def print_dirty_repos(base_path, repos):
+    return key_read
+
+def print_dirty_repos(repos):
     dirty_report = []
     # Longest repo string length
     max_length = len(max(repos, key=len))
-    all_clean = True
+    dirty = False
 
     for repo in repos:
-        repo_short_name = re.sub(rf'^{base_path}/', '', repo)
+        base_epfl = os.environ['EPFL_DIR'].split('/')[-1]
+        repo_short_name = re.sub(os.environ['HOME']+'/', '', repo)
+        repo_short_name = (base_epfl if repo_short_name.endswith(base_epfl+'/')
+                            else re.sub('^.*'+base_epfl+'/', '',
+                            repo_short_name))
 
         git_branch = run_command("git branch -vv --color=always", cwd=repo)
-        git_branch = re.sub(r'\][^\n]*', ']', git_branch)
         git_status = run_command("git -c color.status=always status -sb", repo)
 
         # Check status
         dirty_status = git_status.count("\n") > 1
         dirty_ahead = "ahead" in git_branch
-        dirty_behind_current_branch = "behind" in git_branch.split('\n')[0]
-        dirty_behind_other_branches = "behind" in '\n'.join(git_branch.split('\n')[1:])
+        dirty_behind = "behind" in git_branch
+        dirty_branch = dirty_behind or dirty_ahead
+        dirty_repo = dirty_status or dirty_branch
 
         # Pull if just behind remote
         pulled = False
-        if dirty_behind_current_branch and not dirty_ahead and not dirty_status:
-            print(f"Pull {FAIL}{BOLD}{UNDERLINE}{repo_short_name}:{ENDC}? [y/n]:", end=' ', flush=True)
-            key_read = readchar.readkey()
-            print(key_read)
-            if key_read == 'y' or key_read == 'Y':
+        if dirty_behind and not dirty_ahead and not dirty_status:
+            prompt = f"Pull {FAIL}{BOLD}{UNDERLINE}{repo_short_name}:{ENDC}? [y/n]:"
+            char_read = ask_input(prompt)
+
+            if char_read == 'y' or char_read == 'Y':
                 print('Pulling ...')
                 stream = sp.Popen(f"cd {repo} && git pull", shell=True)
                 pulled = stream.wait() == 0
                 pulled
             print()
-        dirty_behind_current_branch = dirty_behind_current_branch and not pulled
-        dirty_behind = dirty_behind_other_branches or dirty_behind_current_branch
-        dirty_branch = dirty_behind or dirty_ahead
-        dirty_repo = dirty_status or dirty_branch
-        all_clean = all_clean and not dirty_repo
+        dirty_repo = dirty_repo and not pulled
+        dirty = dirty or dirty_repo
 
         # Update dirty report
         if dirty_repo:
@@ -155,7 +161,7 @@ def print_dirty_repos(base_path, repos):
             if dirty_status:
                 dirty_report.append(git_status)
 
-    if all_clean:
+    if not dirty:
         print("All clean!")
     else:
         print("Dirty report")
@@ -163,9 +169,7 @@ def print_dirty_repos(base_path, repos):
 
 
 if __name__ == "__main__":
-    base_path, repo_paths, recursive_repo_dirs, exclude_patterns = load_repositories_definition()
-    all_repos = get_repos(base_path, repo_paths, recursive_repo_dirs)
-    all_repos = filter_repos(all_repos, exclude_patterns)
-    fetch_repos(all_repos)
-    print_dirty_repos(base_path, all_repos)
+    repos = get_repos()
+    fetch_repos(repos)
+    print_dirty_repos(repos)
 
