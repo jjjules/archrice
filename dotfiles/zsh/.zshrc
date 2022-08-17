@@ -83,7 +83,8 @@ alias -g H='| head'
 alias -g T='| tail'
 alias -g G='| grep'
 alias -g L='| less'
-alias -g V='|vim -'
+alias -g V='| vim -'
+alias -g Z='| zathura -'
 
 # Arch
 alias pm='pacman'
@@ -200,6 +201,14 @@ alias exportvscode="for f (keybindings.json settings.json); do
 ##########     Functions     ##########
 
 function work() { echo $1: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours }
+function ari() {
+	if [ $# -eq 1 ]; then
+		arg="-$1"
+	fi
+
+	mm activate "ari9000$arg"
+	cd ~/documents/magma
+}
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
 function cpsync() {	  rsync -aP $1 $2   }
 function weather(){   curl wttr.in/$1   }

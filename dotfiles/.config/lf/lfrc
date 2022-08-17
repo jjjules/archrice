@@ -15,7 +15,7 @@ set ifs '\n'
 set scrolloff 10
 set icons
 set period 1
-set hidden on
+# set hidden on
 set hiddenfiles '.*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml'
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
@@ -80,7 +80,6 @@ cmd bulkrename ${{
 
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
-#map -  cd -
 map zz cd /home/jules
 map zr cd /
 map zd cd /home/jules/documents
@@ -102,6 +101,7 @@ map M moveto
 map m push :mkdir<space>
 map <c-r> reload
 map gh set hidden!
+map zp set preview!
 # map o &mimeopen $f
 # map O $mimeopen --ask $f
 map Y $printf "%s" "$fx" | xclip -selection clipboard
