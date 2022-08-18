@@ -1,28 +1,24 @@
-# Core setup
-shell:				zsh + oh-my-zsh
-terminal:			st
-file fuzzy finder:		fzf
-login manager:				sddm with sddm-chili (dependencies: qt5, qt5-quickcontrols, qt5-graphicaleffects)
-font:					ttf-dejavu (terminal), ttf-font-awesome (i3-bar), ttf-symbola in AUR (emoji)
-window manager:				i3
-status bar:						i3blocks
-screen locker:				betterlockscreen (AUR)
-file browser:		lf (AUR) + atool, mediainfo in AUR and ueberzug, ffmpegthumbnailer,
-program launcher:			dmenu
-notifications:				dunst
-monitor manager:			xrandr
-password-manager: 		pass
-clipboard:		xsel
-clip manager: clipmenu
-wallpaper:		feh
-brightness:		acpilight
-key mapper:		xorg-xmodmap
-hide mouse:		unclutter
-screen temp handler:	redshift
+# Desktop environment setup
 
-
-AUR package manager:	paru
-synching program:			rsync
+| Type                       | Program             | Dependencies                                  |
+|----------------------------|---------------------|-----------------------------------------------|
+| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete                   |
+| login manager              | sddm                | [sddm-chili](https://github.com/MarianArlt/sddm-chili), qt5, qt5-quickcontrols, qt5-graphicaleffects |
+| window manager             | i3-gaps             |                                               |
+| status bar                 | i3blocks            |                                               |
+| screen locker              | ![betterlockscreen](#f03c15) | |
+| file browser               | ![lf](#f03c15)      | atool, mediainfo, ueberzug, ffmpegthumbnailer |
+| program launcher           | dmenu, rofi         |                                               |
+| notification manager       | dunst               |                                               |
+| clipboard                  | xclip, xsel         |                                               |
+| clipboard manager          | clipmenu            |                                               |
+| wallpaper setter           | feh                 |                                               |
+| brightness control         | acpilight           |                                               |
+| key mapper                 | xmodmap             |                                               |
+| mouse hiding               | unclutter           |                                               |
+| screen temperature handler | redshift            |                                               |
+| backup program             | rsync               |                                               |
+| AUR package manager        | ![paru](#c5f015)    |                                               |
 
 # File viewer / editor
 ## Text
