@@ -4,25 +4,25 @@
 
 <span style="color: green"> Some green text </span>
 
-| Type                       | Program             | Dependencies                                  |
-|----------------------------|---------------------|-----------------------------------------------|
-| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete                   |
-| login manager              | sddm                | [sddm-chili](https://github.com/MarianArlt/sddm-chili), qt5, qt5-quickcontrols, qt5-graphicaleffects |
-| window manager             | i3-gaps             |                                               |
-| status bar                 | i3blocks            |                                               |
-| screen locker              | <span style="color:red">betterlockscreen</span> | |
-| file browser               | ![lf](#f03c15)      | atool, mediainfo, ueberzug, ffmpegthumbnailer |
-| program launcher           | dmenu, rofi         |                                               |
-| notification manager       | dunst               |                                               |
-| clipboard                  | xclip, xsel         |                                               |
-| clipboard manager          | clipmenu            |                                               |
-| wallpaper setter           | feh                 |                                               |
-| brightness control         | acpilight           |                                               |
-| key mapper                 | xmodmap             |                                               |
-| mouse hiding               | unclutter           |                                               |
-| screen temperature handler | redshift            |                                               |
-| backup program             | rsync               |                                               |
-| AUR package manager        | ![paru](#c5f015)    |                                               |
+| Type                       | Program                 | Dependencies                                  |
+|----------------------------|-------------------------|-----------------------------------------------|
+| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete  |                    |
+| login manager              | sddm                    | [sddm-chili](https://github.com/MarianArlt/sddm-chili), qt5, qt5-quickcontrols, qt5-graphicaleffects |
+| window manager             | i3-gaps                 |                                               |
+| status bar                 | i3blocks                |                                               |
+| screen locker              | betterlockscreen (AUR)  |                                               |
+| file browser                | lf (AUR)                | atool, mediainfo, ueberzug, ffmpegthumbnailer  |
+| program launcher           | dmenu, rofi              |                                               |
+| notification manager        | dunst                   |                                               |
+| clipboard                  | xclip, xsel             |                                               |
+| clipboard manager          | clipmenu                |                                               |
+| wallpaper setter           | feh                     |                                               |
+| brightness control         | acpilight               |                                               |
+| key mapper                 | xmodmap                 |                                               |
+| mouse hiding               | unclutter               |                                               |
+| screen temperature handler | redshift                |                                               |
+| backup program             | rsync                   |                                               |
+| AUR package manager        | paru (manual install    |                                               |
 
 # File viewer / editor
 ## Text
