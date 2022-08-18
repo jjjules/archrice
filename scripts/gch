@@ -8,9 +8,9 @@
 # Inspired from https://github.com/Gorzen/.files/blob/master/.local/bin/dirty-git-epfl
 
 import os, sys, tty, termios
+import re
 import subprocess as sp
 import multiprocessing
-import re
 import numpy as np
 
 def load_repositories_definition():
@@ -130,13 +130,15 @@ def print_dirty_repos(base_path, repos):
 
         git_branch = run_command("git branch -vv --color=always", cwd=repo)
         git_branch = re.sub(r'\][^\n]*', ']', git_branch)
+        git_current_branch = '\n'.join(re.findall(r'\*.*behind.*$', git_branch))
+        git_other_branches = '\n'.join(re.findall(r'[^\n]\s*.*behind.*', git_branch))
         git_status = run_command("git -c color.status=always status -sb", repo)
 
         # Check status
         dirty_status = git_status.count("\n") > 1
         dirty_ahead = "ahead" in git_branch
-        dirty_behind_current_branch = "behind" in git_branch.split('\n')[0]
-        dirty_behind_other_branches = "behind" in '\n'.join(git_branch.split('\n')[1:])
+        dirty_behind_current_branch = "behind" in git_current_branch
+        dirty_behind_other_branches = "behind" in git_other_branches
 
         # Pull if just behind remote
         pulled = False
