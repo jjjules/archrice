@@ -22,7 +22,7 @@
 | mouse hiding               | unclutter               |                                               |
 | screen temperature handler | redshift                |                                               |
 | backup program             | rsync                   |                                               |
-| AUR package manager        | paru (manual install    |                                               |
+| AUR package manager        | paru (manual install)   |                                               |
 
 # File viewer / editor
 ## Text
