@@ -1,5 +1,7 @@
 # Desktop environment setup
 
+<style>H1{color:Blue;}</style>
+
 | Type                       | Program             | Dependencies                                  |
 |----------------------------|---------------------|-----------------------------------------------|
 | font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete                   |
