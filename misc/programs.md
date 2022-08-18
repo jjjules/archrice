@@ -6,7 +6,7 @@
 | login manager              | sddm                | [sddm-chili](https://github.com/MarianArlt/sddm-chili), qt5, qt5-quickcontrols, qt5-graphicaleffects |
 | window manager             | i3-gaps             |                                               |
 | status bar                 | i3blocks            |                                               |
-| screen locker              | ![betterlockscreen](#f03c15) | |
+| screen locker              | <span style="color:red">betterlockscreen</span> | |
 | file browser               | ![lf](#f03c15)      | atool, mediainfo, ueberzug, ffmpegthumbnailer |
 | program launcher           | dmenu, rofi         |                                               |
 | notification manager       | dunst               |                                               |
