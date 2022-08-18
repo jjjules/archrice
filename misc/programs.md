@@ -2,6 +2,8 @@
 
 <style>H1{color:Blue;}</style>
 
+<span style="color: green"> Some green text </span>
+
 | Type                       | Program             | Dependencies                                  |
 |----------------------------|---------------------|-----------------------------------------------|
 | font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete                   |
