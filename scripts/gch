@@ -11,7 +11,6 @@ import os, sys, tty, termios
 import re
 import subprocess as sp
 import multiprocessing
-import numpy as np
 
 def load_repositories_definition():
     base_path = os.environ["HOME"]
@@ -66,7 +65,7 @@ def filter_repos(repos, exclude_patterns):
     repos = list(filter(os.path.isdir, repos))
 
     # Remove repo with matching pattern in exclude_patterns
-    repos = list(filter(lambda repo: np.all([pat not in repo for pat in exclude_patterns]), repos))
+    repos = list(filter(lambda repo: all([pat not in repo for pat in exclude_patterns]), repos))
 
     return repos
 
@@ -89,7 +88,7 @@ def fetch_repos(repos):
 
 
 # Print iterations progress
-def printProgressBar(iteration, total, length=60, fill="█"):
+def printProgressBar(iteration, total, length=50, fill="█"):
     """
     Call in a loop to create terminal progress bar
     @params:
