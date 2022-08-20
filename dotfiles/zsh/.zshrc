@@ -164,7 +164,6 @@ alias keyum="sudo umount /mnt/usbkey"
 
 # Utilities
 alias todo="vim $RICE_PATH/todo.md"
-alias programs="vim $RICE_PATH/misc/programs"
 alias flv='fl --vim'
 alias ccp='fc -ln -1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
 alias ocp='fc -e - | head -n1 | awk '\''{$1=$1}1'\'' ORS='\'''\'' | xsel -ib'
