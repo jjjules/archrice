@@ -60,6 +60,8 @@ for_window [title="file-launcher"] resize set 850 540
 for_window [title="file-launcher"] move position center
 for_window [class="Arandr"] floating enable
 for_window [class="Arandr"] resize set 850 450
+for_window [class="Tk"] floating enable
+for_window [title="Floating:*"] floating enable
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
