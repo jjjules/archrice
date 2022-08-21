@@ -22,7 +22,7 @@ during the compilation.
 
 ### Core environment setup
 
-| Type                       | Program                 | Configuration   | Additional info. |
+| Type                       | Program                 | Configuration   | Additional information |
 |----------------------------|-------------------------|-----------------|--------------|
 | font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete  |                    |
 | login manager              | sddm                    | [sddm config](./dotfiles/sddm.conf) | Use [chili theme](https://github.com/MarianArlt/sddm-chili). Need qt5, qt5-quickcontrols, qt5-graphicaleffects. Enable daemon |
@@ -48,35 +48,35 @@ during the compilation.
 
 ### Documents and multimedia
 
-| type                    | program        | gui   | configuration      | additional info.       |
+| Type                    | Program        | GUI   | Configuration      | Additional information       |
 |-------------------------|----------------|-------|--------------------|------------------------|
-| text                    | vim            | false | [config folder](./dotfiles/vim/) | vundle for the plugins (manual install)     |
-| text                    | featherpad     | true  |
-| image viewer            | sxiv           | true  |
-| image editor            | pinta          | true  |
-| pdf viewer              | zathura        | true  | [zathurarc](./dotfiles/.config/zathurarc) | with zathura-pdf-mupdf for additional pdf/epub support |
-| pdf editors             | masterpdfeditor-free (aur), foxit-reader (aur) | true  |
-| music server            | mpd, mpc       | false | [mpd config](./dotfiles/.config/mpd/mpd.conf) | enable user daemon     |
-| music player            | ncmpcpp        | false | [config folder](./dotfiles/.config/ncmpcpp) | |
-| video player            | mpv            | true  | [config folder](./dotfiles/.config/mpv) | |
-| audio setup             | pavucontrol    | true  |
-| bluetooth configuration | blueberry      | true  |                    | with pulseaudio-bluetooth |
-| cd ripper               | sound-juicer   | true  |                    | more automatic than abcde but less robust |
-| cd ripper               | abcde          | false |                    |                        |
-| gif viewer              | gifsicle       | false |                    |                        |
+| text                    | vim            | No | [config folder](./dotfiles/vim/) | Vundle for the plugins (manual install)     |
+| text                    | featherpad     | Yes  |
+| image viewer            | sxiv           | Yes  |
+| image editor            | pinta          | Yes  |
+| pdf viewer              | zathura        | Yes  | [zathurarc](./dotfiles/.config/zathurarc) | With zathura-pdf-mupdf for additional pdf/epub support |
+| pdf editors             | masterpdfeditor-free (aur), foxit-reader (aur) | Yes  |
+| music server            | mpd, mpc       | No | [mpd config](./dotfiles/.config/mpd/mpd.conf) | Enable user daemon     |
+| music player            | ncmpcpp        | No | [config folder](./dotfiles/.config/ncmpcpp) | |
+| video player            | mpv            | Yes  | [config folder](./dotfiles/.config/mpv) | |
+| audio setup             | pavucontrol    | Yes  |
+| bluetooth configuration | blueberry      | Yes  |                    | With pulseaudio-bluetooth |
+| cd ripper               | sound-juicer   | Yes  |                    | More automatic than abcde but less robust |
+| cd ripper               | abcde          | No |                    |                        |
+| gif viewer              | gifsicle       | No |                    |                        |
 
 ### Internet
 
-| Type            | Program                            | GUI   | Additional info.                    |
-|-----------------|------------------------------------|-------|-------------------------------------|
-| network manager | networkmanager                     | False |                                     |
-| network setup   | iw, nmcli                          | False | nmcli is provided by networkmanager |
-| network setup   | network-manager-applet, stalonetry | True  |                                     |
-| VPN             | openconnect                        | False |                                     |
-| SSH             | openssh                            | False | With sshpass to pipe password       |
-| browser         | firefox                            | True  | Important plugins: vimium (with its config), sci-hub, grammarly, tab stash, tab focus google search, ublock, HTTPS everywhere |
-| mail client     | mailspring (AUR)                   | True  |                                     |
-| torrent client  | deluge-gtk                         | True  |                                     |
+| Type            | Program                            | GUI   | Additional infomrmation          |
+|-----------------|------------------------------------|-------|----------------------------------|
+| network manager | networkmanager                     | No |                                     |
+| network setup   | iw, nmcli                          | No | nmcli is provided by networkmanager |
+| network setup   | network-manager-applet, stalonetry | Yes  |                                   |
+| VPN             | openconnect                        | No |                                     |
+| SSH             | openssh                            | No | With sshpass to pipe password       |
+| browser         | firefox                            | Yes  | Important plugins: vimium (with its config), sci-hub, grammarly, tab stash, tab focus google search, ublock, HTTPS everywhere |
+| mail client     | mailspring (AUR)                   | Yes  |                                   |
+| torrent client  | deluge-gtk                         | Yes  |                                   |
 
 
 ### IDE
