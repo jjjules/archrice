@@ -1,4 +1,5 @@
 #!/bin/zsh
+##############################################
 #                                            #
 # To avoid conflicts when updating dotfiles, #
 # remove `.profile` before running.          #
@@ -95,12 +96,12 @@ fi
 
 # Package installation
 pacman -Sy
-pacman -S pacman-contrib reflector sshpass pass xclip openconnect htop btop mlocate dmenu rxvt-unicode urxvt-perls xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel i3-gaps i3blocks gsimplecal network-manager-applet stalonetray zsh-completions ttf-font-awesome ttf-dejavu ctags wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk ghostscript pandoc texlive-most scrot deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python python-pip bpython lua firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync ueberzug ffmpegthumbnailer docx2txt odt2txt bat lynx fzf dunst dosfstools dmidecode cronie clipmenu sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring --needed --noconfirm
+pacman -S pacman-contrib reflector sshpass pass htop btop mlocate xorg-xinit xorg-xrandr arandr xorg-xev xorg-xmodmap acpilight xorg-xclipboard xsel xclip i3-gaps i3blocks gsimplecal sddm qt5-quickcontrols qt5-graphicaleffects gnome-keyring zsh-completions ttf-font-awesome ttf-dejavu ctags wget imagemagick sxiv feh jq zathura zathura-pdf-mupdf ghostscript pdfgrep pdftk pandoc texlive-most deepin-screenshot pulseaudio pulseaudio-bluetooth alsa-utils pavucontrol bluez bluez-utils blueberry mpd mpc ncmpcpp mpv gcc cmake python python-pip bpython lua firefox deluge unclutter unrar zip unzip gzip tar redshift tree rsync atool mediainfo ueberzug ffmpegthumbnailer docx2txt odt2txt bat lynx fzf dunst dosfstools dmidecode cronie clipmenu --needed --noconfirm
 
 sudo -u $USER paru -Sy
-sudo -u $USER paru -S lf gdmap atool mediainfo steghide betterlockscreen xidlehook urxvt-resize-font-git libxft-bgra dragon-drop-git mailspring micromamba vscodium-bin tldr++ hfsprogs --noconfirm
+sudo -u $USER paru -S lf gdmap steghide betterlockscreen xidlehook libxft-bgra dragon-drop-git mailspring micromamba vscodium-bin tldr++ --noconfirm
 
-pip3 install --user -U readchar numpy thefuck flake8
+pip3 install --user -U numpy thefuck flake8
 
 # Install vim plugin manager
 [ -d $HOME/.vim/bundle/Vundle.vim ] || sudo -u $USER git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
@@ -151,6 +152,13 @@ sed -i -e 's/^#\s*Color\s*$/Color/' -e 's/^#\s*\(ParallelDownloads.*\)$/\1/' /et
 
 # Setup of dotfiles symbolic links
 update_dotfiles
+
+# Compile submodules
+for mod in st dmenu
+do
+	cd $RICE_PATH/$mod
+	make install
+done
 
 # Last adjustements and verifications
 [ -d $HOME/go -a ! -z $GOPATH ] && mv $HOME/go $GOPATH
