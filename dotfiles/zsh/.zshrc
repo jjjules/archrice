@@ -199,6 +199,7 @@ alias exportvscode="for f (keybindings.json settings.json); do
 
 ##########     Functions     ##########
 
+function mdz() { mdcompile -p $1 Z }
 function work() { echo $1: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours }
 function ari() {
 	if [ $# -eq 1 ]; then
