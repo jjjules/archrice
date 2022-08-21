@@ -284,3 +284,32 @@ set viewoptions-=options	" Avoid directory change because of loadview
 	"Insert mode mappings:
 	imap <F7> _<Esc>mza<C-Right><Esc>bg~iw`zi<Del>
 	imap <F8> _<Esc>mza<C-Right><Esc>bgUiw`zi<Del>
+
+" Show inlined colors for hex values in file
+" Source: https://www.reddit.com/r/vim/comments/wm08fl/simple_vim_9_virtual_text_example_for_hex_colors/
+	if &background ==# 'dark'
+		if (has('termguicolors') && &termguicolors) || has('gui_running')
+			let g:terminal_ansi_colors = ['#080808', '#d7005f', '#00af6f']
+		endif
+	endif
+	def InlineColors()
+		for row in range(1, line('$'))
+			var current = getline(row)
+			var cnt = 1
+			prop_clear(row)
+			var [hex, starts, ends] = matchstrpos(current, '#\x\{6\}', 0, cnt)
+			while starts != -1
+				var col_tag = "inline_color_" .. hex[1 : ]
+				var col_type = prop_type_get(col_tag)
+				if col_type == {}
+					hlset([{ name: col_tag, guifg: hex}])
+					prop_type_add(col_tag, {highlight: col_tag})
+				endif
+				prop_add(row, starts + 1, { length: ends - starts,
+				text: " ● ",
+				type: col_tag })
+				cnt += 1
+				[hex, starts, ends] = matchstrpos(current, '#\x\{6\}', 0, cnt)
+			endwhile
+		endfor
+	enddef
