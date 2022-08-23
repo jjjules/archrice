@@ -53,7 +53,7 @@ update_dotfiles() {
 	echo 'Setup theme for zsh'
 	sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
 	echo 'Setup touchpad'
-	ln -fs $DOTS_PATH/xorg-70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
+	ln -fs $DOTS_PATH/xorg/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 	echo 'Setup login manager'
 	ln -fs $DOTS_PATH/sddm.conf /usr/lib/sddm/sddm.conf.d/sddm.conf
 	echo 'Setup for cron jobs'

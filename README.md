@@ -23,8 +23,11 @@ during the compilation.
 ### Core environment setup
 
 | Type                       | Program                 | Configuration   | Additional information |
-|----------------------------|-------------------------|-----------------|--------------|
-| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete  |                    |
+|----------------------------|-------------------------|-----------------|------------------------|
+| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete  |               |
+| shell                      | zsh                     | [config folder](./dotfiles/zsh) | With oh-my-zsh |
+| terminal                   | st                      | [st fork](./st) |                        |
+| display server             | Xorg                    | [config folder](./dotfiles/xorg) |       |
 | login manager              | sddm                    | [sddm config](./dotfiles/sddm.conf) | Use [chili theme](https://github.com/MarianArlt/sddm-chili). Need qt5, qt5-quickcontrols, qt5-graphicaleffects. Enable daemon |
 | window manager             | i3-gaps                 | [i3 config](./dotfiles/.config/i3/config) |
 | status bar                 | i3blocks                | [config folder](./dotfiles/.config/i3blocks/) |
@@ -74,13 +77,13 @@ during the compilation.
 | network setup   | network-manager-applet, stalonetry | Yes  |                                   |
 | VPN             | openconnect                        | No |                                     |
 | SSH             | openssh                            | No | With sshpass to pipe password       |
-| browser         | firefox                            | Yes  | Important plugins: vimium (with its config), sci-hub, grammarly, tab stash, tab focus google search, ublock, HTTPS everywhere |
+| browser         | firefox                            | Yes  | Important plugins: vimium (with [its config](./dotfiles/vimium)), sci-hub, grammarly, tab stash, tab focus google search, ublock, HTTPS everywhere |
 | mail client     | mailspring (AUR)                   | Yes  |                                   |
 | torrent client  | deluge-gtk                         | Yes  |                                   |
 
 
-### IDE
-vscodium (AUR)
+### IDe
+vscodium-bin (AUR) with the configurations: [general settings](./dotfiles/vscode-settings.json) and [keybindings](./dotfiles/vscode-keybindings.json).
 
 linter: flake8 (need to pip install --user).
 
