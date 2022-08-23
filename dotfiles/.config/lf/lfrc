@@ -88,9 +88,11 @@ map zi cd /home/jules/images
 map zv cd /home/jules/videos
 map zmu cd /home/jules/musics
 map zmt cd /mnt/
-map zco cd /home/jules/.config
-map zcu cd /home/jules/archrice
-map zs  cd /home/jules/archrice/scripts
+map zch cd /home/jules/.config
+map zcc cd /home/jules/archrice/dotfiles
+map zs cd /home/jules/archrice/scripts
+# map Z push $z
+
 map zma cd /home/jules/documents/magma
 
 map <enter> open
@@ -99,6 +101,7 @@ map E extract
 map C copyto
 map M moveto
 map m push :mkdir<space>
+map é mark-save
 map <c-r> reload
 map gh set hidden!
 map zp set preview!
