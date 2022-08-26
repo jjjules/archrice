@@ -6,4 +6,4 @@ zshenv $HOME/.zshenv
 vim/vimrc $HOME/.vim/vimrc
 vim/ftplugin $HOME/.vim/ftplugin
 gitconfig $HOME/.gitconfig
-gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+gpg-agent.conf $GNUPGHOME/gpg-agent.conf
