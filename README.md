@@ -24,10 +24,11 @@ during the compilation.
 
 | Type                       | Program                 | Configuration   | Additional information |
 |----------------------------|-------------------------|-----------------|------------------------|
-| font                       | ttf-dejavu, ttf-font-awesome, nerds-font-complete  |               |
-| shell                      | zsh                     | [config folder](./dotfiles/zsh) | With oh-my-zsh |
+| font                       | ttf-dejavu, ttf-font-awesome, nerd-fonts-complete (AUR)  |               |
+| shell                      | zsh                     | [config folder](./dotfiles/zsh) | With [oh-my-zsh](https://ohmyz.sh/) |
 | terminal                   | st                      | [st fork](./st) |                        |
 | display server             | Xorg                    | [config folder](./dotfiles/xorg) |       |
+| compositor                 | picom                   | [config file](./dotfiles/.config/picom/picom.conf) | |
 | login manager              | sddm                    | [sddm config](./dotfiles/sddm.conf) | Use [chili theme](https://github.com/MarianArlt/sddm-chili). Need qt5, qt5-quickcontrols, qt5-graphicaleffects. Enable daemon |
 | window manager             | i3-gaps                 | [i3 config](./dotfiles/.config/i3/config) |
 | status bar                 | i3blocks                | [config folder](./dotfiles/.config/i3blocks/) |
@@ -58,7 +59,7 @@ during the compilation.
 | image viewer            | sxiv           | Yes  |
 | image editor            | pinta          | Yes  |
 | pdf viewer              | zathura        | Yes  | [zathurarc](./dotfiles/.config/zathurarc) | With zathura-pdf-mupdf for additional pdf/epub support |
-| pdf editors             | masterpdfeditor-free (aur), foxit-reader (aur) | Yes  |
+| pdf editors             | masterpdfeditor-free (AUR), foxit-reader (AUR) | Yes  |
 | music server            | mpd, mpc       | No | [mpd config](./dotfiles/.config/mpd/mpd.conf) | Enable user daemon     |
 | music player            | ncmpcpp        | No | [config folder](./dotfiles/.config/ncmpcpp) | |
 | video player            | mpv            | Yes  | [config folder](./dotfiles/.config/mpv) | |
@@ -131,6 +132,7 @@ Description                   | Program              | Additional info.    |
 Description                   | Program              | Additional info.   |
 |-----------------------------|----------------------|--------------------|
 | Torrent stream from terminal| peerflix             | See [notflix script](./scripts/notflix) |
+| Julia sets explorer         | fraqtive             |                    |
 | Tax program                 | vaudtax              | Need webkitgtk2    |
 | Home cleaner                | [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) |
 | Android screen share        | scrcpy               |

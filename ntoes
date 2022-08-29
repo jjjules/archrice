@@ -1,0 +1,7 @@
+ytfzf/yt-dlp/ytdl
+
+pacman -Qm
+pacman -Qdt
+
+
+- Check picom setup in arch install
