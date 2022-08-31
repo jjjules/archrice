@@ -15,6 +15,7 @@
 	rebase = false
 [push]
 	recurseSubmodules = check
+	autoSetupRemote = true
 [alias]
 	s = status -sb
 	a = add
