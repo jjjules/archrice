@@ -206,7 +206,7 @@ function ari() {
 	fi
 
 	mm activate "ari9000$arg"
-	cd ~/documents/magma
+	cd ~/documents/magma/ari9000api
 }
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
 function cpsync() {	  rsync -aP $1 $2   }
