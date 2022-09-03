@@ -1,5 +1,4 @@
 # Current
-- Setup of pass with gpg? (bug of GNUPGHOME, double check setup)
 - .gitignore for whitelist of configs in archrice directories (mainly vscode, verify vscode does not overwrite
 symlink)
 - Clearer list of programs and needed step for reinstallation

@@ -91,7 +91,7 @@ reboot
 betterlockscreen -u $RICE_PATH/misc/default-lockscreen.jpg
 
 -> recover private key to KEYFILE
-gpg --import KEYFILE
+gpg --import KEYFILE (Double check for GNUPGHOME)
 -> trust key with gpg --edit-key
 shred the KEYFILE
 
