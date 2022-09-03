@@ -130,7 +130,7 @@ def print_dirty_repos(base_path, repos):
         git_branch = run_command("git branch -vv --color=always", cwd=repo)
         git_branch = re.sub(r'\][^\n]*', ']', git_branch)
         git_current_branch = '\n'.join(re.findall(r'\*.*behind.*$', git_branch))
-        git_other_branches = '\n'.join(re.findall(r'[^\n]\s*.*behind.*', git_branch))
+        git_other_branches = '\n'.join(re.findall(r'[\n^](?!\*).*behind.*', git_branch))
         git_status = run_command("git -c color.status=always status -sb", repo)
 
         # Check status
@@ -149,7 +149,6 @@ def print_dirty_repos(base_path, repos):
                 print('Pulling ...')
                 stream = sp.Popen(f"cd {repo} && git pull", shell=True)
                 pulled = stream.wait() == 0
-                pulled
             print()
         dirty_behind_current_branch = dirty_behind_current_branch and not pulled
         dirty_behind = dirty_behind_other_branches or dirty_behind_current_branch
