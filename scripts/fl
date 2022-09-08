@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -x
 # Fast file launcher for i3 using fzf. Defaults to standalone window
 # as a usual file launcher but can also open using vim (useful to open
 # files from a terminal) with --vim option. Optionally take a directory
@@ -7,11 +7,18 @@
 source $HOME/.profile
 
 OPENER() { setsid -f o "$1" }
+SINGLE_COMMAND_OPEN=false
 dir=''
 while [[ $# -gt 0 ]]; do
   case $1 in
 		--vim)
-			OPENER() { vim "$1" </dev/tty }
+			OPENER() { vim -p $@ </dev/tty }
+			SINGLE_COMMAND_OPEN=true
+			shift
+			;;
+		--dragon-drop)
+			OPENER() { dragon-drop $@ }
+			SINGLE_COMMAND_OPEN=true
 			shift
 			;;
     -*|--*)
@@ -35,6 +42,7 @@ export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted -type f -print 2> /
 files=$(fzf -m)
 
 mpvs=()
+regular_files=()
 while read -r file; do
 	[ -z "$file" ] && continue
 	ftype="$(xdg-mime query filetype $file)"
@@ -43,8 +51,18 @@ while read -r file; do
 	then
 		mpvs+="$file"
 	else
-		OPENER "$file"
+		regular_files+="$file"
 	fi
 done <<< "$files"
 
 [ ${#mpvs} -gt 0 ] && i3-msg "exec  mpv ${mpvs[@]}"
+
+if $SINGLE_COMMAND_OPEN
+then
+	OPENER ${regular_files[@]}
+else
+	for file in $regular_files
+	do
+		OPENER "$file"
+	done
+fi
