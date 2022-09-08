@@ -186,7 +186,7 @@ bindsym $mod+y						exec 	signal-desktop
 bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunstify -r 30356 'Notifications activated'"
 
 bindsym $mod+x						exec --no-startup-id "$TERMINAL -e btop"
-#bindsym $mod++Shift+x
+bindsym $mod++Shift+x     exec --no-startup-id 'dunstctl close'
 
 bindsym $mod+c						exec --no-startup-id "source $HOME/.profile && clipmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 bindsym $mod++Shift+c			move position center

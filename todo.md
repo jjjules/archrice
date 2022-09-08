@@ -1,4 +1,5 @@
 # Current
+- close dunst notification with binding (in i3? Tried mod+shift+x)
 - .gitignore for whitelist of configs in archrice directories (mainly vscode, verify vscode does not overwrite
 symlink)
 - Clearer list of programs and needed step for reinstallation
