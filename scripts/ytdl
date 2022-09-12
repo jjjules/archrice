@@ -5,6 +5,19 @@
 # Default to download the sound only in $HOME/ytdl-musics.
 #
 # Depencies: zenity, yt-dlp or youtube-dl, and ytfzf for interactive searching
+# 	ytdl
+#		|
+#		|-	youtube-dl or yt-dlp
+#		|
+#		|- 	zenity
+#		|
+#		|- 	ytfzf
+#				|
+#				|-	fzf
+#				|
+#				|-	mpv
+#				|
+#				|-	ueberzug
 #
 # Run `sudo ytdl --install` to install the program as a desktop application
 

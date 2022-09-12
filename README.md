@@ -83,14 +83,16 @@ during the compilation.
 | torrent client  | deluge-gtk                         | Yes  |                                   |
 
 
-### IDe
+### IDE
+
 vscodium-bin (AUR) with the configurations: [general settings](./dotfiles/vscode-settings.json) and [keybindings](./dotfiles/vscode-keybindings.json).
 
-linter: flake8 (need to pip install --user).
+linter: flake8 (pip install --user, check that path set in vscode settings match the install user-wide install).
+
+Python language server: Pylance, need to install pylance extension using [downloaded VSIX](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance).
 
 Extensions:
 * python - ms-python
-* anaconda - ms-python
 * docs-view - bierner
 * draw.io - hediet
 * git graph - mhutchie
