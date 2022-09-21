@@ -193,6 +193,7 @@ alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_
 alias exportvscode="for f (keybindings.json settings.json); do
                       cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
                     done"
+alias draglastshot="latestindir $HOME/images/screenshots/ | xargs dragon-drop"
 
 
 
@@ -208,6 +209,10 @@ function ari() {
 	mm activate "ari9000$arg"
 	cd ~/documents/magma/ari9000api
 }
+function latestindir() {
+	print -lr -- $1/**/$str*(om[1])
+}
+
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
 function cpsync() {	  rsync -aP $1 $2   }
 function weather(){   curl wttr.in/$1   }

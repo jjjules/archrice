@@ -101,6 +101,7 @@ Extensions:
 * jupyter notebook renderer - ms-toolsai
 * vim - vscodevim
 * vscode-pdf - tomokj1207
+* partial diff - ryu1kn (VSIX install)
 
 micromamba for python environments (AUR)
 
