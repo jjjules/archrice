@@ -31,12 +31,21 @@ ENDC = '\033[0m'
 BOLD = '\033[1m'
 UNDERLINE = '\033[4m'
 
-def run_command(cmd, cwd="."):
-    stdout, _ = sp.Popen(
-        cmd.split(" "), stdout=sp.PIPE, stderr=sp.STDOUT, cwd=cwd
+def run_command(cmd, cwd=".", errors=None):
+    stdout, stderr = sp.Popen(
+        cmd.split(" "), stdout=sp.PIPE, stderr=sp.PIPE, cwd=cwd
     ).communicate()
 
-    return stdout.decode("utf-8")
+    if stderr:
+        error_msg = f"ERROR when running '{cmd}':\n{stderr.decode()}"
+
+        if errors is not None:
+            errors.append(error_msg)
+        else:
+            print(error_msg)
+
+    return stdout.decode()
+
 
 def check_relative_path(base_path, repos):
     repos = [repo if os.path.isabs(repo) else os.path.join(base_path, repo) for repo in repos]
@@ -71,9 +80,10 @@ def filter_repos(repos, exclude_patterns):
 
 
 def fetch_repos(repos):
+    errors = []
     jobs = []
     for repo in repos:
-        process = multiprocessing.Process(target=run_command, args=("git fetch", repo))
+        process = multiprocessing.Process(target=run_command, args=("git fetch", repo, errors))
         jobs.append(process)
 
     # Start the threads (i.e. calculate the random number lists)
@@ -86,6 +96,10 @@ def fetch_repos(repos):
         j.join()
         printProgressBar(i + 1, len(jobs))
 
+    print(errors)
+    for error_msg in errors:
+        print(error_msg)
+        error_msg and print(error_msg)
 
 # Print iterations progress
 def printProgressBar(iteration, total, length=50, fill="█"):
