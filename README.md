@@ -129,6 +129,7 @@ Description                   | Program              | Additional info.    |
 | Get color code of pixel     | grabc (AUR)          |
 | Color code converter        | [convert-color-cli](https://www.npmjs.com/package/convert-color-cli) |
 | Shell syntax checker        | shellcheck           |
+| QR code scanner             | zbarimg (provided by zbar package) | See [script to scan screenshot directly](./scripts/scan-qrcode) using deepin-screenshot |
 
 
 ### Others

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+for program in zbarimg deepin-screenshot
+do
+	if ! which $program &>/dev/null
+	then
+		echo "You must have $program installed to use this script. Exiting..."
+		exit 1
+	fi
+done
+
+qrcode_filename=$(mktemp --dry-run /tmp/qrcode-XXXXX.png)
+deepin-screenshot -s $qrcode_filename &>/dev/null
+if [ -f $qrcode_filename ]
+then
+	qrcode_content="$(zbarimg $qrcode_filename 2>/dev/null | sed 's/^QR-Code://')"
+
+	if [[ "$qrcode_content" =~ https:// ]]
+	then
+		firefox $qrcode_content
+	else
+		echo "Content of QR code: $qrcode_content"
+	fi
+fi
