@@ -52,22 +52,23 @@ during the compilation.
 
 ### Documents and multimedia
 
-| Type                    | Program        | GUI   | Configuration      | Additional information       |
-|-------------------------|----------------|-------|--------------------|------------------------|
-| text                    | vim            | No | [config folder](./dotfiles/vim/) | Vundle for the plugins (manual install)     |
-| text                    | featherpad     | Yes  |
-| image viewer            | sxiv           | Yes  |
-| image editor            | pinta          | Yes  |
-| pdf viewer              | zathura        | Yes  | [zathurarc](./dotfiles/.config/zathurarc) | With zathura-pdf-mupdf for additional pdf/epub support |
-| pdf editors             | masterpdfeditor-free (AUR), foxit-reader (AUR) | Yes  |
-| music server            | mpd, mpc       | No | [mpd config](./dotfiles/.config/mpd/mpd.conf) | Enable user daemon     |
-| music player            | ncmpcpp        | No | [config folder](./dotfiles/.config/ncmpcpp) | |
-| video player            | mpv            | Yes  | [config folder](./dotfiles/.config/mpv) | |
-| audio setup             | pavucontrol    | Yes  |
-| bluetooth configuration | blueberry      | Yes  |                    | With pulseaudio-bluetooth |
-| cd ripper               | sound-juicer   | Yes  |                    | More automatic than abcde but less robust |
-| cd ripper               | abcde          | No |                    |                        |
-| gif viewer              | gifsicle       | No |                    |                        |
+| Type                    | Program        | GUI | Configuration      | Additional information       |
+|-------------------------|----------------|-----|--------------------|------------------------------|
+| text                    | vim            | No  | [config folder](./dotfiles/vim/) | Vundle for the plugins (manual install)     |
+| text                    | featherpad     | Yes |
+| image viewer            | sxiv           | Yes |
+| image editor            | pinta          | Yes |
+| pdf viewer              | zathura        | Yes | [zathurarc](./dotfiles/.config/zathurarc) | With zathura-pdf-mupdf for additional pdf/epub support |
+| pdf editors             | masterpdfeditor-freeAUR), foxit-reader (AUR) | Yes  |
+| music server            | mpd, mpc       | No  | [mpd config](./dotfiles/.config/mpd/mpd.conf) | Enable user daemon     |
+| music player            | ncmpcpp        | No  | [config folder](./dotfiles/.config/ncmpcpp) |     |
+| music tag editor        | exfalso        | Yes |               | Installed via `quodlibet` package |
+| video player            | mpv            | Yes | [config folder](./dotfiles/.config/mpv) |         |
+| audio setup             | pavucontrol    | Yes |
+| bluetooth configuration | blueberry      | Yes |                       | With pulseaudio-bluetooth |
+| cd ripper               | sound-juicer   | Yes | | More automatic than abcde but less robust |
+| cd ripper               | abcde          | No  |                    |                        |
+| gif viewer              | gifsicle       | No  |                    |                        |
 
 ### Internet
 

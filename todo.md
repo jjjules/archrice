@@ -1,4 +1,5 @@
 # Current
+- How to handle .git folders to not copy everytime when running backup script? And make backup
 - close dunst notification with binding (in i3? Tried mod+shift+x)
 - .gitignore for whitelist of configs in archrice directories (mainly vscode, verify vscode does not overwrite
 symlink)
