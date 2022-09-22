@@ -194,6 +194,7 @@ alias exportvscode="for f (keybindings.json settings.json); do
                       cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
                     done"
 alias draglastshot="latestindir $HOME/images/screenshots/ | xargs dragon-drop"
+alias draglastdl="latestindir $HOME/downloads/ | xargs dragon-drop"
 
 
 
