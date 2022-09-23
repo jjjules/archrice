@@ -10,14 +10,6 @@
         "when": "terminalFocus && terminalHasBeenCreated && !terminalEditorFocus || terminalFocus && terminalProcessSupported && !terminalEditorFocus"
     },
     {
-        "key": "alt+j",
-        "command": "workbench.action.nextEditor"
-    },
-    {
-        "key": "alt+k",
-        "command": "workbench.action.previousEditor"
-    },
-    {
         "key": "alt+k",
         "command": "-keybindings.editor.recordSearchKeys",
         "when": "inKeybindings && inKeybindingsSearch"
@@ -99,18 +91,117 @@
         "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
     },
     {
-        "key": "ctrl+k",
+        "key": "alt+k",
         "command": "notebook.focusPreviousEditor",
         "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
     },
     {
-        "key": "ctrl+j",
+        "key": "alt+j",
         "command": "notebook.focusNextEditor",
         "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
     },
     {
+        "key": "alt+k",
+        "command": "workbench.action.previousEditor",
+        "when": "!notebookEditorFocused || !inputFocus"
+    },
+    {
+        "key": "alt+j",
+        "command": "workbench.action.nextEditor",
+        "when": "!notebookEditorFocused || !inputFocus"
+    },
+    {
         "key": "ctrl+w",
-        "command": "workbench.action.closeActiveEditor" ,
+        "command": "workbench.action.closeActiveEditor",
         "when": "inputFocus && vim.active && vim.mode == 'Normal'"
-    }
+    },
+    {
+        "key": "ctrl+k g",
+        "command": "git.viewFileHistory"
+    },
+    {
+        "key": "ctrl+shift+l",
+        "command": "workbench.action.splitEditorRight"
+    },
+    {
+        "key": "alt+o d",
+        "command": "notebook.cell.cut",
+        "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+    },
+    {
+        "key": "ctrl+shift+tab",
+        "command": "workbench.action.quickOpenLeastRecentlyUsedEditor"
+    },
+    {
+        "key": "ctrl+tab",
+        "command": "workbench.action.quickOpenPreviousRecentlyUsedEditor"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFile",
+        "when": "true"
+    },
+    {
+        "key": "z",
+        "command": "undo",
+        "when": "notebookEditorFocused && !inputFocus"
+    },
+    {
+        "key": "t",
+        "command": "redo",
+        "when": "notebookEditorFocused && !inputFocus"
+    },
+    {
+        "key": "ctrl+k p",
+        "command": "markdown.showPreviewToSide",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    {
+        "key": "ctrl+k v",
+        "command": "-markdown.showPreviewToSide",
+        "when": "!notebookEditorFocused && editorLangId == 'markdown'"
+    },
+    {
+        "key": "shift+alt+b",
+        "command": "editor.debug.action.toggleInlineBreakpoint",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "shift+f9",
+        "command": "-editor.debug.action.toggleInlineBreakpoint",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+b",
+        "command": "editor.debug.action.toggleBreakpoint",
+        "when": "debuggersAvailable && editorTextFocus"
+    },
+    {
+        "key": "f9",
+        "command": "-editor.debug.action.toggleBreakpoint",
+        "when": "debuggersAvailable && editorTextFocus"
+    },
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openLocalFile",
+        "when": "remoteFileDialogVisible"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "editor.action.wordHighlight.trigger"
+    },
+    {
+        "key": "alt+d",
+        "command": "workbench.debug.action.toggleRepl",
+        "when": "workbench.panel.repl.view.active"
+    },
+    {
+        "key": "ctrl+shift+y",
+        "command": "-workbench.debug.action.toggleRepl",
+        "when": "workbench.panel.repl.view.active"
+    },
+    {
+        "key": "ctrl+shift+f11",
+        "command": "editor.action.referenceSearch.trigger"
+    },
 ]

@@ -1,0 +1,49 @@
+{
+    "files.autoSave": "afterDelay",
+    "terminal.integrated.inheritEnv": false,
+    "keyboard.dispatch": "keyCode",
+    "editor.lineNumbers": "relative",
+    "zenMode.hideLineNumbers": false,
+    "python.analysis.autoImportCompletions": false,
+    "zenMode.hideStatusBar": false,
+    "window.menuBarVisibility": "toggle",
+    "notebook.output.textLineLimit": 1000,
+
+    "python.condaPath": "/usr/bin/micromamba",
+    "python.envFile": "/home/jules/.local/share/micromamba/envs",
+    "python.languageServer": "Pylance",
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.linting.maxNumberOfProblems": 250,
+    // "python.formatting.provider": "black",
+    // "python.formatting.blackArgs": [
+    //     "--line-length",
+    //     "130"
+    // ],
+    "python.linting.flake8Args": [
+        "--max-line-length=130",
+        "--ignore=E402,E302,E305,E122,E126,E127,E128,E203,E225,E226,E231,E261,E262,E266,E303,E501",
+    ],
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "vim.easymotion": true,
+    "notebook.lineNumbers": "on",
+    "git.mergeEditor": false,
+    "explorer.confirmDragAndDrop": false,
+    "vim.normalModeKeyBindings": [
+        {
+            "before":["<C-n>"],
+            "commands": [
+                ":set hlsearch!",
+            ]
+        },
+    ],
+    "python.linting.flake8Path": "/usr/lib/python3.10/site-packages/flake8/__main__.py",
+    "jupyter.excludeUserSitePackages": true,
+    "jupyter.pythonCompletionTriggerCharacters": ".%",
+    "vim.vimrc.path": "$HOME/.config/VSCodium/User/vimrc",
+    "vim.vimrc.enable": true
+}
