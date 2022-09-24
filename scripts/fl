@@ -1,4 +1,4 @@
-#!/bin/zsh -x
+#!/bin/zsh
 # Fast file launcher for i3 using fzf. Defaults to standalone window
 # as a usual file launcher but can also open using vim (useful to open
 # files from a terminal) with --vim option. Optionally take a directory
