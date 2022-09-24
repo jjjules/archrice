@@ -2,6 +2,8 @@
 trap "exit" INT
 set -e
 
+RSYNC_OPTIONS=(-avP --exclude='*.git/*')
+
 backup_path='/mnt/seagate'
 dirs_to_sync=('documents' 'downloads/' 'images' 'videos')
 
@@ -15,15 +17,23 @@ do
 
 	echo
 	echo Backing up directory "'~/$dir'" to "'$backup_path'":
+
 	echo Running dry run ...
-	rsync --dry-run --size-only -avP "$HOME/$dir" "$backup_path/$dir" > $output_file
+	echo Dry run: > $output_file
+	rsync --dry-run "${RSYNC_OPTIONS[@]}" "$HOME/$dir" "$backup_path/$dir" >> $output_file
 	echo Dry run available at $output_file.
+	if read -q "reply?Show the changes? [y/Y] "
+	then
+		echo
+		vim "$output_file"
+	fi
+
 	if read -q "reply?Execute the backup? [y/Y] "
 	then
 		echo
 		echo Launching execution
 		echo -e '\n\n\n\n\nReal execution:' >> $output_file
-		rsync --size-only -avP "$HOME/$dir" "$backup_path/$dir" | tee -a $output_file
+		rsync "${RSYNC_OPTIONS[@]}" "$HOME/$dir" "$backup_path/$dir" | tee -a $output_file
 
 		echo Done with $dir
 	else
