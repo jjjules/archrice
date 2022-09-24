@@ -107,6 +107,10 @@ bindsym XF86AudioLowerVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume - && pk
 bindsym XF86AudioRaiseVolume 	exec --no-startup-id "$SCRIPTS_PATH/volume + && pkill -RTMIN+1 i3blocks"
 bindsym XF86AudioMicMute			exec --no-startup-id "$SCRIPTS_PATH/micmutetoggle"
 
+bindsym XF86AudioPlay					exec --no-startup-id "mpc toggle"
+bindsym XF86AudioPrev					exec --no-startup-id "mpc prev"
+bindsym XF86AudioNext					exec --no-startup-id "mpc next"
+
 bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 #bindsym XF86Display						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
