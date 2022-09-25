@@ -147,9 +147,9 @@ Description                   | Program              | Additional info.   |
 ### Phone 
 
 apps:
-m f-droid: newpipe
-From play store: reddit, revolut, bcv, twint, maps.me, tl, cff, meteo swiss, wikr, telegram, signal, WhatsApp,
-Facebook messenger, firefox
+F-droid: newpipe
+Play store: Reddit, Revolut, BCV, Twint, Maps.me, TL, CFF, Meteo Swiss, Wikr, Telegram, Signal, WhatsApp,
+Facebook Messenger, Firefox, Caffeine
 
 Then ensure photos from whatsapp and messenger are downloaded.
 
