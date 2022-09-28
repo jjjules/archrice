@@ -1,58 +1,98 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 
-toggle=0
+WAITBEFOREDIM=300
+WAITBEFORELOCK=15
+WAITBEFORESUSPEND=10
+
+function get_ps() {
+	ps aux | grep 'xidlehook' | grep -v 'grep'
+}
+
+function is_running() {
+	! [ -z "$(get_ps)" ]
+}
+
+function get_pid() {
+	get_ps | awk '{print $2}'
+}
+
+function is_stopped() {
+	[[ "$(get_ps | awk '{print $8}')" =~ ^T.* ]]
+}
+
+function run_daemon() {
+	# Only exported variables can be used within the timer's command.
+	export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
+
+	xidlehook \
+		--not-when-fullscreen \
+		--not-when-audio \
+		--timer $WAITBEFOREDIM \
+			"redshift -oPr -b 0.1 -l '46.55:6.6006'" \
+			"redshift -oPr -b 1 -l '46.55:6.6006'" \
+		--timer $WAITBEFORELOCK \
+			"$SCRIPTS_PATH/lockscreen" "" \
+		--timer $WAITBEFORESUSPEND \
+			"systemctl suspend" ""
+}
+
+
+
+if is_stopped
+then
+	action=START
+else
+	action=STOP
+fi
 while [[ $# -gt 0 ]]; do
   case $1 in
     -t|--toogle)
-			toggle=1
+			if is_running
+			then
+				if is_stopped
+				then
+					action=START
+				else
+					action=STOP
+				fi
+			else
+				action=''
+			fi
       shift
       ;;
+		-c|--continue)
+			action=START
+			shift
+			;;
+		-s|--stop)
+			action=STOP
+			shift
+			;;
     *)
       echo "Ignoring inputs given to lockhook"
+			shift
       ;;
   esac
 done
 
-if [ $toggle -eq 1 ]
+if [ -z $action ]
 then
-	psxidle="$(ps aux | grep 'xidlehook' | grep -v 'grep')"
-	if [ ! -z "$psxidle" ]
+	exit
+fi
+
+if is_running
+then
+	if [ $action = 'START' ] && is_stopped
 	then
-		pid="$(awk '{print $2}' <<< $psxidle)"
-		pstate="$(awk '{print $8}' <<< $psxidle)"
-		if [[ "$pstate" =~ '^T.*' ]]
-		then
-			action=CONT
-		else
-			action=STOP
-		fi
-
-		kill -$action $pid
-	else
-		echo 'Cannot toggle xidlehook, process is not running'
+		kill -CONT $(get_pid)
+		echo Continuing lockhook daemon activity
+	elif [ $action = 'STOP' ] && ! $(is_stopped)
+	then
+		kill -STOP $(get_pid)
+		echo Stopping lockhook daemon activity
 	fi
-else
-	# Only exported variables can be used within the timer's command.
-	export PRIMARY_DISPLAY="$(xrandr | awk '/ primary/{print $1}')"
-
-	waitbeforedim=300
-	waitbeforelock=15
-	waitbeforesuspend=10
-
-	# Run xidlehook
-	xidlehook \
-		`# Don't lock when there's a fullscreen application` \
-		--not-when-fullscreen \
-		`# Don't lock when there's audio playing` \
-		--not-when-audio \
-		`# Dim the screen after first inactivity period, undim if user becomes active` \
-		--timer $waitbeforedim \
-			"redshift -oPr -b 0.1 -l '46.55:6.6006'" \
-			"redshift -oPr -b 1 -l '46.55:6.6006'" \
-		`# Undim & lock after second inactivity period` \
-		--timer $waitbeforelock \
-			"$SCRIPTS_PATH/lockscreen" "" \
-		`# Finally, suspend the system` \
-		--timer $waitbeforesuspend \
-			"systemctl suspend" ""
+elif ! [ $action = 'STOP' ]
+then
+	echo Running lockhook daemon...
+	run_daemon
 fi
