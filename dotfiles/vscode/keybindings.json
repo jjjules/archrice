@@ -204,4 +204,24 @@
         "key": "ctrl+shift+f11",
         "command": "editor.action.referenceSearch.trigger"
     },
+    {
+        "key": "alt+o a",
+        "command": "notebook.cell.insertCodeCellAboveAndFocusContainer",
+        "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+o b",
+        "command": "notebook.cell.insertCodeCellBelowAndFocusContainer",
+        "when": "inputFocus && notebookEditorFocused && vim.active && !editorHasSelection && !editorHoverVisible && vim.mode == 'Normal'"
+    },
+    {
+        "key": "alt+f5",
+        "command": "workbench.action.debug.stepOver",
+        "when": "debugState == 'stopped'"
+    },
+    {
+        "key": "f10",
+        "command": "-workbench.action.debug.stepOver",
+        "when": "debugState == 'stopped'"
+    },
 ]

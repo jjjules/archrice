@@ -45,5 +45,9 @@
     "jupyter.excludeUserSitePackages": true,
     "jupyter.pythonCompletionTriggerCharacters": ".%",
     "vim.vimrc.path": "$HOME/.config/VSCodium/User/vimrc",
-    "vim.vimrc.enable": true
+    "vim.vimrc.enable": true,
+    "jupyter.widgetScriptSources": [
+        "jsdelivr.com",
+        "unpkg.com"
+    ]
 }
