@@ -195,6 +195,7 @@ alias exportvscode="for f (keybindings.json settings.json); do
                     done"
 alias draglastshot="latestindir $HOME/images/screenshots/ | xargs dragon-drop"
 alias draglastdl="latestindir $HOME/downloads/ | xargs dragon-drop"
+alias mvlastdl="latestindir $HOME/downloads/ 2>/dev/null | xargs -I {} mv {}"
 
 
 
@@ -211,7 +212,13 @@ function ari() {
 	cd ~/documents/magma/ari9000api
 }
 function latestindir() {
-	print -lr -- $1/**/$str*(om[1])
+	if [ $# -ge 1 ]
+	then
+		dir="$1"
+	else
+		dir='.'
+	fi
+	print -lr -- $dir/**/$str*(om[1])
 }
 
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
