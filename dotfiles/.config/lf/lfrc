@@ -15,8 +15,8 @@ set ifs '\n'
 set scrolloff 10
 set icons
 set period 1
-# set hidden on
-set hiddenfiles '.*:*.aux::*.bbl:*.bcf:*.blg:*.run.xml'
+set hidden on
+set hiddenfiles '.*:*.aux:*.bbl:*.bcf:*.blg:*.run.xml'
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
 
@@ -78,6 +78,10 @@ cmd bulkrename ${{
 	rm $index $index_edit
 }}
 
+cmd dragon-drop ${{
+	xargs dragon-drop <<< "$fx"
+}}
+
 # Bindings
 map <c-f> $lf -remote "send $id select '$(fzf)'"
 map zz cd /home/jules
@@ -101,7 +105,7 @@ map E extract
 map C copyto
 map M moveto
 map m push :mkdir<space>
-map é mark-save
+# map é mark-save
 map <c-r> reload
 map gh set hidden!
 map zp set preview!
