@@ -134,15 +134,16 @@ Description                   | Program              | Additional info.    |
 
 
 ### Others
-Description                   | Program              | Additional info.   |
-|-----------------------------|----------------------|--------------------|
-| Torrent stream from terminal| peerflix             | See [notflix script](./scripts/notflix) |
-| Julia sets explorer         | fraqtive             |                    |
-| Tax program                 | vaudtax              | Need webkitgtk2    |
-| Home cleaner                | [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) |
-| Android screen share        | scrcpy               |
-| OCR tool                    | tesseract            |
-| Fun terminal cleaning       | [wipeclean](https://github.com/JeanJouliaCode/wipeClean)
+Description                    | Program              | Additional info.   |
+|------------------------------|----------------------|--------------------|
+| SQL db visual explorer       | dbeaver              |                    |
+| Torrent stream from terminal | peerflix             | See [notflix script](./scripts/notflix) |
+| Julia sets explorer          | fraqtive             |                    |
+| Tax program                  | vaudtax              | Need webkitgtk2    |
+| Home cleaner                 | [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) |
+| Android screen share         | scrcpy               |
+| OCR tool                     | tesseract            |
+| Fun terminal cleaning        | [wipeclean](https://github.com/JeanJouliaCode/wipeClean)
 
 ### Phone 
 

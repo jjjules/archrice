@@ -224,4 +224,9 @@
         "command": "-workbench.action.debug.stepOver",
         "when": "debugState == 'stopped'"
     },
+    {
+        "key": "0 0",
+        "command": "jupyter.restartkernel",
+        "when": "notebookEditorFocused && !inputFocus"
+    },
 ]
