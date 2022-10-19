@@ -1,9 +1,28 @@
 #!/usr/bin/bash
+# Script that permit easy control of a lockhook, a daemon
+# that detect user inactivity and suspend the computer.
+# The daemon can be in three state: not activated, stopped,
+# or working.
+# The toggle action works only if the daemon is activated.
+# The script's default is to activate in the first state and
+# toggling in the two others, it only accounts for the last
+# option.
+#
+# Usage: lockhook [OPTION]
+#		--get-state:		print the daemon current state and exit
+#		-a, --activate: activate the daemon
+#		-c, --continue: continue the daemon
+#		-s, --stop:			stop the daemon
+#		-t, --toggle:		stop/continue the daemon
 
+
+# Configuration variables
 WAITBEFOREDIM=300
 WAITBEFORELOCK=15
 WAITBEFORESUSPEND=10
 
+
+# Helper functions
 function get_ps() {
 	ps aux | grep 'xidlehook' | grep -v 'grep'
 }
@@ -18,6 +37,24 @@ function get_pid() {
 
 function is_stopped() {
 	[[ "$(get_ps | awk '{print $8}')" =~ ^T.* ]]
+}
+
+function get_state() {
+	state_descr=""
+	if is_running
+	then
+		state_descr+="Daemon is activated: True\nDaemon pid: $(get_pid)"
+		if is_stopped
+		then
+			state_descr+="\nDaemon state: stopped"
+		else
+			state_descr+="\nDaemon state: running"
+		fi
+	else
+		state_descr+="Daemon is not activated"
+	fi
+
+	echo -e $state_descr
 }
 
 function run_daemon() {
@@ -37,8 +74,8 @@ function run_daemon() {
 }
 
 
-
-if is_stopped
+# Argument parsing
+if ! is_running | is_stopped
 then
 	action=START
 else
@@ -46,6 +83,37 @@ else
 fi
 while [[ $# -gt 0 ]]; do
   case $1 in
+		--get-state)
+			get_state
+			exit 0
+			;;
+		-a|--activate)
+			if ! is_running
+			then
+				action=START
+			else
+				action=''
+			fi
+			shift
+			;;
+		-c|--continue)
+			if is_running
+			then
+				action=START
+			else
+				action=''
+			fi
+			shift
+			;;
+		-s|--stop)
+			if is_running
+			then
+				action=STOP
+			else
+				action=''
+			fi
+			shift
+			;;
     -t|--toogle)
 			if is_running
 			then
@@ -60,20 +128,14 @@ while [[ $# -gt 0 ]]; do
 			fi
       shift
       ;;
-		-c|--continue)
-			action=START
-			shift
-			;;
-		-s|--stop)
-			action=STOP
-			shift
-			;;
     *)
       echo "Ignoring inputs given to lockhook"
 			shift
       ;;
   esac
 done
+
+
 
 if [ -z $action ]
 then
@@ -84,15 +146,15 @@ if is_running
 then
 	if [ $action = 'START' ] && is_stopped
 	then
-		kill -CONT $(get_pid)
 		echo Continuing lockhook daemon activity
+		kill -CONT $(get_pid)
 	elif [ $action = 'STOP' ] && ! $(is_stopped)
 	then
-		kill -STOP $(get_pid)
 		echo Stopping lockhook daemon activity
+		kill -STOP $(get_pid)
 	fi
 elif ! [ $action = 'STOP' ]
 then
-	echo Running lockhook daemon...
+	echo Activating lockhook daemon...
 	run_daemon
 fi
