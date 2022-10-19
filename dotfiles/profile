@@ -52,6 +52,7 @@ export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export GRIPHOME="$XDG_CONFIG_HOME/grip"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
+export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export I3_DEFAULT_GAPS=20
