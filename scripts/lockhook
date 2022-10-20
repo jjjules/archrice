@@ -75,11 +75,16 @@ function run_daemon() {
 
 
 # Argument parsing
-if ! is_running | is_stopped
+if ! is_running
 then
 	action=START
 else
-	action=STOP
+	if is_stopped
+	then
+		action=START
+	else
+		action=STOP
+	fi
 fi
 while [[ $# -gt 0 ]]; do
   case $1 in
