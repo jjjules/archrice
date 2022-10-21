@@ -1,0 +1,41 @@
+#!/bin/sh
+#
+# Wrapper around deeping-screenshot for
+# automatic renaming at runtime. Screenshots
+# are save in TARGET_DIR
+
+
+TARGET_DIR=$HOME/images/screenshots
+
+
+if ! [ -d $TARGET_DIR ]; then
+	mkdir -p $TARGET_DIR
+fi
+
+if ! [ -d /tmp/autoshots ]
+then
+	mkdir /tmp/autoshots
+fi
+
+tmpname="$(date +"%Y-%m-%d_%T").png"
+tmppath="/tmp/autoshots/$tmpname"
+
+deepin-screenshot -n -s $tmppath
+if [ $? -ne 0 ]
+then
+	exit 1
+fi
+
+filename=$(i3-input -P 'filename: ' | grep '^output' | sed -e 's/output = //' -e '/.png$/! s/$/.png/')
+if [ -z "$filename" ]
+then
+	filename="$tmpname"
+fi
+filepath="$TARGET_DIR/$filename"
+if [ -f $filepath ]
+then
+	echo "This file already exists"
+	exit 1
+fi
+
+mv "$tmppath" "$filepath"
