@@ -38,6 +38,7 @@ cmd open ${{
 	esac
 }}
 
+cmd touch $touch "$(echo $* | tr ' ' '\ ')"
 cmd cd $cd "$(echo $* | tr ' ' '\ ')"
 cmd mkdir $mkdir -p "$(echo $* | tr ' ' '\ ')"
 
