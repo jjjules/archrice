@@ -13,6 +13,7 @@ USER=jules
 export HOME="/home/$USER"
 source $HOME/archrice/dotfiles/profile
 source $DOTS_PATH/zshenv
+CONFIG_PATH="${XDG_CONFIG_HOME:-HOME/.config}"
 
 TMP="$(mktemp -d /tmp/arch-install-helper.backup.XXXX)"
 echo "Backup at $TMP"
@@ -23,10 +24,10 @@ update_dotfiles() {
 	for name (${(f)confignames})
 	do
 		from="$DOTS_PATH/.config/$name"
-		to="$HOME/.config/$name"
+		to="$CONFIG_PATH/$name"
 
 		[ -e $to -o -L $to ] && mv $to $TMP
-		sudo -u $USER -g $USER ln -s $from $HOME/.config
+		sudo -u $USER ln -s $from $CONFIG_PATH
 
 		[ $? -eq 0 ] && msg=Done || msg=Failed
 		echo "$to -> $from: $msg"
@@ -42,8 +43,8 @@ update_dotfiles() {
 
 
 		[ -e $to -o -L $to ] && mv $to $TMP
-		! [ -d ${to%/*} ] && sudo -u $USER -g $USER mkdir -p ${to%/*}
-		sudo -u $USER -g $USER ln -s $from $to
+		! [ -d ${to%/*} ] && sudo -u $USER mkdir -p ${to%/*}
+		sudo -u $USER ln -s $from $to
 
 		[ $? -eq 0 ] && msg=Done || msg=Failed
 		echo "$to -> $from: $msg"
@@ -51,7 +52,7 @@ update_dotfiles() {
 	echo
 
 	echo 'Setup theme for zsh'
-	sudo -u $USER -g $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
+	sudo -u $USER ln -sf $ZDOTDIR/mytheme.zsh-theme $ZSH_CUSTOM/themes/mytheme.zsh-theme
 	echo 'Setup touchpad'
 	ln -fs $DOTS_PATH/xorg/70-synaptics.conf /etc/X11/xorg.conf.d/70-synaptics.conf
 	echo 'Setup login manager'
@@ -166,7 +167,8 @@ done
 sudo -u $USER mkdir -p "$HOME/.vim/undo"
 sudo -u $USER mkdir -p $XDG_DATA_HOME/{trash,bash,zsh}
 sudo -u $USER mkdir -p "$HOME/musics/mpd-playlists"
-sudo mkdir /mnt/{seagate,seagate-chloe,usbkey}
+sudo -u $USER cp $DOTS_PATH/gch.config $CONFIG_PATH
+sudo mkdir /mnt/{seagate,usbkey}
 
 chown ${USER}:$USER -R $HOME/.cache
 echo 'File left in home belonging to root:'

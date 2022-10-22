@@ -1,35 +1,89 @@
 #!/usr/bin/python
-# Script that automatically checks (and pull if possible) all git repos as defined in the
-# `load_repositories_definition function. The script search recursively in `recursive_repos_dirs`
-# for git repositories and add repositories in `repos` to it.
 #
-# Add pattern (substring) in exclude_pattern to exclude repos.
+# Script that automatically checks (and pull if possible) all git repos as
+# defined in the configuration file. Repositories are defined by paths relative
+# to BASE_PATH (HOME by default).
+#
+# The configuration file is located in XDG_CONFIG_HOME (falls back to $HOME/.config) and
+# is called `gch.config`. An example configuration file that search for all git repositories
+# recursively in `documents/`, discard all repos in 'documents/my-old-company/`, and check
+# also `anotherrepo1` in HOME and `anotherrepo2` in the `images` folder would look like this:
+#
+# [recursive_folders]
+# documents
+#
+# [exclude_patterns]
+# my-old-company
+#
+# [other_repositories]
+# anotherrepo1
+# images/anotherrepo2
+#
+# Note: environment varialbes can be used in the configuration file but not combined in a path.
+# That is the line `PATH_TO_REPO` is converted to its value but it must be exclusively
+# the environment variable name in the line and it must be an absolute path. Env. variables are
+# not allowed for `exclude_patterns`.
 #
 # Inspired from https://github.com/Gorzen/.files/blob/master/.local/bin/dirty-git-epfl
 
-import os, sys, tty, termios
+
 import re
+import os
+import sys
+import tty
+import termios
+import argparse
+import configparser
 import subprocess as sp
 import multiprocessing
 
-def load_repositories_definition():
-    base_path = os.environ["HOME"]
-    recursive_repo_dirs = [f"documents/magma"]
-    repo_dirs = [os.environ['PASSWORD_STORE_DIR'], os.environ['RICE_PATH']]
-    exclude_patterns = []
 
-    return base_path, repo_dirs, recursive_repo_dirs, exclude_patterns
-
-# Colors
-HEADER = '\033[95m'
-OKBLUE = '\033[94m'
-OKCYAN = '\033[96m'
-OKGREEN = '\033[92m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
+BASE_PATH = os.environ["HOME"]
 ENDC = '\033[0m'
+FAIL = '\033[91m'
 BOLD = '\033[1m'
 UNDERLINE = '\033[4m'
+
+def read_config():
+    configdir = os.environ.get('XDG_CONFIG_HOME', '')
+    if not configdir:
+        configdir = f"{os.environ.get('HOME', '')}/.config"
+
+    configpath = f'{configdir}/gch.config'
+
+    if not os.path.isfile(configpath):
+        print('No configuration file. Exiting...')
+        sys.exit(1)
+
+    config = configparser.ConfigParser(allow_no_value=True)
+    config.optionxform = str
+    config.read(configpath)
+
+    config_dict = {}
+    for section in ['recursive_folders', 'other_repositories']:
+        section_paths = []
+        for value in config[section]:
+            if os.path.isabs(value) and os.path.isdir(value):
+                section_paths.append(value)
+            elif os.path.isdir((path := f'{BASE_PATH}/{value}')):
+                section_paths.append(path)
+            else:
+                expanded_value = os.environ.get(value, '')
+
+                if os.path.isdir(expanded_value):
+                    section_paths.append(expanded_value)
+                else:
+                    print(f'Error in config file at line {value}: value not valid')
+                    print('Ignoring and continuing...')
+
+        config_dict[section] = section_paths
+
+    config_dict['exclude_patterns'] = []
+    for pat in config['exclude_patterns']:
+        config_dict['exclude_patterns'].append(pat)
+
+
+    return config_dict
 
 def run_command(cmd, cwd=".", errors=None):
     stdout, stderr = sp.Popen(
@@ -47,61 +101,50 @@ def run_command(cmd, cwd=".", errors=None):
     return stdout.decode()
 
 
-def check_relative_path(base_path, repos):
-    repos = [repo if os.path.isabs(repo) else os.path.join(base_path, repo) for repo in repos]
-
-    return repos
-
-def get_repos(base_path, repo_paths, recursive_repo_dirs):
-    repo_paths = check_relative_path(base_path, repo_paths)
-    recursive_repo_dirs = check_relative_path(base_path, recursive_repo_dirs)
-
-    # Find repos
+def get_repos(config):
     found_repos = []
     find_git_repo_cmd = "find {} -name '.git' -type d | sed 's/\.git$//'"
-    for dir_ in recursive_repo_dirs:
+    for dir_ in config['recursive_folders']:
         stream = os.popen(find_git_repo_cmd.format(dir_))
         output = stream.read().split('\n')
         found_repos += list(filter(None, output))
 
-    all_repos = repo_paths + found_repos
+    all_repos = config['other_repositories'] + found_repos
 
     return all_repos
 
 
 def filter_repos(repos, exclude_patterns):
-    # Filter non-directory repos
     repos = list(filter(os.path.isdir, repos))
-
-    # Remove repo with matching pattern in exclude_patterns
     repos = list(filter(lambda repo: all([pat not in repo for pat in exclude_patterns]), repos))
 
     return repos
 
 
-def fetch_repos(repos):
+def fetch_repos(repos, verbose):
+    if verbose:
+        print('Fetching following repositories:')
+        for repo in repos:
+            print(f'\t- {repo}')
+        print()
+
     errors = []
     jobs = []
     for repo in repos:
         process = multiprocessing.Process(target=run_command, args=("git fetch", repo, errors))
         jobs.append(process)
 
-    # Start the threads (i.e. calculate the random number lists)
     for j in jobs:
         j.start()
 
-    # Ensure all of the threads have finished
     printProgressBar(0, len(jobs))
     for i, j in enumerate(jobs):
         j.join()
         printProgressBar(i + 1, len(jobs))
 
-    print(errors)
     for error_msg in errors:
-        print(error_msg)
         error_msg and print(error_msg)
 
-# Print iterations progress
 def printProgressBar(iteration, total, length=50, fill="█"):
     """
     Call in a loop to create terminal progress bar
@@ -132,14 +175,14 @@ def ask_input(prompt):
 
     return key_read
 
-def print_dirty_repos(base_path, repos):
+def print_dirty_repos(repos):
     dirty_report = []
     # Longest repo string length
     max_length = len(max(repos, key=len))
     all_clean = True
 
     for repo in repos:
-        repo_short_name = re.sub(rf'^{base_path}/', '', repo)
+        repo_short_name = re.sub(rf'^{BASE_PATH}/', '', repo)
 
         git_branch = run_command("git branch -vv --color=always", cwd=repo)
         git_branch = re.sub(r'\][^\n]*', ']', git_branch)
@@ -188,9 +231,13 @@ def print_dirty_repos(base_path, repos):
 
 
 if __name__ == "__main__":
-    base_path, repo_paths, recursive_repo_dirs, exclude_patterns = load_repositories_definition()
-    all_repos = get_repos(base_path, repo_paths, recursive_repo_dirs)
-    all_repos = filter_repos(all_repos, exclude_patterns)
-    fetch_repos(all_repos)
-    print_dirty_repos(base_path, all_repos)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-v','--verbose', action="store_true")
+    args = parser.parse_args()
+    verbose = args.verbose
 
+    config = read_config()
+    all_repos = get_repos(config)
+    all_repos = filter_repos(all_repos, config['exclude_patterns'])
+    fetch_repos(all_repos, verbose)
+    print_dirty_repos(all_repos)
