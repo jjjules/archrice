@@ -209,7 +209,13 @@ function ari() {
 	fi
 
 	mm activate "ari9000$arg"
-	cd ~/documents/magma/ari9000api
+	cd ~/documents/magma/ariapi-qgen
+}
+function arirun() {
+	ari $* && python run.py
+}
+function ariworker() {
+	ari $* && redis-server & python run.py
 }
 function latestindir() {
 	if [ $# -ge 1 ]
