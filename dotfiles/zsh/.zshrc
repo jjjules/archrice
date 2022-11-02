@@ -202,7 +202,14 @@ alias mvlastdl="latestindir $HOME/downloads/ 2>/dev/null | xargs -I {} mv {}"
 ##########     Functions     ##########
 
 function mdz() { mdcompile -p $1 Z }
-function work() { echo $1: $(date '+%d.%m.%y %H:%M:%S') >> $HOME/documents/magma/work_hours }
+function work() {
+	if [ $# -eq 1 ]
+	then
+		line="$1: $(date '+%d.%m.%y %H:%M:%S')"
+	fi
+
+	echo "$line" >> $HOME/documents/magma/work_hours
+}
 function ari() {
 	if [ $# -eq 1 ]; then
 		arg="-$1"
@@ -215,7 +222,7 @@ function arirun() {
 	ari $* && python run.py
 }
 function ariworker() {
-	ari $* && redis-server & python run.py
+	ari $* && redis-server & python worker.py
 }
 function latestindir() {
 	if [ $# -ge 1 ]

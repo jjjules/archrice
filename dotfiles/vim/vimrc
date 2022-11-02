@@ -249,9 +249,9 @@ endif
     call setreg('/', old_query)
 	endfun
 
-	autocmd FileType markdown,rmd,vim let b:noStripWhitespace=1
-	autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
-	autocmd BufWritePre * :%s,^\s\+$,,e
+	" autocmd FileType markdown,rmd,vim let b:noStripWhitespace=1
+	" autocmd BufWritePre * :call  DeleteTrailinfWhiteSpaces()
+	" autocmd BufWritePre * :%s,^\s\+$,,e
 
 " Setup automatic fold
 " -> https://vi.stackexchange.com/questions/13864/bufwinleave-mkview-with-unnamed-file-error-32
