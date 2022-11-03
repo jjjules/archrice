@@ -30,3 +30,4 @@ fi
 
 xargs -- xrandr <<< "$format_xrandr"
 autosound
+setwp
