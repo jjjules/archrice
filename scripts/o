@@ -2,4 +2,8 @@
 # Script useful to open any file from the terminal so that it
 # is independent of it (can close the terminal).
 
-setsid -f xdg-open "$1"
+if [ -z $1 ]; then
+	setsid -f xdg-open "$(cat -)"
+else
+	setsid -f xdg-open $1
+fi
