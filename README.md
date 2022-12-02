@@ -61,7 +61,7 @@ during the compilation.
 | pdf viewer              | zathura        | Yes | [zathurarc](./dotfiles/.config/zathurarc) | With zathura-pdf-mupdf for additional pdf/epub support |
 | pdf editors             | masterpdfeditor-freeAUR), foxit-reader (AUR) | Yes  |
 | music server            | mpd, mpc       | No  | [mpd config](./dotfiles/.config/mpd/mpd.conf) | Enable user daemon     |
-| music player            | ncmpcpp        | No  | [config folder](./dotfiles/.config/ncmpcpp) |     |
+| music player            | ncmpcpp-git    | No  | [config folder](./dotfiles/.config/ncmpcpp) | \*-git version for lyrics |
 | music tag editor        | exfalso        | Yes |               | Installed via `quodlibet` package |
 | video player            | mpv            | Yes | [config folder](./dotfiles/.config/mpv) |         |
 | audio setup             | pavucontrol    | Yes |
@@ -139,6 +139,7 @@ Description                    | Program              | Additional info.   |
 | SQL db visual explorer       | dbeaver              |                    |
 | Torrent stream from terminal | peerflix             | See [notflix script](./scripts/notflix) |
 | Julia sets explorer          | fraqtive             |                    |
+| Trackmania                   | lutris, wine-ge-custom (AUR) | need package for graphics (vulkan-intel in case of embedded GPU) |
 | Tax program                  | vaudtax              | Need webkitgtk2    |
 | Home cleaner                 | [xdg-ninja](https://github.com/b3nj5m1n/xdg-ninja) |
 | Android screen share         | scrcpy               |
