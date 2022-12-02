@@ -12,8 +12,9 @@
     "python.condaPath": "/usr/bin/micromamba",
     "python.envFile": "/home/jules/.local/share/micromamba/envs",
     "python.languageServer": "Pylance",
-    "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
+    "python.linting.lintOnSave": true,
+    "python.linting.flake8Enabled": true,
     "python.linting.maxNumberOfProblems": 250,
     // "python.formatting.provider": "black",
     // "python.formatting.blackArgs": [
@@ -49,5 +50,8 @@
     "jupyter.widgetScriptSources": [
         "jsdelivr.com",
         "unpkg.com"
-    ]
+    ],
+    "gitlens.hovers.currentLine.over": "line",
+    "outline.showVariables": false,
+    "terminal.integrated.enableMultiLinePasteWarning": false
 }
