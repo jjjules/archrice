@@ -61,6 +61,9 @@ def read_config():
 
     config_dict = {}
     for section in ['recursive_folders', 'other_repositories']:
+        if section not in config:
+            continue
+
         section_paths = []
         for value in config[section]:
             if os.path.isabs(value) and os.path.isdir(value):
@@ -79,8 +82,9 @@ def read_config():
         config_dict[section] = section_paths
 
     config_dict['exclude_patterns'] = []
-    for pat in config['exclude_patterns']:
-        config_dict['exclude_patterns'].append(pat)
+    if 'exclude_patterns' in config:
+        for pat in config['exclude_patterns']:
+            config_dict['exclude_patterns'].append(pat)
 
 
     return config_dict
