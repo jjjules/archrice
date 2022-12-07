@@ -214,6 +214,9 @@ function work() {
 
 	echo "$line" >> $HOME/documents/magma/work_hours
 }
+function compute_hours() {
+	/home/jules/documents/magma/compute_hours.py
+}
 function ari() {
 	if [ $# -eq 1 ]; then
 		arg="-$1"
