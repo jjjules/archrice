@@ -47,12 +47,17 @@ export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export _JAVA_OPTIONS='-Duser.home=/tmp/java-home'
 export ANDROID_HOME="$XDG_DATA_HOME/android"
-export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
-export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export GRIPHOME="$XDG_CONFIG_HOME/grip"
 export STACK_ROOT="$XDG_DATA_HOME/stack"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export PATH="$HOME/.ebcli-virtual-env/executables:$PATH"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+if [ -f $AWS_SHARED_CREDENTIALS_FILE ]
+then
+	export AWS_ACCESS_KEY_ID=$(grep 'aws_access_key_id' $AWS_SHARED_CREDENTIALS_FILE | sed 's/aws_access_key_id\s*=\s*//')
+	export AWS_SECRET_ACCESS_KEY=$(grep 'aws_secret_access_key' $AWS_SHARED_CREDENTIALS_FILE | sed 's/aws_secret_access_key\s*=\s*//')
+fi
 
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
 export I3_DEFAULT_GAPS=20
