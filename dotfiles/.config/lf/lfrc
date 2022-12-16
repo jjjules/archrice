@@ -80,7 +80,7 @@ cmd bulkrename ${{
 }}
 
 cmd dragon-drop ${{
-	xargs dragon-drop <<< "$fx"
+	dragon-drop "$fx"
 }}
 
 # Bindings
