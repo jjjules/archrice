@@ -141,6 +141,7 @@ alias gd='git diff'
 alias gb='git branch'
 alias gco='git checkout'
 alias gpl='git pull'
+alias gplr='git pull --rebase'
 alias gpls='git pull --recurse-submodules'
 alias gsu='git submodule update --init --recursive --merge'
 alias gp="git push"
