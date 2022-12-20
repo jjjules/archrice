@@ -1,4 +1,5 @@
 # Current
+- Generate en_GB locale for gsimplecal
 - Check error when fetching in gch and add option to just list dirty repos instead of report + accept argument that filters the repos checked (e.g. gch magma)
 - check-update doesn't work
 - How to handle .git folders to not copy everytime when running backup script? And make backup
