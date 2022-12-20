@@ -114,14 +114,13 @@ bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 bindsym F8										exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym F9										exec --no-startup-id "$SCRIPTS_PATH/wifi --restart"
 bindsym F10			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to suspend?' 'systemctl suspend'"
-bindsym F11			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
-bindsym F12          					exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
+# bindsym F11			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
+# bindsym F12          					exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
 #bindsym XF86Tools
 bindsym XF86Search						exec --no-startup-id "systemctl suspend"
-bindsym Shift+XF86Search			exec --no-startup-id "$SCRIPTS_PATH/lockscreen"
-bindsym XF86LaunchA			      exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
-bindsym XF86Explorer          exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
+# bindsym XF86LaunchA			      exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
+# bindsym XF86Explorer          exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
 ## Letter Key Bindings ##
 bindsym $mod+q						[con_id="__focused__" instance="^(?!dropdown_).*$"] kill
