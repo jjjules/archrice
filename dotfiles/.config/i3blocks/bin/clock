@@ -12,7 +12,7 @@ if [[ -n "$BLOCK_BUTTON" ]]; then
 	if [[ -n "$(ps aux | grep 'gsimplecal' | grep -v 'grep')" ]]; then
 		kill "$(ps aux | grep 'gsimplecal' | grep -v 'grep' | awk '{print $2}')"
 	else
-		gsimplecal &
+		LANG=en_GB.utf8 gsimplecal &
 	fi
 fi
 
