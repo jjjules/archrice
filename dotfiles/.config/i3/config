@@ -113,7 +113,7 @@ bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 #bindsym XF86Display						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym F8										exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym F9										exec --no-startup-id "$SCRIPTS_PATH/wifi --restart"
-bindsym F10			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to suspend?' 'systemctl suspend'"
+bindsym Shift+F10			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to suspend?' 'systemctl suspend'"
 # bindsym F11			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to reboot?' 'systemctl reboot'"
 # bindsym F12          					exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to power off?' 'systemctl poweroff'"
 
