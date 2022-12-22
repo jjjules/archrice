@@ -320,4 +320,8 @@
         "command": "-workbench.action.debug.stepOut",
         "when": "debugState == 'stopped'"
     },
+    {
+        "key": "ctrl+k i",
+        "command": "jupyter.interruptkernel"
+    },
 ]
