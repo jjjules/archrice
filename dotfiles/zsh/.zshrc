@@ -85,6 +85,7 @@ alias -g G='| grep'
 alias -g L='| less'
 alias -g V='| vim -'
 alias -g Z='| zathura -'
+alias -g X='| xsel'
 
 # Arch
 alias pm='pacman'
