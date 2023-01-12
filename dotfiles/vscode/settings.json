@@ -53,5 +53,6 @@
     ],
     "gitlens.hovers.currentLine.over": "line",
     "outline.showVariables": false,
-    "terminal.integrated.enableMultiLinePasteWarning": false
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    "git.confirmSync": false
 }
