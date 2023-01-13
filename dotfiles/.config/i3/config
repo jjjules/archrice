@@ -97,6 +97,7 @@ bindsym $mod+Shift+space			[con_id="__focused__" instance="^(?!dropdown_).*$"] f
 bindsym $mod+Escape 					reload
 bindsym $mod+Shift+Escape 		exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
 bindsym $mod+Print						exec --no-startup-id deepin-screenshot
+bindsym $mod+Delete						exec --no-startup-id "dunstctl close"
 
 ## Media Keys Bindings ##
 bindsym XF86AudioMute 				exec --no-startup-id "$SCRIPTS_PATH/mute && pkill -RTMIN+1 i3blocks"
@@ -111,6 +112,7 @@ bindsym XF86AudioNext					exec --no-startup-id "mpc next"
 bindsym XF86MonBrightnessDown	exec --no-startup-id "$SCRIPTS_PATH/brightness -"
 bindsym XF86MonBrightnessUp		exec --no-startup-id "$SCRIPTS_PATH/brightness +"
 #bindsym XF86Display						exec --no-startup-id "$SCRIPTS_PATH/autolayout"
+bindsym F7										exec --no-startup-id "$SCRIPTS_PATH/setkb && dunstify -u normal -r 32476 'Keyboard setup'"
 bindsym F8										exec --no-startup-id "$SCRIPTS_PATH/autolayout"
 bindsym F9										exec --no-startup-id "$SCRIPTS_PATH/wifi --restart"
 bindsym Shift+F10			      				exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to suspend?' 'systemctl suspend'"
@@ -165,7 +167,7 @@ bindsym $mod+d						exec --no-startup-id "$TERMINAL -T file-launcher -e $SCRIPTS
 bindsym $mod+Shift+d			exec --no-startup-id i3-dmenu-desktop
 
 bindsym $mod+f 						fullscreen toggle
-bindsym $mod+Shift+f			exec --no-startup-id "eval $(dircolors -b $DOTS_PATH/ls_colors);$TERMINAL -e $SCRIPTS_PATH/lfub"
+bindsym $mod+Shift+f			Exec --no-startup-id "eval $(dircolors -b $DOTS_PATH/ls_colors);$TERMINAL -e $SCRIPTS_PATH/lfub"
 
 #bindsym $mod+g
 bindsym $mod+Shift+g			exec --no-startup-id "$SCRIPTS_PATH/togaps ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
