@@ -3,6 +3,7 @@
     "terminal.integrated.inheritEnv": false,
     "keyboard.dispatch": "keyCode",
     "editor.lineNumbers": "relative",
+    "vim.smartRelativeLine": true,
     "zenMode.hideLineNumbers": false,
     "python.analysis.autoImportCompletions": false,
     "zenMode.hideStatusBar": false,
