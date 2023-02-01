@@ -206,6 +206,7 @@ alias mvlastdl="lastdl | xargs -I {} mv {}"
 
 ##########     Functions     ##########
 
+function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
 function mdz() { mdcompile -p $1 Z }
 function mmrepo() { mm activate $(cat .micromamba-env)  }
 function work() {
