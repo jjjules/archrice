@@ -118,7 +118,7 @@ Description                   | Program              | Additional info.    |
 | List files as a tree        | tree                 |
 | Hardware informations       | dmidecode            |
 | More filesystem support     | dosfstools, hfs+ (AUR) | The first is for FAT, the second for Apple filesystem|
-| Android mounting            | jmtpfs (AUR)         |
+| Android mounting            | android-file-transfer|
 | Pacman mirror update        | reflector            |
 | Clean git repository        | bfg (AUR)            |
 | General doc converter       | pandoc               | See [script to compile markdown](./scripts/mdcompile) |
@@ -149,7 +149,7 @@ Description                    | Program              | Additional info.   |
 ### Phone 
 
 apps:
-F-droid: newpipe
+F-droid: newpipe, OpenKeyChain, Password Store
 Play store: Reddit, Revolut, BCV, Twint, Maps.me, TL, CFF, Meteo Swiss, Wikr, Telegram, Signal, WhatsApp,
 Facebook Messenger, Firefox, Caffeine
 
