@@ -145,6 +145,7 @@ Description                    | Program              | Additional info.   |
 | Android screen share         | scrcpy               |
 | OCR tool                     | tesseract            |
 | Fun terminal cleaning        | [wipeclean](https://github.com/JeanJouliaCode/wipeClean)
+| Tetris                       | [ctris](https://github.com/dominikhackl/ctris)
 
 ### Phone 
 
