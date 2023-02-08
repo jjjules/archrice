@@ -146,6 +146,8 @@ Description                    | Program              | Additional info.   |
 | OCR tool                     | tesseract            |
 | Fun terminal cleaning        | [wipeclean](https://github.com/JeanJouliaCode/wipeClean)
 | Tetris                       | [ctris](https://github.com/dominikhackl/ctris)
+| Minesweeper                  | [minesweeper](https://github.com/HaroldLoui/minesweeper-tauri)|
+| Snake                        | [cursnake](https://codeberg.org/karam/cursnake/src/branch/main)|
 
 ### Phone 
 

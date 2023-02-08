@@ -62,6 +62,7 @@ for_window [class="Arandr"] floating enable
 for_window [class="Arandr"] resize set 850 450
 for_window [class="Tk"] floating enable
 for_window [title="Floating:*"] floating enable
+for_window [title="^minesweeper$"] floating enable
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
