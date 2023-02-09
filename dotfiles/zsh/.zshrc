@@ -210,9 +210,17 @@ function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
 function mdz() { mdcompile -p $1 Z }
 function mmrepo() { mm activate $(cat .micromamba-env)  }
 function work() {
-	if [ $# -eq 1 ]
+	if ! [ $# -eq 1 ]
+	then
+		return 1
+	elif [ $1 = start -o $1 = stop ]
 	then
 		line="$1: $(date '+%d.%m.%y %H:%M:%S')"
+	elif [ $1 = new ]
+	then
+		line="\nstart: $(date '+%d.%m.%y %H:%M:%S')"
+	else
+		return 1
 	fi
 
 	echo "$line" >> $HOME/documents/magma/work_hours
