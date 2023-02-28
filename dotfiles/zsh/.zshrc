@@ -193,6 +193,7 @@ alias pubip="curl ifconfig.me"
 alias dunsttoggle="notify-send 'DUNST_COMMAND_TOGGLE'"
 alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
+unalias pip
 alias mm='micromamba'
 alias exportvscode="for f (keybindings.json settings.json); do
                       cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
@@ -210,9 +211,10 @@ function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
 function mdz() { mdcompile -p $1 Z }
 function mmrepo() { mm activate $(cat .micromamba-env)  }
 function work() {
-	if ! [ $# -eq 1 ]
+	if [ $# -eq 0 ]
 	then
-		return 1
+		vim /home/jules/documents/magma/work_hours
+		return 0
 	elif [ $1 = start -o $1 = stop ]
 	then
 		line="$1: $(date '+%d.%m.%y %H:%M:%S')"
@@ -370,3 +372,4 @@ fi
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 eval "$(lua "$SCRIPTS_PATH/z.lua/z.lua" --init zsh enhanced once echo)"
+function space() { z space && mmrepo }
