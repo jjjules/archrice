@@ -210,6 +210,10 @@ alias mvlastdl="lastdl | xargs -I {} mv {}"
 function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
 function mdz() { mdcompile -p $1 Z }
 function mmrepo() { mm activate $(cat .micromamba-env)  }
+function dockerbash() { 
+	cid=$(docker ps | tail -n +2 | fzf | awk '{print $1}')
+	sudo docker exec -it $cid /bin/bash
+}
 function work() {
 	if [ $# -eq 0 ]
 	then
