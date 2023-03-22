@@ -103,7 +103,6 @@ alias paruau='paru -Sayyu'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias ze="cd $HOME/documents/epfl"
 alias zw='cd ~/downloads'
 alias zv='cd ~/videos/movies'
 alias zmu='cd ~/musics/'
