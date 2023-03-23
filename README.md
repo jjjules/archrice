@@ -111,6 +111,7 @@ Description                   | Program              | Additional info.    |
 |-----------------------------|----------------------|---------------------|
 | Calculator                  | bpython              | With dropdown window setup in i3 |
 | Screenshot                  | deepin-screenshot    |
+| Better `du` alternative     | dust                 |
 | Visual disk inspector       | gdmap (AUR)          |
 | Drag and drop files         | dragon-drop (AUR)    |
 | System monitoring           | btop                 |

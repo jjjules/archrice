@@ -121,6 +121,7 @@ alias hg='history | grep'
 #alias less='less -F -X -b -1'
 alias diff="diff --color=auto"
 alias grep="grep --color=auto"
+alias du="dust"
 alias psg="ps aux | grep $@"
 alias ka="killall"
 alias km="killall mailspring"
