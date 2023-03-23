@@ -80,8 +80,7 @@ set $ws10 "10"
 exec --no-startup-id systemctl start --user clipmenud.service
 exec --no-startup-id "$SCRIPTS_PATH/cron/check-update"
 exec --no-startup-id "$SCRIPTS_PATH/lockhook"
-exec --no-startup-id "picom --experimental-backends -b"
-#exec --no-startup-id autotiling
+exec --no-startup-id "picom -b"
 
 ## Special Key Bindings ##
 # bindsym Ctrl+D [con_id="__focused__" instance="^(?dropdown_).*$"] nop
