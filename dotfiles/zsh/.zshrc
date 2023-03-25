@@ -7,7 +7,7 @@ if [ -d $ZSH ];then
 	fi
 
 	PLUGINS_PATH=$ZSH_CUSTOM/plugins
-	plugins=(colored-man-pages thefuck pip)
+	plugins=(colored-man-pages thefuck fzf pip docker docker-compose)
 	for plugin_name ('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
 	do
 		[ -d $PLUGINS_PATH/$plugin_name ] && plugins+=$plugin_name
@@ -424,10 +424,17 @@ fi
 
 # CTRL-T - Paste the selected file path(s) into the command line
 __fsel() {
-  local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type f -print \
-    -o -type d -print \
-    -o -type l -print 2> /dev/null | cut -b3-"}"
+	prune_patterns=('./\.*' '*/\.git*')
+	prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
+	local cmd="find -L . $prune_patterns_formatted  \
+		-path '*/\.dotfiles/*' -print \
+		-o -type f -print \
+		-o -type d -print \
+		-o -type l -print 2> /dev/null | cut -b3-"
+  # local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+  #   -o -type f -print \
+  #   -o -type d -print \
+  #   -o -type l -print 2> /dev/null | cut -b3-"}"
   setopt localoptions pipefail no_aliases 2> /dev/null
   local item
   eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_T_OPTS-}" $(__fzfcmd) -m "$@" | while read item; do

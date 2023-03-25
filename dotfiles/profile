@@ -59,7 +59,14 @@ then
 	export AWS_SECRET_ACCESS_KEY=$(grep 'aws_secret_access_key' $AWS_SHARED_CREDENTIALS_FILE | sed 's/aws_secret_access_key\s*=\s*//')
 fi
 
+export FZF_CTRL_T_COMMAND="find -L . -path './\.*' -prune \
+														-path '*/\.dotfiles/*' -print \
+														-o -type f -print \
+														-o -type d -print \
+														-o -type l -print 2> /dev/null | cut -b3-"
 export FZF_DEFAULT_OPTS='--bind=ctrl-h:backward-word,ctrl-l:forward-word'
+
+
 export I3_DEFAULT_GAPS=20
 export CM_SELECTIONS='clipboard'
 export CM_OUTPUT_CLIP=0
