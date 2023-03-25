@@ -14,6 +14,7 @@ while [[ $# -gt 0 ]]; do
 		--vim)
 			OPENER() { vim -p $@ </dev/tty }
 			SINGLE_COMMAND_OPEN=true
+			# Doesn't work: FZF_OPTS="--preview 'bat --color=always --line-range :500 {}'"
 			shift
 			;;
 		--dragon-drop)
@@ -37,9 +38,11 @@ done
 cd $dir
 prune_patterns=('./\.*' '*/\.git*' './images/*' './musics/*')
 prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
-export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted -type f -print 2> /dev/null"
+export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted -path '*/\.dotfiles/*' -print -o -type f -print 2> /dev/null"
 
-files=$(fzf -m)
+files=$(fzf -m $FZF_OPTS)
+
+[ $? -eq 0 ] || exit 1
 
 mpvs=()
 regular_files=()
