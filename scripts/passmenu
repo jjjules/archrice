@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+shopt -s nullglob globstar
+
+typeit=0
+username=0
+while [[ $# -gt 0 ]]; do
+  case $1 in
+		--type)
+			typeit=1
+			shift
+			;;
+		-u|--username)
+			username=1
+			shift
+			;;
+    *)
+      echo "Incorrect arguments: '$1'. Exiting ..."
+			exit 1
+      ;;
+  esac
+done
+
+
+if [[ -n $WAYLAND_DISPLAY ]]; then
+	dmenu=dmenu-wl
+	xdotool="ydotool type --file -"
+elif [[ -n $DISPLAY ]]; then
+	dmenu=dmenu
+	xdotool="xdotool type --clearmodifiers --file -"
+else
+	echo "Error: No Wayland or X11 display detected" >&2
+	exit 1
+fi
+
+
+prefix=${PASSWORD_STORE_DIR-~/.password-store}
+password_files=( "$prefix"/**/*.gpg )
+password_files=( "${password_files[@]#"$prefix"/}" )
+password_files=( "${password_files[@]%.gpg}" )
+
+password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "$@")
+
+[[ -n $password ]] || exit
+
+[ $username -eq 0 -o $(pass show "$password" 2>/dev/null | wc -l) -ne 1 ] || exit
+
+if [[ $username -eq 0 ]]; then
+	line_number=1
+else
+	line_number=2
+fi
+
+if [[ $typeit -eq 0 ]]; then
+	clipctl disable
+	pass show -c$line_number "$password" 2>/dev/null
+	clipctl enable
+else
+	pass show "$password" | sed "${line_number}q;d" | { IFS= read -r pass; printf %s "$pass"; } | $xdotool
+fi
+

@@ -97,6 +97,8 @@ bindsym $mod+Shift+space			[con_id="__focused__" instance="^(?!dropdown_).*$"] f
 bindsym $mod+Escape 					reload
 bindsym $mod+Shift+Escape 		exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
 bindsym $mod+Print						exec --no-startup-id deepin-screenshot
+bindsym $mod+Insert						exec --no-startup-id "$SCRIPTS_PATH/passmenu --type -u"
+bindsym $mod+Shift+Insert			exec --no-startup-id "$SCRIPTS_PATH/passmenu --type"
 bindsym $mod+Delete						exec --no-startup-id "dunstctl close"
 
 ## Media Keys Bindings ##
@@ -153,7 +155,8 @@ bindsym $mod+o						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize g
 #bindsym $mod+Shift+o
 
 bindsym $mod+p						[con_id="__focused__" instance="^(?!dropdown_).*$"] resize grow width 10 px
-bindsym $mod+Shift+p			exec --no-startup-id "$SCRIPTS_PATH/passmenusec ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
+bindsym $mod+Shift+p			exec --no-startup-id "$SCRIPTS_PATH/passmenu"
+# Fix for focus issue of dmenu: append "; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 
 bindsym $mod+a						split v
 bindsym $mod+Shift+a			split h
