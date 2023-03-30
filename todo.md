@@ -1,5 +1,5 @@
 # Current
-- Generate en_GB locale for gsimplecal
+- Explore zsh-vi-mode plugin to make simple vim setup work
 - mime bug (see output of `xdg-mime query default text/plain`). Also symling mimes from ~/.config to ~/.local/share/applications/mimeapps.list (see tip in http://wiki.archlinux.org/title/XDG_MIME_Applications#mimeapps.listtitle/XDG_MIME_Applications#mimeapps.list)
 - Check error when fetching in gch and add option to just list dirty repos instead of report + accept argument that filters the repos checked (e.g. gch magma)
 - check-update doesn't work

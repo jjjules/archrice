@@ -17,6 +17,19 @@ if [ -d $ZSH ];then
 	[ -d $PLUGINS_PATH/zsh-syntax-highlighting ] && ZSH_HIGHLIGHT_STYLES[path]="none"
 fi
 
+
+# Git fuzzy plugin
+if [ -d $ZSH_CUSTOM/plugins/git-fuzzy ]; then
+	export PATH="$ZSH_CUSTOM/plugins/git-fuzzy/bin:$PATH"
+	export GIT_FUZZY_STATUS_ADD_KEY="Ctrl-A"
+	export GIT_FUZZY_STATUS_EDIT_KEY="Ctrl-E"
+	export GIT_FUZZY_STATUS_COMMIT_KEY="Ctrl-T"
+	export GIT_FUZZY_STATUS_RESET_KEY="Ctrl-R"
+
+	alias gzs='git fuzzy status'
+fi
+
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 source /home/jules/.profile

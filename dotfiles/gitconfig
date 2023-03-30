@@ -28,6 +28,7 @@
 	br = branch
 	rs = restore --staged
 	sm = submodule
+	z = fuzzy
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
