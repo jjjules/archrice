@@ -4,6 +4,7 @@ shopt -s nullglob globstar
 
 typeit=0
 username=0
+both=0
 while [[ $# -gt 0 ]]; do
   case $1 in
 		--type)
@@ -12,6 +13,10 @@ while [[ $# -gt 0 ]]; do
 			;;
 		-u|--username)
 			username=1
+			shift
+			;;
+		--both)
+			both=1
 			shift
 			;;
     *)
@@ -44,6 +49,17 @@ password=$(printf '%s\n' "${password_files[@]}" | "$dmenu" "$@")
 [[ -n $password ]] || exit
 
 [ $username -eq 0 -o $(pass show "$password" 2>/dev/null | wc -l) -ne 1 ] || exit
+
+if [[ $both -eq 1 ]]; then
+	line_number=2
+	pass show "$password" | sed "${line_number}q;d" | { IFS= read -r pass; printf %s "$pass"; } | $xdotool
+
+	clipctl disable
+	pass show -c "$password" 2>/dev/null
+	clipctl enable
+
+	exit 0
+fi
 
 if [[ $username -eq 0 ]]; then
 	line_number=1

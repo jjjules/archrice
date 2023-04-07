@@ -97,7 +97,7 @@ bindsym $mod+Shift+space			[con_id="__focused__" instance="^(?!dropdown_).*$"] f
 bindsym $mod+Escape 					reload
 bindsym $mod+Shift+Escape 		exec --no-startup-id "$SCRIPTS_PATH/prompt 'Do you really want to exit i3?' 'i3-msg exit'"
 bindsym $mod+Print						exec --no-startup-id deepin-screenshot
-bindsym $mod+Insert						exec --no-startup-id "$SCRIPTS_PATH/passmenu --type -u"
+bindsym $mod+Insert						exec --no-startup-id "$SCRIPTS_PATH/passmenu --both"
 bindsym $mod+Shift+Insert			exec --no-startup-id "$SCRIPTS_PATH/passmenu --type"
 bindsym $mod+Delete						exec --no-startup-id "dunstctl close"
 
