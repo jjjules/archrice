@@ -99,7 +99,7 @@ alias -g G='| grep'
 alias -g L='| less'
 alias -g V='| vim -'
 alias -g Z='| zathura -'
-alias -g X='| xsel'
+alias -g X='| xsel -b'
 
 # Arch
 alias pm='pacman'
@@ -133,6 +133,7 @@ alias sudo='sudo '
 alias hg='history | grep'
 #alias less='less -F -X -b -1'
 alias diff="diff --color=auto"
+alias diffc="diff --color=always"
 alias grep="grep --color=auto"
 alias du="dust"
 alias psg="ps aux | grep $@"
@@ -216,6 +217,8 @@ alias draglastshot="latestindir \"$HOME/images/screenshots/\" | xargs dragon-dro
 alias lastdl="latestindir $HOME/downloads"
 alias draglastdl="lastdl | xargs dragon-drop"
 alias mvlastdl="lastdl | xargs -I {} mv {}"
+alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
+alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
 
 
 
