@@ -219,7 +219,11 @@ alias draglastdl="lastdl | xargs dragon-drop"
 alias mvlastdl="lastdl | xargs -I {} mv {}"
 alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
-
+alias rundynamolocal="java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb"
+alias showariblue='aws ec2 describe-instances \
+	--filters "Name=tag-key,Values=elasticbeanstalk:environment-name" "Name=tag-value,Values=ariblue-worker,ariblue,ariblue-api" \
+	--query "Reservations[].Instances[].[Tags[?Key==\`Name\`].Value | [0], State.Name, InstanceType, PublicDnsName, LaunchTime]" \
+	--output table --no-paginate | less -FX'
 
 
 ##########     Functions     ##########
@@ -228,8 +232,15 @@ function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
 function mdz() { mdcompile -p $1 Z }
 function mmrepo() { mm activate $(cat .micromamba-env)  }
 function dockerconnect() { 
+	local _shell
+	if [ $# -gt 0 ]
+	then
+		_shell=$1
+	else
+		_shell=bash
+	fi
 	cid=$(docker ps | tail -n +2 | fzf | awk '{print $1}')
-	[ -z $cid ] || sudo docker exec -it $cid /bin/sh
+	[ -z $cid ] || sudo docker exec -it $cid /bin/$_shell
 }
 function work() {
 	if [ $# -eq 0 ]
