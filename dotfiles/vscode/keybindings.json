@@ -253,7 +253,7 @@
         "when": "!editorFocus"
     },
     {
-        "key": "ctrl+alt+r",
+        "key": "ctrl+alt+e",
         "command": "workbench.action.openRecent"
     },
     {
@@ -323,5 +323,15 @@
     {
         "key": "ctrl+k i",
         "command": "jupyter.interruptkernel"
+    },
+    {
+        "key": "ctrl+t",
+        "command": "workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
+    },
+    {
+        "key": "ctrl+shift+`",
+        "command": "-workbench.action.terminal.new",
+        "when": "terminalProcessSupported || terminalWebExtensionContributedProfile"
     },
 ]
