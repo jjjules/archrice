@@ -220,10 +220,14 @@ alias mvlastdl="lastdl | xargs -I {} mv {}"
 alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
 alias rundynamolocal="java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb"
-alias showariblue='aws ec2 describe-instances \
-	--filters "Name=tag-key,Values=elasticbeanstalk:environment-name" "Name=tag-value,Values=ariblue-worker,ariblue,ariblue-api" \
-	--query "Reservations[].Instances[].[Tags[?Key==\`Name\`].Value | [0], State.Name, InstanceType, PublicDnsName, LaunchTime]" \
-	--output table --no-paginate | less -FX'
+alias showariblue="COLS='State.Name, InstanceType, InstanceId, PublicDnsName, LaunchTime'
+	ENV_NAMES=ariblue-worker,ariblue,ariblue-api,ariblue-recall-api
+	echo Ari Blue environments: $ENV_NAMES
+	echo Columns: $COLS && \
+	aws ec2 describe-instances \
+	--filters 'Name=tag-key,Values=elasticbeanstalk:environment-name' 'Name=tag-value,Values=$ENV_NAMES' \
+	--query 'Reservations[].Instances[].[Tags[?Key==\`Name\`].Value | [0], $COLS]' \
+	--output table --no-paginate | less -FX"
 
 
 ##########     Functions     ##########
