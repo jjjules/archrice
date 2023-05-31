@@ -221,7 +221,7 @@ alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
 alias rundynamolocal="java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb"
 alias showariblue='aws ec2 describe-instances \
-	--filters "Name=tag-key,Values=elasticbeanstalk:environment-name" "Name=tag-value,Values=ariblue-worker,ariblue,ariblue-api" \
+	--filters "Name=tag-key,Values=elasticbeanstalk:environment-name" "Name=tag-value,Values=ariblue-worker,ariblue,ariblue-api,ariblue-recall-api" \
 	--query "Reservations[].Instances[].[Tags[?Key==\`Name\`].Value | [0], State.Name, InstanceType, PublicDnsName, LaunchTime]" \
 	--output table --no-paginate | less -FX'
 
