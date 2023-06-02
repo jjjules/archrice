@@ -72,6 +72,7 @@ bindkey '^L'	vi-forward-word
 bindkey 'Oc'	vi-forward-word
 bindkey 'e'	edit-command-line
 bindkey 'm' run-help
+bindkey -r ''
 ## Replace arrows by vim bindings in menu selection
 zstyle ':completion:*' menu-select
 zmodload zsh/complist

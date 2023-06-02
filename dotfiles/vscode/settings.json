@@ -11,7 +11,6 @@
     "notebook.output.textLineLimit": 1000,
 
     "python.condaPath": "/usr/bin/micromamba",
-    "python.envFile": "/home/jules/.local/share/micromamba/envs",
     "python.languageServer": "Pylance",
     "python.linting.enabled": true,
     "python.linting.lintOnSave": true,
@@ -44,7 +43,6 @@
         },
     ],
     "python.linting.flake8Path": "/usr/lib/python3.10/site-packages/flake8/__main__.py",
-    "jupyter.excludeUserSitePackages": true,
     "jupyter.pythonCompletionTriggerCharacters": ".%",
     "vim.vimrc.path": "$HOME/.config/VSCodium/User/vimrc",
     "vim.vimrc.enable": true,
@@ -56,5 +54,11 @@
     "outline.showVariables": false,
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "git.confirmSync": false,
-    "editor.inlineSuggest.enabled": true
+    "editor.inlineSuggest.enabled": true,
+    "workbench.colorTheme": "Default Dark+ Experimental",
+    "jupyter.enableExtendedKernelCompletions": true,
+    "jupyter.logging.level": "verbose",
+    "jupyter.kernels.trusted": [
+        "/home/jules/.local/share/micromamba/envs/ariblue-backend/share/jupyter/kernels/python3/kernel.json"
+    ]
 }
