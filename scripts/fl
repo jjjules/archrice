@@ -36,7 +36,7 @@ done
 [ -z "$dir" ] && dir="$HOME"
 
 cd $dir
-prune_patterns=('./\.*' '*/\.git*' './images/*' './musics/*' '.cache/*' '.local/*' './documents/repos/*')
+prune_patterns=('./\.*' '*/\.git*' './images/*' './musics/*' '.cache/*' '.local/*' './documents/repos/*' '*/node_modules*')
 prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
 export FZF_DEFAULT_COMMAND="find . $prune_patterns_formatted -path '*/\.dotfiles/*' -print -o -type f -print 2> /dev/null"
 
