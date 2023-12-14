@@ -220,7 +220,7 @@ alias draglastdl="lastdl | xargs dragon-drop"
 alias mvlastdl="lastdl | xargs -I {} mv {}"
 alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
-alias rundynamolocal="java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb"
+alias rundynamolocal="cd /home/jules/documents/magma/tutor/dynamodb/main-db/ && java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb & cd -"
 
 
 ##########     Functions     ##########
