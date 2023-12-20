@@ -9,13 +9,14 @@
     "zenMode.hideStatusBar": false,
     "window.menuBarVisibility": "toggle",
     "notebook.output.textLineLimit": 1000,
-
     "python.condaPath": "/usr/bin/micromamba",
     "python.languageServer": "Pylance",
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.linting.flake8Enabled": true,
-    "python.linting.maxNumberOfProblems": 250,
+    // python.linting settings are deprecated
+    // https://code.visualstudio.com/docs/python/linting
+    // "python.linting.enabled": true,
+    // "python.linting.lintOnSave": true,
+    // "python.linting.flake8Enabled": true,
+    // "python.linting.maxNumberOfProblems": 250,
     // "python.formatting.provider": "black",
     // "python.formatting.blackArgs": [
     //     "--line-length",
@@ -31,15 +32,30 @@
         "<C-f>": false
     },
     "vim.easymotion": true,
+    "vim.foldfix": true,
     "notebook.lineNumbers": "on",
     "git.mergeEditor": false,
     "explorer.confirmDragAndDrop": false,
     "vim.normalModeKeyBindings": [
         {
-            "before":["<C-n>"],
-            "commands": [
-                ":set hlsearch!",
-            ]
+            "before": ["<C-n>"],
+            "commands": [":set hlsearch!"]
+        },
+        {
+            "before": ["z", "s"],
+            "after": [
+                "0", "f", ",", "l", "s", "<ENTER>", "<ESC>",
+            ],
+        },
+        {
+            "before": ["z", "e"],
+            "after": [
+                "0", "f", ")", "i", "<ENTER>", "<BACKSPACE>", "<ESC>",
+            ],
+        },
+        {
+            "before": ["Y"],
+            "after": ["y", "$"],
         },
     ],
     "python.linting.flake8Path": "/usr/lib/python3.10/site-packages/flake8/__main__.py",
@@ -60,5 +76,13 @@
     "jupyter.logging.level": "verbose",
     "jupyter.kernels.trusted": [
         "/home/jules/.local/share/micromamba/envs/ariblue-backend/share/jupyter/kernels/python3/kernel.json"
-    ]
+    ],
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": true,
+        "markdown": true
+    },
+    "gitlens.plusFeatures.enabled": false,
+    "diffEditor.ignoreTrimWhitespace": false
 }

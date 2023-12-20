@@ -202,7 +202,7 @@ bindsym $mod+Shift+v			exec pavucontrol
 bindsym $mod+b 						exec firefox
 bindsym $mod+Shift+b			exec blueberry
 
-bindsym $mod+n						exec --no-startup-id mailspring
+bindsym $mod+n						exec --no-startup-id "mailspring --password-store=gnome-libsecret"
 bindsym $mod+Shift+n			exec --no-startup-id "$TERMINAL -T ncmpcpp -e ncmpcpp"
 bindsym $mod+Ctrl+Shift+n	exec --no-startup-id "killall mailspring; mailspring"
 
