@@ -152,10 +152,20 @@ Description                    | Program              | Additional info.   |
 
 ### Phone 
 
-apps:
-F-droid: newpipe, OpenKeyChain, Password Store
+**Apps:**
+
+F-droid: OpenKeyChain, Password Store
 Play store: Reddit, Revolut, BCV, Twint, Maps.me, TL, CFF, Meteo Swiss, Wikr, Telegram, Signal, WhatsApp,
 Facebook Messenger, Firefox, Caffeine
 
 Then ensure photos from whatsapp and messenger are downloaded.
+
+**Setup of password store on phone:**
+
+From F-Droid: OpenKeyChain and Password Store
+
+- export secret key for password store to file XXXX.asc: gpg --armor --export-secret-keys YOUREMAILADDRESS | gpg --armor --symmetric --output XXX.asc
+- copy exported key and private ssh for git to phone
+- Setup OpenKeyChain, use the ssh key to clone repo, and use password store key in Password Store
+
 
