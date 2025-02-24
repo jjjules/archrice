@@ -104,7 +104,7 @@ Extensions:
 * vscode-pdf - tomokj1207
 * partial diff - ryu1kn (VSIX install)
 
-micromamba for python environments (AUR)
+micromamba for python environments (See automatic install from [the docs](https://mamba.readthedocs.io/en/latest/installation/micromamba-installation.html))
 
 ### Utils
 Description                   | Program              | Additional info.    |
