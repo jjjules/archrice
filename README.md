@@ -80,12 +80,13 @@ during the compilation.
 | VPN             | openconnect                        | No |                                     |
 | SSH             | openssh                            | No | With sshpass to pipe password       |
 | browser         | firefox                            | Yes  | Important plugins: vimium (with [its config](./dotfiles/vimium)), sci-hub, grammarly, tab stash, tab focus google search, ublock, HTTPS everywhere |
-| mail client     | mailspring (AUR)                   | Yes  |                                   |
+| mail client     | mailspring-bin (AUR)                   | Yes  |                                   |
 | torrent client  | deluge-gtk                         | Yes  |                                   |
 
 
 ### IDE
 
+Better now -> cursor-bin (AUR)
 vscodium-bin (AUR) with the configurations: [general settings](./dotfiles/vscode-settings.json) and [keybindings](./dotfiles/vscode-keybindings.json).
 
 linter: flake8 (pip install --user, check that path set in vscode settings match the install user-wide install).
@@ -132,6 +133,7 @@ Description                   | Program              | Additional info.    |
 | Color code converter        | [convert-color-cli](https://www.npmjs.com/package/convert-color-cli) |
 | Shell syntax checker        | shellcheck           |
 | QR code scanner             | zbarimg (provided by zbar package) | See [script to scan screenshot directly](./scripts/scan-qrcode) using deepin-screenshot |
+| Screen cast                 | ffcast (AUR)         |
 
 
 ### Others
