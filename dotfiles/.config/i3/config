@@ -63,6 +63,7 @@ for_window [class="Arandr"] resize set 850 450
 for_window [class="Tk"] floating enable
 for_window [title="Floating:*"] floating enable
 for_window [title="^minesweeper$"] floating enable
+for_window [class="dragon-drop"] sticky enable
 
 ## Workspace Name Definitions ##
 set $ws1 "1"
@@ -186,6 +187,7 @@ bindsym $mod+Shift+k 			move up 100
 
 bindsym $mod+l						exec --no-startup-id "$SCRIPTS_PATH/i3focus right"
 bindsym $mod++Shift+l			move right 100
+bindsym $mod+Ctrl+Alt+l		exec --no-startup-id "systemctl suspend"
 
 bindsym $mod+y						exec 	signal-desktop
 bindsym $mod+Shift+y			exec	--no-startup-id "dunstctl set-paused toggle && dunstify -r 30356 'Notifications activated'"
