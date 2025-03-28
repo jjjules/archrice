@@ -48,7 +48,9 @@ cmd delete ${{
 	printf "%s\n\t" "$fx"
 	printf "delete?[y/N] "
 	read ans
-	[ $ans = "y" ] && xargs -I {} mv {} "${XDG_DATA_HOME:-$HOME/.local/share}/trash" <<< "$fx"
+	if [ $ans = "y" ]; then
+		printf '%s\n' "$fx" | xargs -I {} -d '\n' mv {} "${XDG_DATA_HOME:-$HOME/.local/share}/trash"
+	fi
 }}
 
 cmd bulkrename ${{
@@ -80,7 +82,7 @@ cmd bulkrename ${{
 }}
 
 cmd dragon-drop ${{
-	dragon-drop "$fx"
+	printf '%s\n' "$fx" | xargs -d '\n' dragon-drop
 }}
 
 # Bindings
