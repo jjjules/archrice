@@ -32,7 +32,10 @@ fi
 
 eval $( dircolors -b $DOTS_PATH/ls_colors )
 
-##########  Key Bindings  ##########
+
+
+
+####################  Key Bindings  ####################
 
 # bindkey -v
 # bindkey "^?" backward-delete-char
@@ -71,7 +74,9 @@ bindkey "^[:" copy-earlier-word
 
 
 
-##########     Aliases     ##########
+
+
+####################     Aliases     ####################
 
 # Pipe
 alias -g H='| head'
@@ -199,11 +204,24 @@ alias mvlastshot="latestindir $HOME/images/screenshots/ | xargs -I% -- mv %"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
 
 
-##########     Functions     ##########
 
+
+
+####################     Functions     ####################
+
+# Git
+function gr() {  	cd $(git rev-parse --show-toplevel)   }
+function gac() {
+	git add $(git rev-parse --show-toplevel)
+	git commit
+}
+function grsa() {   git restore --staged $(git rev-parse --show-toplevel)   }
+# Rsync
+function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
+function cpsync() {	  rsync -aP $1 $2   }
 function scalehdmi() { xrandr --output HDMI1 --scale ${1}x${1} }
+
 function mdz() { mdcompile -p $1 Z }
-function mmrepo() { mm activate $(cat .micromamba-env)  }
 function dockerconnect() { 
 	local _shell
 	if [ $# -gt 0 ]
@@ -235,20 +253,6 @@ function work() {
 function compute_hours() {
 	/home/jules/documents/magma/compute_hours.py
 }
-function ari() {
-	if [ $# -eq 1 ]; then
-		arg="-$1"
-	fi
-
-	mm activate "ari9000$arg"
-	cd ~/documents/magma/ariapi-qgen
-}
-function arirun() {
-	ari $* && python run.py
-}
-function ariworker() {
-	ari $* && redis-server & python worker.py
-}
 function showariblue() {
 	COLS='State.Name, InstanceType, InstanceId, PublicDnsName, LaunchTime'
 	ENV_NAMES=ariblue-worker,ariblue,ariblue-api,ariblue-recall-api
@@ -260,8 +264,7 @@ function showariblue() {
 	--output table --no-paginate | less -FX
 }
 function latestindir() {
-	if [ $# -ge 1 ]
-	then
+	if [ $# -ge 1 ]; then
 		dir="$1"
 	else
 		dir='.'
@@ -284,9 +287,6 @@ function importIDEconfig() {
 		done
 	done
 }
-
-function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }
-function cpsync() {	  rsync -aP $1 $2   }
 function weather(){   curl wttr.in/$1   }
 function twoshot() {
 	oneshot $1
@@ -294,13 +294,42 @@ function twoshot() {
 		oneshot $1
 	fi
 }
-function gr() {  	cd $(git rev-parse --show-toplevel)   }
-function gac() {
-	git add $(git rev-parse --show-toplevel)
-	git commit
+function stopwatch(){
+  date1=`date +%s`;
+   while true; do
+    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
+    sleep 0.1
+   done
 }
-function grsa() {   git restore --staged $(git rev-parse --show-toplevel)   }
+function timer(){
+	if [ $# -gt 1 ];then
+		sec="$(echo $1'*60 +' $2 | bc)"
+	elif [ $# -eq 1 ]; then
+		sec=$1
+	else
+		exit 0
+	fi
+	date1=$((`date +%s` + $sec))
+	while [ "$date1" -ge `date +%s` ]
+	do
+		echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+		sleep 0.1
+	done
+	[[ $2 = 's' ]] && return 0
+	dunstify -u normal -r 30503 "End of timer"
+	ffplay -loglevel error -nodisp -loop 0 "$RICE_PATH/misc/radio-alert.mp3" > /dev/null
+}
+if [ -f /usr/bin/pass ];then
+	function pass() {
+		/usr/bin/pass $@
+		if [[ $?  -eq 0 && "$@" =~ '-c' ]]
+		then
+			clipdel -d "$(clippaste)"
+		fi
+	}
+fi
 function gsjoin() {  	/usr/bin/gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dFIXEDMEDIA -dPDFFitPage -sPAPERSIZE=a4 -sOutputFile="$1" "${@:2}"   }
+
 # Compress and Extract functions (https://forums.archlinux.fr/viewtopic.php?p=85628#p85628)
 xtrct () {
 	# Usage: xtrct COMPRESSED_FILE
@@ -346,196 +375,23 @@ cmpr () {
 		*)	echo "Error, please go away.";;
 	esac
 }
-function stopwatch(){
-  date1=`date +%s`;
-   while true; do
-    echo -ne "$(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-    sleep 0.1
-   done
-}
-function timer(){
-	if [ $# -gt 1 ];then
-		sec="$(echo $1'*60 +' $2 | bc)"
-	elif [ $# -eq 1 ]; then
-		sec=$1
-	else
-		exit 0
-	fi
-	date1=$((`date +%s` + $sec))
-	while [ "$date1" -ge `date +%s` ]
-	do
-		echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
-		sleep 0.1
-	done
-	[[ $2 = 's' ]] && return 0
-	dunstify -u normal -r 30503 "End of timer"
-	ffplay -loglevel error -nodisp -loop 0 "$RICE_PATH/misc/radio-alert.mp3" > /dev/null
-}
-if [ -f /usr/bin/pass ];then
-	function pass() {
-		/usr/bin/pass $@
-		if [[ $?  -eq 0 && "$@" =~ '-c' ]]
-		then
-			clipdel -d "$(clippaste)"
-		fi
-	}
-fi
-
-# Change cursor shape for different vi modes. (Luke's)
-# function zle-keymap-select {
-#   if [[ ${KEYMAP} == vicmd ]] ||
-#      [[ $1 = 'block' ]]; then
-#     echo -ne '\e[1 q'
-#   elif [[ ${KEYMAP} == main ]] ||
-#        [[ ${KEYMAP} == viins ]] ||
-#        [[ ${KEYMAP} = '' ]] ||
-#        [[ $1 = 'beam' ]]; then
-#     echo -ne '\e[5 q'
-#   fi
-# }
-# zle -N zle-keymap-select
-# zle-line-init() {
-#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
-#     echo -ne "\e[5 q"
-# }
-# zle -N zle-line-init
-# echo -ne '\e[5 q' # Use beam shape cursor on startup.
-# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
-
-eval "$(lua "$SCRIPTS_PATH/z.lua/z.lua" --init zsh enhanced once echo)"
-function space() { z space && mmrepo }
 
 
 
-# fzf
-#     ____      ____
-#    / __/___  / __/
-#   / /_/_  / / /_
-#  / __/ / /_/ __/
-# /_/   /___/_/ key-bindings.zsh
-#
-# - $FZF_TMUX_OPTS
-# - $FZF_CTRL_T_COMMAND
-# - $FZF_CTRL_T_OPTS
-# - $FZF_CTRL_R_OPTS
-# - $FZF_ALT_C_COMMAND
-# - $FZF_ALT_C_OPTS
 
-# Key bindings
-# ------------
 
-# The code at the top and the bottom of this file is the same as in completion.zsh.
-# Refer to that file for explanation.
-if 'zmodload' 'zsh/parameter' 2>'/dev/null' && (( ${+options} )); then
-  __fzf_key_bindings_options="options=(${(j: :)${(kv)options[@]}})"
-else
-  () {
-    __fzf_key_bindings_options="setopt"
-    'local' '__fzf_opt'
-    for __fzf_opt in "${(@)${(@f)$(set -o)}%% *}"; do
-      if [[ -o "$__fzf_opt" ]]; then
-        __fzf_key_bindings_options+=" -o $__fzf_opt"
-      else
-        __fzf_key_bindings_options+=" +o $__fzf_opt"
-      fi
-    done
-  }
-fi
+####################     FZF widgets      ####################
 
-'emulate' 'zsh' '-o' 'no_aliases'
+# Shortcut added:
+# Ctrl+T -> Easy insertion of filepath(s)
+# Alt+C  -> cd into directory
+# Ctrl+R -> Same behavior as original Ctrl+R but using fzf
+# Ctrl+G -> Easy insertion of commands arguments from history
 
-{
+source /usr/share/fzf/key-bindings.zsh
 
-[[ -o interactive ]] || return 0
-
-# CTRL-T - Paste the selected file path(s) into the command line
-__fsel() {
-	prune_patterns=('./\.*' '*/\.git*')
-	prune_patterns_formatted="$(printf "-path '%s' -prune -o " "${prune_patterns[@]}")"
-	local cmd="find -L . $prune_patterns_formatted  \
-		-path '*/\.dotfiles/*' -print \
-		-o -type f -print \
-		-o -type d -print \
-		-o -type l -print 2> /dev/null | cut -b3-"
-  # local cmd="${FZF_CTRL_T_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-  #   -o -type f -print \
-  #   -o -type d -print \
-  #   -o -type l -print 2> /dev/null | cut -b3-"}"
-  setopt localoptions pipefail no_aliases 2> /dev/null
-  local item
-  eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_CTRL_T_OPTS-}" $(__fzfcmd) -m "$@" | while read item; do
-    echo -n "${(q)item} "
-  done
-  local ret=$?
-  echo
-  return $ret
-}
-
-__fzfcmd() {
-  [ -n "${TMUX_PANE-}" ] && { [ "${FZF_TMUX:-0}" != 0 ] || [ -n "${FZF_TMUX_OPTS-}" ]; } &&
-    echo "fzf-tmux ${FZF_TMUX_OPTS:--d${FZF_TMUX_HEIGHT:-40%}} -- " || echo "fzf"
-}
-
-fzf-file-widget() {
-  LBUFFER="${LBUFFER}$(__fsel)"
-  local ret=$?
-  zle reset-prompt
-  return $ret
-}
-zle     -N            fzf-file-widget
-bindkey -M emacs '^T' fzf-file-widget
-bindkey -M vicmd '^T' fzf-file-widget
-bindkey -M viins '^T' fzf-file-widget
-
-# ALT-C - cd into the selected directory
-fzf-cd-widget() {
-  local cmd="${FZF_ALT_C_COMMAND:-"command find -L . -mindepth 1 \\( -path '*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print 2> /dev/null | cut -b3-"}"
-  setopt localoptions pipefail no_aliases 2> /dev/null
-  local dir="$(eval "$cmd" | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} --reverse --bind=ctrl-z:ignore ${FZF_DEFAULT_OPTS-} ${FZF_ALT_C_OPTS-}" $(__fzfcmd) +m)"
-  if [[ -z "$dir" ]]; then
-    zle redisplay
-    return 0
-  fi
-  zle push-line # Clear buffer. Auto-restored on next prompt.
-  BUFFER="builtin cd -- ${(q)dir}"
-  zle accept-line
-  local ret=$?
-  unset dir # ensure this doesn't end up appearing in prompt expansion
-  zle reset-prompt
-  return $ret
-}
-zle     -N             fzf-cd-widget
-bindkey -M emacs 'x' fzf-cd-widget
-bindkey -M vicmd 'x' fzf-cd-widget
-bindkey -M viins 'x' fzf-cd-widget
-
-# CTRL-R - Paste the selected command from history into the command line
-fzf-history-widget() {
-  local selected num
-  setopt localoptions noglobsubst noposixbuiltins pipefail no_aliases 2> /dev/null
-  selected=( $(fc -rl 1 | awk '{ cmd=$0; sub(/^[ \t]*[0-9]+\**[ \t]+/, "", cmd); if (!seen[cmd]++) print $0 }' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} ${FZF_DEFAULT_OPTS-} -n2..,.. --scheme=history --bind=ctrl-r:toggle-sort,ctrl-z:ignore ${FZF_CTRL_R_OPTS-} --query=${(qqq)LBUFFER} +m" $(__fzfcmd)) )
-  local ret=$?
-  if [ -n "$selected" ]; then
-    num=$selected[1]
-    if [ -n "$num" ]; then
-      zle vi-fetch-history -n $num
-    fi
-  fi
-  zle reset-prompt
-  return $ret
-}
-zle     -N            fzf-history-widget
-bindkey -M emacs '^R' fzf-history-widget
-bindkey -M vicmd '^R' fzf-history-widget
-bindkey -M viins '^R' fzf-history-widget
-
-} always {
-  eval $__fzf_key_bindings_options
-  'unset' '__fzf_key_bindings_options'
-}
-
+# Allow using Ctrl+G to search among arguments in shell history and insert them
+# https://superuser.com/questions/1555617/is-there-an-equivalent-of-ctrl-r-but-for-single-arguments-rather-than-whole-com
 fzf-last-word-widget() {
   local POSITION RECALL_ARGUMENT
   if [[ ! -z $NUMERIC ]]; then
@@ -560,6 +416,36 @@ zle -N        fzf-last-word-widget
 bindkey -M emacs '^G' fzf-last-word-widget
 bindkey -M vicmd '^G' fzf-last-word-widget
 bindkey -M viins '^G' fzf-last-word-widget
+
+
+
+
+####################     Others     ####################
+
+# Change cursor shape for different vi modes. (Luke's)
+# function zle-keymap-select {
+#   if [[ ${KEYMAP} == vicmd ]] ||
+#      [[ $1 = 'block' ]]; then
+#     echo -ne '\e[1 q'
+#   elif [[ ${KEYMAP} == main ]] ||
+#        [[ ${KEYMAP} == viins ]] ||
+#        [[ ${KEYMAP} = '' ]] ||
+#        [[ $1 = 'beam' ]]; then
+#     echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
+# zle-line-init() {
+#     zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+# echo -ne '\e[5 q' # Use beam shape cursor on startup.
+# preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+eval "$(lua "$SCRIPTS_PATH/z.lua/z.lua" --init zsh enhanced once echo)"
+
+
 
 
 
