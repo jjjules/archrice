@@ -59,7 +59,6 @@
         },
     ],
     "python.linting.flake8Path": "/usr/lib/python3.10/site-packages/flake8/__main__.py",
-    "jupyter.pythonCompletionTriggerCharacters": ".%",
     "vim.vimrc.path": "$HOME/.config/VSCodium/User/vimrc",
     "vim.vimrc.enable": true,
     "jupyter.widgetScriptSources": [
@@ -72,7 +71,6 @@
     "git.confirmSync": false,
     "editor.inlineSuggest.enabled": true,
     "workbench.colorTheme": "Default Dark+ Experimental",
-    "jupyter.enableExtendedKernelCompletions": true,
     "jupyter.logging.level": "verbose",
     "jupyter.kernels.trusted": [
         "/home/jules/.local/share/micromamba/envs/ariblue-backend/share/jupyter/kernels/python3/kernel.json"
@@ -84,5 +82,56 @@
         "markdown": true
     },
     "gitlens.plusFeatures.enabled": false,
-    "diffEditor.ignoreTrimWhitespace": false
+    "diffEditor.ignoreTrimWhitespace": false,
+    "jupyter.enableExtendedPythonKernelCompletions": true,
+    "jupyter.completionTriggerCharacters": {
+        "bash": [
+            "$",
+            "{"
+        ],
+        "java": [
+            ".",
+            "@",
+            "#"
+        ],
+        "javascript": [
+            ".",
+            "\"",
+            "'",
+            "/",
+            "@"
+        ],
+        "python": [
+            ".",
+            "%"
+        ],
+        "julia": [
+            "."
+        ],
+        "r": [
+            "[",
+            "(",
+            ",",
+            "$",
+            "@",
+            "\"",
+            "'"
+        ],
+        "rust": [
+            ".",
+            ":"
+        ],
+        "scala": [
+            "."
+        ],
+        "typescript": [
+            ".",
+            "\"",
+            "'",
+            "/",
+            "@",
+            "<"
+        ]
+    },
+    "python.createEnvironment.trigger": "off"
 }
