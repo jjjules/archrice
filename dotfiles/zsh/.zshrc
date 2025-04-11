@@ -211,16 +211,12 @@ alias wget='wget --hsts-file $HOME/.cache/wget-hsts'
 alias webcam='mpv --demuxer-lavf-format=video4linux2 --demuxer-lavf-o-set=input_format=mjpeg av://v4l2:/dev/video0'
 unalias pip
 alias mm='micromamba'
-alias exportvscode="for f (keybindings.json settings.json); do
-                      cp '$XDG_CONFIG_HOME/VSCodium/User/$f' '$RICE_PATH/vscode-$f'\
-                    done"
-alias draglastshot="latestindir \"$HOME/images/screenshots/\" | xargs dragon-drop"
-alias lastdl="latestindir $HOME/downloads"
-alias draglastdl="lastdl | xargs dragon-drop"
-alias mvlastdl="lastdl | xargs -I {} mv {}"
-alias mvlastshot="latestindir \"$HOME/images/screenshots/\" | xargs -I {} mv {}"
+alias draglastshot="latestindir $HOME/images/screenshots/ | xargs -I% -- dragon-drop %"
+alias lastdl="latestindir '$HOME/downloads'"
+alias draglastdl="lastdl | xargs -I% dragon-drop %"
+alias mvlastdl="lastdl | xargs -I% -- mv %"
+alias mvlastshot="latestindir $HOME/images/screenshots/ | xargs -I% -- mv %"
 alias list-aws-instances='aws ec2 describe-instances --region eu-central-1 --query "Reservations[*].Instances[*].{PublicIP:PublicIpAddress,InstanceId:InstanceId,Name:Tags[?Key=='Name']|[0].Value,Status:State.Name}" --filters "Name=instance-state-name,Values=running" --output table'
-alias rundynamolocal="cd /home/jules/documents/magma/tutor/dynamodb/main-db/ && java -Djava.library.path=$DYNAMODBLOCALLOCATION/DynamoDBLocal_lib -jar $DYNAMODBLOCALLOCATION/DynamoDBLocal.jar -sharedDb & cd -"
 
 
 ##########     Functions     ##########
@@ -291,6 +287,22 @@ function latestindir() {
 		dir='.'
 	fi
 	print -lr -- $dir/**/$str*(om[1])
+}
+function exportIDEconfig() {
+	for IDE in VSCodium Cursor; do
+		for f in keybindings.json settings.json; do
+			cp "$XDG_CONFIG_HOME/$IDE/User/$f" "$RICE_PATH/dotfiles/${IDE:l}/$f"
+		done
+	done
+}
+function importIDEconfig() {
+	for IDE in VSCodium Cursor; do
+		for f in keybindings.json settings.json; do
+			if [ -d "$XDG_CONFIG_HOME/$IDE/User/" ]; then
+				cp "$RICE_PATH/dotfiles/${IDE:l}/$f" "$XDG_CONFIG_HOME/$IDE/User/"
+			fi
+		done
+	done
 }
 
 function mvsync() {   rsync -aP --remove-source-files $1 $2 && rm -r $1   }

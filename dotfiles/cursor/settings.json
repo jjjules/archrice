@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Cursor Dark High Contrast",
+    "terminal.integrated.commandsToSkipShell": [
+        "-aichat.newchataction",
+        "-workbench.action.quickOpen",
+        "-aipopup.action.modal.generate"
+    ],
+    "keyboard.dispatch": "keyCode"
+}
