@@ -198,7 +198,7 @@ bindsym $mod++Shift+x     exec --no-startup-id 'dunstctl close'
 bindsym $mod+c						exec --no-startup-id "source $HOME/.profile && clipmenu ; i3-msg 'workspace back_and_forth' ; i3-msg 'workspace back_and_forth'"
 bindsym $mod++Shift+c			move position center
 
-bindsym $mod+v						exec vscodium
+bindsym $mod+v						exec cursor
 bindsym $mod+Shift+v			exec pavucontrol
 
 bindsym $mod+b 						exec firefox
