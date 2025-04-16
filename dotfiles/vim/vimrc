@@ -37,7 +37,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		Plugin 'kana/vim-textobj-line'
 		Plugin 'kana/vim-textobj-underscore'
 		Plugin 'michaeljsmith/vim-indent-object'
-		Plugin 'JulesssG/targets.vim'
+		Plugin 'jjjules/targets.vim'
 		Plugin 'yegappan/taglist'
 		Plugin 'machakann/vim-sandwich'
 		Plugin 'lambdalisue/fern.vim'
