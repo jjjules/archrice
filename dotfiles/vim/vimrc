@@ -40,6 +40,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 
 		"" Commentary
 		nmap cm gc
+		nmap m cmil
 
 		"" Titlecase
 		" let g:titlecase_map_keys = 0
