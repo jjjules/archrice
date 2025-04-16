@@ -107,7 +107,7 @@ def run_command(cmd, cwd=".", errors=None):
 
 def get_repos(config):
     found_repos = []
-    find_git_repo_cmd = "find {} -name '.git' -type d | sed 's/\.git$//'"
+    find_git_repo_cmd = r"find {} -name '.git' -type d | sed 's/\.git$//'"
     for dir_ in config['recursive_folders']:
         stream = os.popen(find_git_repo_cmd.format(dir_))
         output = stream.read().split('\n')
