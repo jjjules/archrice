@@ -1,0 +1,2 @@
+- In vim, Ycm server shutdown -> Run `PluginUpdate` (vim command) and then `python3 install.py --all` (shell) from the
+YouCompleteMe/ directory
