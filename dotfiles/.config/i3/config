@@ -52,7 +52,8 @@ exec --no-startup-id "$TERMINAL -n dropdown_calc -e zsh -c 'bpython;bpython;bpyt
 exec --no-startup-id "$TERMINAL -n dropdown_term -e zsh -c 'zsh;zsh;zsh;zsh;zsh;zsh;zsh;zsh;zsh;zsh'"
 
 ## Other Windows Properties ##
-for_window [class="Pavucontrol"] floating enable
+for_window [class="pavucontrol"] floating enable
+for_window [instance="pavucontrol"] resize set 850 540
 for_window [class="firefox" instance="Places" title="Library" window_role="Organizer"] floating enable
 for_window [class="Blueberry.py"] floating enable
 for_window [title="file-launcher"] floating enable
