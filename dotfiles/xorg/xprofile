@@ -6,3 +6,4 @@ $SCRIPTS_PATH/mute on &
 redshift -l 46.55:6.6006 -g 0.8 -b 1:0.8 &
 unclutter &
 dunst &
+xinput set-prop 'SteelSeries World of Warcraft MMO Gaming Mouse:Legendary Edition' 'libinput Accel Speed' -0.5
