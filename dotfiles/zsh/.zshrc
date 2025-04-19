@@ -1,4 +1,35 @@
+# ~/.zshrc — Jules Gottraux
+#
+# Zsh configuration using Oh My Zsh with a custom theme and plugin setup.
+# Custom plugins are located in $PLUGINS_PATH
+#
+# FZF widgets are enabled for enhanced history and file navigation.
+# The `git-fuzzy` plugin is installed separately (not listed in `plugins`) for fuzzy Git actions.
+#
+# Custom keybindings:
+# - Ctrl+Space (Ctrl+Space): Accept autosuggestion
+# - Ctrl+Z: Undo
+# - Ctrl+H, Ctrl+L: Move word-by-word (vi-style)
+# - Ctrl+J, Ctrl+K: Search through command history
+# - Alt+e: Edit the current command in $EDITOR
+# - Alt+m: Show `run-help`
+# - Menu completion uses Vim keys (h/j/k/l)
+#
+# Includes many aliases for shell navigation, Git, Docker, networking, and more.
+# See below for function definitions used for scripting, automation, etc.
+
+
+
+
+eval $( dircolors -b $DOTS_PATH/ls_colors )
 export ENABLE_CORRECTION='false'
+export xch="$XDG_CONFIG_HOME"
+
+
+
+
+####################  Oh My Zsh  ####################
+
 if [ -d $ZSH ];then
   if [ -f $ZSH_CUSTOM/themes/mytheme.zsh-theme ];then
 		ZSH_THEME="mytheme"
@@ -6,31 +37,27 @@ if [ -d $ZSH ];then
 		ZSH_THEME="robbyrussell"
 	fi
 
+	# Built-in plugins
 	PLUGINS_PATH=$ZSH_CUSTOM/plugins
-	plugins=(colored-man-pages thefuck fzf pip docker docker-compose)
+	plugins=(
+		colored-man-pages
+		thefuck
+		fzf
+		pip
+		docker
+		docker-compose
+	)
+
+	# Manually cloned plugins
 	for plugin_name ('zsh-autosuggestions' 'zsh-syntax-highlighting' 'autoupdate')
 	do
 		[ -d $PLUGINS_PATH/$plugin_name ] && plugins+=$plugin_name
 	done
 
   source $ZSH/oh-my-zsh.sh
+
 	[ -d $PLUGINS_PATH/zsh-syntax-highlighting ] && ZSH_HIGHLIGHT_STYLES[path]="none"
 fi
-
-
-# Git fuzzy plugin
-if [ -d $ZSH_CUSTOM/plugins/git-fuzzy ]; then
-	export PATH="$ZSH_CUSTOM/plugins/git-fuzzy/bin:$PATH"
-	export GIT_FUZZY_STATUS_ADD_KEY="Ctrl-A"
-	export GIT_FUZZY_STATUS_EDIT_KEY="Ctrl-E"
-	export GIT_FUZZY_STATUS_COMMIT_KEY="Ctrl-T"
-	export GIT_FUZZY_STATUS_RESET_KEY="Ctrl-R"
-
-	alias gzs='git fuzzy status'
-fi
-
-
-eval $( dircolors -b $DOTS_PATH/ls_colors )
 
 
 
@@ -420,6 +447,39 @@ bindkey -M viins '^G' fzf-last-word-widget
 
 
 
+####################     Git fuzzy     ####################
+
+if [ -d $PLUGINS_PATH/git-fuzzy ]; then
+	export PATH="$ZSH_CUSTOM/plugins/git-fuzzy/bin:$PATH"
+	export GIT_FUZZY_STATUS_ADD_KEY="Ctrl-A"
+	export GIT_FUZZY_STATUS_EDIT_KEY="Ctrl-E"
+	export GIT_FUZZY_STATUS_COMMIT_KEY="Ctrl-T"
+	export GIT_FUZZY_STATUS_RESET_KEY="Ctrl-R"
+
+	alias gf='git fuzzy'
+fi
+
+
+
+
+####################     Mamba     ####################
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'micromamba shell init' !!
+export MAMBA_EXE='/home/jules/.local/bin/micromamba';
+export MAMBA_ROOT_PREFIX='/home/jules/.local/share/micromamba';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+
+
+
 ####################     Others     ####################
 
 # Change cursor shape for different vi modes. (Luke's)
@@ -444,25 +504,4 @@ bindkey -M viins '^G' fzf-last-word-widget
 # preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 eval "$(lua "$SCRIPTS_PATH/z.lua/z.lua" --init zsh enhanced once echo)"
-
-
-
-
-
-
-
-
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'micromamba shell init' !!
-export MAMBA_EXE='/home/jules/.local/bin/micromamba';
-export MAMBA_ROOT_PREFIX='/home/jules/.local/share/micromamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from micromamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
 

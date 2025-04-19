@@ -1,4 +1,25 @@
-	let mapleader=" "
+" === Vim Configuration Overview ===
+" Leader key: <Space>
+"
+" Plugins (via Vundle):
+" - Navigation/UI: fzf, fern, easymotion, taglist, goyo
+" - Text objects & motions: vim-sandwich, vim-textobj-user, vim-indent-object
+" - Productivity: YouCompleteMe, vim-commentary, vim-system-copy, vim-repeat
+"
+" Key Highlights:
+" - Custom mappings for fast file navigation, commenting, and editing
+" - Easymotion for jump-based movement, fern for file drawer, fzf for fuzzy finding
+" - Sandwich plugin for easy surrounding text manipulation
+" - Auto-reloading files, persistent undo, and last cursor position memory
+" - Smart search (incsearch, ignorecase, smartcase), smart indentation
+" - Custom status line and visual tweaks (relativenumber, light theme)
+" - Insert mode shortcuts (e.g., <C-h>, <C-l>), split navigation (<C-h/j/k/l>)
+" - Custom LaTeX and Markdown helpers (e.g., <leader>cm, <C-b>)
+" - Auto-folding memory via view saving and loading
+" - Optional trailing whitespace deletion on save
+
+
+let mapleader=" "
 
 if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vim"'))
 	" Initialize Vundle
@@ -16,7 +37,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 		Plugin 'kana/vim-textobj-line'
 		Plugin 'kana/vim-textobj-underscore'
 		Plugin 'michaeljsmith/vim-indent-object'
-		Plugin 'JulesssG/targets.vim'
+		Plugin 'jjjules/targets.vim'
 		Plugin 'yegappan/taglist'
 		Plugin 'machakann/vim-sandwich'
 		Plugin 'lambdalisue/fern.vim'
@@ -40,6 +61,7 @@ if filereadable(system('echo -n "$HOME/.vim/bundle/Vundle.vim/autoload/vundle.vi
 
 		"" Commentary
 		nmap cm gc
+		nmap m cmil
 
 		"" Titlecase
 		" let g:titlecase_map_keys = 0
